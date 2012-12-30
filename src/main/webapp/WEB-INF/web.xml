@@ -20,45 +20,14 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <security-constraint>
-        <display-name>Import equipment information</display-name>
-        <web-resource-collection>
-            <web-resource-name>import</web-resource-name>
-            <url-pattern>/ipstore/import</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>Admin can import equipment information</description>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
+    <!-- Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
 
-    <security-constraint>
-        <display-name>View equipment information</display-name>
-        <web-resource-collection>
-            <web-resource-name>view</web-resource-name>
-            <url-pattern>/ipstore/view</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>User and admin can view equipment information</description>
-            <role-name>admin</role-name>
-            <role-name>user</role-name>
-        </auth-constraint>
-    </security-constraint>
-
-    <security-role>
-        <description>Administration role</description>
-        <role-name>admin</role-name>
-    </security-role>
-    <security-role>
-        <description>User role</description>
-        <role-name>user</role-name>
-    </security-role>
-    
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <form-login-config>
-            <form-login-page>/login.html</form-login-page>
-            <form-error-page>/login-failed.html</form-error-page>
-        </form-login-config>
-    </login-config>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
