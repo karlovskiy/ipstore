@@ -8,8 +8,17 @@
     <title>Ipstore equipment</title>
 </head>
 <body>
+<c:if test="${not empty result}">
+    <div>${result}</div>
+</c:if>
 
-<h1>Here will be import</h1>
-
+<h1>Please upload a file to import</h1>
+<form method="post" action="/ipstore/import" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <input type="submit" value="Import"/>
+</form>
+<span style="display: block; padding-top: 10px;">
+    <a href="<c:url value="/ipstore/equipment" />">Back</a>
+</span>
 </body>
 </html>
