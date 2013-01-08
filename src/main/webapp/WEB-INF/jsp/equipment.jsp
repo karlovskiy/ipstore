@@ -17,8 +17,12 @@
     <tr>
         <th>Ip address</th>
         <th>Type</th>
+        <th>Username</th>
+        <th>Login</th>
         <th>Password</th>
+        <th>Client Name</th>
         <th>Placement Address</th>
+        <th>Application Number</th>
         <th>Description</th>
     </tr>
     </thead>
@@ -27,8 +31,12 @@
         <tr>
             <td><c:out value="${equipment.ipAddress}"/></td>
             <td><c:out value="${equipment.type}"/></td>
+            <td><c:out value="${equipment.username}"/></td>
+            <td><c:out value="${equipment.login}"/></td>
             <td><c:out value="${equipment.password}"/></td>
+            <td><c:out value="${equipment.clientName}"/></td>
             <td><c:out value="${equipment.placementAddress}"/></td>
+            <td><c:out value="${equipment.applicationNumber}"/></td>
             <td><c:out value="${equipment.description}"/></td>
         </tr>
     </c:forEach>

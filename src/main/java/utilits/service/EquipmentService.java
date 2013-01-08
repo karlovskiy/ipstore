@@ -55,12 +55,24 @@ public class EquipmentService {
                                 equipment.setType(value);
                                 break;
                             case 2:
-                                equipment.setPassword(value);
+                                equipment.setUsername(value);
                                 break;
                             case 3:
-                                equipment.setPlacementAddress(value);
+                                equipment.setLogin(value);
                                 break;
                             case 4:
+                                equipment.setPassword(value);
+                                break;
+                            case 5:
+                                equipment.setClientName(value);
+                                break;
+                            case 6:
+                                equipment.setPlacementAddress(value);
+                                break;
+                            case 7:
+                                equipment.setApplicationNumber(value);
+                                break;
+                            case 8:
                                 equipment.setDescription(value);
                                 break;
                         }
@@ -72,8 +84,12 @@ public class EquipmentService {
                             .uniqueResult();
                     if (oldEquipment != null) {
                         oldEquipment.setType(equipment.getType());
+                        oldEquipment.setUsername(equipment.getUsername());
+                        oldEquipment.setLogin(equipment.getLogin());
                         oldEquipment.setPassword(equipment.getPassword());
+                        oldEquipment.setClientName(equipment.getClientName());
                         oldEquipment.setPlacementAddress(equipment.getPlacementAddress());
+                        oldEquipment.setApplicationNumber(equipment.getApplicationNumber());
                         oldEquipment.setDescription(equipment.getDescription());
                     } else {
                         session.save(equipment);

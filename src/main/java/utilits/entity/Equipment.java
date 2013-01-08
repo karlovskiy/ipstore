@@ -27,11 +27,23 @@ public class Equipment implements Serializable {
     @Column(name = "TYPE", length = 128)
     private String type;
 
+    @Column(name = "USERNAME", length = 128)
+    private String username;
+
+    @Column(name = "LOGIN", length = 128)
+    private String login;
+
     @Column(name = "PASSWORD", length = 128)
     private String password;
 
+    @Column(name = "CLIENT_NAME", length = 128)
+    private String clientName;
+
     @Column(name = "PLACEMENT_ADDRESS", length = 512)
     private String placementAddress;
+
+    @Column(name = "APPLICATION_NUMBER", length = 128)
+    private String applicationNumber;
 
     @Column(name = "DESCRIPTION", length = 512)
     private String description;
@@ -60,6 +72,22 @@ public class Equipment implements Serializable {
         this.type = type;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -68,12 +96,28 @@ public class Equipment implements Serializable {
         this.password = password;
     }
 
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
     public String getPlacementAddress() {
         return placementAddress;
     }
 
     public void setPlacementAddress(String placementAddress) {
         this.placementAddress = placementAddress;
+    }
+
+    public String getApplicationNumber() {
+        return applicationNumber;
+    }
+
+    public void setApplicationNumber(String applicationNumber) {
+        this.applicationNumber = applicationNumber;
     }
 
     public String getDescription() {
