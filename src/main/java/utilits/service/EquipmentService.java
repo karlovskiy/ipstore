@@ -43,9 +43,9 @@ public class EquipmentService {
             for (Row row : sheet) {
                 i++;
                 if (i > 1) {
-                    int j = 0;
                     Equipment equipment = new Equipment();
-                    for (Cell cell : row) {
+                    for (int j = 0; j <= 8; j++) {
+                        Cell cell = row.getCell(j, Row.CREATE_NULL_AS_BLANK);
                         String value = cell.getStringCellValue();
                         switch (j) {
                             case 0:
@@ -76,7 +76,6 @@ public class EquipmentService {
                                 equipment.setDescription(value);
                                 break;
                         }
-                        j++;
                     }
                     Session session = sessionFactory.getCurrentSession();
                     Equipment oldEquipment = (Equipment) session.createCriteria(Equipment.class)
