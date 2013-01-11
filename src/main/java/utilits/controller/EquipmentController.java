@@ -51,7 +51,8 @@ public class EquipmentController {
         if (!file.isEmpty()) {
             logger.info("File size: " + file.getSize());
             boolean isImportSuccess = equipmentService.importFile(file.getInputStream());
-            model.addAttribute("result", isImportSuccess ? "Importing success!" : "Importing error!");
+            model.addAttribute("success", isImportSuccess);
+            model.addAttribute("resultMessage", isImportSuccess ? "Importing success!" : "Importing error!");
         }
 
         return "import";

@@ -6,49 +6,76 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Ipstore equipment</title>
+    <title>VoIPStore - Equipment Page</title>
+    <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .form-search {
+            float: right;
+        }
+
+        .left-col {
+            padding-left: 0;
+        }
+    </style>
+    <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="<c:url value="/assets/ico/apple-touch-icon-144-precomposed.png"/>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="<c:url value="/assets/ico/apple-touch-icon-114-precomposed.png"/>..">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
+    <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
+    <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
 </head>
 <body>
 
-<h1>Equipment</h1>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th>Ip address</th>
-        <th>Type</th>
-        <th>Username</th>
-        <th>Login</th>
-        <th>Password</th>
-        <th>Client Name</th>
-        <th>Placement Address</th>
-        <th>Application Number</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${equipment}" var="equipment">
-        <tr>
-            <td><c:out value="${equipment.ipAddress}"/></td>
-            <td><c:out value="${equipment.type}"/></td>
-            <td><c:out value="${equipment.username}"/></td>
-            <td><c:out value="${equipment.login}"/></td>
-            <td><c:out value="${equipment.password}"/></td>
-            <td><c:out value="${equipment.clientName}"/></td>
-            <td><c:out value="${equipment.placementAddress}"/></td>
-            <td><c:out value="${equipment.applicationNumber}"/></td>
-            <td><c:out value="${equipment.description}"/></td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-<security:authorize access="hasRole('ROLE_ADMIN')">
-    <span style="display: block; padding-top: 10px;">
-        <a href="<c:url value="/ipstore/import"/>">Import</a>
+<div class="container">
+    <form class="form-search">
+        <input type="text" class="input-medium search-query">
+        <button type="submit" class="btn btn-primary" placeholder=".span1">Search</button>
+    </form>
+    <span style="display: block; padding-top: 10px; float: left;">
+        <security:authorize access="hasRole('ROLE_ADMIN')">
+            <a class="btn btn-info" href="<c:url value="/ipstore/import"/>">Import</a>
+        </security:authorize>
+        <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>
-</security:authorize>
-<span style="display: block; padding-top: 10px;">
-    <a href="<c:url value="/j_spring_security_logout" />">Logout</a>
-</span>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="left-col">Ip address</th>
+            <th>Type</th>
+            <th>Username</th>
+            <th>Login</th>
+            <th>Password</th>
+            <th>Client Name</th>
+            <th>Placement Address</th>
+            <th>Application Number</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${equipment}" var="equipment">
+            <tr>
+                <td class="left-col"><c:out value="${equipment.ipAddress}"/></td>
+                <td><c:out value="${equipment.type}"/></td>
+                <td><c:out value="${equipment.username}"/></td>
+                <td><c:out value="${equipment.login}"/></td>
+                <td><c:out value="${equipment.password}"/></td>
+                <td><c:out value="${equipment.clientName}"/></td>
+                <td><c:out value="${equipment.placementAddress}"/></td>
+                <td><c:out value="${equipment.applicationNumber}"/></td>
+                <td><c:out value="${equipment.description}"/></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
