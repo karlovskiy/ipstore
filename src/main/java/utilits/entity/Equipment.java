@@ -1,5 +1,7 @@
 package utilits.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,8 +21,9 @@ public class Equipment implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     @SequenceGenerator(name = "id_seq", sequenceName = "ID_SEQ", allocationSize = 1)
     @Column(name = "ID")
-    private Integer id;
+    private Long id;
 
+    @NotEmpty
     @Column(name = "IP_ADDRESS", nullable = false, unique = true, length = 45)
     private String ipAddress;
 
@@ -48,11 +51,11 @@ public class Equipment implements Serializable {
     @Column(name = "DESCRIPTION", length = 512)
     private String description;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

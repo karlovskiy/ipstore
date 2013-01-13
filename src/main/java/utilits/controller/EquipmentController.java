@@ -3,6 +3,8 @@ package utilits.controller;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +13,7 @@ import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -57,5 +60,59 @@ public class EquipmentController {
 
         return "import";
     }
+
+    @RequestMapping(value = "/equipment/{id}", method = RequestMethod.GET)
+    public String viewEquipment(@PathVariable Long id, Model model) {
+        Equipment equipment = equipmentService.getEquipment(id);
+        model.addAttribute("equipment", equipment);
+        return "view";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addEquipment(Model model) {
+        Equipment equipment = new Equipment();
+        model.addAttribute("equipment", equipment);
+        model.addAttribute("formAction", "/ipstore/save");
+        model.addAttribute("backButtonUrl", "/ipstore/equipment");
+        return "edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editEquipment(@PathVariable Long id, Model model) {
+        Equipment equipment = equipmentService.getEquipment(id);
+        model.addAttribute("equipment", equipment);
+        model.addAttribute("formAction", "/ipstore/save/" + id);
+        model.addAttribute("backButtonUrl", "/ipstore/equipment/" + id);
+        return "edit";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteEquipment(@PathVariable Long id) {
+        equipmentService.deleteEquipment(id);
+        return "redirect:/ipstore/equipment";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveEquipment(@Valid Equipment equipment, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("formAction", "/ipstore/save");
+            model.addAttribute("backButtonUrl", "/ipstore/equipment");
+            return "edit";
+        }
+        Long id = equipmentService.saveEquipment(equipment);
+        return "redirect:/ipstore/equipment/" + id;
+    }
+
+    @RequestMapping(value = "/save/{id}", method = RequestMethod.POST)
+    public String saveEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("formAction", "/ipstore/save/" + id);
+            model.addAttribute("backButtonUrl", "/ipstore/equipment/" + id);
+            return "edit";
+        }
+        equipmentService.updateEquipment(id, equipment);
+        return "redirect:/ipstore/equipment/" + id;
+    }
+
 
 }

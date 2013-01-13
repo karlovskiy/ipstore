@@ -32,7 +32,7 @@
 <body>
 <div class="container">
     <span style="display: block; padding-top: 10px;">
-        <a class="btn btn-info" href="<c:url value="/ipstore/equipment" />">Back</a>
+        <a class="btn btn-primary" href="<c:url value="/ipstore/equipment" />">Back</a>
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>
     <c:if test="${not empty success}">
@@ -42,7 +42,7 @@
     </c:if>
     <form method="post" action="/ipstore/import" enctype="multipart/form-data">
         <input type="file" name="file"/>
-        <input class="btn btn-info" type="submit" value="Import"/>
+        <input class="btn btn-primary" type="submit" value="Import"/>
     </form>
 </div>
 </body>

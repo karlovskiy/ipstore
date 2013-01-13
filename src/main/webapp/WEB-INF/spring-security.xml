@@ -6,8 +6,12 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/ipstore/equipment" access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="/ipstore/import" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/ipstore/equipment" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/ipstore/equipment/*" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/ipstore/add" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/save" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/edit/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/import" access="hasRole('ROLE_ADMIN')"/>
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/equipment"
                     authentication-failure-url="/ipstore/loginfailed" />
         <logout logout-success-url="/ipstore/logout" />

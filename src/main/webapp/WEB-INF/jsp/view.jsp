@@ -6,21 +6,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>VoIPStore - Equipment Page</title>
+    <title>VoIPStore - View Page</title>
     <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 40px;
             padding-bottom: 40px;
             background-color: #f5f5f5;
-        }
-
-        .form-search {
-            float: right;
-        }
-
-        .left-col {
-            padding-left: 0;
         }
     </style>
     <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
@@ -32,46 +24,57 @@
           href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
+
 </head>
 <body>
-
 <div class="container">
-    <form class="form-search">
-        <input type="text" class="input-medium search-query">
-        <button type="submit" class="btn btn-primary" placeholder=".span1">Search</button>
-    </form>
-    <span style="display: block; padding-top: 10px; float: left;">
+    <span style="display: block; padding-top: 10px;">
+        <a class="btn btn-primary" href="<c:url value="/ipstore/equipment" />">Back</a>
         <security:authorize access="hasRole('ROLE_ADMIN')">
-            <a class="btn btn-primary" href="<c:url value="/ipstore/add"/>">Add</a>
+            <a class="btn btn-primary" href="<c:url value="/ipstore/edit/${equipment.id}" />">Edit</a>
         </security:authorize>
         <security:authorize access="hasRole('ROLE_ADMIN')">
-            <a class="btn btn-primary" href="<c:url value="/ipstore/import"/>">Import</a>
+            <a class="btn btn-primary" href="<c:url value="/ipstore/delete/${equipment.id}" />">Delete</a>
         </security:authorize>
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped" style="width: 0;">
         <tr>
-            <th class="left-col">Ip address</th>
-            <th>Type</th>
-            <th>Login</th>
-            <th>Client Name</th>
+            <td>IpAddress</td>
+            <td><c:out value="${equipment.ipAddress}"/></td>
         </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${equipment}" var="equipment">
-            <tr>
-                <td class="left-col">
-                    <a href="/ipstore/equipment/${equipment.id}">
-                        <c:out value="${equipment.ipAddress}"/>
-                    </a>
-                </td>
-                <td><c:out value="${equipment.type}"/></td>
-                <td><c:out value="${equipment.login}"/></td>
-                <td><c:out value="${equipment.clientName}"/></td>
-            </tr>
-        </c:forEach>
-        </tbody>
+        <tr>
+            <td>Type</td>
+            <td><c:out value="${equipment.type}"/></td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td><c:out value="${equipment.username}"/></td>
+        </tr>
+        <tr>
+            <td>Login</td>
+            <td><c:out value="${equipment.login}"/></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><c:out value="${equipment.password}"/></td>
+        </tr>
+        <tr>
+            <td>ClientName</td>
+            <td><c:out value="${equipment.clientName}"/></td>
+        </tr>
+        <tr>
+            <td>PlacementAddress</td>
+            <td><c:out value="${equipment.placementAddress}"/></td>
+        </tr>
+        <tr>
+            <td>ApplicationNumber</td>
+            <td><c:out value="${equipment.applicationNumber}"/></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><c:out value="${equipment.description}"/></td>
+        </tr>
     </table>
 </div>
 </body>

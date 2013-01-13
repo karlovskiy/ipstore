@@ -35,6 +35,40 @@ public class EquipmentService {
         return session.createCriteria(Equipment.class).list();
     }
 
+    public Equipment getEquipment(Long id) {
+        logger.info("loading equipment with id=" + id);
+        Session session = sessionFactory.getCurrentSession();
+        return (Equipment) session.get(Equipment.class, id);
+    }
+
+    public Long saveEquipment(Equipment equipment) {
+        logger.info("saving new equipment...");
+        Session session = sessionFactory.getCurrentSession();
+        return (Long) session.save(equipment);
+    }
+
+    public void updateEquipment(Long id, Equipment equipment) {
+        logger.info("updating equipment with id=" + id);
+        Session session = sessionFactory.getCurrentSession();
+        Equipment oldEquipment = (Equipment) session.get(Equipment.class, id);
+        oldEquipment.setIpAddress(equipment.getIpAddress());
+        oldEquipment.setType(equipment.getType());
+        oldEquipment.setUsername(equipment.getUsername());
+        oldEquipment.setLogin(equipment.getLogin());
+        oldEquipment.setPassword(equipment.getPassword());
+        oldEquipment.setClientName(equipment.getClientName());
+        oldEquipment.setPlacementAddress(equipment.getPlacementAddress());
+        oldEquipment.setApplicationNumber(equipment.getApplicationNumber());
+        oldEquipment.setDescription(equipment.getDescription());
+    }
+
+    public void deleteEquipment(Long id) {
+        logger.info("delete equipment with id=" + id);
+        Session session = sessionFactory.getCurrentSession();
+        Equipment equipment = (Equipment) session.get(Equipment.class, id);
+        session.delete(equipment);
+    }
+
     public boolean importFile(InputStream is) {
         try {
             Workbook wb = WorkbookFactory.create(is);
