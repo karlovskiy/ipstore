@@ -36,8 +36,8 @@
 <body>
 
 <div class="container">
-    <form class="form-search">
-        <input type="text" class="input-medium search-query">
+    <form class="form-search" action="<c:url value="/ipstore/equipment"/>">
+        <input type="text" name="search" value="${search}" class="input-medium search-query">
         <button type="submit" class="btn btn-primary" placeholder=".span1">Search</button>
     </form>
     <span style="display: block; padding-top: 10px; float: left;">

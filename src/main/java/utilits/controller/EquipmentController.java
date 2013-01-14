@@ -1,5 +1,6 @@
 package utilits.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +34,13 @@ public class EquipmentController {
     private EquipmentService equipmentService;
 
     @RequestMapping(value = "/equipment", method = RequestMethod.GET)
-    public String viewEquipment(Model model) {
-        logger.debug("Received request to load equipment...");
-        List<Equipment> equipment = equipmentService.getEquipment();
+    public String viewEquipment(@RequestParam(value = "search", required = false) String search,Model model) {
+        logger.info("Received request to load equipment, search string: " + search);
+        List<Equipment> equipment = equipmentService.getEquipments(search);
         model.addAttribute("equipment", equipment);
+        if(StringUtils.isNotEmpty(search)){
+            model.addAttribute("search", search);
+        }
         return "equipment";
     }
 

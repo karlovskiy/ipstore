@@ -1,9 +1,12 @@
 package utilits.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,10 +32,14 @@ public class EquipmentService {
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")
-    public List<Equipment> getEquipment() {
-        logger.debug("Start loading equipment...");
+    public List<Equipment> getEquipments(String search) {
+        logger.debug("Start loading equipment, search string: " + search);
         Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Equipment.class).list();
+        Criteria criteria = session.createCriteria(Equipment.class);
+        if (StringUtils.isNotEmpty(search)) {
+            criteria.add(Restrictions.like("ipAddress", "%" + search + "%"));
+        }
+        return criteria.addOrder(Order.asc("ipAddress")).list();
     }
 
     public Equipment getEquipment(Long id) {
