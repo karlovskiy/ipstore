@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>VoIPStore - Equipment Page</title>
     <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/style.css" />" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 40px;
@@ -32,6 +33,8 @@
           href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
+    <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
 </head>
 <body>
 
@@ -49,7 +52,7 @@
         </security:authorize>
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>
-    <table class="table table-striped">
+    <table id="equipment_table" class="table table-striped tablesorter">
         <thead>
         <tr>
             <th class="left-col">Ip address</th>
@@ -74,5 +77,13 @@
         </tbody>
     </table>
 </div>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function () {
+        $("#equipment_table").tablesorter();
+    });
+    //]]>
+
+</script>
 </body>
 </html>
