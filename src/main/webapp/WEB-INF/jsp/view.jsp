@@ -24,7 +24,10 @@
           href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
-
+    <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/bootbox.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/view.js"/>"></script>
 </head>
 <body>
 <div class="container">
@@ -34,7 +37,7 @@
             <a class="btn btn-primary" href="<c:url value="/ipstore/edit/${equipment.id}" />">Edit</a>
         </security:authorize>
         <security:authorize access="hasRole('ROLE_ADMIN')">
-            <a class="btn btn-primary" href="<c:url value="/ipstore/delete/${equipment.id}" />">Delete</a>
+            <a id="equipment_delete" class="btn btn-primary" href="<c:url value="/ipstore/delete/${equipment.id}" />">Delete</a>
         </security:authorize>
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>

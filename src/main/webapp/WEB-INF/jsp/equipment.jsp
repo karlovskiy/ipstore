@@ -35,6 +35,7 @@
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
     <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/equipment.js"/>"></script>
 </head>
 <body>
 
@@ -77,13 +78,5 @@
         </tbody>
     </table>
 </div>
-<script type="text/javascript">
-    //<![CDATA[
-    $(document).ready(function () {
-        $("#equipment_table").tablesorter();
-    });
-    //]]>
-
-</script>
 </body>
 </html>
