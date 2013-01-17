@@ -18,6 +18,10 @@
         .errorblock {
             color: #ff0000;
         }
+        .pml{
+            margin-bottom: 0 !important;
+            width: 20px;
+        }
     </style>
     <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
@@ -28,12 +32,15 @@
           href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
-
+    <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/edit.js"/>"></script>
 </head>
 <body>
 <div class="container">
     <span style="display: block; padding-top: 10px;">
         <a class="btn btn-primary" href="${backButtonUrl}">Back</a>
+        <a id="generate_password" class="btn btn-primary">Generate password</a>
+        <input id="max_length" type="text" name="length" class="pml" value="15">
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>
     <form:form commandName="equipment" action="${formAction}" cssStyle="margin-top: 10px;">
@@ -81,7 +88,7 @@
             <label>Password</label>
 
             <div>
-                <form:input path="password"/>
+                <form:input id="pwd" path="password"/>
                 <span class="errorblock">
                     <form:errors path="password"/>
                 </span>

@@ -1,14 +1,12 @@
 package utilits.controller;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
@@ -28,7 +26,8 @@ import java.util.List;
 @Controller
 public class EquipmentController {
 
-    protected static Logger logger = Logger.getLogger(EquipmentController.class);
+    public static Logger logger = Logger.getLogger(EquipmentController.class);
+    public static int DEFAULT_PASSWORD_LENGTH = 15;
 
     @Resource(name = "equipmentService")
     private EquipmentService equipmentService;
@@ -118,5 +117,10 @@ public class EquipmentController {
         return "redirect:/ipstore/equipment/" + id;
     }
 
-
+    @RequestMapping(value = "/generate_password", method = RequestMethod.GET)
+    public @ResponseBody String generatePassword(@RequestParam Integer length){
+        logger.info("Request fo generating password, length: " + length);
+        length = length != null ? length : DEFAULT_PASSWORD_LENGTH;
+        return RandomStringUtils.random(length, true, true);
+    }
 }
