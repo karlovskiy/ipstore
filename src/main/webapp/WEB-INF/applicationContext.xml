@@ -32,4 +32,5 @@
 
 	<import resource="hibernate-context.xml" />
     <import resource="spring-security.xml" />
+    <import resource="monitoring-spring-datasource.xml"/>
 </beans>
