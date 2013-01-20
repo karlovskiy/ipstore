@@ -52,6 +52,9 @@
             <a class="btn btn-primary" href="<c:url value="/ipstore/import"/>">Import</a>
         </security:authorize>
         <security:authorize access="hasRole('ROLE_DBA')">
+            <a class="btn btn-primary" href="<c:url value="/ipstore/export"/>">Export</a>
+        </security:authorize>
+        <security:authorize access="hasRole('ROLE_DBA')">
             <a class="btn btn-success" href="<c:url value="/monitoring"/>">Monitoring</a>
         </security:authorize>
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>

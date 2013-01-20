@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="equipment" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" whenResourceMissingType="Empty" uuid="89be3da8-5116-4a4f-bdef-c0c60d3efb1c">
+	<property name="ireport.zoom" value="1.9965000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="applicationNumber" class="java.lang.String"/>
+	<field name="clientName" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="ipAddress" class="java.lang.String"/>
+	<field name="login" class="java.lang.String"/>
+	<field name="password" class="java.lang.String"/>
+	<field name="placementAddress" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="username" class="java.lang.String"/>
+	<title>
+		<band height="15">
+			<staticText>
+				<reportElement uuid="1237a27b-5c4e-41dc-b05f-9787dd8bb258" mode="Opaque" x="0" y="0" width="110" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[IP address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98e7b839-8ab9-47fc-8e91-6e6e5e6ea59c" mode="Opaque" x="110" y="0" width="70" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cf9efe6b-bd18-4552-87fc-25bf4a30eac0" mode="Opaque" x="180" y="0" width="110" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Username]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c5d6eb16-5527-4cb2-89dd-3d858e0fe811" mode="Opaque" x="290" y="0" width="50" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Login]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0f000584-b523-4ee4-aa76-a1d3fd848222" mode="Opaque" x="340" y="0" width="150" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Password]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="79e5f7f2-53a0-485e-b966-9a4fd7c7cc73" mode="Opaque" x="490" y="0" width="150" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Client name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28a5ff6b-3402-471e-ad2e-f66d0d88a19e" mode="Opaque" x="640" y="0" width="150" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Placement address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea60a1eb-08bc-4314-b44a-60fa4ddd2fc4" mode="Opaque" x="790" y="0" width="140" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Application number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5083280-3cc3-4288-9594-dbd3f1a12d14" mode="Opaque" x="930" y="0" width="100" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15" splitType="Prevent">
+			<textField>
+				<reportElement uuid="693feb85-9c15-4253-acae-eb34c1159283" x="0" y="0" width="110" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ipAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ede0b1c3-d8d7-42e4-b61c-ffe71a97e83d" x="180" y="0" width="110" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5fea2036-3668-49e3-bf1d-0f52f74b4b92" x="110" y="0" width="70" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7f26a426-de48-4908-9fbb-e98cd635ec85" x="290" y="0" width="50" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fe13f1d3-5519-4bc0-a103-ec496b75e29b" x="340" y="0" width="150" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ded90415-2e56-4e5e-a4d1-08a572604fda" x="490" y="0" width="150" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d6b89ff3-6f2e-4434-84d2-36f710f8c2f8" x="640" y="0" width="150" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{placementAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aae41585-692f-43dc-b447-d91d0d4d8c1d" x="790" y="0" width="140" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{applicationNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ecd390f7-e2f0-4b6e-830c-e1669c95b491" x="930" y="0" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

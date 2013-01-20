@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+  http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--
+     The JasperReportsMultiFormatView allows for the report format to be specified at runtime.
+     The actual rendering of the report is delegated to one of the other JasperReports view classes
+
+     Mapping    Key View Class
+      csv    JasperReportsCsvView
+      html   JasperReportsHtmlView
+      pdf    JasperReportsPdfView
+      xls    JasperReportsXlsView
+
+     See http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/view.html#view-jasper-reports-configuration-multiformat-view
+    -->
+    <!--
+     id: the name to be used as a reference in the controller
+     url: the path where the Jasper JRXML file is located
+     reportDateKey: the name of the datasource. This is passed by the controller
+    -->
+    <bean id="equipmentReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+        <property name="url" value="/WEB-INF/reports/equipment.jasper"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="exporterParameters">
+            <map>
+                <entry key="net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS"
+                        value="true"/>
+                <entry key="net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_COLUMNS"
+                       value="true"/>
+            </map>
+        </property>
+        <property name="headers">
+            <props>
+                <prop key="Content-Disposition">inline; filename="equipment.xls"</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

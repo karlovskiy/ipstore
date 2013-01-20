@@ -15,6 +15,7 @@
         <intercept-url pattern="/ipstore/generate_password" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/ipstore/generate_password" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/monitoring**" access="hasRole('ROLE_DBA')"/>
+        <intercept-url pattern="/ipstore/export" access="hasRole('ROLE_DBA')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/equipment"
                     authentication-failure-url="/ipstore/loginfailed" />
