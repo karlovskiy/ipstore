@@ -34,4 +34,5 @@
     <import resource="spring-security.xml" />
     <import resource="monitoring-spring-datasource.xml"/>
     <import resource="jasper-views.xml"/>
+    <import resource="spring-quartz.xml"/>
 </beans>

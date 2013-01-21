@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean name="backupDatabaseJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="utilits.quartz.BackupDatabaseJob"/>
+        <!--<property name="jobDataAsMap">-->
+            <!--<map>-->
+                <!--<entry key="" value-ref=""/>-->
+            <!--</map>-->
+        <!--</property>-->
+    </bean>
+
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="backupDatabaseJobDetails"/>
+        <!-- executed every 5 seconds -->
+        <property name="cronExpression" value="0/5 * * * * ?"/>
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="backupDatabaseJobDetails"/>
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
