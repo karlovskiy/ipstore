@@ -16,10 +16,11 @@
         <intercept-url pattern="/ipstore/generate_password" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/monitoring**" access="hasRole('ROLE_DBA')"/>
         <intercept-url pattern="/ipstore/export" access="hasRole('ROLE_DBA')"/>
+        <intercept-url pattern="/ipstore/actions" access="hasRole('ROLE_DBA')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/equipment"
-                    authentication-failure-url="/ipstore/loginfailed" />
-        <logout logout-success-url="/ipstore/logout" />
+                    authentication-failure-url="/ipstore/loginfailed"/>
+        <logout logout-success-url="/ipstore/logout"/>
     </http>
 
     <authentication-manager>
@@ -27,7 +28,7 @@
             <user-service>
                 <user name="user" password="user" authorities="ROLE_USER"/>
                 <user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN"/>
-                <user name="dba" password="dba" authorities="ROLE_USER,ROLE_ADMIN,ROLE_DBA"/>
+                <user name="root" password="root" authorities="ROLE_USER,ROLE_ADMIN,ROLE_DBA"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>

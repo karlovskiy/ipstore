@@ -57,9 +57,12 @@
         <security:authorize access="hasRole('ROLE_DBA')">
             <a class="btn btn-success" href="<c:url value="/monitoring"/>">Monitoring</a>
         </security:authorize>
+        <security:authorize access="hasRole('ROLE_DBA')">
+            <a class="btn btn-success" href="<c:url value="/ipstore/actions"/>">Actions</a>
+        </security:authorize>
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>
-    <table id="equipment_table" class="table table-striped tablesorter">
+    <table id="equipment_table" class="table table-hover table-condensed tablesorter">
         <thead>
         <tr>
             <th class="left-col">Ip address</th>
@@ -70,7 +73,7 @@
         </thead>
         <tbody>
         <c:forEach items="${equipment}" var="equipment">
-            <tr>
+            <tr class="info">
                 <td class="left-col">
                     <a href="/ipstore/equipment/${equipment.id}">
                         <c:out value="${equipment.ipAddress}"/>

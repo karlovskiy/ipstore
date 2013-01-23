@@ -15,8 +15,6 @@ import java.io.Serializable;
 @Table(name = "EQUIPMENT")
 public class Equipment implements Serializable {
 
-    private static final long serialVersionUID = -5527566248002296042L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     @SequenceGenerator(name = "id_seq", sequenceName = "ID_SEQ", allocationSize = 1)

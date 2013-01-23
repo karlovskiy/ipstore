@@ -41,40 +41,40 @@
         </security:authorize>
         <a class="btn btn-danger" href="<c:url value="/j_spring_security_logout" />">LogOff</a>
     </span>
-    <table class="table table-striped" style="width: 0;">
-        <tr>
+    <table class="table table-hover" style="width: 0;">
+        <tr class="info">
             <td>IpAddress</td>
             <td><c:out value="${equipment.ipAddress}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>Type</td>
             <td><c:out value="${equipment.type}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>Username</td>
             <td><c:out value="${equipment.username}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>Login</td>
             <td><c:out value="${equipment.login}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>Password</td>
             <td><c:out value="${equipment.password}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>ClientName</td>
             <td><c:out value="${equipment.clientName}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>PlacementAddress</td>
             <td><c:out value="${equipment.placementAddress}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>ApplicationNumber</td>
             <td><c:out value="${equipment.applicationNumber}"/></td>
         </tr>
-        <tr>
+        <tr class="info">
             <td>Description</td>
             <td><c:out value="${equipment.description}"/></td>
         </tr>

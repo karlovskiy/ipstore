@@ -17,6 +17,6 @@ public class BackupDatabaseJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        logger.info("starting backup database job...");
+        //todo
     }
 }
