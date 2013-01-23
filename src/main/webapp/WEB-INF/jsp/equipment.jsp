@@ -23,6 +23,10 @@
         .left-col {
             padding-left: 0;
         }
+
+        .table tbody tr.info td {
+            background-color: #ffffff;
+        }
     </style>
     <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"

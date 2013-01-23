@@ -8,13 +8,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>VoIPStore - View Page</title>
     <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
-    <style type="text/css">
-        body {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #f5f5f5;
-        }
-    </style>
     <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
           href="<c:url value="/assets/ico/apple-touch-icon-144-precomposed.png"/>">
@@ -28,6 +21,17 @@
     <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/bootbox.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/view.js"/>"></script>
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .table tbody tr.info td {
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
