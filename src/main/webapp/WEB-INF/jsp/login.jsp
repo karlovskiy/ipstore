@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>VoIPStore - Login Page</title>
+    <title>VoIPStore</title>
     <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
     <style type="text/css">
         body {

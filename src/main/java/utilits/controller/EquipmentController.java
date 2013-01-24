@@ -84,7 +84,6 @@ public class EquipmentController {
         Equipment equipment = new Equipment();
         model.addAttribute("equipment", equipment);
         model.addAttribute("formAction", "/ipstore/save");
-        model.addAttribute("backButtonUrl", "/ipstore/equipment");
         return "edit";
     }
 
@@ -93,7 +92,7 @@ public class EquipmentController {
         Equipment equipment = equipmentService.getEquipment(id);
         model.addAttribute("equipment", equipment);
         model.addAttribute("formAction", "/ipstore/save/" + id);
-        model.addAttribute("backButtonUrl", "/ipstore/equipment/" + id);
+        model.addAttribute("viewUrl", "/ipstore/equipment/" + id);
         return "edit";
     }
 
