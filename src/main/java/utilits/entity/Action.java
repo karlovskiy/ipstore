@@ -39,6 +39,9 @@ public class Action implements Serializable {
     @Column(name = "USER_AGENT", nullable = false, length = 256)
     private String userAgent;
 
+    @Column(name = "REQUEST_URL", length = 256)
+    private String requestURL;
+
     public Long getId() {
         return id;
     }
@@ -85,5 +88,13 @@ public class Action implements Serializable {
 
     public void setUserAgent(String userAgent) {
         this.userAgent = userAgent;
+    }
+
+    public String getRequestURL() {
+        return requestURL;
+    }
+
+    public void setRequestURL(String requestURL) {
+        this.requestURL = requestURL;
     }
 }

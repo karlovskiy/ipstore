@@ -1,5 +1,6 @@
 package utilits.aspect;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -44,6 +45,12 @@ public class ActionAspect {
             entity.setHost(request.getRemoteHost());
             entity.setType(action.type());
             entity.setUserAgent(request.getHeader("user-agent"));
+            StringBuffer requestURL = request.getRequestURL();
+            String queryParams = request.getQueryString();
+            if (StringUtils.isNotEmpty(queryParams)) {
+                requestURL.append("?").append(queryParams);
+            }
+            entity.setRequestURL(requestURL.toString());
             entity.setActionTimestamp(Calendar.getInstance().getTime());
             actionService.saveAction(entity);
         }

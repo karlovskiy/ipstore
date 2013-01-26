@@ -39,7 +39,7 @@
             <a class="brand" href="<c:url value="/ipstore/equipment" />">VoIPStore</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="<c:url value="/ipstore//equipment" />">Home</a></li>
+                    <li><a href="<c:url value="/ipstore/equipment" />">Home</a></li>
                     <security:authorize access="hasRole('ROLE_ROOT')">
                         <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
                     </security:authorize>

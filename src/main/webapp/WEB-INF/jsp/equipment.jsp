@@ -43,7 +43,7 @@
             <a class="brand" href="<c:url value="/ipstore/equipment" />">VoIPStore</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="<c:url value="/ipstore//equipment" />">Home</a></li>
+                    <li class="active"><a href="<c:url value="/ipstore/equipment" />">Home</a></li>
                     <security:authorize access="hasRole('ROLE_ROOT')">
                         <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
                     </security:authorize>
@@ -62,8 +62,8 @@
                     <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                 </ul>
                 <form class="navbar-form pull-right" action="<c:url value="/ipstore/equipment"/>">
-                    <input type="text" name="search" value="${search}" class="input-medium search-query">
-                    <button type="submit" class="btn btn-primary" placeholder=".span1">Search</button>
+                    <input type="text" name="search" value="${search}" placeholder="Ip" class="input-medium search-query">
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
         </div>
