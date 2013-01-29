@@ -31,8 +31,28 @@
             padding-left: 0;
         }
 
-        .table tbody tr.info td {
+        .table tbody tr.success td {
             background-color: #ffffff;
+        }
+
+        .table-hover tbody tr.success:hover td {
+            background-color: #00ff00;
+        }
+
+        .table tbody tr.error td {
+            background-color: #ff0000;
+        }
+
+        .table-hover tbody tr.error:hover td {
+            background-color: #ff0000;
+        }
+
+        .table tbody tr.warning td {
+            background-color: #ffff00;
+        }
+
+        .table-hover tbody tr.warning:hover td {
+            background-color: #ffff00;
         }
     </style>
 </head>
@@ -76,12 +96,13 @@
             <th class="left-col">Ip address</th>
             <th>Type</th>
             <th>Login</th>
-            <th>Client Name</th>
+            <th>Password status</th>
+            <th>Client name</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${equipment}" var="equipment">
-            <tr class="info">
+            <tr class="${equipment.passwordStatus == 'NEED_UPDATE' ? 'error' : equipment.passwordStatus == 'OLD' ? 'warning' : 'success'}">
                 <td class="left-col">
                     <a href="/ipstore/equipment/${equipment.id}">
                         <c:out value="${equipment.ipAddress}"/>
@@ -89,6 +110,7 @@
                 </td>
                 <td><c:out value="${equipment.type}"/></td>
                 <td><c:out value="${equipment.login}"/></td>
+                <td><c:out value="${equipment.passwordStatus}"/></td>
                 <td><c:out value="${equipment.clientName}"/></td>
             </tr>
         </c:forEach>

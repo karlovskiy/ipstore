@@ -1,9 +1,11 @@
 package utilits.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import utilits.controller.PasswordStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Here will be javadoc
@@ -34,8 +36,17 @@ public class Equipment implements Serializable {
     @Column(name = "LOGIN", length = 128)
     private String login;
 
-    @Column(name = "PASSWORD", length = 128)
+    @NotEmpty
+    @Column(name = "PASSWORD", nullable = false, length = 128)
     private String password;
+
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name = "PASSWORD_DATE", nullable = false)
+    private Date passwordDate;
+
+    @Enumerated(value = EnumType.ORDINAL)
+    @Column(name = "PASSWORD_STATUS", nullable = false)
+    private PasswordStatus passwordStatus;
 
     @Column(name = "CLIENT_NAME", length = 128)
     private String clientName;
@@ -97,6 +108,14 @@ public class Equipment implements Serializable {
         this.password = password;
     }
 
+    public Date getPasswordDate() {
+        return passwordDate;
+    }
+
+    public void setPasswordDate(Date passwordDate) {
+        this.passwordDate = passwordDate;
+    }
+
     public String getClientName() {
         return clientName;
     }
@@ -127,5 +146,13 @@ public class Equipment implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public PasswordStatus getPasswordStatus() {
+        return passwordStatus;
+    }
+
+    public void setPasswordStatus(PasswordStatus passwordStatus) {
+        this.passwordStatus = passwordStatus;
     }
 }

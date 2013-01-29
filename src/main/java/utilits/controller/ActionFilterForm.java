@@ -18,9 +18,6 @@ public class ActionFilterForm {
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date to;
 
-    //    @NotEmpty
-    private String type;
-
     private String ip;
 
     private String host;
@@ -40,14 +37,6 @@ public class ActionFilterForm {
 
     public void setTo(Date to) {
         this.to = to;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getIp() {
@@ -71,7 +60,6 @@ public class ActionFilterForm {
         StringBuilder result = new StringBuilder();
         result.append("from=").append(from)
                 .append(", to=").append(to)
-                .append(", type=").append(type)
                 .append(", ip=").append(ip)
                 .append(", host=").append(host);
         return result.toString();

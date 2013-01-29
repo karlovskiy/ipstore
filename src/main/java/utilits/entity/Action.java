@@ -39,7 +39,7 @@ public class Action implements Serializable {
     @Column(name = "USER_AGENT", nullable = false, length = 256)
     private String userAgent;
 
-    @Column(name = "REQUEST_URL", length = 256)
+    @Column(name = "REQUEST_URL", nullable = false, length = 256)
     private String requestURL;
 
     public Long getId() {

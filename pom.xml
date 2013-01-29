@@ -5,7 +5,7 @@
     <groupId>utilits</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.6-SNAPSHOT</version>
 
     <name>ipstore web application</name>
     <url>http://maven.apache.org</url>

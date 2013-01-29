@@ -1,5 +1,6 @@
 package utilits.service;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.*;
@@ -10,10 +11,12 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utilits.controller.PasswordStatus;
 import utilits.entity.Equipment;
 
 import javax.annotation.Resource;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +54,8 @@ public class EquipmentService {
     public Long saveEquipment(Equipment equipment) {
         logger.info("saving new equipment...");
         Session session = sessionFactory.getCurrentSession();
+        equipment.setPasswordStatus(PasswordStatus.NEW);
+        equipment.setPasswordDate(new Date());
         return (Long) session.save(equipment);
     }
 
@@ -62,11 +67,17 @@ public class EquipmentService {
         oldEquipment.setType(equipment.getType());
         oldEquipment.setUsername(equipment.getUsername());
         oldEquipment.setLogin(equipment.getLogin());
-        oldEquipment.setPassword(equipment.getPassword());
         oldEquipment.setClientName(equipment.getClientName());
         oldEquipment.setPlacementAddress(equipment.getPlacementAddress());
         oldEquipment.setApplicationNumber(equipment.getApplicationNumber());
         oldEquipment.setDescription(equipment.getDescription());
+        String oldPassword = oldEquipment.getPassword();
+        String newPassword = equipment.getPassword();
+        oldEquipment.setPassword(newPassword);
+        if (ObjectUtils.notEqual(oldPassword, newPassword)) {
+            oldEquipment.setPasswordStatus(PasswordStatus.NEW);
+            oldEquipment.setPasswordDate(new Date());
+        }
     }
 
     public void deleteEquipment(Long id) {
@@ -74,6 +85,14 @@ public class EquipmentService {
         Session session = sessionFactory.getCurrentSession();
         Equipment equipment = (Equipment) session.get(Equipment.class, id);
         session.delete(equipment);
+    }
+
+    public void updatePasswordStatus(Long id, PasswordStatus passwordStatus) {
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("UPDATE Equipment SET passwordStatus = :status WHERE id = :id")
+                .setParameter("status", passwordStatus)
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     public boolean importFile(InputStream is) {
@@ -126,12 +145,20 @@ public class EquipmentService {
                         oldEquipment.setType(equipment.getType());
                         oldEquipment.setUsername(equipment.getUsername());
                         oldEquipment.setLogin(equipment.getLogin());
-                        oldEquipment.setPassword(equipment.getPassword());
                         oldEquipment.setClientName(equipment.getClientName());
                         oldEquipment.setPlacementAddress(equipment.getPlacementAddress());
                         oldEquipment.setApplicationNumber(equipment.getApplicationNumber());
                         oldEquipment.setDescription(equipment.getDescription());
+                        String oldPassword = oldEquipment.getPassword();
+                        String newPassword = equipment.getPassword();
+                        oldEquipment.setPassword(newPassword);
+                        if (ObjectUtils.notEqual(oldPassword, newPassword)) {
+                            oldEquipment.setPasswordStatus(PasswordStatus.NEW);
+                            oldEquipment.setPasswordDate(new Date());
+                        }
                     } else {
+                        equipment.setPasswordStatus(PasswordStatus.NEW);
+                        equipment.setPasswordDate(new Date());
                         session.save(equipment);
                     }
                 }

@@ -12,20 +12,32 @@
         <!--</property>-->
     </bean>
 
-    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="backupDatabaseCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="backupDatabaseJobDetails"/>
         <property name="cronExpression" value="0 0 0/12 * * ?"/>
     </bean>
 
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="jobDetails">
-            <list>
-                <ref bean="backupDatabaseJobDetails"/>
-            </list>
+    <bean name="passwordStatusJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="utilits.quartz.PasswordStatusJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="equipmentService" value-ref="equipmentService"/>
+                <entry key="oldDays" value="${password_status.old.days}"/>
+                <entry key="needUpdateDays" value="${password_status_need_update.days}"/>
+            </map>
         </property>
+    </bean>
+
+    <bean id="passwordStatusCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="passwordStatusJobDetails"/>
+        <property name="cronExpression" value="0 0 3 * * ?"/>
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
-                <ref bean="cronTrigger"/>
+                <ref bean="backupDatabaseCronTrigger"/>
+                <ref bean="passwordStatusCronTrigger"/>
             </list>
         </property>
     </bean>
