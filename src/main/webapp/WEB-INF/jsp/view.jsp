@@ -28,8 +28,16 @@
             background-color: #f5f5f5;
         }
 
-        .table tbody tr.info td {
-            background-color: #ffffff;
+        .table td.OLD {
+            color: #ffff00;
+        }
+
+        .table td.NEED_UPDATE {
+            color: #ff0000;
+        }
+
+        .table td.NEW {
+            color: #00ff00;
         }
     </style>
 </head>
@@ -41,24 +49,32 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li><a href="<c:url value="/ipstore/equipment" />">Home</a></li>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
-                    </security:authorize>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
-                    </security:authorize>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
-                    </security:authorize>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Administration
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<c:url value="/ipstore/add"/>">Add</a></li>
+                                <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
+                                <security:authorize access="hasRole('ROLE_ROOT')">
+                                    <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
+                                </security:authorize>
+                            </ul>
+                        </li>
                     </security:authorize>
-                    <li class="active"><a href="#">View</a></li>
-                    <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a href="<c:url value="/ipstore/edit/${equipment.id}" />">Edit</a></li>
-                    </security:authorize>
-                    <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a id="equipment_delete" href="<c:url value="/ipstore/delete/${equipment.id}" />">Delete</a></li>
+                    <security:authorize access="hasRole('ROLE_ROOT')">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Management
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
+                                <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
+                            </ul>
+                        </li>
                     </security:authorize>
                     <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                 </ul>
@@ -67,51 +83,74 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-hover" style="width: 0;">
-        <tr class="info">
+    <table class="table" style="width: 0;">
+        <tbody>
+        <tr>
             <td>IpAddress</td>
             <td><c:out value="${equipment.ipAddress}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>Type</td>
-            <td><c:out value="${equipment.type}"/></td>
+            <td><c:choose>
+                <c:when test="${equipment.type == 'GS'}">
+                    <a href="${gs_type_location}" target="_blank"><c:out value="${equipment.type}"/></a>
+                </c:when>
+                <c:otherwise>
+                    <c:out value="${equipment.type}"/>
+                </c:otherwise>
+            </c:choose>
+            </td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>Username</td>
             <td><c:out value="${equipment.username}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>Login</td>
             <td><c:out value="${equipment.login}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>Password</td>
             <td><c:out value="${equipment.password}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>Password date</td>
             <td><fmt:formatDate value="${equipment.passwordDate}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>Password status</td>
-            <td><c:out value="${equipment.passwordStatus}"/></td>
+            <td class="${equipment.passwordStatus}"><c:out value="${equipment.passwordStatus}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>ClientName</td>
             <td><c:out value="${equipment.clientName}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>PlacementAddress</td>
             <td><c:out value="${equipment.placementAddress}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>ApplicationNumber</td>
             <td><c:out value="${equipment.applicationNumber}"/></td>
         </tr>
-        <tr class="info">
+        <tr>
             <td>Description</td>
             <td><c:out value="${equipment.description}"/></td>
         </tr>
+        </tbody>
+        <security:authorize access="hasRole('ROLE_ADMIN')">
+            <tfoot>
+            <tr>
+                <td>
+                    <a class="btn btn-primary btn-block" href="<c:url value="/ipstore/edit/${equipment.id}" />">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" id="equipment_delete"
+                       href="<c:url value="/ipstore/delete/${equipment.id}"/>">Delete</a>
+                </td>
+            </tr>
+            </tfoot>
+        </security:authorize>
     </table>
 </div>
 </body>

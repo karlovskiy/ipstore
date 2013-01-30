@@ -38,11 +38,32 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li><a href="<c:url value="/ipstore/equipment" />">Home</a></li>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
+                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Administration
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<c:url value="/ipstore/add"/>">Add</a></li>
+                                <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
+                                <security:authorize access="hasRole('ROLE_ROOT')">
+                                    <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
+                                </security:authorize>
+                            </ul>
+                        </li>
                     </security:authorize>
                     <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li class="active"><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Management
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
+                                <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
+                            </ul>
+                        </li>
                     </security:authorize>
                     <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                 </ul>

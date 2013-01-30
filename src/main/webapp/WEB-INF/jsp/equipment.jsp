@@ -18,6 +18,7 @@
     <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
     <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/equipment.js"/>"></script>
     <style type="text/css">
@@ -31,27 +32,27 @@
             padding-left: 0;
         }
 
-        .table tbody tr.success td {
+        .table tbody tr.NEW td {
             background-color: #ffffff;
         }
 
-        .table-hover tbody tr.success:hover td {
+        .table-hover tbody tr.NEW:hover td {
             background-color: #00ff00;
         }
 
-        .table tbody tr.error td {
+        .table tbody tr.NEED_UPDATE td {
             background-color: #ff0000;
         }
 
-        .table-hover tbody tr.error:hover td {
+        .table-hover tbody tr.NEED_UPDATE:hover td {
             background-color: #ff0000;
         }
 
-        .table tbody tr.warning td {
+        .table tbody tr.OLD td {
             background-color: #ffff00;
         }
 
-        .table-hover tbody tr.warning:hover td {
+        .table-hover tbody tr.OLD:hover td {
             background-color: #ffff00;
         }
     </style>
@@ -64,20 +65,32 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="active"><a href="<c:url value="/ipstore/equipment" />">Home</a></li>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
-                    </security:authorize>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
-                    </security:authorize>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
-                    </security:authorize>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Administration
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<c:url value="/ipstore/add"/>">Add</a></li>
+                                <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
+                                <security:authorize access="hasRole('ROLE_ROOT')">
+                                    <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
+                                </security:authorize>
+                            </ul>
+                        </li>
                     </security:authorize>
-                    <security:authorize access="hasRole('ROLE_ADMIN')">
-                        <li><a href="<c:url value="/ipstore/add"/>">Add</a></li>
+                    <security:authorize access="hasRole('ROLE_ROOT')">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Management
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
+                                <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
+                            </ul>
+                        </li>
                     </security:authorize>
                     <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                 </ul>
@@ -95,23 +108,23 @@
         <tr>
             <th class="left-col">Ip address</th>
             <th>Type</th>
-            <th>Login</th>
             <th>Password status</th>
             <th>Client name</th>
+            <th>Placement Address</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${equipment}" var="equipment">
-            <tr class="${equipment.passwordStatus == 'NEED_UPDATE' ? 'error' : equipment.passwordStatus == 'OLD' ? 'warning' : 'success'}">
+            <tr class="${equipment.passwordStatus}">
                 <td class="left-col">
                     <a href="/ipstore/equipment/${equipment.id}">
                         <c:out value="${equipment.ipAddress}"/>
                     </a>
                 </td>
                 <td><c:out value="${equipment.type}"/></td>
-                <td><c:out value="${equipment.login}"/></td>
                 <td><c:out value="${equipment.passwordStatus}"/></td>
                 <td><c:out value="${equipment.clientName}"/></td>
+                <td><c:out value="${equipment.placementAddress}"/></td>
             </tr>
         </c:forEach>
         </tbody>
