@@ -3,7 +3,6 @@ package utilits.controller;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,8 +31,6 @@ public class EquipmentController {
 
     public static Logger logger = Logger.getLogger(EquipmentController.class);
     public static int DEFAULT_PASSWORD_LENGTH = 15;
-
-    private @Value("${gs_type.location}") String gsTypeLocation;
 
     @Resource(name = "equipmentService")
     private EquipmentService equipmentService;
@@ -79,7 +76,6 @@ public class EquipmentController {
                                 @SuppressWarnings("unused") HttpServletRequest request) {
         Equipment equipment = equipmentService.getEquipment(id);
         model.addAttribute("equipment", equipment);
-        model.addAttribute("gs_type_location", gsTypeLocation);
         return "view";
     }
 

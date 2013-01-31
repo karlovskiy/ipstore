@@ -14,5 +14,6 @@ $(document).ready(function () {
             });
         });
     }
+    var copy_to_clipboard = new ZeroClipboard($("#copy_to_clipboard"), { moviePath: "/flash/zeroclipboard.swf"});
 });
 

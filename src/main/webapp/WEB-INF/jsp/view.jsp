@@ -20,6 +20,7 @@
     <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/bootbox.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/zeroclipboard.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/view.js"/>"></script>
     <style type="text/css">
         body {
@@ -38,6 +39,18 @@
 
         .table td.NEW {
             color: #00ff00;
+        }
+
+        .zeroclipboard-is-hover {
+            color: #ffffff;
+            background-color: #0044cc;
+            *background-color: #003bb3;
+        }
+
+        .zeroclipboard-is-active {
+            color: #ffffff;
+            background-color: #0044cc;
+            *background-color: #003bb3;
         }
     </style>
 </head>
@@ -87,19 +100,19 @@
         <tbody>
         <tr>
             <td>IpAddress</td>
-            <td><c:out value="${equipment.ipAddress}"/></td>
+            <td><c:choose>
+                <c:when test="${equipment.type == 'GS'}">
+                    <a href="http://${equipment.ipAddress}" target="_blank"><c:out value="${equipment.ipAddress}"/></a>
+                </c:when>
+                <c:otherwise>
+                    <c:out value="${equipment.ipAddress}"/>
+                </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
         <tr>
             <td>Type</td>
-            <td><c:choose>
-                <c:when test="${equipment.type == 'GS'}">
-                    <a href="${gs_type_location}" target="_blank"><c:out value="${equipment.type}"/></a>
-                </c:when>
-                <c:otherwise>
-                    <c:out value="${equipment.type}"/>
-                </c:otherwise>
-            </c:choose>
-            </td>
+            <td><c:out value="${equipment.type}"/></td>
         </tr>
         <tr>
             <td>Username</td>
@@ -110,12 +123,15 @@
             <td><c:out value="${equipment.login}"/></td>
         </tr>
         <tr>
-            <td>Password</td>
-            <td><c:out value="${equipment.password}"/></td>
+            <td style="vertical-align: middle;">Password</td>
+            <td><span><button id="copy_to_clipboard" class="btn btn-primary"
+                        data-clipboard-text="${equipment.password}">Copy</button></span>
+            </td>
         </tr>
         <tr>
             <td>Password date</td>
-            <td><fmt:formatDate value="${equipment.passwordDate}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/></td>
+            <td style="white-space: nowrap;">
+                <fmt:formatDate value="${equipment.passwordDate}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/></td>
         </tr>
         <tr>
             <td>Password status</td>
