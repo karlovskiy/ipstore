@@ -11,8 +11,7 @@
         <intercept-url pattern="/ipstore/add" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/ipstore/save" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/ipstore/edit/*" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/import" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/generate_password" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/import" access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/generate_password" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/monitoring**" access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/export" access="hasRole('ROLE_ROOT')"/>

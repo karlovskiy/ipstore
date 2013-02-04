@@ -60,6 +60,10 @@ public class Equipment implements Serializable {
     @Column(name = "DESCRIPTION", length = 512)
     private String description;
 
+    @Enumerated(value = EnumType.ORDINAL)
+    @Column(name = "STATUS", nullable = false)
+    private Status status;
+
     public Long getId() {
         return id;
     }
@@ -154,5 +158,13 @@ public class Equipment implements Serializable {
 
     public void setPasswordStatus(PasswordStatus passwordStatus) {
         this.passwordStatus = passwordStatus;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

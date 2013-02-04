@@ -70,8 +70,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="<c:url value="/ipstore/add"/>">Add</a></li>
-                                <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
+                                    <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
                                     <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
                                 </security:authorize>
                             </ul>

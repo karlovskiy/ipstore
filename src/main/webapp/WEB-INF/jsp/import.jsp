@@ -16,6 +16,8 @@
           href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
+    <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -44,8 +46,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="<c:url value="/ipstore/add"/>">Add</a></li>
-                                <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
+                                    <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
                                     <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
                                 </security:authorize>
                             </ul>
