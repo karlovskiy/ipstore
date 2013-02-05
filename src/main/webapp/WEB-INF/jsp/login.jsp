@@ -10,11 +10,6 @@
             background-color: #f5f5f5;
         }
 
-        .container-narrow {
-            margin: 0 auto;
-            max-width: 700px;
-        }
-
         .errorblock {
             color: #ff0000;
         }
@@ -31,11 +26,6 @@
             -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
             -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
             box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-        }
-
-        .form-signin .form-signin-heading,
-        .form-signin .checkbox {
-            margin-bottom: 10px;
         }
 
         .form-signin input[type="text"],
@@ -55,22 +45,32 @@
           href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
     <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
+    <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
 </head>
 <body>
-<div class="container-narrow">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="<c:url value="/ipstore/equipment" />">VoIPStore</a>
 
-    <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="muted">VoIPStore</h3>
+            <div class="navbar-form pull-right">
+                <ul class="nav nav-pills pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 <br><br><br>
 
 <div class="container">
-
     <form class="form-signin" action="<c:url value='j_spring_security_check' />" method='POST'>
         <c:if test="${not empty error}">
             <div class="alert alert-error">
@@ -82,7 +82,6 @@
         <input type="password" class="input-block-level" name='j_password' placeholder="Password">
         <button name="submit" type="submit" class="btn btn-large btn-block btn-primary"> Sign in</button>
     </form>
-
 </div>
 </body>
 </html>
