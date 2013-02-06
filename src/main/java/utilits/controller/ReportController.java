@@ -33,7 +33,7 @@ public class ReportController {
     @RequestMapping(value = "/export", method = RequestMethod.GET)
     public ModelAndView loadReport(@SuppressWarnings("unused") HttpServletRequest request) {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
-        List<Equipment> equipments = equipmentService.getEquipments(null);
+        List<Equipment> equipments = equipmentService.loadEquipments(null);
         JRDataSource jrDataSource = new JRBeanCollectionDataSource(equipments);
         parameterMap.put("datasource", jrDataSource);
         return new ModelAndView("equipmentReport", parameterMap);

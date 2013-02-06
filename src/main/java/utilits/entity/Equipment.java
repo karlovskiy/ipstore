@@ -2,6 +2,7 @@ package utilits.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import utilits.controller.PasswordStatus;
+import utilits.controller.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;

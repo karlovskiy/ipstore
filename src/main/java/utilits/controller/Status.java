@@ -1,4 +1,4 @@
-package utilits.entity;
+package utilits.controller;
 
 /**
  * Here will be javadoc

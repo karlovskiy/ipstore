@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.controller.PasswordStatus;
 import utilits.entity.Equipment;
-import utilits.entity.Status;
+import utilits.controller.Status;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class EquipmentService {
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")
-    public List<Equipment> getEquipments(String search) {
+    public List<Equipment> loadEquipments(String search) {
         logger.debug("Start loading equipment, search string: " + search);
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Equipment.class);
@@ -49,7 +49,7 @@ public class EquipmentService {
         return criteria.addOrder(Order.asc("ipAddress")).list();
     }
 
-    public Equipment getEquipment(Long id) {
+    public Equipment loadEquipment(Long id) {
         logger.info("loading equipment with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         return (Equipment) session.get(Equipment.class, id);

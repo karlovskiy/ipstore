@@ -40,7 +40,7 @@ public class EquipmentController {
     public String viewEquipment(@RequestParam(value = "search", required = false) String search, Model model,
                                 @SuppressWarnings("unused") HttpServletRequest request) {
         logger.info("Received request to load equipment, search string: " + search);
-        List<Equipment> equipment = equipmentService.getEquipments(search);
+        List<Equipment> equipment = equipmentService.loadEquipments(search);
         model.addAttribute("equipment", equipment);
         if (StringUtils.isNotEmpty(search)) {
             model.addAttribute("search", search);
@@ -79,7 +79,7 @@ public class EquipmentController {
     @RequestMapping(value = "/equipment/{id}", method = RequestMethod.GET)
     public String viewEquipment(@PathVariable Long id, Model model,
                                 @SuppressWarnings("unused") HttpServletRequest request) {
-        Equipment equipment = equipmentService.getEquipment(id);
+        Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
         return "view";
     }
@@ -94,7 +94,7 @@ public class EquipmentController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editEquipment(@PathVariable Long id, Model model) {
-        Equipment equipment = equipmentService.getEquipment(id);
+        Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
         model.addAttribute("formAction", "/ipstore/save/" + id);
         return "edit";
