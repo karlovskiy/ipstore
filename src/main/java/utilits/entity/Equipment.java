@@ -16,6 +16,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "EQUIPMENT")
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
 public class Equipment implements Serializable {
 
     @Id

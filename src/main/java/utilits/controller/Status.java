@@ -7,6 +7,6 @@ package utilits.controller;
  * @since 1.0
  */
 public enum Status {
-    ACTIVE,
-    DELETED
+    ACTIVE,     //0
+    DELETED     //1
 }

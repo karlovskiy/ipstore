@@ -6,6 +6,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import utilits.service.ActionService;
 
 import javax.annotation.Resource;
@@ -30,30 +32,20 @@ public class ActionAspect {
     @Around("within(utilits.controller.*) && @annotation(action)")
     public Object observe(ProceedingJoinPoint pjp, Action action) throws Throwable {
         Object result = pjp.proceed();
-        HttpServletRequest request = null;
-        for (Object arg : pjp.getArgs()) {
-            if (arg instanceof HttpServletRequest) {
-                request = (HttpServletRequest) arg;
-                break;
-            }
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        utilits.entity.Action entity = new utilits.entity.Action();
+        entity.setIp(request.getRemoteAddr());
+        entity.setHost(request.getRemoteHost());
+        entity.setType(action.type());
+        entity.setUserAgent(request.getHeader("user-agent"));
+        StringBuffer requestURL = request.getRequestURL();
+        String queryParams = request.getQueryString();
+        if (StringUtils.isNotEmpty(queryParams)) {
+            requestURL.append("?").append(queryParams);
         }
-        if (request == null) {
-            logger.warn("Ignoring aspect " + ActionAspect.class + " parameter " + HttpServletRequest.class + " not found.");
-        } else {
-            utilits.entity.Action entity = new utilits.entity.Action();
-            entity.setIp(request.getRemoteAddr());
-            entity.setHost(request.getRemoteHost());
-            entity.setType(action.type());
-            entity.setUserAgent(request.getHeader("user-agent"));
-            StringBuffer requestURL = request.getRequestURL();
-            String queryParams = request.getQueryString();
-            if (StringUtils.isNotEmpty(queryParams)) {
-                requestURL.append("?").append(queryParams);
-            }
-            entity.setRequestURL(requestURL.toString());
-            entity.setActionTimestamp(Calendar.getInstance().getTime());
-            actionService.saveAction(entity);
-        }
+        entity.setRequestURL(requestURL.toString());
+        entity.setActionTimestamp(Calendar.getInstance().getTime());
+        actionService.saveAction(entity);
         return result;
     }
 

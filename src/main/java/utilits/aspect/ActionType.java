@@ -11,11 +11,14 @@ public enum ActionType {
     LOGIN_FAILURE,      // 1
     LOGOUT,             // 2
     EQUIPMENT_LIST,     // 3
-    EQUIPMENT_VIEW,     // 4
-    EQUIPMENT_EDIT,     // 5
+    ACCESS_VIEW_PAGE,   // 4
+    EQUIPMENT_UPDATE,   // 5
     EQUIPMENT_DELETE,   // 6
     EQUIPMENT_IMPORT,   // 7
     EQUIPMENT_EXPORT,   // 8
-    GENERATE_PASSWORD   // 9
-
+    GENERATE_PASSWORD,  // 9
+    EQUIPMENT_CREATE,   // 10
+    ACCESS_ADD_PAGE,    // 11
+    ACCESS_EDIT_PAGE,   // 12
+    ACCESS_IMPORT_PAGE  // 13
 }
