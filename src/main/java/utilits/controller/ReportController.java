@@ -31,7 +31,7 @@ public class ReportController {
 
     @Action(type = ActionType.EQUIPMENT_EXPORT)
     @RequestMapping(value = "/export", method = RequestMethod.GET)
-    public ModelAndView loadReport(@SuppressWarnings("unused") HttpServletRequest request) {
+    public ModelAndView loadReport() {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         List<Equipment> equipments = equipmentService.loadEquipments(null);
         JRDataSource jrDataSource = new JRBeanCollectionDataSource(equipments);

@@ -2,12 +2,13 @@ package utilits.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.controller.ActionFilterForm;
@@ -27,7 +28,8 @@ import java.util.List;
 @Service("actionService")
 @Transactional
 public class ActionService {
-    protected static Logger logger = Logger.getLogger(ActionService.class);
+
+    protected static Logger logger = LoggerFactory.getLogger(ActionService.class);
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;

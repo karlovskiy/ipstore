@@ -7,7 +7,7 @@ package utilits.controller;
  * @since 1.0
  */
 public enum PasswordStatus {
-    NEW,
-    OLD,
-    NEED_UPDATE
+    NEW,        // 0
+    OLD,        // 1
+    NEED_UPDATE // 2
 }

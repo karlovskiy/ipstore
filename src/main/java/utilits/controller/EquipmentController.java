@@ -2,7 +2,8 @@ package utilits.controller;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ import java.util.List;
 @Controller
 public class EquipmentController {
 
-    public static Logger logger = Logger.getLogger(EquipmentController.class);
+    public static Logger logger = LoggerFactory.getLogger(EquipmentController.class);
 
     private
     @Value("${random_password.default_length}")

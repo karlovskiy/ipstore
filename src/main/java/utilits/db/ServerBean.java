@@ -17,14 +17,11 @@
 
 package utilits.db;
 
-import org.apache.commons.logging.Log;
-
-import org.apache.commons.logging.LogFactory;
-import org.hsqldb.DatabaseManager;
-import org.hsqldb.server.ServerConfiguration;
-import org.hsqldb.Database;
 import org.hsqldb.persist.HsqlProperties;
+import org.hsqldb.server.ServerConfiguration;
 import org.hsqldb.server.ServerConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -37,9 +34,9 @@ import java.util.Properties;
  * Bean that will start an instance of an HSQL database.  This class is primarily intended
  * to be used in demo applications.  It allows for a self contained distribution including
  * a database instance.  The DataSource reference is necessary for proper shutdown.
- *
+ * <p/>
  * This is an example of a bean configuration:
- *
+ * <p/>
  * <pre>
  *     &lt;bean id="dataBase" class="org.springmodules.db.hsqldb.ServerBean" singleton="true" lazy-init="false"&gt;
  *         &lt;property name="dataSource"&gt;&lt;ref local="dataSource"/&gt;&lt;/property&gt;
@@ -53,7 +50,6 @@ import java.util.Properties;
  *     &lt;/bean&gt;
  * </pre>
  *
- *
  * @author Thomas Risberg
  * @see org.hsqldb.Server
  */
@@ -63,7 +59,7 @@ public class ServerBean implements InitializingBean, DisposableBean {
     /**
      * Commons Logging instance.
      */
-    private static final Log log = LogFactory.getLog(ServerBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServerBean.class);
 
     /**
      * Properties used to customize instance.
@@ -112,33 +108,33 @@ public class ServerBean implements InitializingBean, DisposableBean {
         server.setNoSystemExit(true);
         server.setProperties(configProps);
 
-        log.info("HSQL Server Startup sequence initiated");
+        logger.info("HSQL Server Startup sequence initiated");
 
         server.start();
 
         String portMsg = "port " + server.getPort();
-        log.info("HSQL Server listening on " + portMsg);
+        logger.info("HSQL Server listening on " + portMsg);
     }
 
     public void destroy() {
 
-        log.info("HSQL Server Shutdown sequence initiated");
+        logger.info("HSQL Server Shutdown sequence initiated");
         if (dataSource != null) {
             Connection con = null;
             try {
                 con = dataSource.getConnection();
                 con.createStatement().execute("SHUTDOWN");
             } catch (SQLException e) {
-                log.error("HSQL Server Shutdown failed: " + e.getMessage());
+                logger.error("HSQL Server Shutdown failed: " + e.getMessage());
             } finally {
                 try {
                     if (con != null)
                         con.close();
-                } catch (Exception ignore) {}
+                } catch (Exception ignore) {
+                }
             }
-        }
-        else {
-            log.warn("HSQL ServerBean needs a dataSource property set to shutdown database safely.");
+        } else {
+            logger.warn("HSQL ServerBean needs a dataSource property set to shutdown database safely.");
         }
         server.signalCloseAllServerConnections();
         int status = server.stop();
@@ -148,15 +144,14 @@ public class ServerBean implements InitializingBean, DisposableBean {
                 Thread.sleep(100);
                 status = server.getState();
             } catch (InterruptedException e) {
-                log.error("Error while shutting down HSQL Server: " + e.getMessage());
+                logger.error("Error while shutting down HSQL Server: " + e.getMessage());
                 break;
             }
         }
         if (status != ServerConstants.SERVER_STATE_SHUTDOWN) {
-            log.warn("HSQL Server failed to shutdown properly.");
-        }
-        else {
-            log.info("HSQL Server Shutdown completed");
+            logger.warn("HSQL Server failed to shutdown properly.");
+        } else {
+            logger.info("HSQL Server Shutdown completed");
         }
         server = null;
 

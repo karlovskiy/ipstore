@@ -1,6 +1,7 @@
 package utilits.controller;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +24,7 @@ import java.util.List;
 @Controller
 public class ActionController {
 
-    public static Logger logger = Logger.getLogger(ActionController.class);
+    public static Logger logger = LoggerFactory.getLogger(ActionController.class);
 
     @Resource(name = "actionService")
     private ActionService actionService;

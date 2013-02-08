@@ -35,6 +35,7 @@
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="<c:url value="/ipstore/equipment" />">VoIPStore</a>
+
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li><a href="<c:url value="/ipstore/equipment" />">Home</a></li>
@@ -84,10 +85,8 @@
         <tr>
             <th>Date</th>
             <th class="nw">Ip address</th>
-            <th>Host</th>
             <th>Type</th>
             <th>Request URL</th>
-            <th>User Agent</th>
         </tr>
         </thead>
         <tbody>
@@ -96,10 +95,8 @@
                 <td class="nw"><fmt:formatDate value="${action.actionTimestamp}" type="both"
                                                pattern="dd.MM.yyyy HH:mm:ss"/></td>
                 <td><c:out value="${action.ip}"/></td>
-                <td><c:out value="${action.host}"/></td>
                 <td><c:out value="${action.type}"/></td>
                 <td><c:out value="${action.requestURL}"/></td>
-                <td><c:out value="${action.userAgent}"/></td>
             </tr>
         </c:forEach>
         </tbody>

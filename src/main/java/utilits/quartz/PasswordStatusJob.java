@@ -1,9 +1,10 @@
 package utilits.quartz;
 
-import org.apache.log4j.Logger;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import utilits.controller.PasswordStatus;
 import utilits.entity.Equipment;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 public class PasswordStatusJob extends QuartzJobBean {
 
-    private static final Logger logger = Logger.getLogger(PasswordStatusJob.class);
+    private static final Logger logger = LoggerFactory.getLogger(PasswordStatusJob.class);
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {

@@ -2,7 +2,6 @@ package utilits.service;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.hibernate.Criteria;
@@ -10,11 +9,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.controller.PasswordStatus;
-import utilits.entity.Equipment;
 import utilits.controller.Status;
+import utilits.entity.Equipment;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -32,7 +33,7 @@ import java.util.List;
 @Transactional
 public class EquipmentService {
 
-    protected static Logger logger = Logger.getLogger(EquipmentService.class);
+    protected static Logger logger = LoggerFactory.getLogger(EquipmentService.class);
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
