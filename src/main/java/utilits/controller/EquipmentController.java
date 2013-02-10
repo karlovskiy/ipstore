@@ -121,7 +121,7 @@ public class EquipmentController {
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit";
         }
-        Long id = equipmentService.saveEquipment(equipment);
+        Long id = equipmentService.createEquipment(equipment);
         return "redirect:/ipstore/equipment/" + id;
     }
 

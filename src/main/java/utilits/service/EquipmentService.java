@@ -56,7 +56,7 @@ public class EquipmentService {
         return (Equipment) session.get(Equipment.class, id);
     }
 
-    public Long saveEquipment(Equipment equipment) {
+    public Long createEquipment(Equipment equipment) {
         logger.info("saving new equipment...");
         Session session = sessionFactory.getCurrentSession();
         equipment.setPasswordStatus(PasswordStatus.NEW);
