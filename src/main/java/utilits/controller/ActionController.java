@@ -8,10 +8,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utilits.entity.Action;
+import utilits.entity.Change;
 import utilits.service.ActionService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,6 +34,58 @@ public class ActionController {
     @RequestMapping(value = "/actions", method = RequestMethod.GET)
     public String actionList(Model model) {
         logger.info("Received request to load actions");
+        ActionFilterForm filterForm = makeDefaultFilterForm();
+        model.addAttribute("filterForm", filterForm);
+        model.addAttribute("actions", makeActions(filterForm));
+        return "actions";
+    }
+
+    @RequestMapping(value = "/actions", method = RequestMethod.POST)
+    public String filteredActionList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            model.addAttribute("filterForm", filterForm);
+            model.addAttribute("actions", makeActions(filterForm));
+        }
+        return "actions";
+    }
+
+    @RequestMapping(value = "/changes", method = RequestMethod.GET)
+    public String changesList(Model model) {
+        logger.info("Received request to load changes");
+        ActionFilterForm filterForm = makeDefaultFilterForm();
+        model.addAttribute("filterForm", filterForm);
+        model.addAttribute("changes", makeChanges(filterForm));
+        return "changes";
+    }
+
+    @RequestMapping(value = "/changes", method = RequestMethod.POST)
+    public String filteredChangesList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            model.addAttribute("filterForm", filterForm);
+            model.addAttribute("changes", makeChanges(filterForm));
+        }
+        return "changes";
+    }
+
+    private List<ChangeWrapper> makeChanges(ActionFilterForm filterForm) {
+        List<Change> changesList = actionService.loadChanges(filterForm);
+        List<ChangeWrapper> changes = new ArrayList<ChangeWrapper>(changesList.size());
+        for (Change change : changesList) {
+            changes.add(new ChangeWrapper(change));
+        }
+        return changes;
+    }
+
+    private List<ActionWrapper> makeActions(ActionFilterForm filterForm) {
+        List<Action> actionsList = actionService.loadActions(filterForm);
+        List<ActionWrapper> actions = new ArrayList<ActionWrapper>(actionsList.size());
+        for (Action action : actionsList) {
+            actions.add(new ActionWrapper(action));
+        }
+        return actions;
+    }
+
+    private ActionFilterForm makeDefaultFilterForm() {
         ActionFilterForm filterForm = new ActionFilterForm();
         Calendar calendar = Calendar.getInstance();
         filterForm.setTo(calendar.getTime());
@@ -41,20 +95,7 @@ public class ActionController {
         calendar.set(Calendar.HOUR, 0);
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         filterForm.setFrom(calendar.getTime());
-        model.addAttribute("actionFilterForm", filterForm);
-        List<Action> actions = actionService.loadActions(filterForm);
-        model.addAttribute("actions", actions);
-        return "actions";
-    }
-
-    @RequestMapping(value = "/actions", method = RequestMethod.POST)
-    public String filteredActionList(@Valid ActionFilterForm actionFilterForm, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            model.addAttribute("actionFilterForm", actionFilterForm);
-            List<Action> actions = actionService.loadActions(actionFilterForm);
-            model.addAttribute("actions", actions);
-        }
-        return "actions";
+        return filterForm;
     }
 
 }

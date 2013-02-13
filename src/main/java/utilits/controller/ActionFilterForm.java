@@ -20,9 +20,6 @@ public class ActionFilterForm {
 
     private String ip;
 
-    private String host;
-
-
     public Date getFrom() {
         return from;
     }
@@ -47,21 +44,12 @@ public class ActionFilterForm {
         this.ip = ip;
     }
 
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("from=").append(from)
                 .append(", to=").append(to)
-                .append(", ip=").append(ip)
-                .append(", host=").append(host);
+                .append(", ip=").append(ip);
         return result.toString();
     }
 }

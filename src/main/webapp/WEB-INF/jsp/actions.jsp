@@ -15,7 +15,7 @@
     <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/js/actions.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/init-datepicker.js"/>"></script>
     <style type="text/css">
         .table tbody tr.info td {
             background-color: #ffffff;
@@ -62,17 +62,17 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
+                                <li><a href="<c:url value="/ipstore/changes"/>">Changes</a></li>
                                 <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
                             </ul>
                         </li>
                     </security:authorize>
                     <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                 </ul>
-                <form:form commandName="actionFilterForm" class="navbar-form pull-right" action="/ipstore/actions">
+                <form:form commandName="filterForm" class="navbar-form pull-right" action="/ipstore/actions">
                     <form:input id="from" path="from" cssClass="input-small" placeholder="From"/>
                     <form:input id="to" path="to" cssClass="input-small" placeholder="To"/>
                     <form:input id="ip" path="ip" cssClass="input-small" placeholder="Ip"/>
-                    <form:input id="host" path="host" cssClass="input-small" placeholder="Host"/>
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form:form>
             </div>
@@ -95,7 +95,16 @@
                 <td class="nw"><fmt:formatDate value="${action.actionTimestamp}" type="both"
                                                pattern="dd.MM.yyyy HH:mm:ss"/></td>
                 <td><c:out value="${action.ip}"/></td>
-                <td><c:out value="${action.type}"/></td>
+                <td>
+                    <c:choose>
+                        <c:when test="${not empty action.url}">
+                            <a href="<c:url value="${action.url}"/>" target="_blank"><c:out value="${action.type}"/></a>
+                        </c:when>
+                        <c:otherwise>
+                            <c:out value="${action.type}"/>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td><c:out value="${action.requestURL}"/></td>
             </tr>
         </c:forEach>

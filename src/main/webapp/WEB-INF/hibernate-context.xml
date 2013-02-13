@@ -16,7 +16,7 @@
 	<context:property-placeholder location="/WEB-INF/spring.properties" />
     
     <!-- Enable annotation style of managing transactions -->
-	<tx:annotation-driven transaction-manager="transactionManager" />	
+	<tx:annotation-driven transaction-manager="transactionManager" order="0"/>
    
     <!-- Declare the Hibernate SessionFactory for retrieving Hibernate sessions -->
     <!-- See http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/orm/hibernate3/annotation/AnnotationSessionFactoryBean.html --> 							

@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utilits.aspect.Action;
+import utilits.aspect.ActionType;
 import utilits.controller.PasswordStatus;
 import utilits.controller.Status;
 import utilits.entity.Equipment;
@@ -56,6 +58,7 @@ public class EquipmentService {
         return (Equipment) session.get(Equipment.class, id);
     }
 
+    @Action(type = ActionType.EQUIPMENT_CREATE)
     public Long createEquipment(Equipment equipment) {
         logger.info("saving new equipment...");
         Session session = sessionFactory.getCurrentSession();

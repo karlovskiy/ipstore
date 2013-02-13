@@ -61,6 +61,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
+                                <li><a href="<c:url value="/ipstore/changes"/>">Changes</a></li>
                                 <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
                             </ul>
                         </li>

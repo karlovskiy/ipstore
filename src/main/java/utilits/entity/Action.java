@@ -5,6 +5,8 @@ import utilits.aspect.ActionType;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Here will be javadoc
@@ -41,6 +43,16 @@ public class Action implements Serializable {
 
     @Column(name = "REQUEST_URL", nullable = false, length = 256)
     private String requestURL;
+
+    @OneToMany(mappedBy = "action", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name = "ACTION_ID")
+    private Set<Change> changes = new HashSet<Change>();
+
+    public void addChange(Change change) {
+        change.setAction(this);
+        changes.add(change);
+    }
 
     public Long getId() {
         return id;
@@ -96,5 +108,13 @@ public class Action implements Serializable {
 
     public void setRequestURL(String requestURL) {
         this.requestURL = requestURL;
+    }
+
+    public Set<Change> getChanges() {
+        return changes;
+    }
+
+    public void setChanges(Set<Change> changes) {
+        this.changes = changes;
     }
 }

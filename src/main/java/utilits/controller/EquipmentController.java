@@ -112,7 +112,6 @@ public class EquipmentController {
         return "redirect:/ipstore/equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_CREATE)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String createEquipment(@Valid Equipment equipment, BindingResult result, Model model) {
         if (result.hasErrors()) {

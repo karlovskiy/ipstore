@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.controller.ActionFilterForm;
 import utilits.entity.Action;
+import utilits.entity.Change;
+import utilits.entity.Equipment;
 
 import javax.annotation.Resource;
 import java.util.Calendar;
@@ -39,11 +41,28 @@ public class ActionService {
         session.save(action);
     }
 
+    public Equipment loadEquipment(Long id) {
+        org.hibernate.Session session = sessionFactory.getCurrentSession();
+        return (Equipment) session.get(Equipment.class, id);
+    }
+
     @SuppressWarnings("unchecked")
     public List<Action> loadActions(ActionFilterForm filter) {
         logger.info("start loading actions, filter: " + filter);
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Action.class);
+        return makeCriteria(criteria, filter).list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Change> loadChanges(ActionFilterForm filter) {
+        logger.info("start loading changes, filter: " + filter);
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(Change.class).createCriteria("action");
+        return makeCriteria(criteria, filter).list();
+    }
+
+    private Criteria makeCriteria(Criteria criteria, ActionFilterForm filter) {
         Date from = filter.getFrom();
         if (from != null) {
             criteria.add(Restrictions.ge("actionTimestamp", from));
@@ -65,11 +84,7 @@ public class ActionService {
         if (StringUtils.isNotEmpty(ip)) {
             criteria.add(Restrictions.like("ip", "%" + ip + "%"));
         }
-        String host = filter.getHost();
-        if (StringUtils.isNotEmpty(host)) {
-            criteria.add(Restrictions.like("host", "%" + host + "%"));
-        }
-        return criteria.addOrder(Order.asc("actionTimestamp")).list();
+        return criteria.addOrder(Order.asc("actionTimestamp"));
     }
 
 }
