@@ -14,7 +14,7 @@
         <put-attribute name="content" value="/WEB-INF/jsp/content/changes-content.jsp"/>
     </definition>
     <definition name="edit" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Edit"/>
+        <put-attribute name="title" value="Equipment"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/edit-content.jsp"/>
     </definition>
     <definition name="equipment" template="/WEB-INF/jsp/templates/template.jsp">
@@ -23,11 +23,11 @@
         <put-attribute name="content" value="/WEB-INF/jsp/content/equipment-content.jsp"/>
     </definition>
     <definition name="import" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Import"/>
+        <put-attribute name="title" value="Equipment"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/import-content.jsp"/>
     </definition>
     <definition name="view" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="View"/>
+        <put-attribute name="title" value="Equipment"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/view-content.jsp"/>
     </definition>
 </tiles-definitions>
