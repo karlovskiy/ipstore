@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="actions" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Actions"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/actions-form.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/actions-content.jsp"/>
+    </definition>
+    <definition name="changes" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Changes"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/changes-form.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/changes-content.jsp"/>
+    </definition>
+    <definition name="edit" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Edit"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/edit-content.jsp"/>
+    </definition>
+    <definition name="equipment" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Equipment"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/equipment-form.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/equipment-content.jsp"/>
+    </definition>
+    <definition name="import" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Import"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/import-content.jsp"/>
+    </definition>
+    <definition name="view" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="View"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/view-content.jsp"/>
+    </definition>
+</tiles-definitions>

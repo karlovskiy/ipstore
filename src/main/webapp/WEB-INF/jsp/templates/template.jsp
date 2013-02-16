@@ -1,34 +1,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>VoIPStore</title>
-    <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
+    <title><tiles:getAsString name="title"/></title>
     <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/datepicker.css"/>" rel="stylesheet">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="<c:url value="/assets/ico/apple-touch-icon-144-precomposed.png"/>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="<c:url value="/assets/ico/apple-touch-icon-114-precomposed.png"/>..">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
+    <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
+    <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
     <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/js/init-datepicker.js"/>"></script>
-    <style type="text/css">
-        .table tbody tr.info td {
-            background-color: #ffffff;
-        }
-
-        .nw {
-            white-space: nowrap;
-        }
-
-        body {
-            padding-top: 60px;
-        }
-    </style>
+    <link href="<c:url value="/css/datepicker.css"/>" rel="stylesheet">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -69,44 +62,11 @@
                     </security:authorize>
                     <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                 </ul>
-                <form:form commandName="filterForm" class="navbar-form pull-right" action="/ipstore/changes">
-                    <form:input id="from" path="from" cssClass="input-small" placeholder="From"/>
-                    <form:input id="to" path="to" cssClass="input-small" placeholder="To"/>
-                    <form:input id="ip" path="ip" cssClass="input-small" placeholder="Ip"/>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form:form>
+                <tiles:insertAttribute ignore="true" name="menu-form"/>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <table class="table table-hover table-condensed">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th class="nw">Ip address</th>
-            <th>Action type</th>
-            <th>Field type</th>
-            <th>Old value</th>
-            <th>New value</th>
-            <th>Equipment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${changes}" var="change">
-            <tr class="info">
-                <td class="nw"><fmt:formatDate value="${change.actionTimestamp}" type="both"
-                                               pattern="dd.MM.yyyy HH:mm:ss"/></td>
-                <td><c:out value="${change.ip}"/></td>
-                <td><c:out value="${change.actionType}"/></td>
-                <td><c:out value="${change.type}"/></td>
-                <td><c:out value="${change.oldValue}"/></td>
-                <td><c:out value="${change.newValue}"/></td>
-                <td><a href="<c:out value="${change.equipmentURL}"/>" target="_blank">View</a></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+<tiles:insertAttribute name="content"/>
 </body>
 </html>

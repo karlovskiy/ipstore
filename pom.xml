@@ -5,7 +5,7 @@
     <groupId>utilits</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>1.7-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
 
     <name>ipstore web application</name>
     <url>http://maven.apache.org</url>
@@ -395,6 +395,12 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>3.9</version>
+        </dependency>
+        <!-- tiles -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>3.0.1</version>
         </dependency>
         <!-- others -->
         <dependency>
