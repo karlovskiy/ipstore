@@ -116,8 +116,15 @@ public class EquipmentController {
     public String createEquipment(@Valid Equipment equipment, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/ipstore/save");
-            model.addAttribute("backButtonUrl", "/ipstore/equipment");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
+            return "edit";
+        }
+        String ipAddress = equipment.getIpAddress();
+        Equipment existsEquipment = equipmentService.loadEquipment(ipAddress);
+        if (existsEquipment != null) {
+            model.addAttribute("formAction", "/ipstore/save");
+            model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
+            model.addAttribute("existsEquipment", existsEquipment);
             return "edit";
         }
         Long id = equipmentService.createEquipment(equipment);
@@ -129,7 +136,6 @@ public class EquipmentController {
     public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/ipstore/save/" + id);
-            model.addAttribute("backButtonUrl", "/ipstore/equipment/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit";
         }

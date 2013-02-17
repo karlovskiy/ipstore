@@ -58,6 +58,14 @@ public class EquipmentService {
         return (Equipment) session.get(Equipment.class, id);
     }
 
+    public Equipment loadEquipment(String ipAddress) {
+        logger.info("loading equipment with ipAddress=" + ipAddress);
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(Equipment.class);
+        criteria.add(Restrictions.eq("ipAddress", ipAddress));
+        return (Equipment) criteria.uniqueResult();
+    }
+
     @Action(type = ActionType.EQUIPMENT_CREATE)
     public Long createEquipment(Equipment equipment) {
         logger.info("saving new equipment...");
