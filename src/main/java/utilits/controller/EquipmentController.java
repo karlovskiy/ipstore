@@ -65,13 +65,13 @@ public class EquipmentController {
         if (!file.isEmpty()) {
             logger.info("File size: " + file.getSize());
             try {
-                String resultMessage = equipmentService.importFile(file.getInputStream());
-                model.addAttribute("success", true);
-                model.addAttribute("resultMessage", resultMessage);
+                ImportResultType result = equipmentService.importFile(file.getInputStream());
+                model.addAttribute("result", result);
+                logger.info("Importing success, added=" + result.getAddedCount() +
+                        ", exists=" + result.getExistsCount());
             } catch (Exception e) {
+                model.addAttribute("error", true);
                 logger.error("Importing error...", e);
-                model.addAttribute("success", false);
-                model.addAttribute("resultMessage", "Importing error!");
             }
         }
         return "import";

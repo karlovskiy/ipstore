@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.aspect.Action;
 import utilits.aspect.ActionType;
+import utilits.controller.ImportResultType;
 import utilits.controller.PasswordStatus;
 import utilits.controller.Status;
 import utilits.entity.Equipment;
@@ -112,74 +113,69 @@ public class EquipmentService {
                 .executeUpdate();
     }
 
-    public String importFile(InputStream is) throws IOException, InvalidFormatException {
+    public ImportResultType importFile(InputStream is) throws IOException, InvalidFormatException {
+        ImportResultType<Equipment> result = new ImportResultType<Equipment>();
         Workbook wb = WorkbookFactory.create(is);
         Sheet sheet = wb.getSheetAt(0);
         int i = 0;
         for (Row row : sheet) {
             i++;
             if (i > 1) {
-                Equipment equipment = new Equipment();
-                for (int j = 0; j <= 8; j++) {
-                    Cell cell = row.getCell(j, Row.CREATE_NULL_AS_BLANK);
-                    String value = cell.getStringCellValue();
-                    switch (j) {
-                        case 0:
-                            equipment.setIpAddress(value);
-                            break;
-                        case 1:
-                            equipment.setType(value);
-                            break;
-                        case 2:
-                            equipment.setUsername(value);
-                            break;
-                        case 3:
-                            equipment.setLogin(value);
-                            break;
-                        case 4:
-                            equipment.setPassword(value);
-                            break;
-                        case 5:
-                            equipment.setClientName(value);
-                            break;
-                        case 6:
-                            equipment.setPlacementAddress(value);
-                            break;
-                        case 7:
-                            equipment.setApplicationNumber(value);
-                            break;
-                        case 8:
-                            equipment.setDescription(value);
-                            break;
-                    }
-                }
+                Equipment equipment = makeEquipment(row);
                 Session session = sessionFactory.getCurrentSession();
                 Equipment oldEquipment = (Equipment) session.createCriteria(Equipment.class)
                         .add(Restrictions.eq("ipAddress", equipment.getIpAddress()))
                         .uniqueResult();
                 if (oldEquipment != null) {
-                    oldEquipment.setType(equipment.getType());
-                    oldEquipment.setUsername(equipment.getUsername());
-                    oldEquipment.setLogin(equipment.getLogin());
-                    oldEquipment.setClientName(equipment.getClientName());
-                    oldEquipment.setPlacementAddress(equipment.getPlacementAddress());
-                    oldEquipment.setApplicationNumber(equipment.getApplicationNumber());
-                    oldEquipment.setDescription(equipment.getDescription());
-                    String oldPassword = oldEquipment.getPassword();
-                    String newPassword = equipment.getPassword();
-                    oldEquipment.setPassword(newPassword);
-                    if (ObjectUtils.notEqual(oldPassword, newPassword)) {
-                        oldEquipment.setPasswordStatus(PasswordStatus.NEW);
-                        oldEquipment.setPasswordDate(new Date());
-                    }
+                    result.addExists(oldEquipment);
                 } else {
-                    equipment.setPasswordStatus(PasswordStatus.NEW);
-                    equipment.setPasswordDate(new Date());
-                    equipment.setStatus(Status.ACTIVE);
-                    session.save(equipment);
+                    Long id = (Long) session.save(equipment);
+                    equipment.setId(id);
+                    result.addAdded(equipment);
                 }
             }
         }
-        return "Successfully imported " + (i - 1) + " items!";
+        return result;
+    }
+
+    private Equipment makeEquipment(Row row) {
+        Equipment equipment = new Equipment();
+        for (int j = 0; j <= 8; j++) {
+            Cell cell = row.getCell(j, Row.CREATE_NULL_AS_BLANK);
+            String value = cell.getStringCellValue();
+            switch (j) {
+                case 0:
+                    equipment.setIpAddress(value);
+                    break;
+                case 1:
+                    equipment.setType(value);
+                    break;
+                case 2:
+                    equipment.setUsername(value);
+                    break;
+                case 3:
+                    equipment.setLogin(value);
+                    break;
+                case 4:
+                    equipment.setPassword(value);
+                    break;
+                case 5:
+                    equipment.setClientName(value);
+                    break;
+                case 6:
+                    equipment.setPlacementAddress(value);
+                    break;
+                case 7:
+                    equipment.setApplicationNumber(value);
+                    break;
+                case 8:
+                    equipment.setDescription(value);
+                    break;
+            }
+        }
+        equipment.setPasswordStatus(PasswordStatus.NEW);
+        equipment.setPasswordDate(new Date());
+        equipment.setStatus(Status.ACTIVE);
+        return equipment;
     }
 }
