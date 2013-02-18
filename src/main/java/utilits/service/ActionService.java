@@ -42,8 +42,14 @@ public class ActionService {
     }
 
     public Equipment loadEquipment(Long id) {
-        org.hibernate.Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         return (Equipment) session.get(Equipment.class, id);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Equipment> loadEquipment() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Equipment.class).list();
     }
 
     @SuppressWarnings("unchecked")

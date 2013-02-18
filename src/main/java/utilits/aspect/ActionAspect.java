@@ -22,10 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Here will be javadoc
@@ -56,6 +53,21 @@ public class ActionAspect {
             List<Change> changes = buildCreateEquipmentChanges(oldEquipment, newEquipment);
             for (Change change : changes) {
                 entity.addChange(change);
+            }
+        } else if (actionType == ActionType.EQUIPMENT_IMPORT) {
+            Set<Long> beforeImportIds = new HashSet<Long>();
+            for (Equipment equipment : actionService.loadEquipment()) {
+                beforeImportIds.add(equipment.getId());
+            }
+            result = pjp.proceed();
+            entity = buildAction(actionType);
+            for (Equipment equipment : actionService.loadEquipment()) {
+                Long id = equipment.getId();
+                if (!beforeImportIds.contains(id)) {
+                    for (Change change : buildCreateEquipmentChanges(equipment)) {
+                        entity.addChange(change);
+                    }
+                }
             }
         } else {
             result = pjp.proceed();
