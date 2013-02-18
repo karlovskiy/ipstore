@@ -105,6 +105,13 @@ public class EquipmentService {
         equipment.setStatus(Status.DELETED);
     }
 
+    public void activateEquipment(Long id) {
+        logger.info("activate deleted equipment with id=" + id);
+        Session session = sessionFactory.getCurrentSession();
+        Equipment equipment = (Equipment) session.get(Equipment.class, id);
+        equipment.setStatus(Status.ACTIVE);
+    }
+
     public void updatePasswordStatus(Long id, PasswordStatus passwordStatus) {
         Session session = sessionFactory.getCurrentSession();
         session.createQuery("UPDATE Equipment SET passwordStatus = :status WHERE id = :id")

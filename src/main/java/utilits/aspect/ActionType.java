@@ -20,5 +20,6 @@ public enum ActionType {
     EQUIPMENT_CREATE,   // 10
     ACCESS_ADD_PAGE,    // 11
     ACCESS_EDIT_PAGE,   // 12
-    ACCESS_IMPORT_PAGE  // 13
+    ACCESS_IMPORT_PAGE, // 13
+    EQUIPMENT_ACTIVATE  // 14
 }
