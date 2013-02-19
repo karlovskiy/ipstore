@@ -18,7 +18,7 @@
         <intercept-url pattern="/ipstore/actions" access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/changes" access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/delete/*" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/activate/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/activate/*" access="hasRole('ROLE_ROOT')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/equipment"
                     authentication-failure-url="/ipstore/loginfailed"/>
