@@ -68,7 +68,7 @@
         <c:if test="${equipment.status == 'DELETED'}">
             <tr>
                 <td>Status</td>
-                <td colspan="2"><span class="text-error"><c:out value="${equipment.status}"/></span></td>
+                <td><span class="text-error"><c:out value="${equipment.status}"/></span></td>
             </tr>
         </c:if>
         </tbody>

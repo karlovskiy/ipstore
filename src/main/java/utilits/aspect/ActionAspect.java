@@ -39,7 +39,7 @@ public class ActionAspect {
     @Resource(name = "actionService")
     private ActionService actionService;
 
-    @Around("within(utilits.controller.*) && @annotation(action)")
+    @Around("within(utilits.controller..*) && @annotation(action)")
     public Object observe(ProceedingJoinPoint pjp, Action action) throws Throwable {
         ActionType actionType = action.type();
         Object result;

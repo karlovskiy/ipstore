@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <title>VoIPStore</title>
@@ -52,7 +53,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="<c:url value="/ipstore/equipment" />">VoIPStore</a>
+            <a class="brand" href="<c:url value="/ipstore/"/>">VoIPStore</a>
 
             <div class="navbar-form pull-right">
                 <ul class="nav nav-pills pull-right">

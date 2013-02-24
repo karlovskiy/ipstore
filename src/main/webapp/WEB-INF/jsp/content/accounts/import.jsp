@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container">
-    <h3>Equipment import</h3>
+    <h3>Accounts import</h3>
     <c:if test="${error}">
         <span class="errorblock">Importing error!</span>
     </c:if>
-    <form method="post" action="/ipstore/import" enctype="multipart/form-data">
+    <form method="post" action="/ipstore/accounts/import" enctype="multipart/form-data">
         <input type="file" name="file"/>
         <input class="btn btn-primary" type="submit" value="Import"/>
     </form>
@@ -17,7 +17,7 @@
                         <tr>
                             <td>
                                 <span class="text-success">
-                                    Successfully added <c:out value="${result.addedCount}"/> equipment items.
+                                    Successfully added <c:out value="${result.addedCount}"/> account items.
                                 </span>
                             </td>
                         </tr>
@@ -25,10 +25,11 @@
                             <tr>
                                 <td>
                                     <span class="text-success">
-                                        Equipment with ip <a href="/ipstore/equipment/${added.id}"
-                                                             target="_blank">
-                                        <c:out value="${added.ipAddress}"/>
-                                    </a> successfully added!
+                                        Account with login
+                                        <a href="/ipstore/accounts/view/${added.id}" target="_blank">
+                                            <c:out value="${added.login}"/>
+                                        </a>
+                                        successfully added!
                                     </span>
                                 </td>
                             </tr>
@@ -41,7 +42,7 @@
                             <tr>
                                 <td>
                                     <span class="text-error">
-                                        Already exists and ignored <c:out value="${result.existsCount}"/> equipment items.
+                                        Already exists and ignored <c:out value="${result.existsCount}"/> account items.
                                     </span>
                                 </td>
                             </tr>
@@ -49,10 +50,11 @@
                                 <tr>
                                     <td>
                                         <span class="text-error">
-                                            Equipment with ip <a href="/ipstore/equipment/${exists.id}"
-                                                                 target="_blank">
-                                            <c:out value="${exists.ipAddress}"/>
-                                        </a> already exists!
+                                            Account with login
+                                            <a href="/ipstore/accounts/view/${exists.id}" target="_blank">
+                                                <c:out value="${exists.login}"/>
+                                            </a>
+                                            already exists!
                                         </span>
                                     </td>
                                 </tr>

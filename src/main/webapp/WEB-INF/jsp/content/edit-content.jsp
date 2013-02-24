@@ -107,7 +107,7 @@
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save</button>
             <a id="generate_password" class="btn btn-success">Generate password</a>
-            <input id="max_length" type="text" name="length" style="width: 20px;" value="15">
+            <input id="max_length" type="text" name="length" style="width: 20px;" value="${defaultPasswordLength}">
         </div>
 
     </form:form>

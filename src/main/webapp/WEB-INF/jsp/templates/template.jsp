@@ -27,11 +27,10 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="<c:url value="/ipstore/equipment" />">VoIPStore</a>
+            <a class="brand" href="<c:url value="/ipstore/" />">VoIPStore</a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a href="<c:url value="/ipstore/equipment" />">Home</a></li>
                     <security:authorize access="hasRole('ROLE_ADMIN')">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -39,10 +38,17 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<c:url value="/ipstore/add"/>">Add</a></li>
+                                <li class="nav-header">Equipment</li>
+                                <li><a href="<c:url value="/ipstore/add"/>">Add equipment</a></li>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
-                                    <li><a href="<c:url value="/ipstore/import"/>">Import</a></li>
-                                    <li><a href="<c:url value="/ipstore/export"/>">Export</a></li>
+                                    <li><a href="<c:url value="/ipstore/import"/>">Import equipment</a></li>
+                                    <li><a href="<c:url value="/ipstore/export"/>">Export equipment</a></li>
+                                </security:authorize>
+                                <li class="nav-header">Accounts</li>
+                                <li><a href="<c:url value="/ipstore/accounts/add"/>">Add account</a></li>
+                                <security:authorize access="hasRole('ROLE_ROOT')">
+                                    <li><a href="<c:url value="/ipstore/accounts/import"/>">Import accounts</a></li>
+                                    <li><a href="#">Export accounts</a></li>
                                 </security:authorize>
                             </ul>
                         </li>
@@ -55,8 +61,11 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
-                                <li><a href="<c:url value="/ipstore/changes"/>">Changes</a></li>
                                 <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
+                                <li class="nav-header">Equipment</li>
+                                <li><a href="<c:url value="/ipstore/changes"/>">Equipment changes</a></li>
+                                <li class="nav-header">Accounts</li>
+                                <li><a href="#">Accounts changes</a></li>
                             </ul>
                         </li>
                     </security:authorize>

@@ -120,7 +120,7 @@ public class EquipmentService {
                 .executeUpdate();
     }
 
-    public ImportResultType importFile(InputStream is) throws IOException, InvalidFormatException {
+    public ImportResultType<Equipment> importFile(InputStream is) throws IOException, InvalidFormatException {
         ImportResultType<Equipment> result = new ImportResultType<Equipment>();
         Workbook wb = WorkbookFactory.create(is);
         Sheet sheet = wb.getSheetAt(0);

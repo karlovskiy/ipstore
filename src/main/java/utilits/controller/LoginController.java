@@ -16,7 +16,7 @@ import utilits.aspect.ActionType;
 @Controller
 public class LoginController {
 
-    @Action(type = ActionType.ACCESS_LOGIN_PAGE)
+    @Action(type = ActionType.LOGIN_PAGE)
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
@@ -33,6 +33,12 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
         return "login";
+    }
+
+    @Action(type = ActionType.HOME_PAGE)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "home";
     }
 
 }

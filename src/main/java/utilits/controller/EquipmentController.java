@@ -51,7 +51,7 @@ public class EquipmentController {
         return "equipment";
     }
 
-    @Action(type = ActionType.ACCESS_IMPORT_PAGE)
+    @Action(type = ActionType.EQUIPMENT_IMPORT_PAGE)
     @RequestMapping(value = "/import", method = RequestMethod.GET)
     public String importEquipment() {
         logger.debug("Received request to import equipment...");
@@ -65,7 +65,7 @@ public class EquipmentController {
         if (!file.isEmpty()) {
             logger.info("File size: " + file.getSize());
             try {
-                ImportResultType result = equipmentService.importFile(file.getInputStream());
+                ImportResultType<Equipment> result = equipmentService.importFile(file.getInputStream());
                 model.addAttribute("result", result);
                 logger.info("Importing success, added=" + result.getAddedCount() +
                         ", exists=" + result.getExistsCount());
@@ -77,7 +77,7 @@ public class EquipmentController {
         return "import";
     }
 
-    @Action(type = ActionType.ACCESS_VIEW_PAGE)
+    @Action(type = ActionType.EQUIPMENT_VIEW_PAGE)
     @RequestMapping(value = "/equipment/{id}", method = RequestMethod.GET)
     public String viewEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
@@ -85,7 +85,7 @@ public class EquipmentController {
         return "view";
     }
 
-    @Action(type = ActionType.ACCESS_ADD_PAGE)
+    @Action(type = ActionType.EQUIPMENT_ADD_PAGE)
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addEquipment(Model model) {
         Equipment equipment = new Equipment();
@@ -95,7 +95,7 @@ public class EquipmentController {
         return "edit";
     }
 
-    @Action(type = ActionType.ACCESS_EDIT_PAGE)
+    @Action(type = ActionType.EQUIPMENT_EDIT_PAGE)
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);

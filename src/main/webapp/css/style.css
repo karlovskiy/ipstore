@@ -90,6 +90,7 @@ body {
 .table tbody tr.info td {
     background-color: #ffffff;
 }
+
 .table td.OLD {
     color: #ffff00;
 }
@@ -113,3 +114,40 @@ body {
     background-color: #0044cc;
     *background-color: #003bb3;
 }
+
+.table tbody tr.NORMAL td {
+    background-color: #ffffff;
+}
+
+.table-hover tbody tr.NORMAL:hover td {
+    background-color: #00ff00;
+}
+
+.table tbody tr.WARNING td {
+    background-color: #ff0000;
+}
+
+.table-hover tbody tr.WARNING:hover td {
+    background-color: #ff0000;
+}
+
+span.NORMAL {
+    color: #00ff00;
+}
+
+span.WARNING {
+    color: #ff0000;
+}
+
+span.DELETE {
+    color: #000000;
+}
+
+div#view-fields div.row {
+    padding-bottom: 5px;
+}
+
+div#view-buttons div.row {
+    padding-top: 15px;
+}
+

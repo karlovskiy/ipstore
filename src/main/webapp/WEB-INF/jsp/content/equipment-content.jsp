@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/equipment.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/list.js"/>"></script>
 <div class="container">
-    <table id="equipment_table" class="table table-hover table-condensed tablesorter">
+    <table id="list_table" class="table table-hover table-condensed tablesorter">
         <thead>
         <tr>
             <th class="left-col">Ip address</th>

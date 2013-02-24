@@ -24,8 +24,8 @@ public class ActionWrapper {
         String requestURL = action.getRequestURL();
         switch (actionType) {
             case EQUIPMENT_LIST:
-            case ACCESS_VIEW_PAGE:
-            case ACCESS_EDIT_PAGE:
+            case EQUIPMENT_VIEW_PAGE:
+            case EQUIPMENT_EDIT_PAGE:
                 url = requestURL;
                 break;
             case EQUIPMENT_UPDATE:

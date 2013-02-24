@@ -30,4 +30,35 @@
         <put-attribute name="title" value="Equipment"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/view-content.jsp"/>
     </definition>
+
+    <!-- home page -->
+    <definition name="home" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Home"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/home.jsp"/>
+    </definition>
+
+    <!-- import accounts page -->
+    <definition name="import-accounts" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Import accounts"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/accounts/import.jsp"/>
+    </definition>
+
+    <!-- accounts list page -->
+    <definition name="accounts" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Accounts list"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/accounts/list.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/accounts/list.jsp"/>
+    </definition>
+
+    <!-- accounts view page -->
+    <definition name="view-account" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="View account"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/accounts/view.jsp"/>
+    </definition>
+
+    <!-- accounts edit page -->
+    <definition name="edit-account" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Edit account"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/accounts/edit.jsp"/>
+    </definition>
 </tiles-definitions>
