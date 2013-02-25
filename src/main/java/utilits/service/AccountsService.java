@@ -127,8 +127,9 @@ public class AccountsService {
 
     private Account makeAccount(Row row) {
         Account account = new Account();
-        for (int j = 0; j <= 8; j++) {
+        for (int j = 0; j <= 3; j++) {
             Cell cell = row.getCell(j, Row.CREATE_NULL_AS_BLANK);
+            cell.setCellType(Cell.CELL_TYPE_STRING);
             String value = cell.getStringCellValue();
             switch (j) {
                 case 0:

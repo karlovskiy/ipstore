@@ -149,6 +149,7 @@ public class EquipmentService {
         Equipment equipment = new Equipment();
         for (int j = 0; j <= 8; j++) {
             Cell cell = row.getCell(j, Row.CREATE_NULL_AS_BLANK);
+            cell.setCellType(Cell.CELL_TYPE_STRING);
             String value = cell.getStringCellValue();
             switch (j) {
                 case 0:

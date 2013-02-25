@@ -151,3 +151,11 @@ div#view-buttons div.row {
     padding-top: 15px;
 }
 
+.ml-10px {
+    margin-left: 10px;
+}
+
+.block {
+    display: block;
+}
+

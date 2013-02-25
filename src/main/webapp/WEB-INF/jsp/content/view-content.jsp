@@ -76,6 +76,9 @@
             <tfoot>
             <tr>
                 <td>
+                    <a href="<c:url value="/ipstore/equipment"/>" class="btn btn-primary btn-block">List</a>
+                </td>
+                <td>
                     <a class="btn btn-primary btn-block" href="<c:url value="/ipstore/edit/${equipment.id}" />">Edit</a>
                 </td>
                 <c:if test="${equipment.status != 'DELETED'}">
