@@ -1,4 +1,4 @@
-package utilits.controller;
+package utilits.controller.wrapper;
 
 import utilits.aspect.ActionType;
 import utilits.aspect.ChangeType;
@@ -6,7 +6,7 @@ import utilits.entity.Change;
 
 import java.util.Date;
 
-import static utilits.controller.ActionWrapper.VIEW_PAGE_PREFIX;
+import static utilits.controller.wrapper.ActionWrapper.VIEW_PAGE_PREFIX;
 
 /**
  * Here will be javadoc

@@ -65,7 +65,7 @@
                                 <li class="nav-header">Equipment</li>
                                 <li><a href="<c:url value="/ipstore/changes"/>">Equipment changes</a></li>
                                 <li class="nav-header">Accounts</li>
-                                <li><a href="#">Accounts changes</a></li>
+                                <li><a href="<c:url value="/ipstore/accounts/changes"/>">Accounts changes</a></li>
                             </ul>
                         </li>
                     </security:authorize>

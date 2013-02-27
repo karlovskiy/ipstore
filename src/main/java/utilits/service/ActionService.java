@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import utilits.controller.ActionFilterForm;
 import utilits.entity.Action;
 import utilits.entity.Change;
-import utilits.entity.Equipment;
 
 import javax.annotation.Resource;
 import java.util.Calendar;
@@ -41,15 +40,16 @@ public class ActionService {
         session.save(action);
     }
 
-    public Equipment loadEquipment(Long id) {
+    @SuppressWarnings("unchecked")
+    public <T> T loadEntity(Long id, Class<T> clazz) {
         Session session = sessionFactory.getCurrentSession();
-        return (Equipment) session.get(Equipment.class, id);
+        return (T) session.get(clazz, id);
     }
 
     @SuppressWarnings("unchecked")
-    public List<Equipment> loadEquipment() {
+    public <T> List<T> loadEntities(Class<T> clazz) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Equipment.class).list();
+        return session.createCriteria(clazz).list();
     }
 
     @SuppressWarnings("unchecked")
@@ -61,10 +61,10 @@ public class ActionService {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Change> loadChanges(ActionFilterForm filter) {
+    public <T> List<T> loadChanges(ActionFilterForm filter, Class<T> clazz) {
         logger.info("start loading changes, filter: " + filter);
         Session session = sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(Change.class).createCriteria("action");
+        Criteria criteria = session.createCriteria(clazz).createCriteria("action");
         return makeCriteria(criteria, filter).list();
     }
 

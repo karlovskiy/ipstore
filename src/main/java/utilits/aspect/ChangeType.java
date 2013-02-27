@@ -6,7 +6,7 @@ package utilits.aspect;
  * @author karlovsky
  * @since 1.0
  */
-public enum ChangeType {
+public enum ChangeType implements IChangeType {
     IP_ADDRESS("ipAddress"),
     TYPE("type"),
     USERNAME("username"),

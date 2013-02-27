@@ -30,6 +30,7 @@
         <intercept-url pattern="/ipstore/accounts/activate/*" access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/accounts/edit/*" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/ipstore/accounts/add" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/changes" access="hasRole('ROLE_ROOT')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/"
                     authentication-failure-url="/ipstore/loginfailed"/>

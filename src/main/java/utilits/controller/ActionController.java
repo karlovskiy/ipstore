@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import utilits.controller.wrapper.AccountsChangeWrapper;
+import utilits.controller.wrapper.ActionWrapper;
+import utilits.controller.wrapper.ChangeWrapper;
+import utilits.entity.AccountChange;
 import utilits.entity.Action;
 import utilits.entity.Change;
 import utilits.service.ActionService;
@@ -54,6 +58,7 @@ public class ActionController {
         logger.info("Received request to load changes");
         ActionFilterForm filterForm = makeDefaultFilterForm();
         model.addAttribute("filterForm", filterForm);
+        model.addAttribute("formAction", "/ipstore/changes");
         model.addAttribute("changes", makeChanges(filterForm));
         return "changes";
     }
@@ -62,13 +67,43 @@ public class ActionController {
     public String filteredChangesList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             model.addAttribute("filterForm", filterForm);
+            model.addAttribute("formAction", "/ipstore/changes");
             model.addAttribute("changes", makeChanges(filterForm));
         }
         return "changes";
     }
 
+    @RequestMapping(value = "/accounts/changes", method = RequestMethod.GET)
+    public String accountChangesList(Model model) {
+        logger.info("Received request to load account changes");
+        ActionFilterForm filterForm = makeDefaultFilterForm();
+        model.addAttribute("filterForm", filterForm);
+        model.addAttribute("formAction", "/ipstore/accounts/changes");
+        model.addAttribute("changes", makeAccountChanges(filterForm));
+        return "changes";
+    }
+
+    @RequestMapping(value = "/accounts/changes", method = RequestMethod.POST)
+    public String filteredAccountChangesList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            model.addAttribute("filterForm", filterForm);
+            model.addAttribute("formAction", "/ipstore/accounts/changes");
+            model.addAttribute("changes", makeAccountChanges(filterForm));
+        }
+        return "changes";
+    }
+
+    private List<AccountsChangeWrapper> makeAccountChanges(ActionFilterForm filterForm) {
+        List<AccountChange> changesList = actionService.loadChanges(filterForm, AccountChange.class);
+        List<AccountsChangeWrapper> changes = new ArrayList<AccountsChangeWrapper>(changesList.size());
+        for (AccountChange change : changesList) {
+            changes.add(new AccountsChangeWrapper(change));
+        }
+        return changes;
+    }
+
     private List<ChangeWrapper> makeChanges(ActionFilterForm filterForm) {
-        List<Change> changesList = actionService.loadChanges(filterForm);
+        List<Change> changesList = actionService.loadChanges(filterForm, Change.class);
         List<ChangeWrapper> changes = new ArrayList<ChangeWrapper>(changesList.size());
         for (Change change : changesList) {
             changes.add(new ChangeWrapper(change));
