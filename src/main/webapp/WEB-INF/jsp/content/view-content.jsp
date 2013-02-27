@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="span2">Password status</div>
                 <div class="span5">
-                    <span class="${equipment.passwordStatus}"><c:out value="${equipment.passwordStatus}"/></span>
+                    <span class="${equipment.passwordStatus} block"><c:out value="${equipment.passwordStatus}"/></span>
                 </div>
             </div>
             <div class="row">
