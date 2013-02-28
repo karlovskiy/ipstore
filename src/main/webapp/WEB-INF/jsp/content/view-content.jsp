@@ -47,21 +47,22 @@
             <div class="row">
                 <div class="span2">Password</div>
                 <div class="span5">
-                    <span><button id="copy_to_clipboard" class="btn btn-primary"
+                    <button id="copy_to_clipboard" class="btn btn-primary"
                             data-clipboard-text="${equipment.password}"> Copy
-                    </button> </span>
+                    </button>
                 </div>
             </div>
             <div class="row">
                 <div class="span2">Password date</div>
                 <div class="span5">
-                    <fmt:formatDate value="${equipment.passwordDate}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
+                    <span class="block"> <fmt:formatDate value="${equipment.passwordDate}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/> </span>
                 </div>
             </div>
             <div class="row">
                 <div class="span2">Password status</div>
                 <div class="span5">
-                    <span class="${equipment.passwordStatus} block"><c:out value="${equipment.passwordStatus}"/></span>
+                    <span class="${equipment.passwordStatus} block">
+                        <span class="block"><c:out value="${equipment.passwordStatus}"/></span></span>
                 </div>
             </div>
             <div class="row">
