@@ -91,18 +91,6 @@ body {
     background-color: #ffffff;
 }
 
-.table td.OLD {
-    color: #ffff00;
-}
-
-.table td.NEED_UPDATE {
-    color: #ff0000;
-}
-
-.table td.NEW {
-    color: #00ff00;
-}
-
 .zeroclipboard-is-hover {
     color: #ffffff;
     background-color: #0044cc;
@@ -141,6 +129,18 @@ span.WARNING {
 
 span.DELETE {
     color: #000000;
+}
+
+span.OLD {
+    color: #ffff00;
+}
+
+span.NEED_UPDATE {
+    color: #ff0000;
+}
+
+span.NEW {
+    color: #00ff00;
 }
 
 div#view-fields div.row {

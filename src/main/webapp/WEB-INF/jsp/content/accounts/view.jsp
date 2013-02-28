@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="<c:url value="/js/bootbox.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/accounts/view.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/view.js"/>"></script>
 <div class="container">
     <div id="view-fields">
         <div class="row">
@@ -86,7 +86,7 @@
                     <security:authorize access="hasRole('ROLE_ROOT')">
                         <div class="span1 ml-10px">
                             <a href="<c:url value="/ipstore/accounts/delete/${account.id}"/>"
-                               class="btn btn-danger btn-block" id="account_delete">Delete</a>
+                               class="btn btn-danger btn-block" id="delete_btn">Delete</a>
                         </div>
                     </security:authorize>
                 </c:if>
