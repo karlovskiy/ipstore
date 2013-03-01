@@ -48,7 +48,7 @@
                                 <li><a href="<c:url value="/ipstore/accounts/add"/>">Add account</a></li>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
                                     <li><a href="<c:url value="/ipstore/accounts/import"/>">Import accounts</a></li>
-                                    <li><a href="#">Export accounts</a></li>
+                                    <li><a href="<c:url value="/ipstore/accounts/export"/>">Export accounts</a></li>
                                 </security:authorize>
                             </ul>
                         </li>
