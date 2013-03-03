@@ -30,10 +30,10 @@
 	<!-- Declare a datasource that has pooling capabilities-->	 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 				destroy-method="close"
-				p:driverClass="${app.jdbc.driverClassName}"
-				p:jdbcUrl="${app.jdbc.url}"
-				p:user="${app.jdbc.username}"
-				p:password="${app.jdbc.password}"
+				p:driverClass="${jdbc.driverClassName}"
+				p:jdbcUrl="${jdbc.url}"
+				p:user="${jdbc.username}"
+				p:password="${jdbc.password}"
 				p:acquireIncrement="5"
 				p:idleConnectionTestPeriod="60"
 				p:maxPoolSize="100"
@@ -48,7 +48,7 @@
         <property name="dataSource"><ref local="dataSource"/></property>
         <property name="serverProperties">
             <props>
-                <prop key="server.port">9101</prop>
+                <prop key="server.port">${db.port}</prop>
                 <prop key="server.database.0">./database</prop>
                 <prop key="server.dbname.0">db</prop>
             </props>

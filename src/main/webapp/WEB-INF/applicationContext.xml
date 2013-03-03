@@ -44,9 +44,10 @@
         </property>
     </bean>
 
-    <import resource="hibernate-context.xml"/>
+    <import resource="spring-hibernate.xml"/>
     <import resource="spring-security.xml"/>
-    <import resource="monitoring-spring-datasource.xml"/>
-    <import resource="jasper-views.xml"/>
+    <import resource="spring-javamelody.xml"/>
+    <import resource="spring-jasper.xml"/>
     <import resource="spring-quartz.xml"/>
+    <import resource="spring-integration.xml"/>
 </beans>

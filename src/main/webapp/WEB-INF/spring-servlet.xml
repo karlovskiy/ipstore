@@ -15,7 +15,7 @@
     </bean>
 
     <bean id="jasperViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver"
-          p:location="/WEB-INF/jasper-views.xml" p:order="0"/>
+          p:location="/WEB-INF/spring-jasper.xml" p:order="0"/>
 
     <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1">
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>

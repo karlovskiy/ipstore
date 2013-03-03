@@ -5,16 +5,16 @@
 
     <bean name="backupDatabaseJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
         <property name="jobClass" value="utilits.quartz.BackupDatabaseJob"/>
-        <!--<property name="jobDataAsMap">-->
-        <!--<map>-->
-        <!--<entry key="" value-ref=""/>-->
-        <!--</map>-->
-        <!--</property>-->
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="ftpChannel" value-ref="ftpChannel"/>
+            </map>
+        </property>
     </bean>
 
     <bean id="backupDatabaseCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="backupDatabaseJobDetails"/>
-        <property name="cronExpression" value="0 0 0/12 * * ?"/>
+        <property name="cronExpression" value="${cron.backup.database}"/>
     </bean>
 
     <bean name="passwordStatusJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
@@ -30,7 +30,7 @@
 
     <bean id="passwordStatusCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="passwordStatusJobDetails"/>
-        <property name="cronExpression" value="0 0 3 * * ?"/>
+        <property name="cronExpression" value="${cron.password.status}"/>
     </bean>
 
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
