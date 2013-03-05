@@ -78,10 +78,8 @@ public abstract class AbstractUpdateObserver<E, C> extends AbstractObserver {
 
     private C makeChange(IChangeType changeType, Object oldValue, Object newValue, Long id) {
         C change = null;
-        if (oldValue instanceof String && newValue instanceof String) {
-            String oldString = (String) oldValue;
-            String newString = (String) newValue;
-            change = buildChange(changeType, oldString, newString, id);
+        if (oldValue instanceof String || newValue instanceof String) {
+            change = buildChange(changeType, (String) oldValue, (String) newValue, id);
         } else if (oldValue instanceof Date && newValue instanceof Date) {
             Date oldDate = (Date) oldValue;
             Date newDate = (Date) newValue;
