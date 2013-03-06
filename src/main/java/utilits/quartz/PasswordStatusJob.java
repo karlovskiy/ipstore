@@ -36,7 +36,7 @@ public class PasswordStatusJob extends QuartzJobBean {
         Date oldDate = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, -(needUpdateDays - oldDays));
         Date needUpdateDate = calendar.getTime();
-        List<Equipment> equipments = equipmentService.loadEquipments(null);
+        List<Equipment> equipments = equipmentService.loadEquipments();
         for (Equipment equipment : equipments) {
             Date passwordDate = equipment.getPasswordDate();
             if (passwordDate.after(oldDate)) {

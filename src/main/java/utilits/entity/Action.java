@@ -46,12 +46,10 @@ public class Action implements Serializable {
 
     @OneToMany(mappedBy = "action", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name = "ACTION_ID")
     private Set<Change> changes = new HashSet<Change>();
 
     @OneToMany(mappedBy = "action", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name = "ACTION_ID")
     private Set<AccountChange> accountChanges = new HashSet<AccountChange>();
 
     public void addChange(Change change) {

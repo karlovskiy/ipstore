@@ -1,10 +1,13 @@
 package utilits.entity;
 
+import org.hibernate.search.annotations.*;
 import org.hibernate.validator.constraints.NotEmpty;
 import utilits.controller.accounts.AccountStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+import static utilits.Utils.INDEX_ANALYZER_DEFINITION;
 
 /**
  * Here will be javadoc
@@ -14,6 +17,8 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "ACCOUNT")
+@Indexed
+@Analyzer(definition = INDEX_ANALYZER_DEFINITION)
 public class Account implements Serializable {
 
     @Id
@@ -22,6 +27,7 @@ public class Account implements Serializable {
     @Column(name = "ID")
     private Long id;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @NotEmpty
     @Column(name = "LOGIN", nullable = false, unique = true, length = 128)
     private String login;
@@ -30,12 +36,15 @@ public class Account implements Serializable {
     @Column(name = "PASSWORD", nullable = false, length = 128)
     private String password;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "CLIENTNAME", length = 128)
     private String clientName;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "NUMBER", length = 128)
     private String number;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "DESCRIPTION", length = 512)
     private String description;
 

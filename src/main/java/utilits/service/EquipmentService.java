@@ -1,7 +1,6 @@
 package utilits.service;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.hibernate.Criteria;
@@ -42,13 +41,10 @@ public class EquipmentService {
     private SessionFactory sessionFactory;
 
     @SuppressWarnings("unchecked")
-    public List<Equipment> loadEquipments(String search) {
-        logger.debug("Start loading equipment, search string: " + search);
+    public List<Equipment> loadEquipments() {
+        logger.debug("Start loading equipment.");
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Equipment.class);
-        if (StringUtils.isNotEmpty(search)) {
-            criteria.add(Restrictions.like("ipAddress", "%" + search + "%"));
-        }
         criteria.add(Restrictions.eq("status", Status.ACTIVE));
         return criteria.addOrder(Order.asc("ipAddress")).list();
     }

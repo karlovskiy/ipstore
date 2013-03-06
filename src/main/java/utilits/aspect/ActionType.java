@@ -35,5 +35,6 @@ public enum ActionType {
     ACCOUNTS_ADD_PAGE,      // 25
     ACCOUNTS_CREATE,        // 26
     ACCOUNTS_UPDATE,        // 27
-    ACCOUNTS_EXPORT         // 28
+    ACCOUNTS_EXPORT,        // 28
+    REBUILD_INDEX           // 29
 }

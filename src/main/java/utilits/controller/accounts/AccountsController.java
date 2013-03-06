@@ -17,6 +17,7 @@ import utilits.aspect.ActionType;
 import utilits.controller.ImportResultType;
 import utilits.entity.Account;
 import utilits.service.AccountsService;
+import utilits.service.SearchService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -40,6 +41,9 @@ public class AccountsController {
 
     @Resource(name = "accountsService")
     private AccountsService accountsService;
+
+    @Resource(name = "searchService")
+    private SearchService searchService;
 
     @Action(type = ActionType.ACCOUNTS_IMPORT_PAGE)
     @RequestMapping(value = "/accounts/import", method = RequestMethod.GET)
@@ -70,11 +74,12 @@ public class AccountsController {
     @Action(type = ActionType.ACCOUNTS_LIST)
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     public String viewAccounts(@RequestParam(value = "search", required = false) String search, Model model) {
-        logger.info("Received request to load accounts, search string: " + search);
-        List<Account> accounts = accountsService.loadAccounts(search);
-        model.addAttribute("accounts", accounts);
+        logger.info("Received request to load accounts.");
         if (StringUtils.isNotEmpty(search)) {
+            model.addAttribute("accounts", searchService.searchAccounts(search));
             model.addAttribute("search", search);
+        } else {
+            model.addAttribute("accounts", accountsService.loadAccounts());
         }
         return "accounts";
     }

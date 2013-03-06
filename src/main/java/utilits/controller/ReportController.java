@@ -37,7 +37,7 @@ public class ReportController {
     @RequestMapping(value = "/export", method = RequestMethod.GET)
     public ModelAndView loadEquipmentReport() {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
-        List<Equipment> equipments = equipmentService.loadEquipments(null);
+        List<Equipment> equipments = equipmentService.loadEquipments();
         JRDataSource jrDataSource = new JRBeanCollectionDataSource(equipments);
         parameterMap.put("datasource", jrDataSource);
         return new ModelAndView("equipmentReport", parameterMap);
@@ -47,7 +47,7 @@ public class ReportController {
     @RequestMapping(value = "/accounts/export", method = RequestMethod.GET)
     public ModelAndView loadAccountsReport() {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
-        List<Account> accounts = accountsService.loadAccounts(null);
+        List<Account> accounts = accountsService.loadAccounts();
         JRDataSource jrDataSource = new JRBeanCollectionDataSource(accounts);
         parameterMap.put("datasource", jrDataSource);
         return new ModelAndView("accountsReport", parameterMap);

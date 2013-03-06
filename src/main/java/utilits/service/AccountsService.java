@@ -1,6 +1,5 @@
 package utilits.service;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.hibernate.Criteria;
@@ -79,13 +78,10 @@ public class AccountsService {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Account> loadAccounts(String search) {
-        logger.debug("Start loading accounts, search string: " + search);
+    public List<Account> loadAccounts() {
+        logger.debug("Start loading accounts.");
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Account.class);
-        if (StringUtils.isNotEmpty(search)) {
-            criteria.add(Restrictions.like("login", "%" + search + "%"));
-        }
         criteria.add(Restrictions.ne("status", AccountStatus.DELETED));
         return criteria.addOrder(Order.asc("login")).list();
     }

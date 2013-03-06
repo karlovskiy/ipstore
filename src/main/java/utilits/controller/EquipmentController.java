@@ -14,11 +14,11 @@ import utilits.aspect.Action;
 import utilits.aspect.ActionType;
 import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
+import utilits.service.SearchService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.List;
 
 
 /**
@@ -39,14 +39,18 @@ public class EquipmentController {
     @Resource(name = "equipmentService")
     private EquipmentService equipmentService;
 
+    @Resource(name = "searchService")
+    private SearchService searchService;
+
     @Action(type = ActionType.EQUIPMENT_LIST)
     @RequestMapping(value = "/equipment", method = RequestMethod.GET)
     public String viewEquipment(@RequestParam(value = "search", required = false) String search, Model model) {
-        logger.info("Received request to load equipment, search string: " + search);
-        List<Equipment> equipment = equipmentService.loadEquipments(search);
-        model.addAttribute("equipment", equipment);
+        logger.info("Received request to load equipment.");
         if (StringUtils.isNotEmpty(search)) {
+            model.addAttribute("equipment", searchService.searchEquipment(search));
             model.addAttribute("search", search);
+        } else {
+            model.addAttribute("equipment", equipmentService.loadEquipments());
         }
         return "equipment";
     }

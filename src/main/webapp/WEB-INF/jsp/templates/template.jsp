@@ -20,6 +20,8 @@
     <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/bootbox.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/menu.js"/>"></script>
     <link href="<c:url value="/css/datepicker.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
 </head>
@@ -62,6 +64,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
                                 <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
+                                <li><a id="rebuild_index" href="<c:url value="/ipstore/rebuild"/>">Rebuild index</a></li>
                                 <li class="nav-header">Equipment</li>
                                 <li><a href="<c:url value="/ipstore/changes"/>">Equipment changes</a></li>
                                 <li class="nav-header">Accounts</li>

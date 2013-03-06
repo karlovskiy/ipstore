@@ -1,5 +1,8 @@
 package utilits.entity;
 
+import org.apache.solr.analysis.*;
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
 import utilits.controller.PasswordStatus;
 import utilits.controller.Status;
@@ -7,6 +10,9 @@ import utilits.controller.Status;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+
+import static utilits.Utils.INDEX_ANALYZER_DEFINITION;
+import static utilits.Utils.QUERY_ANALYZER_DEFINITION;
 
 /**
  * Here will be javadoc
@@ -17,6 +23,27 @@ import java.util.Date;
 @Entity
 @Table(name = "EQUIPMENT")
 @org.hibernate.annotations.Entity(dynamicUpdate = true)
+@Indexed
+@AnalyzerDefs({
+        @AnalyzerDef(name = INDEX_ANALYZER_DEFINITION,
+                tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+                filters = {
+                        @TokenFilterDef(factory = StandardFilterFactory.class),
+                        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                        @TokenFilterDef(factory = StopFilterFactory.class),
+                        @TokenFilterDef(factory = NGramFilterFactory.class,
+                                params = {
+                                        @Parameter(name = "minGramSize", value = "1"),
+                                        @Parameter(name = "maxGramSize", value = "16")})
+                }),
+        @AnalyzerDef(name = QUERY_ANALYZER_DEFINITION,
+                tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+                filters = {
+                        @TokenFilterDef(factory = StandardFilterFactory.class),
+                        @TokenFilterDef(factory = LowerCaseFilterFactory.class)
+                })
+})
+@Analyzer(definition = INDEX_ANALYZER_DEFINITION)
 public class Equipment implements Serializable {
 
     @Id
@@ -25,16 +52,20 @@ public class Equipment implements Serializable {
     @Column(name = "ID")
     private Long id;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @NotEmpty
     @Column(name = "IP_ADDRESS", nullable = false, unique = true, length = 45)
     private String ipAddress;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "TYPE", length = 128)
     private String type;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "USERNAME", length = 128)
     private String username;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "LOGIN", length = 128)
     private String login;
 
@@ -50,15 +81,19 @@ public class Equipment implements Serializable {
     @Column(name = "PASSWORD_STATUS", nullable = false)
     private PasswordStatus passwordStatus;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "CLIENT_NAME", length = 128)
     private String clientName;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "PLACEMENT_ADDRESS", length = 512)
     private String placementAddress;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "APPLICATION_NUMBER", length = 128)
     private String applicationNumber;
 
+    @Field(index = Index.TOKENIZED, store = Store.YES)
     @Column(name = "DESCRIPTION", length = 512)
     private String description;
 

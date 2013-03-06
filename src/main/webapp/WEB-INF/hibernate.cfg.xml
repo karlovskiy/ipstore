@@ -9,5 +9,7 @@
         <property name="format_sql">false</property>
         <property name="use_sql_comments">false</property>
         <property name="hbm2ddl.auto">update</property>
+        <property name="hibernate.search.default.directory_provider">filesystem</property>
+        <property name="hibernate.search.default.indexBase">./lucene/indexes</property>
     </session-factory>
 </hibernate-configuration>
