@@ -7,6 +7,8 @@ import utilits.aspect.ActionType;
 import utilits.entity.Action;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Calendar;
 
 /**
@@ -23,7 +25,7 @@ public abstract class AbstractObserver implements IObserver {
         this.actionType = actionType;
     }
 
-    protected Action buildAction() {
+    protected Action buildAction() throws UnsupportedEncodingException {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Action entity = new utilits.entity.Action();
         entity.setIp(request.getRemoteAddr());
@@ -33,7 +35,7 @@ public abstract class AbstractObserver implements IObserver {
         StringBuffer requestURL = request.getRequestURL();
         String queryParams = request.getQueryString();
         if (StringUtils.isNotEmpty(queryParams)) {
-            requestURL.append("?").append(queryParams);
+            requestURL.append("?").append(URLDecoder.decode(queryParams, "UTF-8"));
         }
         entity.setRequestURL(requestURL.toString());
         entity.setActionTimestamp(Calendar.getInstance().getTime());
