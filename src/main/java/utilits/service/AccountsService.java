@@ -32,7 +32,7 @@ import java.util.List;
 @Transactional
 public class AccountsService {
 
-    protected static Logger logger = LoggerFactory.getLogger(AccountsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccountsService.class);
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;

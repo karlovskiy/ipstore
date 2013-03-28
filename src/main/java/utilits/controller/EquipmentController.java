@@ -30,7 +30,7 @@ import java.io.IOException;
 @Controller
 public class EquipmentController {
 
-    public static Logger logger = LoggerFactory.getLogger(EquipmentController.class);
+    private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);
 
     private
     @Value("${random_password.default_length}")

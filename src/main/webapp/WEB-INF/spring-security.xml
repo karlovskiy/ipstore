@@ -6,47 +6,65 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/ipstore/equipment"             access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/equipment/*"           access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/add"                   access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/save"                  access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/edit/*"                access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/import"                access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/generate_password"     access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/monitoring**"                  access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/export"                access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/actions"               access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/changes"               access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/delete/*"              access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/activate/*"            access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/"                      access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/equipment" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/equipment/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/add" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/save" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/edit/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/import" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/generate_password" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/monitoring**" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/export" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/actions" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/changes" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/delete/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/activate/*" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/" access="hasRole('ROLE_ADMIN')"/>
         <!-- accounts -->
-        <intercept-url pattern="/ipstore/accounts/import"       access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/accounts"              access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/accounts/view/*"       access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/accounts/delete/*"     access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/accounts/block/*"      access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/accounts/unblock/*"    access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/accounts/activate/*"   access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/accounts/edit/*"       access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/accounts/add"          access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/ipstore/accounts/changes"      access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/accounts/export"       access="hasRole('ROLE_ROOT')"/>
-
-        <intercept-url pattern="/ipstore/rebuild"               access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/accounts/import" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/accounts" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/view/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/delete/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/block/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/unblock/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/activate/*" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/accounts/edit/*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/add" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/accounts/changes" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/accounts/export" access="hasRole('ROLE_ROOT')"/>
+        <!-- lucene index -->
+        <intercept-url pattern="/ipstore/rebuild" access="hasRole('ROLE_ROOT')"/>
+        <!-- users -->
+        <intercept-url pattern="/ipstore/users" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/users/view/*" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/users/block/*" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/users/unblock/*" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/users/edit/*" access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/users/add" access="hasRole('ROLE_ROOT')"/>
+        <!-- change password -->
+        <intercept-url pattern="/ipstore/changepassword" access="hasRole('ROLE_ANONYMOUS')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/"
-                    authentication-failure-url="/ipstore/loginfailed"/>
+                    authentication-failure-handler-ref="authenticationFailureHandler"/>
         <logout logout-success-url="/ipstore/logout"/>
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-                <user name="root" password="root" authorities="ROLE_ADMIN,ROLE_ROOT"/>
-            </user-service>
+        <authentication-provider user-service-ref='userDetailsService'>
+            <password-encoder ref="passwordEncoder">
+                <salt-source user-property="username"/>
+            </password-encoder>
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="passwordEncoder"
+                class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+        <beans:constructor-arg value="256"/>
+    </beans:bean>
+
+    <beans:bean id="authenticationFailureHandler"
+                class="utilits.controller.users.CustomAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/ipstore/loginfailed"/>
+    </beans:bean>
 
 </beans:beans>

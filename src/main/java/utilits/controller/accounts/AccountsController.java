@@ -33,7 +33,7 @@ import java.util.List;
 @Controller
 public class AccountsController {
 
-    public static Logger logger = LoggerFactory.getLogger(AccountsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccountsController.class);
 
     private
     @Value("${random_password.default_length}")

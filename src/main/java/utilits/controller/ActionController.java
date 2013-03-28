@@ -30,7 +30,7 @@ import java.util.List;
 @Controller
 public class ActionController {
 
-    public static Logger logger = LoggerFactory.getLogger(ActionController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActionController.class);
 
     @Resource(name = "actionService")
     private ActionService actionService;

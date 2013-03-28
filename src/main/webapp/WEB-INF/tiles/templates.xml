@@ -61,4 +61,22 @@
         <put-attribute name="title" value="Edit account"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/accounts/edit.jsp"/>
     </definition>
+
+    <!-- users list page -->
+    <definition name="users" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Users list"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/users/list.jsp"/>
+    </definition>
+
+    <!-- users view page -->
+    <definition name="view-user" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="View user"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/users/view.jsp"/>
+    </definition>
+
+    <!-- users edit page -->
+    <definition name="edit-user" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Edit user"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/users/edit.jsp"/>
+    </definition>
 </tiles-definitions>

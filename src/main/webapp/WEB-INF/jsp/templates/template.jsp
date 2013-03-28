@@ -65,6 +65,8 @@
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
                                 <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
                                 <li><a id="rebuild_index" href="<c:url value="/ipstore/rebuild"/>">Rebuild index</a></li>
+                                <li><a href="<c:url value="/ipstore/users"/>">Users</a></li>
+                                <li><a href="<c:url value="/ipstore/users/add"/>">Add user</a></li>
                                 <li class="nav-header">Equipment</li>
                                 <li><a href="<c:url value="/ipstore/changes"/>">Equipment changes</a></li>
                                 <li class="nav-header">Accounts</li>

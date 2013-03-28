@@ -35,7 +35,7 @@ import java.util.List;
 @Transactional
 public class EquipmentService {
 
-    protected static Logger logger = LoggerFactory.getLogger(EquipmentService.class);
+    private static final Logger logger = LoggerFactory.getLogger(EquipmentService.class);
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;

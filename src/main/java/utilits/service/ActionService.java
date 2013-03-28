@@ -30,7 +30,7 @@ import java.util.List;
 @Transactional
 public class ActionService {
 
-    protected static Logger logger = LoggerFactory.getLogger(ActionService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActionService.class);
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
