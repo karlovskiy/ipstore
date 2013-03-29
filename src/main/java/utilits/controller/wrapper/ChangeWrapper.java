@@ -32,6 +32,10 @@ public class ChangeWrapper {
         return change.getAction().getIp();
     }
 
+    public String getUsername() {
+        return change.getAction().getUsername();
+    }
+
     public ActionType getActionType() {
         return change.getAction().getType();
     }

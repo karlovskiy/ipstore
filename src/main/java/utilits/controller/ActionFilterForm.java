@@ -18,7 +18,7 @@ public class ActionFilterForm {
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date to;
 
-    private String ip;
+    private String username;
 
     public Date getFrom() {
         return from;
@@ -36,12 +36,12 @@ public class ActionFilterForm {
         this.to = to;
     }
 
-    public String getIp() {
-        return ip;
+    public String getUsername() {
+        return username;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ActionFilterForm {
         StringBuilder result = new StringBuilder();
         result.append("from=").append(from)
                 .append(", to=").append(to)
-                .append(", ip=").append(ip);
+                .append(", username=").append(username);
         return result.toString();
     }
 }

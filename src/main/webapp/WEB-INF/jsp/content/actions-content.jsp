@@ -8,6 +8,7 @@
         <tr>
             <th>Date</th>
             <th class="nw">Ip address</th>
+            <th>Username</th>
             <th>Type</th>
             <th>Request URL</th>
         </tr>
@@ -18,6 +19,7 @@
                 <td class="nw"><fmt:formatDate value="${action.actionTimestamp}" type="both"
                                                pattern="dd.MM.yyyy HH:mm:ss"/></td>
                 <td><c:out value="${action.ip}"/></td>
+                <td><c:out value="${action.username}"/></td>
                 <td>
                     <c:choose>
                         <c:when test="${not empty action.url}">

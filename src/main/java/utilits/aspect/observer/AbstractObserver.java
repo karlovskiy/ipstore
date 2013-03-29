@@ -1,6 +1,7 @@
 package utilits.aspect.observer;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import utilits.aspect.ActionType;
@@ -27,19 +28,20 @@ public abstract class AbstractObserver implements IObserver {
 
     protected Action buildAction() throws UnsupportedEncodingException {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Action entity = new utilits.entity.Action();
-        entity.setIp(request.getRemoteAddr());
-        entity.setHost(request.getRemoteHost());
-        entity.setType(actionType);
-        entity.setUserAgent(request.getHeader("user-agent"));
+        Action action = new utilits.entity.Action();
+        action.setIp(request.getRemoteAddr());
+        action.setHost(request.getRemoteHost());
+        action.setType(actionType);
+        action.setUserAgent(request.getHeader("user-agent"));
         StringBuffer requestURL = request.getRequestURL();
         String queryParams = request.getQueryString();
         if (StringUtils.isNotEmpty(queryParams)) {
             requestURL.append("?").append(URLDecoder.decode(queryParams, "UTF-8"));
         }
-        entity.setRequestURL(requestURL.toString());
-        entity.setActionTimestamp(Calendar.getInstance().getTime());
-        return entity;
+        action.setRequestURL(requestURL.toString());
+        action.setActionTimestamp(Calendar.getInstance().getTime());
+        action.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return action;
     }
 
 }

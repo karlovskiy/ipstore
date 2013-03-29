@@ -29,6 +29,10 @@ public class AccountsChangeWrapper {
         return accountChange.getAction().getIp();
     }
 
+    public String getUsername(){
+        return accountChange.getAction().getUsername();
+    }
+
     public ActionType getActionType() {
         return accountChange.getAction().getType();
     }

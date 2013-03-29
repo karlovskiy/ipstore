@@ -4,6 +4,6 @@
 <form:form commandName="filterForm" class="navbar-form pull-right" action="${formAction}">
     <form:input id="from" path="from" cssClass="input-small" placeholder="From"/>
     <form:input id="to" path="to" cssClass="input-small" placeholder="To"/>
-    <form:input id="ip" path="ip" cssClass="input-small" placeholder="Ip"/>
+    <form:input id="username" path="username" cssClass="input-small" placeholder="Username"/>
     <button type="submit" class="btn btn-primary">Search</button>
 </form:form>

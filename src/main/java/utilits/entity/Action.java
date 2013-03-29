@@ -44,6 +44,9 @@ public class Action implements Serializable {
     @Column(name = "REQUEST_URL", nullable = false, length = 256)
     private String requestURL;
 
+    @Column(name = "USERNAME", nullable = false, length = 128)
+    private String username;
+
     @OneToMany(mappedBy = "action", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Change> changes = new HashSet<Change>();
@@ -124,5 +127,13 @@ public class Action implements Serializable {
 
     public void setChanges(Set<Change> changes) {
         this.changes = changes;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

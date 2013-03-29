@@ -8,6 +8,7 @@
         <tr>
             <th>Date</th>
             <th class="nw">Ip address</th>
+            <th>Username</th>
             <th>Action type</th>
             <th>Field type</th>
             <th>Old value</th>
@@ -21,6 +22,7 @@
                 <td class="nw"><fmt:formatDate value="${change.actionTimestamp}" type="both"
                                                pattern="dd.MM.yyyy HH:mm:ss"/></td>
                 <td><c:out value="${change.ip}"/></td>
+                <td><c:out value="${change.username}"/></td>
                 <td><c:out value="${change.actionType}"/></td>
                 <td><c:out value="${change.type}"/></td>
                 <td><c:out value="${change.oldValue}"/></td>

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.controller.ActionFilterForm;
 import utilits.entity.Action;
-import utilits.entity.Change;
 
 import javax.annotation.Resource;
 import java.util.Calendar;
@@ -86,9 +85,9 @@ public class ActionService {
             }
             criteria.add(Restrictions.le("actionTimestamp", to));
         }
-        String ip = filter.getIp();
-        if (StringUtils.isNotEmpty(ip)) {
-            criteria.add(Restrictions.like("ip", "%" + ip + "%"));
+        String username = filter.getUsername();
+        if (StringUtils.isNotEmpty(username)) {
+            criteria.add(Restrictions.like("username", "%" + username + "%"));
         }
         return criteria.addOrder(Order.asc("actionTimestamp"));
     }

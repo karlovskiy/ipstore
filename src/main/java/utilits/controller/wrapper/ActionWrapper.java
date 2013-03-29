@@ -50,6 +50,10 @@ public class ActionWrapper {
         return action.getIp();
     }
 
+    public String getUsername() {
+        return action.getUsername();
+    }
+
     public String getRequestURL() {
         return action.getRequestURL();
     }
