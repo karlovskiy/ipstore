@@ -54,6 +54,12 @@ public class UsersController {
         return "redirect:/ipstore/users/view/" + id;
     }
 
+    @RequestMapping(value = "/users/reset/{id}", method = RequestMethod.GET)
+    public String resetUserPassword(@PathVariable Long id) {
+        userService.resetUserPassword(id);
+        return "redirect:/ipstore/users/view/" + id;
+    }
+
     @RequestMapping(value = "/users/edit/{id}", method = RequestMethod.GET)
     public String editUser(@PathVariable Long id, Model model) {
         User user = userService.loadUser(id);

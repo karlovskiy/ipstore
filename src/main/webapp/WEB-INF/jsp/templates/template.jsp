@@ -41,12 +41,14 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-header">Equipment</li>
+                                <li><a href="<c:url value="/ipstore/equipment"/>">Equipment list</a></li>
                                 <li><a href="<c:url value="/ipstore/add"/>">Add equipment</a></li>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
                                     <li><a href="<c:url value="/ipstore/import"/>">Import equipment</a></li>
                                     <li><a href="<c:url value="/ipstore/export"/>">Export equipment</a></li>
                                 </security:authorize>
                                 <li class="nav-header">Accounts</li>
+                                <li><a href="<c:url value="/ipstore/accounts"/>">Accounts list</a></li>
                                 <li><a href="<c:url value="/ipstore/accounts/add"/>">Add account</a></li>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
                                     <li><a href="<c:url value="/ipstore/accounts/import"/>">Import accounts</a></li>
@@ -64,13 +66,27 @@
                             <ul class="dropdown-menu">
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
                                 <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
-                                <li><a id="rebuild_index" href="<c:url value="/ipstore/rebuild"/>">Rebuild index</a></li>
+                                <li><a id="rebuild_index" href="<c:url value="/ipstore/rebuild"/>">Rebuild index</a>
+                                </li>
+                                <li class="nav-header">Users</li>
                                 <li><a href="<c:url value="/ipstore/users"/>">Users</a></li>
                                 <li><a href="<c:url value="/ipstore/users/add"/>">Add user</a></li>
                                 <li class="nav-header">Equipment</li>
                                 <li><a href="<c:url value="/ipstore/changes"/>">Equipment changes</a></li>
                                 <li class="nav-header">Accounts</li>
                                 <li><a href="<c:url value="/ipstore/accounts/changes"/>">Accounts changes</a></li>
+                            </ul>
+                        </li>
+                    </security:authorize>
+                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Settings
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<c:url value="/ipstore/changepassword"/>">Change password</a></li>
+                                <li><a href="<c:url value="/ipstore/changeuserinfo"/>">Change userInfo</a></li>
                             </ul>
                         </li>
                     </security:authorize>

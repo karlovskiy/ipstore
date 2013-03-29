@@ -1,6 +1,7 @@
 package utilits.controller;
 
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import utilits.aspect.Action;
 import utilits.aspect.ActionType;
 import utilits.controller.users.ChangePassword;
+import utilits.controller.users.ChangeUserInfo;
 import utilits.entity.User;
 import utilits.service.UsersService;
 
@@ -81,6 +83,69 @@ public class LoginController {
         user.setCredentialsNonExpired(true);
         userService.updateUser(user.getId(), user);
         session.invalidate();
+        return "redirect:/ipstore/";
+    }
+
+    @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
+    public String changePassword(Model model) {
+        model.addAttribute("changePassword", new ChangePassword());
+        return "changepassword";
+    }
+
+    @RequestMapping(value = "/changepassword", method = RequestMethod.POST)
+    public String changePassword(@Valid ChangePassword changePassword, BindingResult result,
+                                 HttpServletRequest request) {
+        if (result.hasErrors()) {
+            return "changepassword";
+        }
+        String newPassword = changePassword.getNewPassword();
+        if (!newPassword.equals(changePassword.getRepeatNewPassword())) {
+            result.rejectValue("repeatNewPassword", "none", "Repeat new password!");
+            return "changepassword";
+        }
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.loadUser(username);
+        String storedPasswordHash = user.getPassword();
+        String enteredPasswordHash = passwordEncoder.encodePassword(changePassword.getOldPassword(), username);
+        if (!storedPasswordHash.equals(enteredPasswordHash)) {
+            result.rejectValue("oldPassword", "none", "Incorrect password!");
+            return "changepassword";
+        }
+        user.setPassword(passwordEncoder.encodePassword(newPassword, username));
+        userService.updateUser(user.getId(), user);
+        request.getSession().invalidate();
+        return "redirect:/ipstore/";
+    }
+
+    @RequestMapping(value = "/changeuserinfo", method = RequestMethod.GET)
+    public String changeUserInfo(Model model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.loadUser(username);
+        ChangeUserInfo userInfo = new ChangeUserInfo();
+        userInfo.setEmail(user.getEmail());
+        userInfo.setFirstName(user.getFirstName());
+        userInfo.setLastName(user.getLastName());
+        model.addAttribute("changeUserInfo", userInfo);
+        return "changeuserinfo";
+    }
+
+    @RequestMapping(value = "/changeuserinfo", method = RequestMethod.POST)
+    public String changeUserInfo(@Valid ChangeUserInfo changeUserInfo, BindingResult result) {
+        if (result.hasErrors()) {
+            return "changeuserinfo";
+        }
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.loadUser(username);
+        String storedPasswordHash = user.getPassword();
+        String enteredPasswordHash = passwordEncoder.encodePassword(changeUserInfo.getPassword(), username);
+        if (!storedPasswordHash.equals(enteredPasswordHash)) {
+            result.rejectValue("password", "none", "Incorrect password!");
+            return "changeuserinfo";
+        }
+        user.setEmail(changeUserInfo.getEmail());
+        user.setFirstName(changeUserInfo.getFirstName());
+        user.setLastName(changeUserInfo.getLastName());
+        userService.updateUser(user.getId(), user);
         return "redirect:/ipstore/";
     }
 

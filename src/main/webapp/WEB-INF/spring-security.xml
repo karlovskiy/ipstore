@@ -41,8 +41,11 @@
         <intercept-url pattern="/ipstore/users/unblock/*" access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/users/edit/*" access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/users/add" access="hasRole('ROLE_ROOT')"/>
-        <!-- change password -->
-        <intercept-url pattern="/ipstore/changepassword" access="hasRole('ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/ipstore/users/reset/*" access="hasRole('ROLE_ROOT')"/>
+        <!-- change password and user info -->
+        <intercept-url pattern="/ipstore/mustchangepassword" access="hasRole('ROLE_ANONYMOUS')"/>
+        <intercept-url pattern="/ipstore/changepassword" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ipstore/changeuserinfo" access="hasRole('ROLE_ADMIN')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/"
                     authentication-failure-handler-ref="authenticationFailureHandler"/>

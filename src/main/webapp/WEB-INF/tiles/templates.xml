@@ -79,4 +79,16 @@
         <put-attribute name="title" value="Edit user"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/users/edit.jsp"/>
     </definition>
+
+    <!--changepassword page -->
+    <definition name="changepassword" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Change password"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/changepassword.jsp"/>
+    </definition>
+
+    <!--changeuserinfo page -->
+    <definition name="changeuserinfo" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Change password"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/changeuserinfo.jsp"/>
+    </definition>
 </tiles-definitions>

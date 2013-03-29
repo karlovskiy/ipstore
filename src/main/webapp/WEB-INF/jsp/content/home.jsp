@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container">
     <div class="hero-unit">
-        <h1>Welcome to VoIPStore!</h1>
+        <h1>Welcome to VoIPStore, <security:authentication property="principal.username"/>!</h1>
 
         <p>
             You have
@@ -14,16 +14,13 @@
                 and <span class="text-success">management</span>
             </security:authorize> rights.
             <br/>
-            Use the menu above or the buttons below to start working with the equipment or accounts.
+            Use the menu above below to start working with the equipment or accounts.
             <br/>
-            Good luck.
+
         </p>
 
         <p>
-            <a href="<c:url value="/ipstore/equipment"/>"
-               class="btn btn-primary btn-large">Equipment list »</a>
-            <a href="<c:url value="/ipstore/accounts"/>"
-               class="btn btn-primary btn-large">Accounts list »</a>
+            Good luck.
         </p>
     </div>
 </div>

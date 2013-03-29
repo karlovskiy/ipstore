@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container">
-    <form:form commandName="changePassword" action="/ipstore/changepassword" cssClass="form-horizontal">
+    <form:form commandName="changeUserInfo" action="/ipstore/changeuserinfo" cssClass="form-horizontal">
         <div class="control-group">
             <label class="control-label" for="username">Username</label>
 
@@ -14,37 +14,48 @@
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="oldPassword">Old password</label>
+            <label class="control-label" for="password">Password</label>
 
             <div class="controls">
-                <form:password id="oldPassword" path="oldPassword"/>
+                <form:password id="password" path="password"/>
                 <span class="errorblock">
-                    <form:errors path="oldPassword"/>
+                    <form:errors path="password"/>
                 </span>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="newPassword">New password</label>
+            <label class="control-label" for="email">Email</label>
 
             <div class="controls">
-                <form:password id="newPassword" path="newPassword"/>
+                <form:input id="email" path="email"/>
                 <span class="errorblock">
-                    <form:errors path="newPassword"/>
+                    <form:errors path="email"/>
                 </span>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="repeatNewPassword">Repeat new password</label>
+            <label class="control-label" for="firstName">FirstName</label>
 
             <div class="controls">
-                <form:password id="repeatNewPassword" path="repeatNewPassword"/>
+                <form:input id="firstName" path="firstName" cssClass="input-xxlarge"/>
                 <span class="errorblock">
-                    <form:errors path="repeatNewPassword"/>
+                    <form:errors path="firstName"/>
                 </span>
             </div>
         </div>
+        <div class="control-group">
+            <label class="control-label" for="lastName">LastName</label>
+
+            <div class="controls">
+                <form:input id="lastName" path="lastName" cssClass="input-xxlarge"/>
+                <span class="errorblock">
+                    <form:errors path="lastName"/>
+                </span>
+            </div>
+        </div>
+
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Change password</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form:form>
 </div>

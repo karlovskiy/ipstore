@@ -60,6 +60,10 @@
                 <a href="<c:url value="/ipstore/users/edit/${user.id}"/>"
                    class="btn btn-primary btn-block">Edit</a>
             </div>
+            <div class="span2 ml-10px">
+                <a href="<c:url value="/ipstore/users/reset/${user.id}"/>"
+                   class="btn btn-danger btn-block">Reset password</a>
+            </div>
             <c:if test="${user.userStatus == 'BLOCKED'}">
                 <div class="span1 ml-10px">
                     <a href="<c:url value="/ipstore/users/unblock/${user.id}"/>"

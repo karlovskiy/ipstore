@@ -73,6 +73,14 @@ public class UsersService {
         user.setUserStatus(UserStatus.ACTIVE);
     }
 
+    public void resetUserPassword(Long id) {
+        logger.info("Start resetting password of user with id=" + id);
+        Session session = sessionFactory.getCurrentSession();
+        User user = (User) session.get(User.class, id);
+        user.setPassword(passwordEncoder.encodePassword(defaultPassword, user.getUsername()));
+        user.setCredentialsNonExpired(false);
+    }
+
     public Long createUser(User user) {
         logger.info("Start saving new user...");
         Session session = sessionFactory.getCurrentSession();
