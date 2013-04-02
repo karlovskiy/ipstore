@@ -99,7 +99,8 @@ public class UsersController {
             model.addAttribute("formAction", "/ipstore/users/edit/" + id);
             return "edit-user";
         }
-        String oldUsername = userService.loadUser(id).getUsername();
+        User oldUser = userService.loadUser(id);
+        String oldUsername = oldUser.getUsername();
         String newUsername = user.getUsername();
         if (!oldUsername.equals(newUsername)) {
             User existsUser = userService.loadUser(newUsername);
@@ -109,7 +110,12 @@ public class UsersController {
                 return "edit-user";
             }
         }
-        userService.updateUser(id, user);
+        oldUser.setUsername(user.getUsername());
+        oldUser.setAuthorities(user.getAuthorities());
+        oldUser.setEmail(user.getEmail());
+        oldUser.setFirstName(user.getFirstName());
+        oldUser.setLastName(user.getLastName());
+        userService.updateUser(id, oldUser);
         return "redirect:/ipstore/users/view/" + id;
     }
 

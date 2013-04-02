@@ -12,14 +12,16 @@
                 </span>
             </div>
         </div>
-        <div class="row">
-            <div class="span1">Password</div>
-            <div class="span5">
+        <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
+            <div class="row">
+                <div class="span1">Password</div>
+                <div class="span5">
                 <span class="block">
                     <c:out value="${account.password}"/>
                 </span>
+                </div>
             </div>
-        </div>
+        </security:authorize>
         <div class="row">
             <div class="span1">ClientName</div>
             <div class="span5">
@@ -51,7 +53,7 @@
             </div>
         </div>
     </div>
-    <security:authorize access="hasRole('ROLE_ADMIN')">
+    <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
         <div id="view-buttons">
             <div class="row">
                 <div class="span1">

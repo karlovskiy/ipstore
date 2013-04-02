@@ -33,23 +33,31 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                    <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_VIEW','ROLE_ACCOUNT_VIEW')">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Administration
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="nav-header">Equipment</li>
-                                <li><a href="<c:url value="/ipstore/equipment"/>">Equipment list</a></li>
-                                <li><a href="<c:url value="/ipstore/add"/>">Add equipment</a></li>
+                                <security:authorize access="hasRole('ROLE_EQUIPMENT_VIEW')">
+                                    <li class="nav-header">Equipment</li>
+                                    <li><a href="<c:url value="/ipstore/equipment"/>">Equipment list</a></li>
+                                </security:authorize>
+                                <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
+                                    <li><a href="<c:url value="/ipstore/add"/>">Add equipment</a></li>
+                                </security:authorize>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
                                     <li><a href="<c:url value="/ipstore/import"/>">Import equipment</a></li>
                                     <li><a href="<c:url value="/ipstore/export"/>">Export equipment</a></li>
                                 </security:authorize>
-                                <li class="nav-header">Accounts</li>
-                                <li><a href="<c:url value="/ipstore/accounts"/>">Accounts list</a></li>
-                                <li><a href="<c:url value="/ipstore/accounts/add"/>">Add account</a></li>
+                                <security:authorize access="hasRole('ROLE_ACCOUNT_VIEW')">
+                                    <li class="nav-header">Accounts</li>
+                                    <li><a href="<c:url value="/ipstore/accounts"/>">Accounts list</a></li>
+                                </security:authorize>
+                                <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
+                                    <li><a href="<c:url value="/ipstore/accounts/add"/>">Add account</a></li>
+                                </security:authorize>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
                                     <li><a href="<c:url value="/ipstore/accounts/import"/>">Import accounts</a></li>
                                     <li><a href="<c:url value="/ipstore/accounts/export"/>">Export accounts</a></li>
@@ -78,7 +86,7 @@
                             </ul>
                         </li>
                     </security:authorize>
-                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                    <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_VIEW','ROLE_ACCOUNT_VIEW')">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Settings

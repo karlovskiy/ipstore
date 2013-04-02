@@ -15,8 +15,11 @@ import java.util.Iterator;
  */
 public enum Authority implements GrantedAuthority {
 
-    ADMIN(0x1, "ROLE_ADMIN"),
-    ROOT(0x2, "ROLE_ROOT");
+    ROOT(0x1, "ROLE_ROOT"),
+    EQUIPMENT_EDIT(0x2, "ROLE_EQUIPMENT_EDIT"),
+    EQUIPMENT_VIEW(0x4, "ROLE_EQUIPMENT_VIEW"),
+    ACCOUNT_EDIT(0x8, "ROLE_ACCOUNT_EDIT"),
+    ACCOUNT_VIEW(0x10, "ROLE_ACCOUNT_VIEW");
 
     private int code;
     private String name;

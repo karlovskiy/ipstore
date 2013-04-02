@@ -51,14 +51,16 @@
                     </span>
             </div>
         </div>
-        <div class="row">
-            <div class="span2">Password</div>
-            <div class="span5">
-                <button id="copy_to_clipboard" class="btn btn-primary"
-                        data-clipboard-text="${equipment.password}"> Copy
-                </button>
+        <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
+            <div class="row">
+                <div class="span2">Password</div>
+                <div class="span5">
+                    <button id="copy_to_clipboard" class="btn btn-primary"
+                            data-clipboard-text="${equipment.password}"> Copy
+                    </button>
+                </div>
             </div>
-        </div>
+        </security:authorize>
         <div class="row">
             <div class="span2">Password date</div>
             <div class="span5">
@@ -107,7 +109,7 @@
             </div>
         </c:if>
     </div>
-    <security:authorize access="hasRole('ROLE_ADMIN')">
+    <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
         <div id="view-buttons">
             <div class="row">
                 <div class="span1 ml-15px">
@@ -116,13 +118,13 @@
                 <div class="span1 ml-10px">
                     <a class="btn btn-primary btn-block" href="<c:url value="/ipstore/edit/${equipment.id}" />">Edit</a>
                 </div>
-                <c:if test="${equipment.status != 'DELETED'}">
-                    <div class="span1 ml-10px">
-                        <a class="btn btn-danger" id="delete_btn"
-                           href="<c:url value="/ipstore/delete/${equipment.id}"/>">Delete</a>
-                    </div>
-                </c:if>
                 <security:authorize access="hasRole('ROLE_ROOT')">
+                    <c:if test="${equipment.status != 'DELETED'}">
+                        <div class="span1 ml-10px">
+                            <a class="btn btn-danger" id="delete_btn"
+                               href="<c:url value="/ipstore/delete/${equipment.id}"/>">Delete</a>
+                        </div>
+                    </c:if>
                     <c:if test="${equipment.status == 'DELETED'}">
                         <div class="span1 ml-10px">
                             <a class="btn btn-warning"

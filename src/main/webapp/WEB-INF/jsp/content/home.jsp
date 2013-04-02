@@ -7,7 +7,7 @@
 
         <p>
             You have
-            <security:authorize access="hasRole('ROLE_ADMIN')">
+            <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_EDIT','ROLE_ACCOUNT_EDIT')">
                 <span class="text-success">administration</span>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ROOT')">
