@@ -53,45 +53,45 @@
             </div>
         </div>
     </div>
-    <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
-        <div id="view-buttons">
-            <div class="row">
-                <div class="span1">
-                    <a href="<c:url value="/ipstore/accounts"/>" class="btn btn-primary btn-block">List</a>
-                </div>
-                <div class="span1 ml-10px">
-                    <a href="<c:url value="/ipstore/accounts/edit/${account.id}"/>"
-                       class="btn btn-primary btn-block">Edit</a>
-                </div>
-                <security:authorize access="hasRole('ROLE_ROOT')">
-                    <c:if test="${account.status == 'DELETED'}">
-                        <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/accounts/activate/${account.id}"/>"
-                               class="btn btn-success btn-block">Activate</a>
-                        </div>
-                    </c:if>
-                </security:authorize>
-                <c:if test="${account.status != 'DELETED'}">
-                    <c:if test="${account.status == 'NORMAL'}">
-                        <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/accounts/block/${account.id}"/>"
-                               class="btn btn-warning btn-block">Block</a>
-                        </div>
-                    </c:if>
-                    <c:if test="${account.status == 'WARNING'}">
-                        <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/accounts/unblock/${account.id}"/>"
-                               class="btn btn-warning btn-block">Unblock</a>
-                        </div>
-                    </c:if>
-                    <security:authorize access="hasRole('ROLE_ROOT')">
-                        <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/accounts/delete/${account.id}"/>"
-                               class="btn btn-danger btn-block" id="delete_btn">Delete</a>
-                        </div>
-                    </security:authorize>
-                </c:if>
+    <div id="view-buttons">
+        <div class="row">
+            <div class="span1">
+                <a href="<c:url value="/ipstore/accounts"/>" class="btn btn-primary btn-block">List</a>
             </div>
+            <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
+            <div class="span1 ml-10px">
+                <a href="<c:url value="/ipstore/accounts/edit/${account.id}"/>"
+                   class="btn btn-primary btn-block">Edit</a>
+            </div>
+            <security:authorize access="hasRole('ROLE_ROOT')">
+                <c:if test="${account.status == 'DELETED'}">
+                    <div class="span1 ml-10px">
+                        <a href="<c:url value="/ipstore/accounts/activate/${account.id}"/>"
+                           class="btn btn-success btn-block">Activate</a>
+                    </div>
+                </c:if>
+            </security:authorize>
+            <c:if test="${account.status != 'DELETED'}">
+                <c:if test="${account.status == 'NORMAL'}">
+                    <div class="span1 ml-10px">
+                        <a href="<c:url value="/ipstore/accounts/block/${account.id}"/>"
+                           class="btn btn-warning btn-block">Block</a>
+                    </div>
+                </c:if>
+                <c:if test="${account.status == 'WARNING'}">
+                    <div class="span1 ml-10px">
+                        <a href="<c:url value="/ipstore/accounts/unblock/${account.id}"/>"
+                           class="btn btn-warning btn-block">Unblock</a>
+                    </div>
+                </c:if>
+                <security:authorize access="hasRole('ROLE_ROOT')">
+                    <div class="span1 ml-10px">
+                        <a href="<c:url value="/ipstore/accounts/delete/${account.id}"/>"
+                           class="btn btn-danger btn-block" id="delete_btn">Delete</a>
+                    </div>
+                </security:authorize>
+            </c:if>
         </div>
-    </security:authorize>
+        </security:authorize>
+    </div>
 </div>
