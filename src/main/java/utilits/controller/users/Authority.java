@@ -3,9 +3,7 @@ package utilits.controller.users;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Here will be javadoc
@@ -67,13 +65,40 @@ public enum Authority implements GrantedAuthority {
 
     public static int getAuthorityMask(String authorities) {
         int authorityMask = 0;
-        if (StringUtils.isNotEmpty(authorities)) {
-            for (String s : authorities.split(",")) {
-                Authority authority = Authority.valueOf(s.trim());
-                authorityMask |= authority.getCode();
-            }
+        Collection<Authority> validatedAuthorities = makeValidatedAuthorities(authorities);
+        for (Authority authority : validatedAuthorities) {
+            authorityMask |= authority.getCode();
         }
         return authorityMask;
+    }
+
+    private static Collection<Authority> makeValidatedAuthorities(String authorities) {
+        Collection<Authority> result = new HashSet<Authority>();
+        if (StringUtils.isNotEmpty(authorities)) {
+            for (Authority authority : values()) {
+                for (String s : authorities.split(",")) {
+                    Authority added = Authority.valueOf(s.trim());
+                    if (authority == added) {
+                        switch (added) {
+                            case ROOT:
+                                Collections.addAll(result, values());
+                                return result;
+                            case EQUIPMENT_EDIT:
+                                result.add(EQUIPMENT_EDIT);
+                                result.add(EQUIPMENT_VIEW);
+                                break;
+                            case ACCOUNT_EDIT:
+                                result.add(ACCOUNT_EDIT);
+                                result.add(ACCOUNT_VIEW);
+                                break;
+                            default:
+                                result.add(added);
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 
 }
