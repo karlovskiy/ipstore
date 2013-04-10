@@ -7,30 +7,29 @@
 
         <p>
             You have
-            <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_VIEW','ROLE_ACCOUNT_VIEW')">
+            <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_VIEW','ROLE_ACCOUNT_VIEW', 'ROLE_COMMUNIGATE_VIEW')">
                 <span class="text-success">view</span>
             </security:authorize>
-            <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_EDIT','ROLE_ACCOUNT_EDIT')">
-                and <span class="text-success">edit</span>
+            <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_EDIT','ROLE_ACCOUNT_EDIT', 'ROLE_COMMUNIGATE_EDIT')">
+                <span class="text-success">, edit</span>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ROOT')">
-                and <span class="text-success">management</span>
+                <span class="text-success">, management</span>
             </security:authorize> rights.
             <br/>
-            Use the menu above below to start working with the
+            Use the menu above or the buttons below to start working.
+        </p>
+
+        <p>
             <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_VIEW','ROLE_EQUIPMENT_EDIT')">
-                <a href="<c:url value="/ipstore/equipment"/>">equipment</a>
-            </security:authorize>
-            <security:authorize
-                    access="hasAnyRole('ROLE_EQUIPMENT_VIEW','ROLE_EQUIPMENT_EDIT') and hasAnyRole('ROLE_ACCOUNT_VIEW','ROLE_ACCOUNT_EDIT')">
-                or
+                <a href="<c:url value="/ipstore/equipment"/>" class="btn btn-primary btn-large">Equipment list »</a>
             </security:authorize>
             <security:authorize access="hasAnyRole('ROLE_ACCOUNT_VIEW','ROLE_ACCOUNT_EDIT')">
-                <a href="<c:url value="/ipstore/accounts"/>">accounts</a>
+                <a href="<c:url value="/ipstore/accounts"/>" class="btn btn-primary btn-large">Accounts list »</a>
             </security:authorize>
-            .
-            <br/>
-
+            <security:authorize access="hasAnyRole('ROLE_COMMUNIGATE_VIEW','ROLE_COMMUNIGATE_EDIT')">
+                <a href="<c:url value="/ipstore/communigate"/>" class="btn btn-primary btn-large">Communigate domains list »</a>
+            </security:authorize>
         </p>
 
         <p>

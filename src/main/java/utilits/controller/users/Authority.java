@@ -17,7 +17,9 @@ public enum Authority implements GrantedAuthority {
     EQUIPMENT_EDIT(0x2, "ROLE_EQUIPMENT_EDIT"),
     EQUIPMENT_VIEW(0x4, "ROLE_EQUIPMENT_VIEW"),
     ACCOUNT_EDIT(0x8, "ROLE_ACCOUNT_EDIT"),
-    ACCOUNT_VIEW(0x10, "ROLE_ACCOUNT_VIEW");
+    ACCOUNT_VIEW(0x10, "ROLE_ACCOUNT_VIEW"),
+    COMMUNIGATE_VIEW(0x20, "ROLE_COMMUNIGATE_VIEW"),
+    COMMUNIGATE_EDIT(0x40, "ROLE_COMMUNIGATE_EDIT");
 
     private int code;
     private String name;
@@ -91,6 +93,9 @@ public enum Authority implements GrantedAuthority {
                                 result.add(ACCOUNT_EDIT);
                                 result.add(ACCOUNT_VIEW);
                                 break;
+                            case COMMUNIGATE_EDIT:
+                                result.add(COMMUNIGATE_EDIT);
+                                result.add(COMMUNIGATE_VIEW);
                             default:
                                 result.add(added);
                         }

@@ -91,4 +91,29 @@
         <put-attribute name="title" value="Change password"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/changeuserinfo.jsp"/>
     </definition>
+
+    <!-- communigate list page -->
+    <definition name="communigate" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Communigate list"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/communigate/list.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/communigate/list.jsp"/>
+    </definition>
+
+    <!-- communigate view page -->
+    <definition name="view-communigate" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="View communigate"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/communigate/view.jsp"/>
+    </definition>
+
+    <!-- communigate edit page -->
+    <definition name="edit-communigate" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Edit communigate"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/communigate/edit.jsp"/>
+    </definition>
+
+    <!-- import communigate page -->
+    <definition name="import-communigate" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Import communigate"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/communigate/import.jsp"/>
+    </definition>
 </tiles-definitions>

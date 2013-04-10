@@ -91,7 +91,7 @@
                     </div>
                 </security:authorize>
             </c:if>
+            </security:authorize>
         </div>
-        </security:authorize>
     </div>
 </div>
