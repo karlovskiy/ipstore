@@ -4,6 +4,7 @@
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="<c:url value="/js/view.js"/>"></script>
@@ -86,7 +87,8 @@
             <div class="span2">Date</div>
             <div class="span5">
                 <span class="block">
-                    <c:out value="${communigateDomain.date}"/>
+                    <fmt:formatDate value="${communigateDomain.date}" type="date"
+                                    pattern="dd.MM.yyyy"/>
                 </span>
             </div>
         </div>

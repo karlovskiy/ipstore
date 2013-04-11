@@ -3,6 +3,7 @@
   Date: 25.03.13
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/list.js"/>"></script>
@@ -26,7 +27,8 @@
                 </td>
                 <td><c:out value="${communigateDomains.tryPrefix}"/></td>
                 <td><c:out value="${communigateDomains.clientName}"/></td>
-                <td><c:out value="${communigateDomains.date}"/></td>
+                <td><fmt:formatDate value="${communigateDomains.date}" type="date"
+                                    pattern="dd.MM.yyyy"/></td>
             </tr>
         </c:forEach>
         </tbody>
