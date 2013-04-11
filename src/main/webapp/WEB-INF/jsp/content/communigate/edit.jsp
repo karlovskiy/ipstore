@@ -6,6 +6,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="<c:url value="/js/edit.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/init-datepicker.js"/>"></script>
 <div class="container">
     <form:form commandName="communigateDomain" action="${formAction}" cssClass="form-horizontal">
         <div class="control-group">
@@ -17,9 +18,9 @@
                     <form:errors path="domainName"/>
                     <c:if test="${not empty existsCommunigateDomain}">
                       <span>
-                            Communigate domains with DomainName
+                            Communigate domain with
                             <a href="<c:url value="/ipstore/communigate/view/${existsCommunigateDomain.id}"/>" target="_blank">
-                                <c:out value="${existsCommunigateDomain.domainName}"/>
+                                domainName <c:out value="${existsCommunigateDomain.domainName}"/> and tryPrefix <c:out value="${existsCommunigateDomain.tryPrefix}"/>
                             </a>
                             already exists!
                         </span>

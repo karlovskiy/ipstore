@@ -54,9 +54,9 @@
                                 <tr>
                                     <td>
                                         <span class="text-error">
-                                            Communigate Domain with domain name
+                                            Communigate Domain with
                                             <a href="/domain/communigate/view/${exists.id}" target="_blank">
-                                                <c:out value="${exists.domainName}"/>
+                                                domainName <c:out value="${exists.domainName}"/> and tryPrefix <c:out value="${exists.tryPrefix}"/>
                                             </a>
                                             already exists!
                                         </span>

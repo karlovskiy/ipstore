@@ -63,7 +63,8 @@ public class CommunigateController {
             return "edit-communigate";
         }
         String domainName = communigateDomain.getDomainName();
-        CommunigateDomain existsCommunigateDomain = communigateService.loadCommunigate(domainName);
+        String tryPrefix = communigateDomain.getTryPrefix();
+        CommunigateDomain existsCommunigateDomain = communigateService.loadCommunigate(domainName, tryPrefix);
         if (existsCommunigateDomain != null) {
             model.addAttribute("edit", false);
             model.addAttribute("formAction", "/ipstore/communigate/add");
@@ -92,9 +93,18 @@ public class CommunigateController {
         CommunigateDomain oldCommunigate = communigateService.loadCommunigate(id);
         String oldDomainName = oldCommunigate.getDomainName();
         String newDomainName = communigateDomain.getDomainName();
-        if (!oldDomainName.equals(newDomainName))
-        {
+        if (!oldDomainName.equals(newDomainName)) {
             CommunigateDomain existsCommunigateDomain = communigateService.loadCommunigate(newDomainName);
+            if (existsCommunigateDomain != null) {
+                model.addAttribute("formAction", "/ipstore/communigate/edit/" + id);
+                model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);
+                return "edit-communigate";
+            }
+        }
+        String oldTryPrefix = oldCommunigate.getTryPrefix();
+        String newTryPrefix = communigateDomain.getTryPrefix();
+        if (!oldTryPrefix.equals(newTryPrefix)) {
+            CommunigateDomain existsCommunigateDomain = communigateService.loadCommunigateByTryPrefix(newTryPrefix);
             if (existsCommunigateDomain != null) {
                 model.addAttribute("formAction", "/ipstore/communigate/edit/" + id);
                 model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);

@@ -11,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import utilits.aspect.Action;
-import utilits.aspect.ActionType;
 import utilits.controller.ImportResultType;
 import utilits.controller.communigate.CommunigateStatus;
 import utilits.entity.CommunigateDomain;
@@ -20,6 +18,8 @@ import utilits.entity.CommunigateDomain;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -34,8 +34,6 @@ public class CommunigateService {
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
-
-
 
 
     public void updateCommunigate(Long id, CommunigateDomain communigateDomain) {
@@ -86,6 +84,24 @@ public class CommunigateService {
         return (CommunigateDomain) criteria.uniqueResult();
     }
 
+    public CommunigateDomain loadCommunigateByTryPrefix(String tryPrefix) {
+        logger.info("loading communigate domain with tryPrefix=" + tryPrefix);
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(CommunigateDomain.class);
+        criteria.add(Restrictions.eq("tryPrefix", tryPrefix));
+        return (CommunigateDomain) criteria.uniqueResult();
+    }
+
+    public CommunigateDomain loadCommunigate(String domainName, String tryPrefix) {
+        logger.info("loading communigate domain with domainName=" + domainName + ", and tryPrefix=" + tryPrefix);
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(CommunigateDomain.class);
+        criteria.add(Restrictions.disjunction()
+                .add(Restrictions.eq("domainName", domainName))
+                .add(Restrictions.eq("tryPrefix", tryPrefix)));
+        return (CommunigateDomain) criteria.uniqueResult();
+    }
+
     public void activateCommunigate(Long id) {
         logger.info("activate account with id=" + id);
         Session session = sessionFactory.getCurrentSession();
@@ -106,6 +122,7 @@ public class CommunigateService {
         CommunigateDomain communigateDomain = (CommunigateDomain) session.get(CommunigateDomain.class, id);
         communigateDomain.setStatus(CommunigateStatus.DELETED);
     }
+
     public ImportResultType<CommunigateDomain> importFile(InputStream is) throws IOException, InvalidFormatException {
         ImportResultType<CommunigateDomain> result = new ImportResultType<CommunigateDomain>();
         Workbook wb = WorkbookFactory.create(is);
@@ -117,8 +134,10 @@ public class CommunigateService {
                 CommunigateDomain communigateDomain = makeCommunigate(row);
                 Session session = sessionFactory.getCurrentSession();
                 CommunigateDomain oldCommunigateDomain = (CommunigateDomain) session.createCriteria(CommunigateDomain.class)
-                        .add(Restrictions.eq("domainName", communigateDomain.getDomainName()))
-                        .uniqueResult();
+                        .add(Restrictions.disjunction()
+                                .add(Restrictions.eq("domainName", communigateDomain.getDomainName()))
+                                .add(Restrictions.eq("tryPrefix", communigateDomain.getTryPrefix()))
+                        ).uniqueResult();
                 if (oldCommunigateDomain != null) {
                     result.addExists(oldCommunigateDomain);
                 } else {
@@ -133,6 +152,7 @@ public class CommunigateService {
 
     private CommunigateDomain makeCommunigate(Row row) {
         CommunigateDomain communigateDomain = new CommunigateDomain();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         for (int j = 0; j <= 10; j++) {
             Cell cell = row.getCell(j, Row.CREATE_NULL_AS_BLANK);
             cell.setCellType(Cell.CELL_TYPE_STRING);
@@ -166,7 +186,10 @@ public class CommunigateService {
                     communigateDomain.setLogin(value);
                     break;
                 case 9:
-                    communigateDomain.setDate(value);
+                    try {
+                        communigateDomain.setDate(sdf.parse(value));
+                    } catch (ParseException ignored) {
+                    }
                     break;
                 case 10:
                     communigateDomain.setDescription(value);

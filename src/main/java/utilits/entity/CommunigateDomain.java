@@ -4,6 +4,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import utilits.controller.communigate.CommunigateStatus;
 
 /**
@@ -51,8 +54,9 @@ public class CommunigateDomain implements Serializable {
     @Column(name = "LOGIN", length = 64)
     private String login;
 
-    @Column(name = "DATE", length = 128)
-    private String date;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @Column(name = "DATE")
+    private Date date;
 
     @Column(name = "DESCRIPTION", length = 512)
     private String description;
@@ -152,11 +156,11 @@ public class CommunigateDomain implements Serializable {
         this.description = description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
