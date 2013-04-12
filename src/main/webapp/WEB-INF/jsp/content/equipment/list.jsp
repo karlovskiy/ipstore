@@ -17,7 +17,7 @@
         <c:forEach items="${equipment}" var="equipment">
             <tr class="${equipment.passwordStatus}">
                 <td class="left-col">
-                    <a href="/ipstore/equipment/${equipment.id}">
+                    <a href="/ipstore/equipment/view/${equipment.id}">
                         <c:out value="${equipment.ipAddress}"/>
                     </a>
                 </td>

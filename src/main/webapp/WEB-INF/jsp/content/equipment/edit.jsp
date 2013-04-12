@@ -105,6 +105,12 @@
             </div>
         </div>
         <div class="form-actions">
+            <c:if test="${empty equipment.id}">
+                <a href="<c:url value="/ipstore/equipment"/>" class="btn btn-primary">List</a>
+            </c:if>
+            <c:if test="${not empty equipment.id}">
+                <a href="<c:url value="/ipstore/equipment/view/${equipment.id}"/>" class="btn btn-primary">View</a>
+            </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
             <a id="generate_password" class="btn btn-success">Generate password</a>
             <input id="max_length" type="text" name="length" style="width: 20px;" value="${defaultPasswordLength}">

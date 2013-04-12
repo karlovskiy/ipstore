@@ -53,21 +53,21 @@ public class ActionController {
         return "actions";
     }
 
-    @RequestMapping(value = "/changes", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/changes", method = RequestMethod.GET)
     public String changesList(Model model) {
         logger.info("Received request to load changes");
         ActionFilterForm filterForm = makeDefaultFilterForm();
         model.addAttribute("filterForm", filterForm);
-        model.addAttribute("formAction", "/ipstore/changes");
+        model.addAttribute("formAction", "/ipstore/equipment/changes");
         model.addAttribute("changes", makeChanges(filterForm));
         return "changes";
     }
 
-    @RequestMapping(value = "/changes", method = RequestMethod.POST)
+    @RequestMapping(value = "/equipment/changes", method = RequestMethod.POST)
     public String filteredChangesList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             model.addAttribute("filterForm", filterForm);
-            model.addAttribute("formAction", "/ipstore/changes");
+            model.addAttribute("formAction", "/ipstore/equipment/changes");
             model.addAttribute("changes", makeChanges(filterForm));
         }
         return "changes";

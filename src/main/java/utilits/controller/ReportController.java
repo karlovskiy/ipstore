@@ -34,7 +34,7 @@ public class ReportController {
     private AccountsService accountsService;
 
     @Action(type = ActionType.EQUIPMENT_EXPORT)
-    @RequestMapping(value = "/export", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/export", method = RequestMethod.GET)
     public ModelAndView loadEquipmentReport() {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
         List<Equipment> equipments = equipmentService.loadEquipments();

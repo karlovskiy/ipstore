@@ -3,32 +3,43 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+    <!-- actions page -->
     <definition name="actions" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Actions"/>
-        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/actions-form.jsp"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/content/actions-content.jsp"/>
+        <put-attribute name="title" value="Actions list"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/actions/list.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/actions/list.jsp"/>
     </definition>
+
+    <!-- changes page -->
     <definition name="changes" template="/WEB-INF/jsp/templates/template.jsp">
         <put-attribute name="title" value="Changes"/>
-        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/changes-form.jsp"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/content/changes-content.jsp"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/changes/list.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/changes/list.jsp"/>
     </definition>
-    <definition name="edit" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Equipment"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/content/edit-content.jsp"/>
-    </definition>
+
+    <!-- equipment list page -->
     <definition name="equipment" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Equipment"/>
-        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/equipment-form.jsp"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/content/equipment-content.jsp"/>
+        <put-attribute name="title" value="Equipment list"/>
+        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/equipment/list.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/equipment/list.jsp"/>
     </definition>
-    <definition name="import" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Equipment"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/content/import-content.jsp"/>
+
+    <!-- equipment edit page -->
+    <definition name="edit-equipment" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Edit equipment"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/equipment/edit.jsp"/>
     </definition>
-    <definition name="view" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Equipment"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/content/view-content.jsp"/>
+
+    <!-- equipment view page -->
+    <definition name="view-equipment" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="View equipment"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/equipment/view.jsp"/>
+    </definition>
+
+    <!-- equipment import page -->
+    <definition name="import-equipment" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Import equipment"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/equipment/import.jsp"/>
     </definition>
 
     <!-- home page -->

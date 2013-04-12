@@ -130,6 +130,12 @@
         </div>
 
         <div class="form-actions">
+            <c:if test="${empty communigateDomain.id}">
+                <a href="<c:url value="/ipstore/communigate"/>" class="btn btn-primary">List</a>
+            </c:if>
+            <c:if test="${not empty communigateDomain.id}">
+                <a href="<c:url value="/ipstore/communigate/view/${communigateDomain.id}"/>" class="btn btn-primary">View</a>
+            </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
 

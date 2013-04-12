@@ -9,9 +9,6 @@
             <th class="left-col">Username</th>
             <th>Status</th>
             <th>Authority</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Email</th>
         </tr>
         </thead>
         <tbody>
@@ -24,9 +21,6 @@
                 </td>
                 <td><c:out value="${user.userStatus}"/></td>
                 <td><c:out value="${user.authorities}"/></td>
-                <td><c:out value="${user.firstName}"/></td>
-                <td><c:out value="${user.lastName}"/></td>
-                <td><c:out value="${user.email}"/></td>
             </tr>
         </c:forEach>
         </tbody>

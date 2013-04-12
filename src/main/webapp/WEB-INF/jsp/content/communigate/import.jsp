@@ -11,6 +11,7 @@
     </c:if>
     <form method="post" action="/ipstore/communigate/import" enctype="multipart/form-data">
         <input type="file" name="file"/>
+        <a href="<c:url value="/ipstore/communigate"/>" class="btn btn-primary">List</a>
         <input class="btn btn-primary" type="submit" value="Import"/>
     </form>
     <c:if test="${not error and not empty result}">

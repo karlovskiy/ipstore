@@ -116,12 +116,12 @@
             </div>
             <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
                 <div class="span1 ml-10px">
-                    <a class="btn btn-primary btn-block" href="<c:url value="/ipstore/edit/${equipment.id}" />">Edit</a>
+                    <a class="btn btn-primary btn-block" href="<c:url value="/ipstore/equipment/edit/${equipment.id}" />">Edit</a>
                 </div>
                 <c:if test="${equipment.status != 'DELETED'}">
                     <div class="span1 ml-10px">
                         <a class="btn btn-danger" id="delete_btn"
-                           href="<c:url value="/ipstore/delete/${equipment.id}"/>">Delete</a>
+                           href="<c:url value="/ipstore/equipment/delete/${equipment.id}"/>">Delete</a>
                     </div>
                 </c:if>
             </security:authorize>
@@ -129,7 +129,7 @@
                 <c:if test="${equipment.status == 'DELETED'}">
                     <div class="span1 ml-10px">
                         <a class="btn btn-warning"
-                           href="<c:url value="/ipstore/activate/${equipment.id}"/>">Activate</a>
+                           href="<c:url value="/ipstore/equipment/activate/${equipment.id}"/>">Activate</a>
                     </div>
                 </c:if>
             </security:authorize>

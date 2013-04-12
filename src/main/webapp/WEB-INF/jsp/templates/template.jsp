@@ -35,7 +35,7 @@
                 <ul class="nav">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Administration
+                            Main
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
@@ -44,11 +44,11 @@
                                 <li><a href="<c:url value="/ipstore/equipment"/>">Equipment list</a></li>
                             </security:authorize>
                             <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
-                                <li><a href="<c:url value="/ipstore/add"/>">Add equipment</a></li>
+                                <li><a href="<c:url value="/ipstore/equipment/add"/>">Add equipment</a></li>
                             </security:authorize>
                             <security:authorize access="hasRole('ROLE_ROOT')">
-                                <li><a href="<c:url value="/ipstore/import"/>">Import equipment</a></li>
-                                <li><a href="<c:url value="/ipstore/export"/>">Export equipment</a></li>
+                                <li><a href="<c:url value="/ipstore/equipment/import"/>">Import equipment</a></li>
+                                <li><a href="<c:url value="/ipstore/equipment/export"/>">Export equipment</a></li>
                             </security:authorize>
 
                             <security:authorize access="hasRole('ROLE_ACCOUNT_VIEW')">
@@ -83,21 +83,21 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
+                                <li class="nav-header">Actions</li>
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
-                                <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
-                                <li><a id="rebuild_index" href="<c:url value="/ipstore/rebuild"/>">Rebuild index</a>
-                                </li>
-                                <li class="nav-header">Users</li>
-                                <li><a href="<c:url value="/ipstore/users"/>">Users</a></li>
-                                <li><a href="<c:url value="/ipstore/users/add"/>">Add user</a></li>
-                                <li class="nav-header">Equipment</li>
-                                <li><a href="<c:url value="/ipstore/changes"/>">Equipment changes</a></li>
-                                <li class="nav-header">Accounts</li>
+                                <li><a href="<c:url value="/ipstore//equipment/changes"/>">Equipment changes</a></li>
                                 <li><a href="<c:url value="/ipstore/accounts/changes"/>">Accounts changes</a></li>
+                                <li class="nav-header">Users</li>
+                                <li><a href="<c:url value="/ipstore/users"/>">Users list</a></li>
+                                <li><a href="<c:url value="/ipstore/users/add"/>">Add user</a></li>
+                                <li class="nav-header">Miscellaneous</li>
+                                <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
+                                <li><a id="rebuild_index" href="<c:url value="/ipstore/rebuild"/>">Rebuild lucene index</a></li>
+
                             </ul>
                         </li>
                     </security:authorize>
-                    <security:authorize access="hasAnyRole('ROLE_EQUIPMENT_VIEW','ROLE_ACCOUNT_VIEW')">
+                    <security:authorize access="isFullyAuthenticated()">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Settings

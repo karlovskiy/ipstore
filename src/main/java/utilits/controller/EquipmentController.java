@@ -56,14 +56,14 @@ public class EquipmentController {
     }
 
     @Action(type = ActionType.EQUIPMENT_IMPORT_PAGE)
-    @RequestMapping(value = "/import", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/import", method = RequestMethod.GET)
     public String importEquipment() {
         logger.debug("Received request to import equipment...");
-        return "import";
+        return "import-equipment";
     }
 
     @Action(type = ActionType.EQUIPMENT_IMPORT)
-    @RequestMapping(value = "/import", method = RequestMethod.POST)
+    @RequestMapping(value = "/equipment/import", method = RequestMethod.POST)
     public String importEquipment(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         logger.info("Importing file " + file.getOriginalFilename());
         if (!file.isEmpty()) {
@@ -78,80 +78,80 @@ public class EquipmentController {
                 logger.error("Importing error...", e);
             }
         }
-        return "import";
+        return "import-equipment";
     }
 
     @Action(type = ActionType.EQUIPMENT_VIEW_PAGE)
-    @RequestMapping(value = "/equipment/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/view/{id}", method = RequestMethod.GET)
     public String viewEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
-        return "view";
+        return "view-equipment";
     }
 
     @Action(type = ActionType.EQUIPMENT_ADD_PAGE)
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/add", method = RequestMethod.GET)
     public String addEquipment(Model model) {
         Equipment equipment = new Equipment();
         model.addAttribute("equipment", equipment);
-        model.addAttribute("formAction", "/ipstore/save");
+        model.addAttribute("formAction", "/ipstore/equipment/save");
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-        return "edit";
+        return "edit-equipment";
     }
 
     @Action(type = ActionType.EQUIPMENT_EDIT_PAGE)
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/edit/{id}", method = RequestMethod.GET)
     public String editEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
-        model.addAttribute("formAction", "/ipstore/save/" + id);
+        model.addAttribute("formAction", "/ipstore/equipment/save/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-        return "edit";
+        return "edit-equipment";
     }
 
     @Action(type = ActionType.EQUIPMENT_DELETE)
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/delete/{id}", method = RequestMethod.GET)
     public String deleteEquipment(@PathVariable Long id) {
         equipmentService.deleteEquipment(id);
         return "redirect:/ipstore/equipment";
     }
 
     @Action(type = ActionType.EQUIPMENT_ACTIVATE)
-    @RequestMapping(value = "/activate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/activate/{id}", method = RequestMethod.GET)
     public String activateEquipment(@PathVariable Long id) {
         equipmentService.activateEquipment(id);
-        return "redirect:/ipstore/equipment/" + id;
+        return "redirect:/ipstore/equipment/view/" + id;
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/equipment/save", method = RequestMethod.POST)
     public String createEquipment(@Valid Equipment equipment, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/ipstore/save");
+            model.addAttribute("formAction", "/ipstore/equipment/save");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-            return "edit";
+            return "edit-equipment";
         }
         String ipAddress = equipment.getIpAddress();
         Equipment existsEquipment = equipmentService.loadEquipment(ipAddress);
         if (existsEquipment != null) {
-            model.addAttribute("formAction", "/ipstore/save");
+            model.addAttribute("formAction", "/ipstore/equipment/save");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             model.addAttribute("existsEquipment", existsEquipment);
-            return "edit";
+            return "edit-equipment";
         }
         Long id = equipmentService.createEquipment(equipment);
-        return "redirect:/ipstore/equipment/" + id;
+        return "redirect:/ipstore/equipment/view/" + id;
     }
 
     @Action(type = ActionType.EQUIPMENT_UPDATE)
-    @RequestMapping(value = "/save/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/equipment/save/{id}", method = RequestMethod.POST)
     public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/ipstore/save/" + id);
+            model.addAttribute("formAction", "/ipstore/equipment/save/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-            return "edit";
+            return "edit-equipment";
         }
         equipmentService.updateEquipment(id, equipment);
-        return "redirect:/ipstore/equipment/" + id;
+        return "redirect:/ipstore/equipment/view/" + id;
     }
 
     @Action(type = ActionType.GENERATE_PASSWORD)

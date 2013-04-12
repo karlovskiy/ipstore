@@ -67,6 +67,12 @@
             </div>
         </div>
         <div class="form-actions">
+            <c:if test="${empty user.id}">
+                <a href="<c:url value="/ipstore/users"/>" class="btn btn-primary">List</a>
+            </c:if>
+            <c:if test="${not empty user.id}">
+                <a href="<c:url value="/ipstore/users/view/${user.id}"/>" class="btn btn-primary">View</a>
+            </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
 
