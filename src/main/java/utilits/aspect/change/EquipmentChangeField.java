@@ -1,12 +1,13 @@
-package utilits.aspect;
+package utilits.aspect.change;
 
 /**
  * Here will be javadoc
  *
  * @author karlovsky
- * @since 1.0
+ * @since 2.4.6, 4/8/13
  */
-public enum ChangeType implements IChangeType {
+public enum EquipmentChangeField implements IChangeField {
+
     IP_ADDRESS("ipAddress"),
     TYPE("type"),
     USERNAME("username"),
@@ -20,13 +21,19 @@ public enum ChangeType implements IChangeType {
     DESCRIPTION("description"),
     STATUS("status");
 
-    ChangeType(String fieldName) {
+    private final String fieldName;
+
+    EquipmentChangeField(String fieldName) {
         this.fieldName = fieldName;
     }
 
-    private final String fieldName;
-
+    @Override
     public String getFieldName() {
         return fieldName;
+    }
+
+    @Override
+    public String getFieldType() {
+        return name();
     }
 }

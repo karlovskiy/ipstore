@@ -1,12 +1,10 @@
 package utilits.controller.wrapper;
 
 import utilits.aspect.ActionType;
-import utilits.aspect.ChangeType;
+import utilits.aspect.change.ChangeType;
 import utilits.entity.Change;
 
 import java.util.Date;
-
-import static utilits.controller.wrapper.ActionWrapper.VIEW_PAGE_PREFIX;
 
 /**
  * Here will be javadoc
@@ -17,11 +15,9 @@ import static utilits.controller.wrapper.ActionWrapper.VIEW_PAGE_PREFIX;
 public class ChangeWrapper {
 
     private final Change change;
-    private final String equipmentURL;
 
     public ChangeWrapper(Change change) {
         this.change = change;
-        this.equipmentURL = VIEW_PAGE_PREFIX + change.getEquipmentId();
     }
 
     public Date getActionTimestamp() {
@@ -44,6 +40,10 @@ public class ChangeWrapper {
         return change.getType();
     }
 
+    public String getFieldType() {
+        return change.getFieldType();
+    }
+
     public String getOldValue() {
         return change.getOldValue();
     }
@@ -52,7 +52,7 @@ public class ChangeWrapper {
         return change.getNewValue();
     }
 
-    public String getEquipmentURL() {
-        return equipmentURL;
+    public Long getEntityId() {
+        return change.getEntityId();
     }
 }

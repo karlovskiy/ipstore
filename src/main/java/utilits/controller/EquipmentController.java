@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import utilits.aspect.Action;
-import utilits.aspect.ActionType;
 import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
 import utilits.service.SearchService;
@@ -19,6 +18,11 @@ import utilits.service.SearchService;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.io.IOException;
+
+import static utilits.aspect.ActionType.*;
+import static utilits.aspect.change.ChangeType.EQUIPMENT;
+import static utilits.aspect.change.ChangeMode.IMPORT;
+import static utilits.aspect.change.ChangeMode.UPDATE;
 
 
 /**
@@ -42,7 +46,7 @@ public class EquipmentController {
     @Resource(name = "searchService")
     private SearchService searchService;
 
-    @Action(type = ActionType.EQUIPMENT_LIST)
+    @Action(value = EQUIPMENT_LIST)
     @RequestMapping(value = "/equipment", method = RequestMethod.GET)
     public String viewEquipment(@RequestParam(value = "search", required = false) String search, Model model) {
         logger.info("Received request to load equipment.");
@@ -55,14 +59,14 @@ public class EquipmentController {
         return "equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_IMPORT_PAGE)
+    @Action(value = EQUIPMENT_IMPORT_PAGE)
     @RequestMapping(value = "/equipment/import", method = RequestMethod.GET)
     public String importEquipment() {
         logger.debug("Received request to import equipment...");
         return "import-equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_IMPORT)
+    @Action(value = EQUIPMENT_IMPORT, changeType = EQUIPMENT, changeMode = IMPORT)
     @RequestMapping(value = "/equipment/import", method = RequestMethod.POST)
     public String importEquipment(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         logger.info("Importing file " + file.getOriginalFilename());
@@ -81,7 +85,7 @@ public class EquipmentController {
         return "import-equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_VIEW_PAGE)
+    @Action(value = EQUIPMENT_VIEW_PAGE)
     @RequestMapping(value = "/equipment/view/{id}", method = RequestMethod.GET)
     public String viewEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
@@ -89,7 +93,7 @@ public class EquipmentController {
         return "view-equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_ADD_PAGE)
+    @Action(value = EQUIPMENT_ADD_PAGE)
     @RequestMapping(value = "/equipment/add", method = RequestMethod.GET)
     public String addEquipment(Model model) {
         Equipment equipment = new Equipment();
@@ -99,7 +103,7 @@ public class EquipmentController {
         return "edit-equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_EDIT_PAGE)
+    @Action(value = EQUIPMENT_EDIT_PAGE)
     @RequestMapping(value = "/equipment/edit/{id}", method = RequestMethod.GET)
     public String editEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
@@ -109,14 +113,14 @@ public class EquipmentController {
         return "edit-equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_DELETE)
+    @Action(value = EQUIPMENT_DELETE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/delete/{id}", method = RequestMethod.GET)
     public String deleteEquipment(@PathVariable Long id) {
         equipmentService.deleteEquipment(id);
         return "redirect:/ipstore/equipment";
     }
 
-    @Action(type = ActionType.EQUIPMENT_ACTIVATE)
+    @Action(value = EQUIPMENT_ACTIVATE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/activate/{id}", method = RequestMethod.GET)
     public String activateEquipment(@PathVariable Long id) {
         equipmentService.activateEquipment(id);
@@ -142,7 +146,7 @@ public class EquipmentController {
         return "redirect:/ipstore/equipment/view/" + id;
     }
 
-    @Action(type = ActionType.EQUIPMENT_UPDATE)
+    @Action(value = EQUIPMENT_UPDATE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/save/{id}", method = RequestMethod.POST)
     public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
@@ -154,7 +158,7 @@ public class EquipmentController {
         return "redirect:/ipstore/equipment/view/" + id;
     }
 
-    @Action(type = ActionType.GENERATE_PASSWORD)
+    @Action(value = GENERATE_PASSWORD)
     @RequestMapping(value = "/generate_password", method = RequestMethod.GET)
     public
     @ResponseBody

@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.aspect.Action;
-import utilits.aspect.ActionType;
 import utilits.controller.ImportResultType;
 import utilits.controller.accounts.AccountStatus;
 import utilits.entity.Account;
@@ -21,6 +20,10 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import static utilits.aspect.ActionType.ACCOUNTS_CREATE;
+import static utilits.aspect.change.ChangeType.ACCOUNTS;
+import static utilits.aspect.change.ChangeMode.CREATE;
 
 /**
  * Here will be javadoc
@@ -48,7 +51,7 @@ public class AccountsService {
         oldAccount.setDescription(account.getDescription());
     }
 
-    @Action(type = ActionType.ACCOUNTS_CREATE)
+    @Action(value = ACCOUNTS_CREATE, changeType = ACCOUNTS, changeMode = CREATE)
     public Long createAccount(Account account) {
         logger.info("saving new account...");
         Session session = sessionFactory.getCurrentSession();

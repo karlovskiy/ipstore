@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utilits.aspect.Action;
-import utilits.aspect.ActionType;
 import utilits.controller.users.ChangePassword;
 import utilits.controller.users.ChangeUserInfo;
 import utilits.entity.User;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import static utilits.aspect.ActionType.*;
 import static utilits.controller.users.CustomAuthenticationFailureHandler.CREDENTIALS_EXPIRED_USERNAME_KEY;
 
 /**
@@ -36,7 +36,7 @@ public class LoginController {
     @Resource(name = "passwordEncoder")
     private PasswordEncoder passwordEncoder;
 
-    @Action(type = ActionType.LOGIN_PAGE)
+    @Action(value = LOGIN_PAGE)
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
@@ -46,7 +46,7 @@ public class LoginController {
         return "login";
     }
 
-    @Action(type = ActionType.LOGIN_FAILURE)
+    @Action(value = LOGIN_FAILURE)
     @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
     public String loginerror(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
@@ -149,13 +149,13 @@ public class LoginController {
         return "redirect:/ipstore/";
     }
 
-    @Action(type = ActionType.LOGOUT)
+    @Action(value = LOGOUT)
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
         return "login";
     }
 
-    @Action(type = ActionType.HOME_PAGE)
+    @Action(value = HOME_PAGE)
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
         return "home";

@@ -19,7 +19,7 @@ import static utilits.Utils.INDEX_ANALYZER_DEFINITION;
 @Table(name = "ACCOUNT")
 @Indexed
 @Analyzer(definition = INDEX_ANALYZER_DEFINITION)
-public class Account implements Serializable {
+public class Account implements IHasId, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")

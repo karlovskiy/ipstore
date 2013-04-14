@@ -5,7 +5,7 @@
     <c:if test="${error}">
         <span class="errorblock">Importing error!</span>
     </c:if>
-    <form method="post" action="/ipstore/import" enctype="multipart/form-data">
+    <form method="post" action="/ipstore/equipment/import" enctype="multipart/form-data">
         <input type="file" name="file"/>
         <a href="<c:url value="/ipstore/equipment"/>" class="btn btn-primary">List</a>
         <input class="btn btn-primary" type="submit" value="Import"/>
@@ -26,7 +26,7 @@
                             <tr>
                                 <td>
                                     <span class="text-success">
-                                        Equipment with ip <a href="/ipstore/equipment/${added.id}"
+                                        Equipment with ip <a href="/ipstore/equipment/view/${added.id}"
                                                              target="_blank">
                                         <c:out value="${added.ipAddress}"/>
                                     </a> successfully added!
@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>
                                         <span class="text-error">
-                                            Equipment with ip <a href="/ipstore/equipment/${exists.id}"
+                                            Equipment with ip <a href="/ipstore/equipment/view/${exists.id}"
                                                                  target="_blank">
                                             <c:out value="${exists.ipAddress}"/>
                                         </a> already exists!

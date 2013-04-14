@@ -44,7 +44,7 @@ import static utilits.Utils.QUERY_ANALYZER_DEFINITION;
                 })
 })
 @Analyzer(definition = INDEX_ANALYZER_DEFINITION)
-public class Equipment implements Serializable {
+public class Equipment implements IHasId, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")

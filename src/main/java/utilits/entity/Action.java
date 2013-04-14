@@ -1,5 +1,6 @@
 package utilits.entity;
 
+import org.hibernate.annotations.Formula;
 import utilits.aspect.ActionType;
 
 import javax.persistence.*;
@@ -47,22 +48,16 @@ public class Action implements Serializable {
     @Column(name = "USERNAME", nullable = false, length = 128)
     private String username;
 
+    @Formula(value = "(select count(*) from change c where c.action_id = id)")
+    private int changesCount;
+
     @OneToMany(mappedBy = "action", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     private Set<Change> changes = new HashSet<Change>();
 
-    @OneToMany(mappedBy = "action", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private Set<AccountChange> accountChanges = new HashSet<AccountChange>();
-
     public void addChange(Change change) {
         change.setAction(this);
         changes.add(change);
-    }
-
-    public void addAccountChange(AccountChange accountChange) {
-        accountChange.setAction(this);
-        accountChanges.add(accountChange);
     }
 
     public Long getId() {
@@ -135,5 +130,9 @@ public class Action implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getChangesCount() {
+        return changesCount;
     }
 }

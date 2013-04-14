@@ -1,17 +1,21 @@
 package utilits.aspect;
 
-import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import utilits.aspect.observer.IObserver;
-import utilits.aspect.observer.ObserverFactory;
+import utilits.aspect.change.ChangeMode;
+import utilits.aspect.observer.*;
 import utilits.service.ActionService;
 
 import javax.annotation.Resource;
+
+import static utilits.aspect.change.ChangeMode.IMPORT;
+import static utilits.aspect.change.ChangeMode.UPDATE;
 
 /**
  * Here will be javadoc
@@ -23,14 +27,22 @@ import javax.annotation.Resource;
 @Aspect
 public class ActionAspect {
 
-    private static final Logger logger = Logger.getLogger(ActionAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActionAspect.class);
 
     @Resource(name = "actionService")
     private ActionService actionService;
 
     @Around("within(utilits.controller..*) && @annotation(action)")
     public Object observe(ProceedingJoinPoint pjp, Action action) throws Throwable {
-        IObserver observer = ObserverFactory.getInstance(action.type(), actionService, pjp);
+        ChangeMode changeMode = action.changeMode();
+        ActionType actionType = action.value();
+        logger.info("Observing acton with type {}, changeMode {}, changeType {}",
+                actionType, action.changeType(), changeMode);
+        IObserver observer = changeMode == IMPORT
+                ? new ActionWithImportChangesObserver(action, actionService, pjp)
+                : changeMode == UPDATE
+                ? new ActionWithUpdateChangesObserver(action, actionService, pjp)
+                : new ActionObserver(actionType, actionService, pjp);
         return observer.observe();
     }
 
@@ -38,7 +50,9 @@ public class ActionAspect {
     @AfterReturning(pointcut = "within(utilits.service.*) && @annotation(action)",
             returning = "id")
     public void afterAction(Long id, Action action) throws Throwable {
-        IObserver observer = ObserverFactory.getInstance(action.type(), actionService, id);
+        logger.info("Observing acton with type {}, changeMode {}, changeType {}",
+                action.value(), action.changeType(), action.changeMode());
+        IObserver observer = new ActionWithCreateChangesObserver(action, actionService, id);
         observer.observe();
     }
 }

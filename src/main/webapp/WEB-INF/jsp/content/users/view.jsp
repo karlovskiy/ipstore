@@ -20,7 +20,7 @@
         </div>
         <div class="row">
             <div class="span1">Authority</div>
-            <div class="span5">
+            <div class="span2">
                 <span class="block">
                     <c:out value="${user.authorities}"/>
                 </span>

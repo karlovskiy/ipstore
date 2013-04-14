@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.aspect.Action;
-import utilits.aspect.ActionType;
 import utilits.controller.ImportResultType;
 import utilits.controller.PasswordStatus;
 import utilits.controller.Status;
@@ -24,6 +23,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+
+import static utilits.aspect.ActionType.EQUIPMENT_CREATE;
+import static utilits.aspect.change.ChangeType.EQUIPMENT;
+import static utilits.aspect.change.ChangeMode.CREATE;
 
 /**
  * Here will be javadoc
@@ -63,7 +66,7 @@ public class EquipmentService {
         return (Equipment) criteria.uniqueResult();
     }
 
-    @Action(type = ActionType.EQUIPMENT_CREATE)
+    @Action(value = EQUIPMENT_CREATE, changeType = EQUIPMENT, changeMode = CREATE)
     public Long createEquipment(Equipment equipment) {
         logger.info("saving new equipment...");
         Session session = sessionFactory.getCurrentSession();

@@ -13,7 +13,7 @@
         </thead>
         <tbody>
         <c:forEach items="${users}" var="user">
-            <tr>
+            <tr class="info">
                 <td>
                     <a href="/ipstore/users/view/${user.id}">
                         <c:out value="${user.username}"/>

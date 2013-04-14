@@ -1,5 +1,8 @@
 package utilits.aspect;
 
+import utilits.aspect.change.ChangeType;
+import utilits.aspect.change.ChangeMode;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,5 +17,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Action {
-    ActionType type();
+    ActionType value();
+
+    ChangeType changeType() default ChangeType.NONE;
+
+    ChangeMode changeMode() default ChangeMode.NONE;
 }

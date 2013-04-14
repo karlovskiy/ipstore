@@ -85,8 +85,7 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-header">Actions</li>
                                 <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
-                                <li><a href="<c:url value="/ipstore//equipment/changes"/>">Equipment changes</a></li>
-                                <li><a href="<c:url value="/ipstore/accounts/changes"/>">Accounts changes</a></li>
+                                <li><a href="<c:url value="/ipstore/changes"/>">Changes</a></li>
                                 <li class="nav-header">Users</li>
                                 <li><a href="<c:url value="/ipstore/users"/>">Users list</a></li>
                                 <li><a href="<c:url value="/ipstore/users/add"/>">Add user</a></li>

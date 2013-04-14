@@ -11,14 +11,13 @@ import utilits.service.ActionService;
  * @author karlovsky
  * @since 1.0
  */
-public class SimpleObserver extends AbstractObserver {
+public class ActionObserver extends BaseObserver {
 
     private final ProceedingJoinPoint pjp;
-
     private final ActionService actionService;
 
-    public SimpleObserver(ActionType actionType, ProceedingJoinPoint pjp,
-                          ActionService actionService) {
+    public ActionObserver(ActionType actionType, ActionService actionService,
+                          ProceedingJoinPoint pjp) {
         super(actionType);
         this.pjp = pjp;
         this.actionService = actionService;

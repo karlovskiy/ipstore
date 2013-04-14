@@ -18,11 +18,11 @@ import java.util.Calendar;
  * @author karlovsky
  * @since 1.0
  */
-public abstract class AbstractObserver implements IObserver {
+public abstract class BaseObserver implements IObserver {
 
     protected final ActionType actionType;
 
-    public AbstractObserver(ActionType actionType) {
+    public BaseObserver(ActionType actionType) {
         this.actionType = actionType;
     }
 

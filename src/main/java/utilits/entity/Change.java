@@ -1,6 +1,6 @@
 package utilits.entity;
 
-import utilits.aspect.ChangeType;
+import utilits.aspect.change.ChangeType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,8 +24,11 @@ public class Change implements Serializable {
     @Column(name = "TYPE", nullable = false)
     private ChangeType type;
 
-    @Column(name = "EQUIPMENT_ID")
-    private Long equipmentId;
+    @Column(name = "FIELD_TYPE", nullable = false, length = 64)
+    private String fieldType;
+
+    @Column(name = "ENTITY_ID")
+    private Long entityId;
 
     @Column(name = "OLD_VALUE", length = 512)
     private String oldValue;
@@ -53,14 +56,6 @@ public class Change implements Serializable {
         this.type = type;
     }
 
-    public Long getEquipmentId() {
-        return equipmentId;
-    }
-
-    public void setEquipmentId(Long equipmentId) {
-        this.equipmentId = equipmentId;
-    }
-
     public String getOldValue() {
         return oldValue;
     }
@@ -83,5 +78,21 @@ public class Change implements Serializable {
 
     public void setAction(Action action) {
         this.action = action;
+    }
+
+    public String getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(String fieldType) {
+        this.fieldType = fieldType;
+    }
+
+    public Long getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(Long entityId) {
+        this.entityId = entityId;
     }
 }

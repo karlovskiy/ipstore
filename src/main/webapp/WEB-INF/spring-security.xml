@@ -14,6 +14,7 @@
         <intercept-url pattern="/ipstore/generate_password"         access="isFullyAuthenticated()"/>
         <!-- actions -->
         <intercept-url pattern="/ipstore/actions"                   access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/actions/view/*"            access="hasRole('ROLE_ROOT')"/>
         <!-- change password and user info -->
         <intercept-url pattern="/ipstore/mustchangepassword"        access="hasRole('ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/ipstore/changepassword"            access="isFullyAuthenticated()"/>

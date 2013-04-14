@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import utilits.aspect.Action;
-import utilits.aspect.ActionType;
 import utilits.entity.Account;
 import utilits.entity.Equipment;
 import utilits.service.AccountsService;
@@ -17,6 +16,9 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static utilits.aspect.ActionType.ACCOUNTS_EXPORT;
+import static utilits.aspect.ActionType.EQUIPMENT_EXPORT;
 
 /**
  * Here will be javadoc
@@ -33,7 +35,7 @@ public class ReportController {
     @Resource(name = "accountsService")
     private AccountsService accountsService;
 
-    @Action(type = ActionType.EQUIPMENT_EXPORT)
+    @Action(value = EQUIPMENT_EXPORT)
     @RequestMapping(value = "/equipment/export", method = RequestMethod.GET)
     public ModelAndView loadEquipmentReport() {
         Map<String, Object> parameterMap = new HashMap<String, Object>();
@@ -43,7 +45,7 @@ public class ReportController {
         return new ModelAndView("equipmentReport", parameterMap);
     }
 
-    @Action(type = ActionType.ACCOUNTS_EXPORT)
+    @Action(value = ACCOUNTS_EXPORT)
     @RequestMapping(value = "/accounts/export", method = RequestMethod.GET)
     public ModelAndView loadAccountsReport() {
         Map<String, Object> parameterMap = new HashMap<String, Object>();

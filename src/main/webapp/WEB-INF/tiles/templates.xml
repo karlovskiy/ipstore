@@ -10,6 +10,12 @@
         <put-attribute name="content" value="/WEB-INF/jsp/content/actions/list.jsp"/>
     </definition>
 
+    <!-- actions view page -->
+    <definition name="view-action" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="View action"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/actions/view.jsp"/>
+    </definition>
+
     <!-- changes page -->
     <definition name="changes" template="/WEB-INF/jsp/templates/template.jsp">
         <put-attribute name="title" value="Changes"/>
