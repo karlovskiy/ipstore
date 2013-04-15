@@ -1,6 +1,7 @@
 package utilits.aspect.change;
 
 import utilits.entity.Account;
+import utilits.entity.CommunigateDomain;
 import utilits.entity.Equipment;
 import utilits.entity.IHasId;
 
@@ -12,9 +13,10 @@ import utilits.entity.IHasId;
  */
 public enum ChangeType {
 
-    NONE,                                                   // 0
-    ACCOUNTS(Account.class, AccountChangeField.class),      // 1
-    EQUIPMENT(Equipment.class, EquipmentChangeField.class); // 2
+    NONE,                                                               // 0
+    ACCOUNTS(Account.class, AccountChangeField.class),                  // 1
+    EQUIPMENT(Equipment.class, EquipmentChangeField.class),             // 2
+    COMMUNIGATE(CommunigateDomain.class, CommunigateChangeFild.class);  // 3
 
     private Class<? extends IHasId> entityClazz;
     private Class<? extends IChangeField> fieldsClazz;
