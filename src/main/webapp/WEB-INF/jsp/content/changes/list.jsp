@@ -38,6 +38,11 @@
                                 <c:out value="${change.type}"/>
                             </a>
                         </c:when>
+                        <c:when test="${change.type == 'COMMUNIGATE'}">
+                            <a href="/ipstore/communigate/view/${change.entityId}" target="_blank">
+                                <c:out value="${change.type}"/>
+                            </a>
+                        </c:when>
                         <c:otherwise>
                             <c:out value="${change.type}"/>
                         </c:otherwise>

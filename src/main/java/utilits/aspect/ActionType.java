@@ -36,5 +36,18 @@ public enum ActionType {
     ACCOUNTS_CREATE,        // 26
     ACCOUNTS_UPDATE,        // 27
     ACCOUNTS_EXPORT,        // 28
-    REBUILD_INDEX           // 29
+    REBUILD_INDEX,          // 29
+    COMMUNIGATE_LIST,       // 30
+    COMMUNIGATE_VIEW_PAGE,  // 31
+    COMMUNIGATE_ADD_PAGE,   // 32
+    COMMUNIGATE_UPDATE,     // 33
+    COMMUNIGATE_EDIT_PAGE,  // 34
+    COMMUNIGATE_DELETE,     // 35
+    COMMUNIGATE_BLOCK,      // 36
+    COMMUNIGATE_ACTIVATE,   // 37
+    COMMUNIGATE_UNBLOCK,    // 38
+    COMMUNIGATE_IMPORT_PAGE,// 39
+    COMMUNIGATE_IMPORT,     // 40
+    COMMUNIGATE_CREATE,     // 41
+
 }
