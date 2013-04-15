@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utilits.aspect.Action;
 import utilits.controller.ImportResultType;
 import utilits.controller.communigate.CommunigateStatus;
 import utilits.entity.CommunigateDomain;
@@ -21,6 +22,10 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import static utilits.aspect.ActionType.COMMUNIGATE_CREATE;
+import static utilits.aspect.change.ChangeType.COMMUNIGATE;
+import static utilits.aspect.change.ChangeMode.CREATE;
 
 /**
  * User: Sidorov Oleg
@@ -54,6 +59,7 @@ public class CommunigateService {
 
     }
 
+    @Action(value = COMMUNIGATE_CREATE, changeType = COMMUNIGATE, changeMode = CREATE)
     public Long createCommunigate(CommunigateDomain communigateDomain) {
         logger.info("saving new communigate domain...");
         Session session = sessionFactory.getCurrentSession();

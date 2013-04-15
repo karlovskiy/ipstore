@@ -17,7 +17,7 @@ import utilits.controller.communigate.CommunigateStatus;
 @Entity
 @Table(name = "COMMUNIGATE_DOMAIN")
 
-public class CommunigateDomain implements Serializable {
+public class CommunigateDomain implements IHasId,Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
