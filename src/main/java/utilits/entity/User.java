@@ -19,7 +19,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "USER")
-public class User implements Serializable {
+public class User implements IHasId, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")

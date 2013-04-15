@@ -4,7 +4,7 @@ package utilits.aspect.change;
  * User: Sidorov Oleg
  * Date: 15.04.13
  */
-public enum CommunigateChangeFild implements IChangeField {
+public enum CommunigateChangeField implements IChangeField {
 
     DOMAIN_NAME("domainName"),
     TRY_PREFIX("tryPrefix"),
@@ -22,7 +22,7 @@ public enum CommunigateChangeFild implements IChangeField {
 
     private final String fieldName;
 
-    CommunigateChangeFild(String fieldName) {
+    CommunigateChangeField(String fieldName) {
         this.fieldName = fieldName;
     }
 

@@ -77,6 +77,14 @@ public class ActionWithUpdateChangesObserver extends BaseObserver {
             Enum oldEnumType = (Enum) oldValue;
             Enum newEnumType = (Enum) newValue;
             change = buildChange(field, oldEnumType.name(), newEnumType.name(), id);
+        } else if (oldValue instanceof Integer && newValue instanceof Integer) {
+            Integer oldInteger = (Integer) oldValue;
+            Integer newInteger = (Integer) newValue;
+            change = buildChange(field, oldInteger.toString(), newInteger.toString(), id);
+        } else if (oldValue instanceof Boolean && newValue instanceof Boolean) {
+            Boolean oldBoolean = (Boolean) oldValue;
+            Boolean newBoolean = (Boolean) newValue;
+            change = buildChange(field, oldBoolean.toString(), newBoolean.toString(), id);
         }
         return change;
     }

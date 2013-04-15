@@ -1,9 +1,6 @@
 package utilits.aspect.change;
 
-import utilits.entity.Account;
-import utilits.entity.CommunigateDomain;
-import utilits.entity.Equipment;
-import utilits.entity.IHasId;
+import utilits.entity.*;
 
 /**
  * Here will be javadoc
@@ -13,21 +10,25 @@ import utilits.entity.IHasId;
  */
 public enum ChangeType {
 
-    NONE,                                                               // 0
-    ACCOUNTS(Account.class, AccountChangeField.class),                  // 1
-    EQUIPMENT(Equipment.class, EquipmentChangeField.class),             // 2
-    COMMUNIGATE(CommunigateDomain.class, CommunigateChangeFild.class);  // 3
+    NONE,                                                                                               // 0
+    ACCOUNTS(Account.class, AccountChangeField.class, "/ipstore/accounts/view/"),                       // 1
+    EQUIPMENT(Equipment.class, EquipmentChangeField.class, "/ipstore/equipment/view"),                  // 2
+    COMMUNIGATE(CommunigateDomain.class, CommunigateChangeField.class, "/ipstore/communigate/view"),    // 3
+    USERS(User.class, UsersChangeField.class, "/ipstore/users/view");                                   // 4
 
     private Class<? extends IHasId> entityClazz;
     private Class<? extends IChangeField> fieldsClazz;
+    private String viewPageURL;
 
     private ChangeType() {
     }
 
     private ChangeType(Class<? extends IHasId> entityClazz,
-                       Class<? extends IChangeField> fieldsClazz) {
+                       Class<? extends IChangeField> fieldsClazz,
+                       String viewPageURL) {
         this.entityClazz = entityClazz;
         this.fieldsClazz = fieldsClazz;
+        this.viewPageURL = viewPageURL;
     }
 
     public IChangeField[] getIChangeFields() {
@@ -36,5 +37,9 @@ public enum ChangeType {
 
     public Class<? extends IHasId> getEntityClazz() {
         return entityClazz;
+    }
+
+    public String getViewPageURL() {
+        return viewPageURL;
     }
 }

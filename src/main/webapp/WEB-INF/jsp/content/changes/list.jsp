@@ -27,26 +27,9 @@
                 <td><c:out value="${change.username}"/></td>
                 <td><c:out value="${change.actionType}"/></td>
                 <td>
-                    <c:choose>
-                        <c:when test="${change.type == 'EQUIPMENT'}">
-                            <a href="/ipstore/equipment/view/${change.entityId}" target="_blank">
-                                <c:out value="${change.type}"/>
-                            </a>
-                        </c:when>
-                        <c:when test="${change.type == 'ACCOUNTS'}">
-                            <a href="/ipstore/accounts/view/${change.entityId}" target="_blank">
-                                <c:out value="${change.type}"/>
-                            </a>
-                        </c:when>
-                        <c:when test="${change.type == 'COMMUNIGATE'}">
-                            <a href="/ipstore/communigate/view/${change.entityId}" target="_blank">
-                                <c:out value="${change.type}"/>
-                            </a>
-                        </c:when>
-                        <c:otherwise>
-                            <c:out value="${change.type}"/>
-                        </c:otherwise>
-                    </c:choose>
+                    <a href="${change.type.viewPageURL}/${change.entityId}" target="_blank">
+                        <c:out value="${change.type}"/>
+                    </a>
                 </td>
                 <td><c:out value="${change.fieldType}"/></td>
                 <td><c:out value="${change.oldValue}"/></td>

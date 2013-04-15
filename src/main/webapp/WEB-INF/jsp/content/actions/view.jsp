@@ -69,28 +69,15 @@
                 <th>Field type</th>
                 <th>Old value</th>
                 <th>New value</th>
-                <th>View</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${action.changes}" var="change">
                 <tr class="info">
                     <td>
-                        <c:choose>
-                            <c:when test="${change.type == 'EQUIPMENT'}">
-                                <a href="/ipstore/equipment/view/${change.entityId}" target="_blank">
-                                    <c:out value="${change.type}"/>
-                                </a>
-                            </c:when>
-                            <c:when test="${change.type == 'ACCOUNTS'}">
-                                <a href="/ipstore/accounts/view/${change.entityId}" target="_blank">
-                                    <c:out value="${change.type}"/>
-                                </a>
-                            </c:when>
-                            <c:otherwise>
-                                <c:out value="${change.type}"/>
-                            </c:otherwise>
-                        </c:choose>
+                        <a href="${change.type.viewPageURL}/${change.entityId}" target="_blank">
+                            <c:out value="${change.type}"/>
+                        </a>
                     </td>
                     <td><c:out value="${change.fieldType}"/></td>
                     <td><c:out value="${change.oldValue}"/></td>

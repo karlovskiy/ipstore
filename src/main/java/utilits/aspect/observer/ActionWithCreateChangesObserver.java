@@ -76,6 +76,12 @@ public class ActionWithCreateChangesObserver extends BaseObserver {
         } else if (object instanceof Enum) {
             Enum enumType = (Enum) object;
             change = buildChange(field, enumType.name());
+        } else if (object instanceof Integer) {
+            Integer value = (Integer) object;
+            change = buildChange(field, value.toString());
+        } else if (object instanceof Boolean) {
+            Boolean value = (Boolean) object;
+            change = buildChange(field, value.toString());
         }
         return change;
     }

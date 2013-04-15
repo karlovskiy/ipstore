@@ -49,5 +49,13 @@ public enum ActionType {
     COMMUNIGATE_IMPORT_PAGE,// 39
     COMMUNIGATE_IMPORT,     // 40
     COMMUNIGATE_CREATE,     // 41
-
+    USERS_LIST,             // 42
+    USERS_VIEW_PAGE,        // 43
+    USERS_ADD_PAGE,         // 44
+    USERS_EDIT_PAGE,        // 45
+    USERS_UPDATE,           // 46
+    USERS_CREATE,           // 47
+    USERS_BLOCK,            // 48
+    USERS_UNBLOCK,          // 49
+    USERS_RESET_PASSWORD    // 50
 }

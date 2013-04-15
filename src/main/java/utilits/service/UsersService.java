@@ -10,11 +10,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utilits.aspect.Action;
+import utilits.aspect.ActionType;
+import utilits.aspect.change.ChangeMode;
+import utilits.aspect.change.ChangeType;
 import utilits.controller.users.UserStatus;
 import utilits.entity.User;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+import static utilits.aspect.ActionType.USERS_CREATE;
+import static utilits.aspect.change.ChangeMode.CREATE;
+import static utilits.aspect.change.ChangeType.USERS;
 
 /**
  * Here will be javadoc
@@ -81,6 +89,7 @@ public class UsersService {
         user.setCredentialsNonExpired(false);
     }
 
+    @Action(value = USERS_CREATE, changeType = USERS, changeMode = CREATE)
     public Long createUser(User user) {
         logger.info("Start saving new user...");
         Session session = sessionFactory.getCurrentSession();
