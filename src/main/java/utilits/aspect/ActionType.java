@@ -57,5 +57,6 @@ public enum ActionType {
     USERS_CREATE,           // 47
     USERS_BLOCK,            // 48
     USERS_UNBLOCK,          // 49
-    USERS_RESET_PASSWORD    // 50
+    USERS_RESET_PASSWORD,   // 50
+    COMMUNIGATE_EXPORT      // 51
 }

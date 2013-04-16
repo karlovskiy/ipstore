@@ -62,6 +62,7 @@
         <intercept-url pattern="/ipstore/communigate/edit/*"        access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
         <intercept-url pattern="/ipstore/communigate/add"           access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
         <intercept-url pattern="/ipstore/communigate/import"        access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/communigate/export"        access="hasRole('ROLE_ROOT')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/"
                     authentication-failure-handler-ref="authenticationFailureHandler"/>

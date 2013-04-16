@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import utilits.aspect.Action;
 import utilits.entity.Account;
+import utilits.entity.CommunigateDomain;
 import utilits.entity.Equipment;
 import utilits.service.AccountsService;
+import utilits.service.CommunigateService;
 import utilits.service.EquipmentService;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import java.util.Map;
 
 import static utilits.aspect.ActionType.ACCOUNTS_EXPORT;
 import static utilits.aspect.ActionType.EQUIPMENT_EXPORT;
+import static utilits.aspect.ActionType.COMMUNIGATE_EXPORT;
 
 /**
  * Here will be javadoc
@@ -34,6 +37,9 @@ public class ReportController {
 
     @Resource(name = "accountsService")
     private AccountsService accountsService;
+
+    @Resource(name = "communigateService")
+    private CommunigateService communigateService;
 
     @Action(value = EQUIPMENT_EXPORT)
     @RequestMapping(value = "/equipment/export", method = RequestMethod.GET)
@@ -53,5 +59,15 @@ public class ReportController {
         JRDataSource jrDataSource = new JRBeanCollectionDataSource(accounts);
         parameterMap.put("datasource", jrDataSource);
         return new ModelAndView("accountsReport", parameterMap);
+    }
+
+    @Action(value = COMMUNIGATE_EXPORT)
+    @RequestMapping(value = "/communigate/export", method = RequestMethod.GET)
+    public ModelAndView loadCommunigateReport() {
+        Map<String, Object> parameterMap = new HashMap<String, Object>();
+        List<CommunigateDomain> communigateDomains = communigateService.loadCommunigate();
+        JRDataSource jrDataSource = new JRBeanCollectionDataSource(communigateDomains);
+        parameterMap.put("datasource", jrDataSource);
+        return new ModelAndView("communigateReport", parameterMap);
     }
 }
