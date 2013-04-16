@@ -71,8 +71,8 @@
                                 <li><a href="<c:url value="/ipstore/communigate/add"/>">Add communigate domain</a></li>
                             </security:authorize>
                             <security:authorize access="hasRole('ROLE_ROOT')">
-                                <li><a href="<c:url value="/ipstore/communigate/import"/>">Import communigate domain</a>
-                                </li>
+                                <li><a href="<c:url value="/ipstore/communigate/import"/>">Import communigate domain</a></li>
+                                <li><a href="<c:url value="/ipstore/communigate/export"/>">Export communigate domain</a></li>
                             </security:authorize>
                         </ul>
                     </li>
