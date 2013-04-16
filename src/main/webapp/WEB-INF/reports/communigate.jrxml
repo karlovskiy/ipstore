@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="communigate" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" whenResourceMissingType="Empty" uuid="89be3da8-5116-4a4f-bdef-c0c60d3efb1c">
+	<property name="ireport.zoom" value="1.9487171000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="domainName" class="java.lang.String"/>
+	<field name="tryPrefix" class="java.lang.String"/>
+	<field name="clientName" class="java.lang.String"/>
+	<field name="ticket" class="java.lang.String"/>
+	<field name="numberLine" class="java.lang.String"/>
+	<field name="diskCapacity" class="java.lang.String"/>
+	<field name="service" class="java.lang.String"/>
+	<field name="contract" class="java.lang.String"/>
+	<field name="login" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="date" class="java.util.Date"/>
+	<title>
+		<band height="15">
+			<staticText>
+				<reportElement uuid="b7c09271-891f-4408-9cc1-b77a2dc78215" mode="Opaque" x="0" y="0" width="133" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement markup="none">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Domain Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98e7b839-8ab9-47fc-8e91-6e6e5e6ea59c" mode="Opaque" x="133" y="0" width="47" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[TRY prefix]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cf9efe6b-bd18-4552-87fc-25bf4a30eac0" mode="Opaque" x="180" y="0" width="110" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Client Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c5d6eb16-5527-4cb2-89dd-3d858e0fe811" mode="Opaque" x="290" y="0" width="84" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0f000584-b523-4ee4-aa76-a1d3fd848222" mode="Opaque" x="374" y="0" width="80" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Number Line]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="79e5f7f2-53a0-485e-b966-9a4fd7c7cc73" mode="Opaque" x="454" y="0" width="79" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Disk Capacity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28a5ff6b-3402-471e-ad2e-f66d0d88a19e" mode="Opaque" x="533" y="0" width="143" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Service]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea60a1eb-08bc-4314-b44a-60fa4ddd2fc4" mode="Opaque" x="676" y="0" width="140" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Contract]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f5083280-3cc3-4288-9594-dbd3f1a12d14" mode="Opaque" x="816" y="0" width="100" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Login]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1a819b33-d1e5-4d13-bea2-b6bb0e605947" mode="Opaque" x="1016" y="0" width="203" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec101ad4-fd27-4ed5-a607-a365ef4ccbde" mode="Opaque" x="916" y="0" width="100" height="15" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15" splitType="Prevent">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="693feb85-9c15-4253-acae-eb34c1159283" x="0" y="0" width="133" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{domainName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ede0b1c3-d8d7-42e4-b61c-ffe71a97e83d" x="180" y="0" width="110" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5fea2036-3668-49e3-bf1d-0f52f74b4b92" x="133" y="0" width="47" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tryPrefix}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7f26a426-de48-4908-9fbb-e98cd635ec85" x="290" y="0" width="84" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ticket}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="fe13f1d3-5519-4bc0-a103-ec496b75e29b" x="374" y="0" width="80" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{numberLine}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ded90415-2e56-4e5e-a4d1-08a572604fda" x="454" y="0" width="79" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{diskCapacity}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d6b89ff3-6f2e-4434-84d2-36f710f8c2f8" x="533" y="0" width="143" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{service}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="aae41585-692f-43dc-b447-d91d0d4d8c1d" x="676" y="0" width="140" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{contract}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ecd390f7-e2f0-4b6e-830c-e1669c95b491" x="816" y="0" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5b06bc20-dce5-4470-96f6-37453b544495" x="1016" y="0" width="203" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd.MM.yyyy" isBlankWhenNull="true">
+				<reportElement uuid="83ea6ef5-9a24-4f61-ade7-6374c68e3ae9" x="916" y="0" width="100" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

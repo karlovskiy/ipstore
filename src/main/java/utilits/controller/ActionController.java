@@ -65,16 +65,6 @@ public class ActionController {
         return "changes";
     }
 
-    @RequestMapping(value = "/equipment/changes", method = RequestMethod.POST)
-    public String filteredChangesList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            model.addAttribute("filterForm", filterForm);
-            model.addAttribute("formAction", "/ipstore/equipment/changes");
-            model.addAttribute("changes", makeChanges(filterForm));
-        }
-        return "changes";
-    }
-
     private List<ChangeWrapper> makeChanges(ActionFilterForm filterForm) {
         List<Change> changesList = actionService.loadChanges(filterForm);
         List<ChangeWrapper> changes = new ArrayList<ChangeWrapper>(changesList.size());

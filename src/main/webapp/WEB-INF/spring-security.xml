@@ -15,6 +15,8 @@
         <!-- actions -->
         <intercept-url pattern="/ipstore/actions"                   access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/actions/view/*"            access="hasRole('ROLE_ROOT')"/>
+        <!-- changes -->
+        <intercept-url pattern="/ipstore/changes"                   access="hasRole('ROLE_ROOT')"/>
         <!-- change password and user info -->
         <intercept-url pattern="/ipstore/mustchangepassword"        access="hasRole('ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/ipstore/changepassword"            access="isFullyAuthenticated()"/>
@@ -27,9 +29,8 @@
         <intercept-url pattern="/ipstore/equipment/add"             access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
         <intercept-url pattern="/ipstore/equipment/save"            access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
         <intercept-url pattern="/ipstore/equipment/edit/*"          access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
-        <intercept-url pattern="/ipstore/equipment/delete/*"        access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/equipment/delete/*"        access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
         <intercept-url pattern="/ipstore/equipment/activate/*"      access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/ipstore/equipment/changes"         access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/equipment/export"          access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/equipment/import"          access="hasRole('ROLE_ROOT')"/>
         <!-- accounts -->
@@ -42,7 +43,6 @@
         <intercept-url pattern="/ipstore/accounts/activate/*"       access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/accounts/edit/*"           access="hasRole('ROLE_ACCOUNT_EDIT')"/>
         <intercept-url pattern="/ipstore/accounts/add"              access="hasRole('ROLE_ACCOUNT_EDIT')"/>
-        <intercept-url pattern="/ipstore/accounts/changes"          access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/accounts/export"           access="hasRole('ROLE_ROOT')"/>
         <!-- users -->
         <intercept-url pattern="/ipstore/users"                     access="hasRole('ROLE_ROOT')"/>
@@ -62,6 +62,7 @@
         <intercept-url pattern="/ipstore/communigate/edit/*"        access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
         <intercept-url pattern="/ipstore/communigate/add"           access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
         <intercept-url pattern="/ipstore/communigate/import"        access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/communigate/export"        access="hasRole('ROLE_ROOT')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/"
                     authentication-failure-handler-ref="authenticationFailureHandler"/>
