@@ -6,7 +6,7 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-import utilits.controller.PasswordStatus;
+import utilits.controller.equipment.PasswordStatus;
 import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
 

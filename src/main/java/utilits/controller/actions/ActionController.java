@@ -1,4 +1,4 @@
-package utilits.controller;
+package utilits.controller.actions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,16 +8,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import utilits.controller.wrapper.ChangeWrapper;
-import utilits.entity.Change;
+import utilits.controller.ActionFilterForm;
 import utilits.service.ActionService;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
-import static utilits.Utils.DEFAULT_ACTION_FILTER;
+import static utilits.Utils.*;
 
 /**
  * Here will be javadoc
@@ -36,16 +33,18 @@ public class ActionController {
     @RequestMapping(value = "/actions", method = RequestMethod.GET)
     public String actionList(Model model) {
         logger.info("Received request to load actions");
-        model.addAttribute("filterForm", DEFAULT_ACTION_FILTER);
-        model.addAttribute("actions", actionService.loadActions(DEFAULT_ACTION_FILTER));
+        model.addAttribute("actionsForm", DEFAULT_ACTIONS_FORM);
+        model.addAttribute("actions", actionService.loadActions(DEFAULT_ACTIONS_FORM));
+        model.addAttribute("actionTypes", ACTIONS_TYPES);
         return "actions";
     }
 
     @RequestMapping(value = "/actions", method = RequestMethod.POST)
-    public String filteredActionList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
+    public String filteredActionList(@Valid ActionsForm actionsForm, BindingResult result, Model model) {
         if (!result.hasErrors()) {
-            model.addAttribute("filterForm", filterForm);
-            model.addAttribute("actions", actionService.loadActions(filterForm));
+            model.addAttribute("actionsForm", actionsForm);
+            model.addAttribute("actions", actionService.loadActions(actionsForm));
+            model.addAttribute("actionTypes", ACTIONS_TYPES);
         }
         return "actions";
     }
@@ -60,18 +59,19 @@ public class ActionController {
     public String changesList(Model model) {
         logger.info("Received request to load changes");
         model.addAttribute("filterForm", DEFAULT_ACTION_FILTER);
-        model.addAttribute("formAction", "/ipstore/equipment/changes");
-        model.addAttribute("changes", makeChanges(DEFAULT_ACTION_FILTER));
+        model.addAttribute("formAction", "/ipstore/changes");
+        model.addAttribute("changes", actionService.loadChanges(DEFAULT_ACTION_FILTER));
         return "changes";
     }
 
-    private List<ChangeWrapper> makeChanges(ActionFilterForm filterForm) {
-        List<Change> changesList = actionService.loadChanges(filterForm);
-        List<ChangeWrapper> changes = new ArrayList<ChangeWrapper>(changesList.size());
-        for (Change change : changesList) {
-            changes.add(new ChangeWrapper(change));
+    @RequestMapping(value = "/changes", method = RequestMethod.POST)
+    public String filteredChangesList(@Valid ActionFilterForm filterForm, BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            model.addAttribute("filterForm", filterForm);
+            model.addAttribute("formAction", "/ipstore/changes");
+            model.addAttribute("changes", actionService.loadChanges(filterForm));
         }
-        return changes;
+        return "changes";
     }
 
 }

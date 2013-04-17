@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.aspect.Action;
 import utilits.controller.ImportResultType;
-import utilits.controller.PasswordStatus;
-import utilits.controller.Status;
+import utilits.controller.equipment.PasswordStatus;
+import utilits.controller.equipment.Status;
 import utilits.entity.Equipment;
 
 import javax.annotation.Resource;

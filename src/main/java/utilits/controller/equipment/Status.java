@@ -1,4 +1,4 @@
-package utilits.controller;
+package utilits.controller.equipment;
 
 /**
  * Here will be javadoc

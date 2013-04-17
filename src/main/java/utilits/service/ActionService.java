@@ -12,15 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import utilits.Utils;
+import utilits.aspect.ActionType;
 import utilits.controller.ActionFilterForm;
+import utilits.controller.actions.ActionsForm;
+import utilits.controller.wrapper.ChangeWrapper;
 import utilits.entity.Action;
 import utilits.entity.Change;
 
 import javax.annotation.Resource;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import static utilits.Utils.ALL;
 
 /**
  * Here will be javadoc
@@ -63,7 +66,7 @@ public class ActionService {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Action> loadActions(ActionFilterForm filter) {
+    public List<Action> loadActions(ActionsForm filter) {
         logger.info("start loading actions, filter: " + filter);
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Action.class);
@@ -88,18 +91,29 @@ public class ActionService {
         if (StringUtils.isNotEmpty(username)) {
             criteria.add(Restrictions.like("username", "%" + username + "%"));
         }
+        String actionType = filter.getActionType();
+        if (!actionType.equals(ALL)) {
+            criteria.add(Restrictions.eq("type", ActionType.valueOf(actionType)));
+        }
         return criteria.addOrder(Order.asc("actionTimestamp")).list();
     }
 
-
-    @SuppressWarnings("unchecked")
-    public <T> List<T> loadChanges(ActionFilterForm filter) {
+    public List<ChangeWrapper> loadChanges(ActionFilterForm filter) {
         logger.info("start loading changes, filter: " + filter);
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Change.class).createCriteria("action");
-        return makeCriteria(criteria, filter).list();
+        @SuppressWarnings("unchecked")
+        List<Change> changesList = makeCriteria(criteria, filter).list();
+        List<ChangeWrapper> changes = new ArrayList<ChangeWrapper>(changesList.size());
+        for (Change change : changesList) {
+            changes.add(new ChangeWrapper(change));
+        }
+        return changes;
     }
 
+    /**
+     * todo: refactoring
+     */
     private Criteria makeCriteria(Criteria criteria, ActionFilterForm filter) {
         Date from = filter.getFrom();
         if (from != null) {

@@ -1,4 +1,4 @@
-package utilits.controller;
+package utilits.controller.equipment;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import utilits.aspect.Action;
+import utilits.controller.ImportResultType;
 import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
 import utilits.service.SearchService;

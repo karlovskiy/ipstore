@@ -4,8 +4,8 @@ import org.apache.solr.analysis.*;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
-import utilits.controller.PasswordStatus;
-import utilits.controller.Status;
+import utilits.controller.equipment.PasswordStatus;
+import utilits.controller.equipment.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
