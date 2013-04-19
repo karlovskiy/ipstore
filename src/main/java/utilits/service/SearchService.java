@@ -29,7 +29,7 @@ public class SearchService {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchService.class);
 
-    private static final String[] EQUIPMENT_INDEX_FIELDS = {"ipAddress", "value", "username", "login",
+    private static final String[] EQUIPMENT_INDEX_FIELDS = {"ipAddress", "type", "username", "login",
             "clientName", "placementAddress", "applicationNumber", "description"};
 
     private static final String[] ACCOUNTS_INDEX_FIELDS = {"login", "clientName", "number", "description"};

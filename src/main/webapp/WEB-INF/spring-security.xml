@@ -17,6 +17,7 @@
         <intercept-url pattern="/ipstore/actions/view/*"            access="hasRole('ROLE_ROOT')"/>
         <!-- changes -->
         <intercept-url pattern="/ipstore/changes"                   access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/ipstore/changes_types"                   access="hasRole('ROLE_ROOT')"/>
         <!-- change password and user info -->
         <intercept-url pattern="/ipstore/mustchangepassword"        access="hasRole('ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/ipstore/changepassword"            access="isFullyAuthenticated()"/>

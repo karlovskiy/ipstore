@@ -1,4 +1,4 @@
-package utilits.controller;
+package utilits.controller.actions;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,17 +8,17 @@ import java.util.Date;
  * Here will be javadoc
  *
  * @author karlovsky
- * @since 1.0
+ * @since 2.5.4, 4/18/13
  */
-public class ActionFilterForm {
+public class ChangesForm {
 
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date from;
-
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date to;
-
     private String username;
+    private String changeType;
+    private String fieldType;
 
     public Date getFrom() {
         return from;
@@ -44,12 +44,30 @@ public class ActionFilterForm {
         this.username = username;
     }
 
+    public String getChangeType() {
+        return changeType;
+    }
+
+    public void setChangeType(String changeType) {
+        this.changeType = changeType;
+    }
+
+    public String getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(String fieldType) {
+        this.fieldType = fieldType;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("from=").append(from)
                 .append(", to=").append(to)
-                .append(", username=").append(username);
+                .append(", username=").append(username)
+                .append(", changeType=").append(changeType)
+                .append(", fieldType=").append(fieldType);
         return result.toString();
     }
 }

@@ -12,16 +12,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import utilits.Utils;
 import utilits.aspect.ActionType;
-import utilits.controller.ActionFilterForm;
+import utilits.aspect.change.ChangeType;
 import utilits.controller.actions.ActionsForm;
+import utilits.controller.actions.ChangesForm;
 import utilits.controller.wrapper.ChangeWrapper;
 import utilits.entity.Action;
 import utilits.entity.Change;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import static utilits.Utils.ALL;
 
@@ -36,7 +39,6 @@ import static utilits.Utils.ALL;
 public class ActionService {
 
     private static final Logger logger = LoggerFactory.getLogger(ActionService.class);
-
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
 
@@ -69,28 +71,8 @@ public class ActionService {
     public List<Action> loadActions(ActionsForm filter) {
         logger.info("start loading actions, filter: " + filter);
         Session session = sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(Action.class);
-        Date from = filter.getFrom();
-        if (from != null) {
-            criteria.add(Restrictions.ge("actionTimestamp", from));
-        }
-        Date to = filter.getTo();
-        if (to != null) {
-            Calendar calendar = Calendar.getInstance();
-            Date now = calendar.getTime();
-            if (DateUtils.isSameDay(to, now)) {
-                to = now;
-            } else {
-                calendar.setTime(to);
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
-                to = calendar.getTime();
-            }
-            criteria.add(Restrictions.le("actionTimestamp", to));
-        }
-        String username = filter.getUsername();
-        if (StringUtils.isNotEmpty(username)) {
-            criteria.add(Restrictions.like("username", "%" + username + "%"));
-        }
+        Criteria criteria = makeActionCriteria(session.createCriteria(Action.class),
+                filter.getFrom(), filter.getTo(), filter.getUsername());
         String actionType = filter.getActionType();
         if (!actionType.equals(ALL)) {
             criteria.add(Restrictions.eq("type", ActionType.valueOf(actionType)));
@@ -98,12 +80,22 @@ public class ActionService {
         return criteria.addOrder(Order.asc("actionTimestamp")).list();
     }
 
-    public List<ChangeWrapper> loadChanges(ActionFilterForm filter) {
+    public List<ChangeWrapper> loadChanges(ChangesForm filter) {
         logger.info("start loading changes, filter: " + filter);
         Session session = sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(Change.class).createCriteria("action");
+        Criteria criteria = session.createCriteria(Change.class);
+        String changeType = filter.getChangeType();
+        if (!changeType.equals(ALL)) {
+            criteria.add(Restrictions.eq("type", ChangeType.valueOf(changeType)));
+        }
+        String fieldType = filter.getFieldType();
+        if (StringUtils.isNotEmpty(fieldType) && !ALL.equals(fieldType)) {
+            criteria.add(Restrictions.eq("fieldType", fieldType));
+        }
+        criteria = makeActionCriteria(criteria.createCriteria("action"),
+                filter.getFrom(), filter.getTo(), filter.getUsername());
         @SuppressWarnings("unchecked")
-        List<Change> changesList = makeCriteria(criteria, filter).list();
+        List<Change> changesList = criteria.list();
         List<ChangeWrapper> changes = new ArrayList<ChangeWrapper>(changesList.size());
         for (Change change : changesList) {
             changes.add(new ChangeWrapper(change));
@@ -111,15 +103,10 @@ public class ActionService {
         return changes;
     }
 
-    /**
-     * todo: refactoring
-     */
-    private Criteria makeCriteria(Criteria criteria, ActionFilterForm filter) {
-        Date from = filter.getFrom();
+    private Criteria makeActionCriteria(Criteria criteria, Date from, Date to, String username) {
         if (from != null) {
             criteria.add(Restrictions.ge("actionTimestamp", from));
         }
-        Date to = filter.getTo();
         if (to != null) {
             Calendar calendar = Calendar.getInstance();
             Date now = calendar.getTime();
@@ -132,7 +119,6 @@ public class ActionService {
             }
             criteria.add(Restrictions.le("actionTimestamp", to));
         }
-        String username = filter.getUsername();
         if (StringUtils.isNotEmpty(username)) {
             criteria.add(Restrictions.like("username", "%" + username + "%"));
         }

@@ -17,8 +17,7 @@
 
     <!-- changes page -->
     <definition name="changes" template="/WEB-INF/jsp/templates/template.jsp">
-        <put-attribute name="title" value="Changes"/>
-        <put-attribute name="menu-form" value="/WEB-INF/jsp/form/changes/list.jsp"/>
+        <put-attribute name="title" value="Changes list"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/changes/list.jsp"/>
     </definition>
 

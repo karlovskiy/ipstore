@@ -41,8 +41,8 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
     color: #ffffff;
     background-color: #006dcc;
     *background-color: #0044cc;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ff0088cc', endColorstr = '#ff0044cc', GradientType = 0);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 
 body {
@@ -62,34 +62,6 @@ body {
 .errorblock {
     color: #ff0000;
 }
-
-/*.table tbody tr.NEW td {*/
-    /*background-color: #ffffff;*/
-/*}*/
-
-/*.table-hover tbody tr.NEW:hover td {*/
-    /*background-color: #00ff00;*/
-/*}*/
-
-/*.table tbody tr.NEED_UPDATE td {*/
-    /*background-color: #ff0000;*/
-/*}*/
-
-/*.table-hover tbody tr.NEED_UPDATE:hover td {*/
-    /*background-color: #ff0000;*/
-/*}*/
-
-/*.table tbody tr.OLD td {*/
-    /*background-color: #ffff00;*/
-/*}*/
-
-/*.table-hover tbody tr.OLD:hover td {*/
-    /*background-color: #ffff00;*/
-/*}*/
-
-/*.table tbody tr.info td {*/
-    /*background-color: #ffffff;*/
-/*}*/
 
 .zeroclipboard-is-hover {
     color: #ffffff;
@@ -120,10 +92,6 @@ body {
 .table tbody tr.BLOCKED td, table-hover tbody tr.BLOCKED:hover td {
     background-color: #ff0000;
 }
-
-/*.table-hover tbody tr.WARNING:hover td {*/
-    /*background-color: #ff0000;*/
-/*}*/
 
 span.NORMAL, span.NEW, span.ACTIVE {
     color: #00ff00;
