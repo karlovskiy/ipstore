@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utilits.entity.Account;
+import utilits.entity.CommunigateDomain;
 import utilits.entity.Equipment;
 
 import javax.annotation.Resource;
@@ -33,6 +34,9 @@ public class SearchService {
             "clientName", "placementAddress", "applicationNumber", "description"};
 
     private static final String[] ACCOUNTS_INDEX_FIELDS = {"login", "clientName", "number", "description"};
+
+    private static final String[] COMMUNIGATE_DOMAINS_INDEX_FIELDS = {"domainName", "tryPrefix", "clientName",
+            "ticket", "numberLine", "diskCapacity", "service", "contract", "login", "description"};
 
     @Resource(name = "sessionFactory")
     private SessionFactory sessionFactory;
@@ -62,6 +66,11 @@ public class SearchService {
     public List<Account> searchAccounts(String search) {
         logger.info("Searching accounts, search=" + search);
         return searchEntities(search, Account.class, ACCOUNTS_INDEX_FIELDS);
+    }
+
+    public List<CommunigateDomain> searchCommunigateDomains(String search) {
+        logger.info("Searching communigate domains, search=" + search);
+        return searchEntities(search, CommunigateDomain.class, COMMUNIGATE_DOMAINS_INDEX_FIELDS);
     }
 
     @SuppressWarnings("unchecked")

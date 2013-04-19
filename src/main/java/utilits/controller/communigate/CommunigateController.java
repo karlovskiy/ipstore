@@ -1,5 +1,6 @@
 package utilits.controller.communigate;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import utilits.aspect.ActionType;
 import utilits.entity.CommunigateDomain;
 import utilits.service.CommunigateService;
 import utilits.controller.ImportResultType;
+import utilits.service.SearchService;
 
 
 import javax.annotation.Resource;
@@ -40,11 +42,19 @@ public class CommunigateController {
     @Resource(name = "communigateService")
     private CommunigateService communigateService;
 
+    @Resource(name = "searchService")
+    private SearchService searchService;
+
     @Action(value = COMMUNIGATE_LIST)
     @RequestMapping(value = "/communigate", method = RequestMethod.GET)
     public String viewCommunigate(String search, Model model) {
         logger.info("Received request to load communigate domains.");
-        model.addAttribute("communigateDomains", communigateService.loadCommunigate());
+        if (StringUtils.isNotEmpty(search)) {
+            model.addAttribute("communigateDomains", searchService.searchCommunigateDomains(search));
+            model.addAttribute("search", search);
+        } else {
+            model.addAttribute("communigateDomains", communigateService.loadCommunigate());
+        }
         return "communigate";
     }
 
