@@ -10,7 +10,7 @@
         <form:input id="to" path="to" cssClass="input-small" placeholder="To"/>
         <form:input id="username" path="username" cssClass="input-small" placeholder="Username"/>
         <form:select id="changeType" path="changeType" cssClass="input-medium" items="${changesTypes}"/>
-        <form:select id="fieldType" path="fieldType" cssClass="input-xlarge"
+        <form:select id="fieldType" path="fieldType" cssClass="input-large"
                      cssStyle="${empty changesForm.fieldType ? 'display: none;' : ''}">
             <c:if test="${not empty changesForm.fieldType}">
                 <form:option value="${changesForm.fieldType}"/>
