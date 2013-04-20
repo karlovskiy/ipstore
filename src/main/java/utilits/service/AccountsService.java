@@ -107,18 +107,23 @@ public class AccountsService {
         ImportResultType<Account> result = new ImportResultType<Account>();
         Workbook wb = WorkbookFactory.create(is);
         Sheet sheet = wb.getSheetAt(0);
+        int i = 0;
         for (Row row : sheet) {
-            Account account = makeAccount(row);
-            Session session = sessionFactory.getCurrentSession();
-            Account oldAccount = (Account) session.createCriteria(Account.class)
-                    .add(Restrictions.eq("login", account.getLogin()))
-                    .uniqueResult();
-            if (oldAccount != null) {
-                result.addExists(oldAccount);
-            } else {
-                Long id = (Long) session.save(account);
-                account.setId(id);
-                result.addAdded(account);
+            i++;
+            if (i > 1) {
+                Account account = makeAccount(row);
+                Session session = sessionFactory.getCurrentSession();
+                Account oldAccount = (Account) session.createCriteria(Account.class)
+                        .add(Restrictions.disjunction()
+                                .add(Restrictions.eq("login", account.getLogin()))
+                        ).uniqueResult();
+                if (oldAccount != null) {
+                    result.addExists(oldAccount);
+                } else {
+                    Long id = (Long) session.save(account);
+                    account.setId(id);
+                    result.addAdded(account);
+                }
             }
         }
         return result;
@@ -126,7 +131,7 @@ public class AccountsService {
 
     private Account makeAccount(Row row) {
         Account account = new Account();
-        for (int j = 0; j <= 3; j++) {
+        for (int j = 0; j <= 4; j++) {
             Cell cell = row.getCell(j, Row.CREATE_NULL_AS_BLANK);
             cell.setCellType(Cell.CELL_TYPE_STRING);
             String value = cell.getStringCellValue();
@@ -140,6 +145,10 @@ public class AccountsService {
                 case 2:
                     account.setClientName(value);
                     break;
+                case 3:
+                    account.setNumber(value);
+                case 4:
+                    account.setDescription(value);
             }
         }
         account.setStatus(AccountStatus.NORMAL);
