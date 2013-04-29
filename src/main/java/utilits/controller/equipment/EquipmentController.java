@@ -128,6 +128,13 @@ public class EquipmentController {
         return "redirect:/ipstore/equipment/view/" + id;
     }
 
+    @Action(value = ACTIVATE_NO_EXPIRED_EQUIPMENT, changeType = EQUIPMENT, changeMode = UPDATE)
+    @RequestMapping(value = "/equipment/activate_no_expired/{id}", method = RequestMethod.GET)
+    public String activateNoExpiredEquipment(@PathVariable Long id) {
+        equipmentService.activateWithNoExpiredEquipment(id);
+        return "redirect:/ipstore/equipment/view/" + id;
+    }
+
     @RequestMapping(value = "/equipment/save", method = RequestMethod.POST)
     public String createEquipment(@Valid Equipment equipment, BindingResult result, Model model) {
         if (result.hasErrors()) {

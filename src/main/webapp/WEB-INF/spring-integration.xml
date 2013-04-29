@@ -27,7 +27,8 @@
     <int-ftp:outbound-channel-adapter id="ftpOutbound"
                                       channel="ftpChannel"
                                       session-factory="ftpSessionFactory"
-                                      remote-directory="${ftp.remoteDirectory}"/>
+                                      remote-directory="${ftp.remoteDirectory}"
+                                      cache-sessions="false"/>
     <!--remote-file-separator="/"-->
     <!--charset="UTF-8"-->
     <!--auto-create-directory="true"-->

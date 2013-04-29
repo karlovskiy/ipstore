@@ -48,7 +48,7 @@ public class EquipmentService {
         logger.debug("Start loading equipment.");
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Equipment.class);
-        criteria.add(Restrictions.eq("status", Status.ACTIVE));
+        criteria.add(Restrictions.ne("status", Status.DELETED));
         return criteria.addOrder(Order.asc("ipAddress")).list();
     }
 
@@ -109,6 +109,14 @@ public class EquipmentService {
         Session session = sessionFactory.getCurrentSession();
         Equipment equipment = (Equipment) session.get(Equipment.class, id);
         equipment.setStatus(Status.ACTIVE);
+    }
+
+    public void activateWithNoExpiredEquipment(Long id) {
+        logger.info("activate with no expired password equipment with id=" + id);
+        Session session = sessionFactory.getCurrentSession();
+        Equipment equipment = (Equipment) session.get(Equipment.class, id);
+        equipment.setStatus(Status.ACTIVE_NO_EXPIRED);
+        equipment.setPasswordStatus(PasswordStatus.NEW);
     }
 
     public void updatePasswordStatus(Long id, PasswordStatus passwordStatus) {

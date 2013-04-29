@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import utilits.controller.equipment.PasswordStatus;
+import utilits.controller.equipment.Status;
 import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
 
@@ -38,13 +39,15 @@ public class PasswordStatusJob extends QuartzJobBean {
         Date needUpdateDate = calendar.getTime();
         List<Equipment> equipments = equipmentService.loadEquipments();
         for (Equipment equipment : equipments) {
-            Date passwordDate = equipment.getPasswordDate();
-            if (passwordDate.after(oldDate)) {
-                changePasswordType(equipmentService, equipment, PasswordStatus.NEW);
-            } else if (passwordDate.before(oldDate) && passwordDate.after(needUpdateDate)) {
-                changePasswordType(equipmentService, equipment, PasswordStatus.OLD);
-            } else {
-                changePasswordType(equipmentService, equipment, PasswordStatus.NEED_UPDATE);
+            if (Status.ACTIVE_NO_EXPIRED != equipment.getStatus()) {
+                Date passwordDate = equipment.getPasswordDate();
+                if (passwordDate.after(oldDate)) {
+                    changePasswordType(equipmentService, equipment, PasswordStatus.NEW);
+                } else if (passwordDate.before(oldDate) && passwordDate.after(needUpdateDate)) {
+                    changePasswordType(equipmentService, equipment, PasswordStatus.OLD);
+                } else {
+                    changePasswordType(equipmentService, equipment, PasswordStatus.NEED_UPDATE);
+                }
             }
         }
 

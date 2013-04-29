@@ -132,6 +132,12 @@
                            href="<c:url value="/ipstore/equipment/activate/${equipment.id}"/>">Activate</a>
                     </div>
                 </c:if>
+                <c:if test="${equipment.status == 'ACTIVE'}">
+                    <div class="span1 ml-10px">
+                        <a class="btn btn-warning"
+                           href="<c:url value="/ipstore/equipment/activate_no_expired/${equipment.id}"/>">ActivateWithNoExpired</a>
+                    </div>
+                </c:if>
             </security:authorize>
         </div>
     </div>
