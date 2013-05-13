@@ -100,7 +100,7 @@
                 <span class="block"><c:out value="${equipment.description}"/></span>
             </div>
         </div>
-        <c:if test="${equipment.status == 'DELETED'}">
+        <c:if test="${equipment.status == 'DELETED' or equipment.status == 'ACTIVE_NO_EXPIRED'}">
             <div class="row">
                 <div class="span2">Status</div>
                 <div class="span5">
@@ -126,7 +126,7 @@
                 </c:if>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ROOT')">
-                <c:if test="${equipment.status == 'DELETED'}">
+                <c:if test="${equipment.status == 'DELETED' or equipment.status == 'ACTIVE_NO_EXPIRED'}">
                     <div class="span1 ml-10px">
                         <a class="btn btn-warning"
                            href="<c:url value="/ipstore/equipment/activate/${equipment.id}"/>">Activate</a>
