@@ -5,10 +5,9 @@
     <groupId>utilits</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>2.5.8-SNAPSHOT</version>
+    <version>2.5.9-SNAPSHOT</version>
 
     <name>ipstore web application</name>
-    <url>http://maven.apache.org</url>
 
     <licenses>
         <license>
@@ -17,6 +16,19 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <id>karlovsky</id>
+            <name>Alexey Karlovskiy</name>
+            <email>yexella@gmail.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/ravenstar/ipstore</connection>
+        <developerConnection>scm:git:git://github.com/ravenstar/ipstore</developerConnection>
+        <url>https://github.com/ravenstar/ipstore</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -431,9 +443,8 @@
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <type>jar</type>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
