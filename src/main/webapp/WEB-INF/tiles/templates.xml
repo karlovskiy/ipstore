@@ -131,4 +131,10 @@
         <put-attribute name="title" value="Import communigate"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/communigate/import.jsp"/>
     </definition>
+
+    <!-- contact page -->
+    <definition name="contact" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Contact"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/contact.jsp"/>
+    </definition>
 </tiles-definitions>

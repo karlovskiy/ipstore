@@ -3,11 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>VoIPStore</title>
+    <title>Sign in</title>
     <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
     <style type="text/css">
         body {
-            padding-top: 40px;
+            padding-top: 20px;
             padding-bottom: 40px;
             background-color: #f5f5f5;
         }
@@ -51,27 +51,6 @@
     <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="<c:url value="/ipstore/"/>">VoIPStore</a>
-
-            <div class="navbar-form pull-right">
-                <ul class="nav nav-pills pull-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="http://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/contact.html">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<br><br><br>
-
 <div class="container">
     <c:if test="${empty sessionScope['CREDENTIALS_EXPIRED_USERNAME']}">
         <form class="form-signin" action="<c:url value='j_spring_security_check' />" method='POST'>
@@ -80,7 +59,7 @@
                     <span class="errorblock">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</span>
                 </div>
             </c:if>
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading">Sign in</h2>
             <input type="text" class="input-block-level" name='j_username' placeholder="User Name">
             <input type="password" class="input-block-level" name='j_password' placeholder="Password">
             <button name="submit" type="submit" class="btn btn-large btn-block btn-primary"> Sign in</button>

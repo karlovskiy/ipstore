@@ -161,4 +161,10 @@ public class LoginController {
         return "home";
     }
 
+    @Action(value = CONTACT_PAGE)
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
+    public String contact() {
+        return "contact";
+    }
+
 }

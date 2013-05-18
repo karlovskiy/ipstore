@@ -59,5 +59,6 @@ public enum ActionType {
     USERS_UNBLOCK,                  // 49
     USERS_RESET_PASSWORD,           // 50
     COMMUNIGATE_EXPORT,             // 51
-    ACTIVATE_NO_EXPIRED_EQUIPMENT   // 52
+    ACTIVATE_NO_EXPIRED_EQUIPMENT,  // 52
+    CONTACT_PAGE                    // 53
 }

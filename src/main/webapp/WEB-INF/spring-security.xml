@@ -8,6 +8,8 @@
     <http auto-config="true" use-expressions="true">
         <!-- home -->
         <intercept-url pattern="/ipstore/"                                  access="isFullyAuthenticated()"/>
+        <!-- contact -->
+        <intercept-url pattern="/ipstore/contact"                           access="isFullyAuthenticated()"/>
         <!-- monitoring -->
         <intercept-url pattern="/monitoring**"                              access="hasRole('ROLE_ROOT')"/>
         <!-- generate password -->
