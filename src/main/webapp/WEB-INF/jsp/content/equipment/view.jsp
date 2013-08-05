@@ -100,6 +100,17 @@
                 <span class="block"><c:out value="${equipment.description}"/></span>
             </div>
         </div>
+        <c:if test="${not empty equipment.configName}">
+            <div class="row">
+                <div class="span2">Config</div>
+                <div class="span5">
+                    <span class="block">
+                        <a id="cf_download" href="<c:url value="/ipstore/equipment/load_config/${equipment.id}"/>">
+                        <c:out value="${equipment.configName}"/></a>
+                    </span>
+                </div>
+            </div>
+        </c:if>
         <c:if test="${equipment.status == 'DELETED' or equipment.status == 'ACTIVE_NO_EXPIRED'}">
             <div class="row">
                 <div class="span2">Status</div>

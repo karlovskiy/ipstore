@@ -19,7 +19,9 @@ public enum EquipmentChangeField implements IChangeField {
     PLACEMENT_ADDRESS("placementAddress"),
     APPLICATION_NUMBER("applicationNumber"),
     DESCRIPTION("description"),
-    STATUS("status");
+    STATUS("status"),
+    CONFIG_NAME("configName"),
+    CONFIG_TYPE("configType");
 
     private final String fieldName;
 

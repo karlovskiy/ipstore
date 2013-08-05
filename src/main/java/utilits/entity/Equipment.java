@@ -101,6 +101,17 @@ public class Equipment implements IHasId, Serializable {
     @Column(name = "STATUS", nullable = false)
     private Status status;
 
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @Column(name = "CONF_DATA", columnDefinition = "BLOB(10M)")
+    private byte[] configData;
+
+    @Column(name = "CONF_NAME", length = 128)
+    private String configName;
+
+    @Column(name = "CONF_TYPE", length = 128)
+    private String configType;
+
     public Long getId() {
         return id;
     }
@@ -203,5 +214,29 @@ public class Equipment implements IHasId, Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public byte[] getConfigData() {
+        return configData;
+    }
+
+    public void setConfigData(byte[] configData) {
+        this.configData = configData;
+    }
+
+    public String getConfigName() {
+        return configName;
+    }
+
+    public void setConfigName(String configName) {
+        this.configName = configName;
+    }
+
+    public String getConfigType() {
+        return configType;
+    }
+
+    public void setConfigType(String configType) {
+        this.configType = configType;
     }
 }

@@ -29,6 +29,7 @@
         <!-- equipment -->
         <intercept-url pattern="/ipstore/equipment"                         access="hasRole('ROLE_EQUIPMENT_VIEW')"/>
         <intercept-url pattern="/ipstore/equipment/view/*"                  access="hasRole('ROLE_EQUIPMENT_VIEW')"/>
+        <intercept-url pattern="/ipstore/equipment/load_config/*"           access="hasRole('ROLE_EQUIPMENT_VIEW')"/>
         <intercept-url pattern="/ipstore/equipment/add"                     access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
         <intercept-url pattern="/ipstore/equipment/save"                    access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
         <intercept-url pattern="/ipstore/equipment/edit/*"                  access="hasRole('ROLE_EQUIPMENT_EDIT')"/>

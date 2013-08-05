@@ -10,8 +10,12 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import utilits.aspect.Action;
 import utilits.controller.ImportResultType;
 import utilits.controller.equipment.PasswordStatus;
@@ -67,16 +71,23 @@ public class EquipmentService {
     }
 
     @Action(value = EQUIPMENT_CREATE, changeType = EQUIPMENT, changeMode = CREATE)
-    public Long createEquipment(Equipment equipment) {
+    public Long createEquipment(Equipment equipment, MultipartFile config) {
         logger.info("saving new equipment...");
         Session session = sessionFactory.getCurrentSession();
         equipment.setPasswordStatus(PasswordStatus.NEW);
         equipment.setPasswordDate(new Date());
         equipment.setStatus(Status.ACTIVE);
+        equipment.setConfigName(config.getOriginalFilename());
+        equipment.setConfigType(config.getContentType());
+        try {
+            equipment.setConfigData(config.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return (Long) session.save(equipment);
     }
 
-    public void updateEquipment(Long id, Equipment equipment) {
+    public void updateEquipment(Long id, Equipment equipment, MultipartFile config) {
         logger.info("updating equipment with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Equipment oldEquipment = (Equipment) session.get(Equipment.class, id);
@@ -94,6 +105,19 @@ public class EquipmentService {
         if (ObjectUtils.notEqual(oldPassword, newPassword)) {
             oldEquipment.setPasswordStatus(PasswordStatus.NEW);
             oldEquipment.setPasswordDate(new Date());
+        }
+        if (config.isEmpty()) {
+            oldEquipment.setConfigData(null);
+            oldEquipment.setConfigName(null);
+            oldEquipment.setConfigType(null);
+        } else {
+            try {
+                oldEquipment.setConfigData(config.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            oldEquipment.setConfigName(config.getOriginalFilename());
+            oldEquipment.setConfigType(config.getContentType());
         }
     }
 
@@ -150,6 +174,18 @@ public class EquipmentService {
             }
         }
         return result;
+    }
+
+    public HttpEntity<byte[]> loadConfig(Long id){
+        logger.info("load config for equipment with id=" + id);
+        Session session = sessionFactory.getCurrentSession();
+        Equipment equipment = (Equipment) session.get(Equipment.class, id);
+        byte[] data = equipment.getConfigData();
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.parseMediaType(equipment.getConfigType()));
+        header.set("Content-Disposition", "attachment; filename=" + equipment.getConfigName().replace(" ", "_"));
+        header.setContentLength(data.length);
+        return new HttpEntity<byte[]>(data, header);
     }
 
     private Equipment makeEquipment(Row row) {

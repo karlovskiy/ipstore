@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="<c:url value="/js/edit.js"/>"></script>
 <div class="container">
-    <form:form commandName="equipment" action="${formAction}" cssClass="form-horizontal">
+    <form:form commandName="equipment" action="${formAction}" cssClass="form-horizontal" enctype="multipart/form-data">
         <div class="control-group">
             <label class="control-label" for="ipAddress">IpAddress</label>
 
@@ -104,6 +104,32 @@
                 </span>
             </div>
         </div>
+        <c:choose>
+            <c:when test="${empty equipment.id}">
+                <div class="control-group">
+                    <label class="control-label" for="new_equipment_cf">Config(Max 10Mb)</label>
+                    <div class="controls">
+                        <input id="new_equipment_cf" name="cf" class="input-xxlarge" type="file"/>
+                    </div>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div id="new_cf" class="control-group" style="${empty equipment.configName ? '' : 'display: none;'}">
+                    <label class="control-label" for="edit_equipment_cf">Config(Max 10Mb)</label>
+                    <div class="controls">
+                        <input id="edit_equipment_cf" name="cf" class="input-xxlarge" type="file"/>
+                    </div>
+                </div>
+                <div id="exist_cf" class="control-group" style="${empty equipment.configName ? 'display: none;' : ''}">
+                    <label class="control-label" for="cf_download">Config</label>
+                    <div class="controls">
+                        <a id="cf_download" href="<c:url value="/ipstore/equipment/load_config/${equipment.id}"/>">
+                            <c:out value="${equipment.configName}"/></a>
+                        <a class="btn btn-danger" onclick="$('#exist_cf').hide();$('#new_cf').show();">Delete</a>
+                    </div>
+                </div>
+            </c:otherwise>
+        </c:choose>
         <div class="form-actions">
             <c:if test="${empty equipment.id}">
                 <a href="<c:url value="/ipstore/equipment"/>" class="btn btn-primary">List</a>

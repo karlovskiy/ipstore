@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +22,9 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 import static utilits.aspect.ActionType.*;
-import static utilits.aspect.change.ChangeType.EQUIPMENT;
 import static utilits.aspect.change.ChangeMode.IMPORT;
 import static utilits.aspect.change.ChangeMode.UPDATE;
+import static utilits.aspect.change.ChangeType.EQUIPMENT;
 
 
 /**
@@ -36,14 +37,11 @@ import static utilits.aspect.change.ChangeMode.UPDATE;
 public class EquipmentController {
 
     private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);
-
     private
     @Value("${random_password.default_length}")
     String generatedPasswordDefaultLength;
-
     @Resource(name = "equipmentService")
     private EquipmentService equipmentService;
-
     @Resource(name = "searchService")
     private SearchService searchService;
 
@@ -136,7 +134,8 @@ public class EquipmentController {
     }
 
     @RequestMapping(value = "/equipment/save", method = RequestMethod.POST)
-    public String createEquipment(@Valid Equipment equipment, BindingResult result, Model model) {
+    public String createEquipment(@Valid Equipment equipment, BindingResult result,
+                                  @RequestParam("cf") MultipartFile config, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/ipstore/equipment/save");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
@@ -150,19 +149,20 @@ public class EquipmentController {
             model.addAttribute("existsEquipment", existsEquipment);
             return "edit-equipment";
         }
-        Long id = equipmentService.createEquipment(equipment);
+        Long id = equipmentService.createEquipment(equipment, config);
         return "redirect:/ipstore/equipment/view/" + id;
     }
 
     @Action(value = EQUIPMENT_UPDATE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/save/{id}", method = RequestMethod.POST)
-    public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id, Model model) {
+    public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id,
+                                  @RequestParam("cf") MultipartFile config, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/ipstore/equipment/save/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit-equipment";
         }
-        equipmentService.updateEquipment(id, equipment);
+        equipmentService.updateEquipment(id, equipment, config);
         return "redirect:/ipstore/equipment/view/" + id;
     }
 
@@ -171,8 +171,15 @@ public class EquipmentController {
     public
     @ResponseBody
     String generatePassword(@RequestParam Integer length) {
-        logger.info("Request fo generating password, length: " + length);
+        logger.info("Request for generating password, length: " + length);
         length = length != null ? length : Integer.valueOf(generatedPasswordDefaultLength);
         return RandomStringUtils.random(length, true, true);
+    }
+
+    @Action(value = LOAD_CONFIG)
+    @RequestMapping(value = "/equipment/load_config/{id}", method = RequestMethod.GET)
+    public HttpEntity<byte[]> loadConfig(@PathVariable Long id) {
+        logger.info("Request for loading equipment config");
+        return equipmentService.loadConfig(id);
     }
 }
