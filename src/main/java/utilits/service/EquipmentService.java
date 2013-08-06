@@ -25,6 +25,8 @@ import utilits.entity.Equipment;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -176,14 +178,19 @@ public class EquipmentService {
         return result;
     }
 
-    public HttpEntity<byte[]> loadConfig(Long id){
+    public HttpEntity<byte[]> loadConfig(Long id) {
         logger.info("load config for equipment with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Equipment equipment = (Equipment) session.get(Equipment.class, id);
         byte[] data = equipment.getConfigData();
         HttpHeaders header = new HttpHeaders();
         header.setContentType(MediaType.parseMediaType(equipment.getConfigType()));
-        header.set("Content-Disposition", "attachment; filename=" + equipment.getConfigName().replace(" ", "_"));
+        String filename = equipment.getConfigName().replace(" ", "_");
+        try {
+            filename = URLEncoder.encode(filename, "UTF8");
+        } catch (UnsupportedEncodingException ignored) {
+        }
+        header.set("Content-Disposition", "attachment; filename*=UTF-8''" + filename);
         header.setContentLength(data.length);
         return new HttpEntity<byte[]>(data, header);
     }
