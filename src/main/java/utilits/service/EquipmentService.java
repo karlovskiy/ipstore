@@ -87,7 +87,7 @@ public class EquipmentService {
         return (Long) session.save(equipment);
     }
 
-    public void updateEquipment(Long id, Equipment equipment, MultipartFile config) {
+    public void updateEquipment(Long id, Equipment equipment, MultipartFile config, boolean reset) {
         logger.info("updating equipment with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Equipment oldEquipment = (Equipment) session.get(Equipment.class, id);
@@ -106,11 +106,11 @@ public class EquipmentService {
             oldEquipment.setPasswordStatus(PasswordStatus.NEW);
             oldEquipment.setPasswordDate(new Date());
         }
-        if (config.isEmpty()) {
+        if (reset && config.isEmpty()) {
             oldEquipment.setConfigData(null);
             oldEquipment.setConfigName(null);
             oldEquipment.setConfigType(null);
-        } else {
+        } else if (!config.isEmpty()) {
             try {
                 oldEquipment.setConfigData(config.getBytes());
             } catch (IOException e) {

@@ -156,13 +156,14 @@ public class EquipmentController {
     @Action(value = EQUIPMENT_UPDATE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/save/{id}", method = RequestMethod.POST)
     public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id,
-                                  @RequestParam("cf") MultipartFile config, Model model) {
+                                  @RequestParam("cf") MultipartFile config, @RequestParam("cf_reset") String cfReset,
+                                  Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/ipstore/equipment/save/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit-equipment";
         }
-        equipmentService.updateEquipment(id, equipment, config);
+        equipmentService.updateEquipment(id, equipment, config, "reset".equals(cfReset));
         return "redirect:/ipstore/equipment/view/" + id;
     }
 

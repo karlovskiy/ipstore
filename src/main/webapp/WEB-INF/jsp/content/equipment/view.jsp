@@ -100,17 +100,19 @@
                 <span class="block"><c:out value="${equipment.description}"/></span>
             </div>
         </div>
-        <c:if test="${not empty equipment.configName}">
-            <div class="row">
-                <div class="span2">Config</div>
-                <div class="span5">
-                    <span class="block">
-                        <a id="cf_download" href="<c:url value="/ipstore/equipment/load_config/${equipment.id}"/>">
-                        <c:out value="${equipment.configName}"/></a>
-                    </span>
+        <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
+            <c:if test="${not empty equipment.configName}">
+                <div class="row">
+                    <div class="span2">Config</div>
+                    <div class="span5">
+                        <span class="block">
+                            <a id="cf_download" href="<c:url value="/ipstore/equipment/load_config/${equipment.id}"/>">
+                            <c:out value="${equipment.configName}"/></a>
+                        </span>
+                    </div>
                 </div>
-            </div>
-        </c:if>
+            </c:if>
+        </security:authorize>
         <c:if test="${equipment.status == 'DELETED' or equipment.status == 'ACTIVE_NO_EXPIRED'}">
             <div class="row">
                 <div class="span2">Status</div>

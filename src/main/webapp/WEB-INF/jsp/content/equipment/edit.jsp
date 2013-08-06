@@ -123,9 +123,11 @@
                 <div id="exist_cf" class="control-group" style="${empty equipment.configName ? 'display: none;' : ''}">
                     <label class="control-label" for="cf_download">Config</label>
                     <div class="controls">
+                        <input type="hidden" name="cf_reset" value=""/>
                         <a id="cf_download" href="<c:url value="/ipstore/equipment/load_config/${equipment.id}"/>">
                             <c:out value="${equipment.configName}"/></a>
-                        <a class="btn btn-danger" onclick="$('#exist_cf').hide();$('#new_cf').show();">Delete</a>
+                        <a class="btn btn-danger"
+                           onclick="$('#exist_cf').hide();$('#new_cf').show();$('input[name=cf_reset]').val('reset');">Delete</a>
                     </div>
                 </div>
             </c:otherwise>
