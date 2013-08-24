@@ -42,10 +42,25 @@ $(document).ready(function () {
                 var mode = all[i];
                 var edit = mode + "_EDIT";
                 var view = mode + "_VIEW";
+                var manager = mode + "_MANAGER";
+                var editElement = $("label.authority > input[type='checkbox'][id='" + edit + "']");
+                var viewElement = $("label.authority > input[type='checkbox'][id='" + view + "']");
+                var managerElement = $("label.authority > input[type='checkbox'][id='" + manager + "']");
                 if (id == edit && jthis.is(":checked")) {
-                    $("label.authority > input[type='checkbox'][id='" + view + "']").attr("checked", true);
+                    viewElement.attr("checked", true);
+                    if (managerElement.length != 0) {
+                        managerElement.attr("checked", true);
+                    }
                 } else if (id == view && !jthis.is(":checked")) {
-                    $("label.authority > input[type='checkbox'][id='" + edit + "']").attr("checked", false);
+                    editElement.attr("checked", false);
+                    if (managerElement.length != 0) {
+                        managerElement.attr("checked", false);
+                    }
+                } else if (id == manager && jthis.is(":checked")) {
+                    viewElement.attr("checked", true);
+
+                } else if (id == manager && !jthis.is(":checked")) {
+                    editElement.attr("checked", false);
                 }
             }
         }

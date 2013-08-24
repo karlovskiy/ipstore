@@ -183,3 +183,15 @@ div.hero-unit {
 div.form-actions {
     background-color: #FFFFFF;
 }
+
+div#home {
+    padding-top: 0;
+}
+
+div#home a.btn {
+    width: 250px;
+}
+
+div#home p.rights {
+    white-space: nowrap;
+}

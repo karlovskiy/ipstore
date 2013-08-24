@@ -137,4 +137,28 @@
         <put-attribute name="title" value="Contact"/>
         <put-attribute name="content" value="/WEB-INF/jsp/content/contact.jsp"/>
     </definition>
+
+    <!-- capacity list page -->
+    <definition name="capacity" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Capacity list"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/capacity/list.jsp"/>
+    </definition>
+
+    <!-- capacity add page -->
+    <definition name="edit-capacity" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Edit Capacity"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/capacity/edit.jsp"/>
+    </definition>
+
+    <!-- capacity add number page -->
+    <definition name="edit-capactity-number" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="Edit capacity number"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/capacity/number/edit.jsp"/>
+    </definition>
+
+    <!-- capacity view number page -->
+    <definition name="view-capactity-number" template="/WEB-INF/jsp/templates/template.jsp">
+        <put-attribute name="title" value="View capacity number"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/content/capacity/number/view.jsp"/>
+    </definition>
 </tiles-definitions>

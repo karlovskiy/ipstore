@@ -76,6 +76,14 @@
                                     <li><a href="<c:url value="/ipstore/communigate/import"/>">Import communigate domain</a></li>
                                     <li><a href="<c:url value="/ipstore/communigate/export"/>">Export communigate domain</a></li>
                                 </security:authorize>
+
+                                <security:authorize access="hasRole('ROLE_CAPACITY_VIEW')">
+                                    <li class="nav-header">Phone Capacity</li>
+                                    <li><a href="<c:url value="/ipstore/capacity"/>">Phone capacity list</a></li>
+                                </security:authorize>
+                                <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
+                                    <li><a href="<c:url value="/ipstore/capacity/add"/>">Add phone capacity</a></li>
+                                </security:authorize>
                             </ul>
                         </li>
                         <security:authorize access="hasRole('ROLE_ROOT')">

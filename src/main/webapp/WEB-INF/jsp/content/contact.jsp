@@ -6,7 +6,7 @@
             <dd><a href="mailto:yexella@gmail.com">Karlovskiy Alexey</a></dd>
             <dd><a href="mailto:aka.hunter@gmail.com">Sidorov Oleg</a></dd>
             <dt>Source code</dt>
-            <dd><a href="https://github.com/ravenstar/ipstore" target="_blank">Source code on github.com</a></dd>
+            <dd><a href="https://github.com/karlovskiy/ipstore" target="_blank">Source code on github.com</a></dd>
         </dl>
     </div>
 </div>

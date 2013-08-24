@@ -13,13 +13,16 @@ import java.util.*;
  */
 public enum Authority implements GrantedAuthority {
 
-    ROOT(0x1, "ROLE_ROOT"),
-    EQUIPMENT_EDIT(0x2, "ROLE_EQUIPMENT_EDIT"),
-    EQUIPMENT_VIEW(0x4, "ROLE_EQUIPMENT_VIEW"),
-    ACCOUNT_EDIT(0x8, "ROLE_ACCOUNT_EDIT"),
-    ACCOUNT_VIEW(0x10, "ROLE_ACCOUNT_VIEW"),
-    COMMUNIGATE_VIEW(0x20, "ROLE_COMMUNIGATE_VIEW"),
-    COMMUNIGATE_EDIT(0x40, "ROLE_COMMUNIGATE_EDIT");
+    ROOT(               0x1,   "ROLE_ROOT"),
+    EQUIPMENT_EDIT(     0x2,   "ROLE_EQUIPMENT_EDIT"),
+    EQUIPMENT_VIEW(     0x4,   "ROLE_EQUIPMENT_VIEW"),
+    ACCOUNT_EDIT(       0x8,   "ROLE_ACCOUNT_EDIT"),
+    ACCOUNT_VIEW(       0x10,  "ROLE_ACCOUNT_VIEW"),
+    COMMUNIGATE_VIEW(   0x20,  "ROLE_COMMUNIGATE_VIEW"),
+    COMMUNIGATE_EDIT(   0x40,  "ROLE_COMMUNIGATE_EDIT"),
+    CAPACITY_VIEW(      0x80,  "ROLE_CAPACITY_VIEW"),
+    CAPACITY_MANAGER(   0x200, "ROLE_CAPACITY_MANAGER"),
+    CAPACITY_EDIT(      0x100, "ROLE_CAPACITY_EDIT");
 
     private int code;
     private String name;
@@ -96,6 +99,16 @@ public enum Authority implements GrantedAuthority {
                             case COMMUNIGATE_EDIT:
                                 result.add(COMMUNIGATE_EDIT);
                                 result.add(COMMUNIGATE_VIEW);
+                                break;
+                            case CAPACITY_MANAGER:
+                                result.add(CAPACITY_MANAGER);
+                                result.add(CAPACITY_VIEW);
+                                break;
+                            case CAPACITY_EDIT:
+                                result.add(CAPACITY_EDIT);
+                                result.add(CAPACITY_MANAGER);
+                                result.add(CAPACITY_VIEW);
+                                break;
                             default:
                                 result.add(added);
                         }

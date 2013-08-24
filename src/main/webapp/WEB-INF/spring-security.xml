@@ -68,6 +68,19 @@
         <intercept-url pattern="/ipstore/communigate/add"                   access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
         <intercept-url pattern="/ipstore/communigate/import"                access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/ipstore/communigate/export"                access="hasRole('ROLE_ROOT')"/>
+        <!-- phone capacity -->
+        <intercept-url pattern="/ipstore/capacity"                          access="hasRole('ROLE_CAPACITY_VIEW')"/>
+        <intercept-url pattern="/ipstore/capacity/edit/*"                   access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/ipstore/capacity/number/view/*"            access="hasRole('ROLE_CAPACITY_VIEW')"/>
+        <intercept-url pattern="/ipstore/capacity/number/edit/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/ipstore/capacity/*/add"                    access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/ipstore/capacity/add"                      access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/ipstore/capacity/number/reserve/*"         access="hasRole('ROLE_CAPACITY_MANAGER')"/>
+        <intercept-url pattern="/ipstore/capacity/number/unreserve/*"       access="hasRole('ROLE_CAPACITY_MANAGER')"/>
+        <intercept-url pattern="/ipstore/capacity/number/free/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/ipstore/capacity/number/sell/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/ipstore/capacity/number/test/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/ipstore/capacity/number/transfer/*"        access="hasRole('ROLE_CAPACITY_EDIT')"/>
 
         <form-login login-page="/ipstore/login" default-target-url="/ipstore/"
                     authentication-failure-handler-ref="authenticationFailureHandler"/>
