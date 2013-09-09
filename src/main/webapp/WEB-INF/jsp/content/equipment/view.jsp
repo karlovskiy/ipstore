@@ -77,6 +77,27 @@
             </div>
         </div>
         <div class="row">
+            <div class="span2">Telnet status</div>
+            <div class="span5">
+                    <span class="${equipment.telnetStatus} block">
+                        <c:out value="${equipment.telnetStatus}"/>
+                    </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span2">Telnet status date</div>
+            <div class="span5">
+                <span class="block"> <fmt:formatDate value="${equipment.telnetStatusDate}" type="both"
+                                                     pattern="dd.MM.yyyy HH:mm:ss"/> </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span2">Is checked by telnet</div>
+            <div class="span5">
+                <span class="block"><c:out value="${empty equipment.telnetCheck or not equipment.telnetCheck ? 'false' : 'true'}"/></span>
+            </div>
+        </div>
+        <div class="row">
             <div class="span2">ClientName</div>
             <div class="span5">
                 <span class="block"><c:out value="${equipment.clientName}"/></span>

@@ -33,11 +33,30 @@
         <property name="cronExpression" value="${cron.password.status}"/>
     </bean>
 
+    <bean name="telnetStatusJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="utilits.quartz.TelnetStatusJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="equipmentService" value-ref="equipmentService"/>
+                <entry key="gsTypePrefixes" value="${telnet.gstype.prefixes}"/>
+                <entry key="apTypePrefixes" value="${telnet.aptype.prefixes}"/>
+                <entry key="port" value="${telnet.port}"/>
+                <entry key="timeout" value="${telnet.timeout}"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="telnetStatusCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="telnetStatusJobDetails"/>
+        <property name="cronExpression" value="${cron.telnet.status}"/>
+    </bean>
+
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
                 <ref bean="backupDatabaseCronTrigger"/>
                 <ref bean="passwordStatusCronTrigger"/>
+                <ref bean="telnetStatusCronTrigger"/>
             </list>
         </property>
     </bean>

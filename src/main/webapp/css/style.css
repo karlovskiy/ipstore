@@ -70,25 +70,33 @@ table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSo
     *background-color: #003bb3;
 }
 
-.table tbody tr.NORMAL td, .table tbody tr.NEW td, .table tbody tr.info td {
+.table tbody tr.NORMAL td, .table tbody tr.info td {
     background-color: #ffffff;
 }
 
-.table-hover tbody tr.NORMAL:hover td, .table-hover tbody tr.NEW:hover td {
+.table-hover tbody tr.NORMAL:hover td {
     background-color: #00ff00;
 }
 
-.table tbody tr.OLD td, .table-hover tbody tr.OLD:hover td {
+table tbody tr td.NEW, table tbody tr td.OK {
+    background-color: #00ff00;
+}
+
+table tbody tr td.OLD, table tbody tr td.TIMEOUT {
     background-color: #ffff00;
 }
 
+table tbody tr td.WARNING, table tbody tr td.NEED_UPDATE {
+    background-color: #ff0000;
+}
+
+
 .table tbody tr.WARNING td, .table-hover tbody tr.WARNING:hover td,
-.table tbody tr.NEED_UPDATE td, .table-hover tbody tr.NEED_UPDATE:hover td,
 .table tbody tr.BLOCKED td, table-hover tbody tr.BLOCKED:hover td {
     background-color: #ff0000;
 }
 
-span.NORMAL, span.NEW, span.ACTIVE {
+span.NORMAL, span.NEW, span.ACTIVE, span.OK {
     color: #00ff00;
 }
 
@@ -100,7 +108,7 @@ span.DELETE {
     color: #000000;
 }
 
-span.OLD {
+span.OLD, span.TIMEOUT {
     color: #ffff00;
 }
 

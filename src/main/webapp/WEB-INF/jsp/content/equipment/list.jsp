@@ -3,28 +3,30 @@
 <script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/list.js"/>"></script>
 <div class="container">
-    <table id="list_table" class="table table-hover table-condensed tablesorter">
+    <table id="list_table" class="table table-condensed tablesorter">
         <thead>
         <tr>
             <th class="left-col">Ip address</th>
             <th>Type</th>
-            <th>Password status</th>
             <th>Client name</th>
             <th>Placement Address</th>
+            <th>Password status</th>
+            <th>Telnet status</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${equipment}" var="equipment">
-            <tr class="${equipment.passwordStatus}">
+            <tr>
                 <td class="left-col">
                     <a href="/ipstore/equipment/view/${equipment.id}">
                         <c:out value="${equipment.ipAddress}"/>
                     </a>
                 </td>
                 <td><c:out value="${equipment.type}"/></td>
-                <td><c:out value="${equipment.passwordStatus}"/></td>
                 <td><c:out value="${equipment.clientName}"/></td>
                 <td><c:out value="${equipment.placementAddress}"/></td>
+                <td class="${equipment.passwordStatus}"><c:out value="${equipment.passwordStatus}"/></td>
+                <td class="${equipment.telnetStatus}"><c:out value="${equipment.telnetStatus}"/></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -6,6 +6,7 @@ import org.hibernate.search.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
 import utilits.controller.equipment.PasswordStatus;
 import utilits.controller.equipment.Status;
+import utilits.controller.equipment.TelnetStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -111,6 +112,17 @@ public class Equipment implements IHasId, Serializable {
 
     @Column(name = "CONF_TYPE", length = 128)
     private String configType;
+
+    @Enumerated(value = EnumType.ORDINAL)
+    @Column(name = "TELNET_STATUS")
+    private TelnetStatus telnetStatus;
+
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name = "TELNET_DATE")
+    private Date telnetStatusDate;
+
+    @Column(name = "TELNET_CHECK")
+    private Boolean telnetCheck;
 
     public Long getId() {
         return id;
@@ -238,5 +250,29 @@ public class Equipment implements IHasId, Serializable {
 
     public void setConfigType(String configType) {
         this.configType = configType;
+    }
+
+    public TelnetStatus getTelnetStatus() {
+        return telnetStatus;
+    }
+
+    public void setTelnetStatus(TelnetStatus telnetStatus) {
+        this.telnetStatus = telnetStatus;
+    }
+
+    public Date getTelnetStatusDate() {
+        return telnetStatusDate;
+    }
+
+    public void setTelnetStatusDate(Date telnetStatusDate) {
+        this.telnetStatusDate = telnetStatusDate;
+    }
+
+    public Boolean getTelnetCheck() {
+        return telnetCheck;
+    }
+
+    public void setTelnetCheck(Boolean telnetCheck) {
+        this.telnetCheck = telnetCheck;
     }
 }

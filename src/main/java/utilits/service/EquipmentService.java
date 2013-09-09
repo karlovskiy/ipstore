@@ -20,6 +20,7 @@ import utilits.aspect.Action;
 import utilits.controller.ImportResultType;
 import utilits.controller.equipment.PasswordStatus;
 import utilits.controller.equipment.Status;
+import utilits.controller.equipment.TelnetStatus;
 import utilits.entity.Equipment;
 
 import javax.annotation.Resource;
@@ -101,6 +102,7 @@ public class EquipmentService {
         oldEquipment.setPlacementAddress(equipment.getPlacementAddress());
         oldEquipment.setApplicationNumber(equipment.getApplicationNumber());
         oldEquipment.setDescription(equipment.getDescription());
+        oldEquipment.setTelnetCheck(equipment.getTelnetCheck());
         String oldPassword = oldEquipment.getPassword();
         String newPassword = equipment.getPassword();
         oldEquipment.setPassword(newPassword);
@@ -149,6 +151,15 @@ public class EquipmentService {
         Session session = sessionFactory.getCurrentSession();
         session.createQuery("UPDATE Equipment SET passwordStatus = :status WHERE id = :id")
                 .setParameter("status", passwordStatus)
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+    public void updateTelnetStatus(Long id, TelnetStatus telnetStatus) {
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("UPDATE Equipment SET telnetStatus = :telnetStatus, telnetStatusDate = :telnetDate  WHERE id = :id")
+                .setParameter("telnetStatus", telnetStatus)
+                .setParameter("telnetDate", new Date())
                 .setParameter("id", id)
                 .executeUpdate();
     }

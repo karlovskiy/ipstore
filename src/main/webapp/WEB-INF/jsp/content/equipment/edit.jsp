@@ -65,6 +65,16 @@
             </div>
         </div>
         <div class="control-group">
+            <label class="control-label" for="tch">Is checked by telnet</label>
+
+            <div class="controls">
+                <form:checkbox id="tch" path="telnetCheck"/>
+                <span class="errorblock">
+                    <form:errors path="telnetCheck"/>
+                </span>
+            </div>
+        </div>
+        <div class="control-group">
             <label class="control-label" for="clientName">ClientName</label>
 
             <div class="controls">
