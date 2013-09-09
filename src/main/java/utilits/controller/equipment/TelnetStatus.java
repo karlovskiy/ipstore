@@ -8,7 +8,7 @@ package utilits.controller.equipment;
  */
 public enum TelnetStatus {
     OK,         // 0
-    WARNING,    // 2
-    TIMEOUT,    // 3
-    IGNORED     // 4
+    WARNING,    // 1
+    TIMEOUT,    // 2
+    IGNORED     // 3
 }
