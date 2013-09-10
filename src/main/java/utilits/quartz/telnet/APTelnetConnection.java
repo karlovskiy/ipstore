@@ -39,7 +39,7 @@ public class APTelnetConnection extends AbstractTelnetConnection {
                 username = "root";
             }
             String answer = readUntil(is, "login:", timeout);
-            if (answer.contains("login:")) {
+            if (answer.contains("login:") || answer.contains("Login")) {
                 os.write((username + "\r\n").getBytes());
                 os.flush();
                 answer = readUntil(is, "Password:", timeout);
@@ -49,10 +49,10 @@ public class APTelnetConnection extends AbstractTelnetConnection {
                 os.flush();
                 answer = readUntil(is, "Login incorrect", timeout);
             }
-            if (answer.contains("Login incorrect")) {
-                result = TelnetStatus.WARNING;
-            } else if (answer.contains("at tty")) {
+            if (answer.contains("at tty") || answer.contains(">") || answer.contains("#")) {
                 result = TelnetStatus.OK;
+            } else if (answer.contains("Login incorrect") || answer.contains("Login")) {
+                result = TelnetStatus.WARNING;
             }
             os.write("exit\r\n".getBytes());
             os.flush();

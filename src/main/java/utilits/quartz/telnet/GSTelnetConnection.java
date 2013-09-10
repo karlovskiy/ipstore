@@ -37,9 +37,9 @@ public class GSTelnetConnection extends AbstractTelnetConnection {
             if (answer.contains("Password:")) {
                 os.write((password + "\r\n").getBytes());
                 os.flush();
-                answer = readUntil(is, "GS>", timeout);
+                answer = readUntil(is, ">", timeout);
             }
-            if (answer.contains("GS>")) {
+            if (answer.contains(">")) {
                 result = TelnetStatus.OK;
             } else if (answer.contains("Permission denied, please try again")) {
                 result = TelnetStatus.WARNING;
