@@ -6,7 +6,7 @@
             <pattern>[%5level] %date [%thread] %logger{10} [%file : %line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/server-%d.log</fileNamePattern>
+            <fileNamePattern>${ipstore.logs.dir:-../logs}/%d{yyyyMMdd}_server.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
@@ -16,8 +16,8 @@
             <pattern>[%5level] %date [%thread] %logger{10} [%file : %line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/application-%d.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
+            <fileNamePattern>${ipstore.logs.dir:-../logs}/%d{yyyyMMdd}_application.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
         </rollingPolicy>
     </appender>
 
@@ -26,20 +26,20 @@
             <pattern>[%5level] %date [%thread] %logger{10} [%file : %line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/hibernate-%d.log</fileNamePattern>
-            <maxHistory>90</maxHistory>
+            <fileNamePattern>${ipstore.logs.dir:-../logs}/%d{yyyyMMdd}_hibernate.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
 
-    <appender name="db_migration" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <encoder>
-            <pattern>[%5level] %date [%thread] %logger{10} [%file : %line] %msg%n</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/db_migration-%d.log</fileNamePattern>
-            <maxHistory>90</maxHistory>
-        </rollingPolicy>
-    </appender>
+    <!--<appender name="db_migration" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<encoder>-->
+            <!--<pattern>[%5level] %date [%thread] %logger{10} [%file : %line] %msg%n</pattern>-->
+        <!--</encoder>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>${ipstore.logs.dir:-../logs}/%d{yyyyMMdd}_db_migration.log</fileNamePattern>-->
+            <!--<maxHistory>30</maxHistory>-->
+        <!--</rollingPolicy>-->
+    <!--</appender>-->
 
     <logger name="utilits" additivity="false">
         <appender-ref ref="application"/>
@@ -49,9 +49,9 @@
         <appender-ref ref="hibernate"/>
     </logger>
 
-    <logger name="com.googlecode.flyway" additivity="false">
-        <appender-ref ref="db_migrations"/>
-    </logger>
+    <!--<logger name="com.googlecode.flyway" additivity="false">-->
+        <!--<appender-ref ref="db_migrations"/>-->
+    <!--</logger>-->
 
     <root level="debug">
         <appender-ref ref="server"/>

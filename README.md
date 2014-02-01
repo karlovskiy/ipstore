@@ -13,7 +13,7 @@ Technologies and frameworks used:
 * Hibernate
 * Javamelody(java ee application monitoring)
 * Tiles 3
-* Quartz(database backup, password status)
+* Quartz(database backup, telnet status, password status)
 * Full text search
   * lucene
   * hibernate search

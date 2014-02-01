@@ -8,6 +8,7 @@
         <property name="jobDataAsMap">
             <map>
                 <entry key="ftpChannel" value-ref="ftpChannel"/>
+                <entry key="databaseDir" value="${ipstore.database.dir:.}"/>
             </map>
         </property>
     </bean>

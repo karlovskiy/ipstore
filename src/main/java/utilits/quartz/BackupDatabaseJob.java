@@ -24,7 +24,7 @@ import java.util.zip.ZipOutputStream;
  * Here will be javadoc
  *
  * @author karlovsky
- * @since 1.0
+ * @since 3.2, 1/2/14
  */
 public class BackupDatabaseJob extends QuartzJobBean {
 
@@ -37,22 +37,22 @@ public class BackupDatabaseJob extends QuartzJobBean {
             long startTime = System.currentTimeMillis();
             JobDataMap params = context.getMergedJobDataMap();
             MessageChannel ftpChannel = (MessageChannel) params.get("ftpChannel");
-            File tmpDatabaseDir = makeTmpDatabaseDir();
-            File backup = makeCompressedDatabaseFile(tmpDatabaseDir);
+            File parentDir = new File((String) params.get("databaseDir"));
+            File tmpDatabaseDir = makeTmpDatabaseDir(parentDir);
+            File backup = makeCompressedDatabaseFile(parentDir, tmpDatabaseDir);
             Message<File> message = MessageBuilder.withPayload(backup).build();
             ftpChannel.send(message);
             long endTime = System.currentTimeMillis() - startTime;
             logger.info("Database backup ended, execution time {} ms.", endTime);
-            FileUtils.forceDelete(tmpDatabaseDir);
             FileUtils.forceDelete(backup);
         } catch (Exception e) {
             throw new JobExecutionException(e);
         }
     }
 
-    private File makeTmpDatabaseDir() throws IOException {
-        File databaseDir = new File("database");
-        File tmpBackupDir = new File("tmp_backup");
+    private File makeTmpDatabaseDir(File parentDir) throws IOException {
+        File databaseDir = new File(parentDir, "database");
+        File tmpBackupDir = new File(parentDir, "tmp_backup");
         FileUtils.forceMkdir(tmpBackupDir);
         File tmpDatabaseDir = new File(tmpBackupDir, "database");
         FileUtils.forceMkdir(tmpDatabaseDir);
@@ -60,12 +60,16 @@ public class BackupDatabaseJob extends QuartzJobBean {
         return tmpDatabaseDir;
     }
 
-    private File makeCompressedDatabaseFile(File tmpDatabaseDir) throws IOException {
-        File backup = new File("backup" + new SimpleDateFormat("yyyyMMddHHmm").format(new Date()) + ".zip");
-        ZipOutputStream out = new ZipOutputStream(new FileOutputStream(backup));
-        compressDirectory(tmpDatabaseDir, out);
-        out.close();
-        return backup;
+    private File makeCompressedDatabaseFile(File parentDir, File tmpDatabaseDir) throws IOException {
+        try {
+            File backup = new File(parentDir, new SimpleDateFormat("yyyyMMddHHmm").format(new Date()) + "_backup" + ".zip");
+            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(backup));
+            compressDirectory(tmpDatabaseDir, out);
+            out.close();
+            return backup;
+        } finally {
+            FileUtils.deleteQuietly(tmpDatabaseDir.getParentFile());
+        }
     }
 
 
