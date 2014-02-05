@@ -5,8 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/list.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.tablesorter.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
 <div class="container">
     <table id="list_table" class="table table-hover table-condensed tablesorter">
         <thead>
@@ -21,7 +21,7 @@
         <c:forEach items="${communigateDomains}" var="communigateDomains">
             <tr class="${communigateDomains.status}">
                 <td class="left-col">
-                    <a href="/ipstore/communigate/view/${communigateDomains.id}">
+                    <a href="/communigate/view/${communigateDomains.id}">
                         <c:out value="${communigateDomains.domainName}"/>
                     </a>
                 </td>

@@ -83,7 +83,7 @@ public class LoginController {
         user.setCredentialsNonExpired(true);
         userService.updateUser(user.getId(), user);
         session.invalidate();
-        return "redirect:/ipstore/";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
@@ -114,7 +114,7 @@ public class LoginController {
         user.setPassword(passwordEncoder.encodePassword(newPassword, username));
         userService.updateUser(user.getId(), user);
         request.getSession().invalidate();
-        return "redirect:/ipstore/";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/changeuserinfo", method = RequestMethod.GET)
@@ -146,7 +146,7 @@ public class LoginController {
         user.setFirstName(changeUserInfo.getFirstName());
         user.setLastName(changeUserInfo.getLastName());
         userService.updateUser(user.getId(), user);
-        return "redirect:/ipstore/";
+        return "redirect:/";
     }
 
     @Action(value = LOGOUT)

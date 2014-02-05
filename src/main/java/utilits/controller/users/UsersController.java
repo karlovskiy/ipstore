@@ -54,7 +54,7 @@ public class UsersController {
     public String editUser(@PathVariable Long id, Model model) {
         User user = userService.loadUser(id);
         model.addAttribute("user", user);
-        model.addAttribute("formAction", "/ipstore/users/edit/" + id);
+        model.addAttribute("formAction", "/users/edit/" + id);
         return "edit-user";
     }
 
@@ -63,7 +63,7 @@ public class UsersController {
     public String addUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        model.addAttribute("formAction", "/ipstore/users/add");
+        model.addAttribute("formAction", "/users/add");
         return "edit-user";
     }
 
@@ -71,45 +71,45 @@ public class UsersController {
     @RequestMapping(value = "/users/block/{id}", method = RequestMethod.GET)
     public String blockUser(@PathVariable Long id) {
         userService.blockUser(id);
-        return "redirect:/ipstore/users/view/" + id;
+        return "redirect:/users/view/" + id;
     }
 
     @Action(value = USERS_UNBLOCK, changeType = USERS, changeMode = UPDATE)
     @RequestMapping(value = "/users/unblock/{id}", method = RequestMethod.GET)
     public String unblockUser(@PathVariable Long id) {
         userService.unblockUser(id);
-        return "redirect:/ipstore/users/view/" + id;
+        return "redirect:/users/view/" + id;
     }
 
     @Action(value = USERS_RESET_PASSWORD, changeType = USERS, changeMode = UPDATE)
     @RequestMapping(value = "/users/reset/{id}", method = RequestMethod.GET)
     public String resetUserPassword(@PathVariable Long id) {
         userService.resetUserPassword(id);
-        return "redirect:/ipstore/users/view/" + id;
+        return "redirect:/users/view/" + id;
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
     public String createUser(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/ipstore/users/add");
+            model.addAttribute("formAction", "/users/add");
             return "edit-user";
         }
         String username = user.getUsername();
         User existsUser = userService.loadUser(username);
         if (existsUser != null) {
-            model.addAttribute("formAction", "/ipstore/users/add");
+            model.addAttribute("formAction", "/users/add");
             model.addAttribute("existsUser", existsUser);
             return "edit-user";
         }
         Long id = userService.createUser(user);
-        return "redirect:/ipstore/users/view/" + id;
+        return "redirect:/users/view/" + id;
     }
 
     @Action(value = USERS_UPDATE, changeType = USERS, changeMode = UPDATE)
     @RequestMapping(value = "/users/edit/{id}", method = RequestMethod.POST)
     public String updateUser(@Valid User user, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/ipstore/users/edit/" + id);
+            model.addAttribute("formAction", "/users/edit/" + id);
             return "edit-user";
         }
         User oldUser = userService.loadUser(id);
@@ -118,7 +118,7 @@ public class UsersController {
         if (!oldUsername.equals(newUsername)) {
             User existsUser = userService.loadUser(newUsername);
             if (existsUser != null) {
-                model.addAttribute("formAction", "/ipstore/users/edit/" + id);
+                model.addAttribute("formAction", "/users/edit/" + id);
                 model.addAttribute("existsUser", existsUser);
                 return "edit-user";
             }
@@ -129,7 +129,7 @@ public class UsersController {
         oldUser.setFirstName(user.getFirstName());
         oldUser.setLastName(user.getLastName());
         userService.updateUser(id, oldUser);
-        return "redirect:/ipstore/users/view/" + id;
+        return "redirect:/users/view/" + id;
     }
 
 }

@@ -12,7 +12,7 @@
 
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
-        <url-pattern>/ipstore/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <listener>
@@ -22,8 +22,6 @@
     <listener>
         <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
-
-    <!-- Spring Security -->
 
     <filter>
         <filter-name>characterEncodingFilter</filter-name>

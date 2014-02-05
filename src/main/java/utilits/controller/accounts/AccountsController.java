@@ -99,28 +99,28 @@ public class AccountsController {
     @RequestMapping(value = "/accounts/delete/{id}", method = RequestMethod.GET)
     public String deleteAccount(@PathVariable Long id) {
         accountsService.deleteAccount(id);
-        return "redirect:/ipstore/accounts";
+        return "redirect:/accounts";
     }
 
     @Action(value = ACCOUNTS_BLOCK, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/block/{id}", method = RequestMethod.GET)
     public String blockAccount(@PathVariable Long id) {
         accountsService.blockAccount(id);
-        return "redirect:/ipstore/accounts/view/" + id;
+        return "redirect:/accounts/view/" + id;
     }
 
     @Action(value = ACCOUNTS_ACTIVATE, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/activate/{id}", method = RequestMethod.GET)
     public String activateAccount(@PathVariable Long id) {
         accountsService.activateAccount(id);
-        return "redirect:/ipstore/accounts/view/" + id;
+        return "redirect:/accounts/view/" + id;
     }
 
     @Action(value = ACCOUNTS_UNBLOCK, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/unblock/{id}", method = RequestMethod.GET)
     public String unBlockAccount(@PathVariable Long id) {
         accountsService.activateAccount(id);
-        return "redirect:/ipstore/accounts/view/" + id;
+        return "redirect:/accounts/view/" + id;
     }
 
     @Action(value = ACCOUNTS_EDIT_PAGE)
@@ -129,7 +129,7 @@ public class AccountsController {
         Account account = accountsService.loadAccount(id);
         model.addAttribute("account", account);
         model.addAttribute("edit", true);
-        model.addAttribute("formAction", "/ipstore/accounts/edit/" + id);
+        model.addAttribute("formAction", "/accounts/edit/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "edit-account";
     }
@@ -140,7 +140,7 @@ public class AccountsController {
         Account account = new Account();
         model.addAttribute("edit", false);
         model.addAttribute("account", account);
-        model.addAttribute("formAction", "/ipstore/accounts/add");
+        model.addAttribute("formAction", "/accounts/add");
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "edit-account";
     }
@@ -148,7 +148,7 @@ public class AccountsController {
     @RequestMapping(value = "/accounts/add", method = RequestMethod.POST)
     public String createAccount(@Valid Account account, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/ipstore/accounts/add");
+            model.addAttribute("formAction", "/accounts/add");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit-account";
         }
@@ -156,13 +156,13 @@ public class AccountsController {
         Account existsAccount = accountsService.loadAccount(login);
         if (existsAccount != null) {
             model.addAttribute("edit", false);
-            model.addAttribute("formAction", "/ipstore/accounts/add");
+            model.addAttribute("formAction", "/accounts/add");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             model.addAttribute("existsAccount", existsAccount);
             return "edit-account";
         }
         Long id = accountsService.createAccount(account);
-        return "redirect:/ipstore/accounts/view/" + id;
+        return "redirect:/accounts/view/" + id;
     }
 
     @Action(value = ACCOUNTS_UPDATE, changeType = ACCOUNTS, changeMode = UPDATE)
@@ -170,11 +170,11 @@ public class AccountsController {
     public String updateAccount(@Valid Account account, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("edit", true);
-            model.addAttribute("formAction", "/ipstore/accounts/edit/" + id);
+            model.addAttribute("formAction", "/accounts/edit/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit-account";
         }
         accountsService.updateAccount(id, account);
-        return "redirect:/ipstore/accounts/view/" + id;
+        return "redirect:/accounts/view/" + id;
     }
 }

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/view.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/view.js"/>"></script>
 <style>
     .w110{
         width: 110px;
@@ -104,12 +104,12 @@
     <div id="view-buttons">
         <div class="row">
             <div class="span1">
-                <a href="<c:url value="/ipstore/capacity/${capacityNumber.type.id}"/>" class="btn btn-primary btn-block">List</a>
+                <a href="<c:url value="/capacity/${capacityNumber.type.id}"/>" class="btn btn-primary btn-block">List</a>
             </div>
             <security:authorize access="hasRole('ROLE_CAPACITY_MANAGER')">
                 <c:if test="${capacityNumber.status ne 'RESERVED'}">
                     <div class="span1 ml-10px">
-                        <a href="<c:url value="/ipstore/capacity/number/reserve/${capacityNumber.id}"/>"
+                        <a href="<c:url value="/capacity/number/reserve/${capacityNumber.id}"/>"
                            class="btn btn-primary btn-block">Reserve</a>
                     </div>
                 </c:if>
@@ -117,37 +117,37 @@
                 <security:authorize var="edit" access="hasRole('ROLE_CAPACITY_EDIT')"/>
                 <c:if test="${capacityNumber.status eq 'RESERVED' and (capacityNumber.lscUsername eq username or edit)}">
                     <div class="span1 ml-10px">
-                        <a href="<c:url value="/ipstore/capacity/number/unreserve/${capacityNumber.id}"/>"
+                        <a href="<c:url value="/capacity/number/unreserve/${capacityNumber.id}"/>"
                            class="btn btn-primary btn-block">Unreserve</a>
                     </div>
                 </c:if>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
                 <div class="span1 ml-10px">
-                    <a href="<c:url value="/ipstore/capacity/number/edit/${capacityNumber.id}"/>"
+                    <a href="<c:url value="/capacity/number/edit/${capacityNumber.id}"/>"
                        class="btn btn-primary btn-block">Edit</a>
                 </div>
                 <c:if test="${capacityNumber.status ne 'FREE'}">
                     <div class="span1 ml-10px">
-                        <a href="<c:url value="/ipstore/capacity/number/free/${capacityNumber.id}"/>"
+                        <a href="<c:url value="/capacity/number/free/${capacityNumber.id}"/>"
                            class="btn btn-primary btn-block">Free</a>
                     </div>
                 </c:if>
                 <c:if test="${capacityNumber.status ne 'SELL'}">
                     <div class="span1 ml-10px">
-                        <a href="<c:url value="/ipstore/capacity/number/sell/${capacityNumber.id}"/>"
+                        <a href="<c:url value="/capacity/number/sell/${capacityNumber.id}"/>"
                            class="btn btn-primary btn-block">Sell</a>
                     </div>
                 </c:if>
                 <c:if test="${capacityNumber.status ne 'TEST'}">
                     <div class="span1 ml-10px">
-                        <a href="<c:url value="/ipstore/capacity/number/test/${capacityNumber.id}"/>"
+                        <a href="<c:url value="/capacity/number/test/${capacityNumber.id}"/>"
                            class="btn btn-primary btn-block">Test</a>
                     </div>
                 </c:if>
                 <c:if test="${capacityNumber.status ne 'TRANSFERED'}">
                     <div class="span1 ml-10px">
-                        <a href="<c:url value="/ipstore/capacity/number/transfer/${capacityNumber.id}"/>"
+                        <a href="<c:url value="/capacity/number/transfer/${capacityNumber.id}"/>"
                            class="btn btn-primary btn-block">Transfer</a>
                     </div>
                 </c:if>

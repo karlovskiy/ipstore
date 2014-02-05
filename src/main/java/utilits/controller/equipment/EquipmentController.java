@@ -97,7 +97,7 @@ public class EquipmentController {
     public String addEquipment(Model model) {
         Equipment equipment = new Equipment();
         model.addAttribute("equipment", equipment);
-        model.addAttribute("formAction", "/ipstore/equipment/save");
+        model.addAttribute("formAction", "/equipment/save");
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "edit-equipment";
     }
@@ -107,7 +107,7 @@ public class EquipmentController {
     public String editEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
-        model.addAttribute("formAction", "/ipstore/equipment/save/" + id);
+        model.addAttribute("formAction", "/equipment/save/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "edit-equipment";
     }
@@ -116,41 +116,41 @@ public class EquipmentController {
     @RequestMapping(value = "/equipment/delete/{id}", method = RequestMethod.GET)
     public String deleteEquipment(@PathVariable Long id) {
         equipmentService.deleteEquipment(id);
-        return "redirect:/ipstore/equipment";
+        return "redirect:/equipment";
     }
 
     @Action(value = EQUIPMENT_ACTIVATE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/activate/{id}", method = RequestMethod.GET)
     public String activateEquipment(@PathVariable Long id) {
         equipmentService.activateEquipment(id);
-        return "redirect:/ipstore/equipment/view/" + id;
+        return "redirect:/equipment/view/" + id;
     }
 
     @Action(value = ACTIVATE_NO_EXPIRED_EQUIPMENT, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/activate_no_expired/{id}", method = RequestMethod.GET)
     public String activateNoExpiredEquipment(@PathVariable Long id) {
         equipmentService.activateWithNoExpiredEquipment(id);
-        return "redirect:/ipstore/equipment/view/" + id;
+        return "redirect:/equipment/view/" + id;
     }
 
     @RequestMapping(value = "/equipment/save", method = RequestMethod.POST)
     public String createEquipment(@Valid Equipment equipment, BindingResult result,
                                   @RequestParam("cf") MultipartFile config, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/ipstore/equipment/save");
+            model.addAttribute("formAction", "/equipment/save");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit-equipment";
         }
         String ipAddress = equipment.getIpAddress();
         Equipment existsEquipment = equipmentService.loadEquipment(ipAddress);
         if (existsEquipment != null) {
-            model.addAttribute("formAction", "/ipstore/equipment/save");
+            model.addAttribute("formAction", "/equipment/save");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             model.addAttribute("existsEquipment", existsEquipment);
             return "edit-equipment";
         }
         Long id = equipmentService.createEquipment(equipment, config);
-        return "redirect:/ipstore/equipment/view/" + id;
+        return "redirect:/equipment/view/" + id;
     }
 
     @Action(value = EQUIPMENT_UPDATE, changeType = EQUIPMENT, changeMode = UPDATE)
@@ -159,12 +159,12 @@ public class EquipmentController {
                                   @RequestParam("cf") MultipartFile config, @RequestParam("cf_reset") String cfReset,
                                   Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/ipstore/equipment/save/" + id);
+            model.addAttribute("formAction", "/equipment/save/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "edit-equipment";
         }
         equipmentService.updateEquipment(id, equipment, config, "reset".equals(cfReset));
-        return "redirect:/ipstore/equipment/view/" + id;
+        return "redirect:/equipment/view/" + id;
     }
 
     @Action(value = GENERATE_PASSWORD)

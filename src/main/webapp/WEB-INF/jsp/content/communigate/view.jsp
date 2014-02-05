@@ -7,7 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/view.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/view.js"/>"></script>
 <div class="container">
     <div id="view-fields">
         <div class="row">
@@ -110,17 +110,17 @@
         <div id="view-buttons">
             <div class="row">
                 <div class="span1">
-                    <a href="<c:url value="/ipstore/communigate"/>" class="btn btn-primary btn-block">List</a>
+                    <a href="<c:url value="/communigate"/>" class="btn btn-primary btn-block">List</a>
                 </div>
                 <security:authorize access="hasRole('ROLE_COMMUNIGATE_EDIT')">
                 <div class="span1 ml-10px">
-                    <a href="<c:url value="/ipstore/communigate/edit/${communigateDomain.id}"/>"
+                    <a href="<c:url value="/communigate/edit/${communigateDomain.id}"/>"
                        class="btn btn-primary btn-block">Edit</a>
                 </div>
                 <security:authorize access="hasRole('ROLE_ROOT')">
                     <c:if test="${communigateDomain.status == 'DELETED'}">
                         <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/communigate/activate/${communigateDomain.id}"/>"
+                            <a href="<c:url value="/communigate/activate/${communigateDomain.id}"/>"
                                class="btn btn-success btn-block">Activate</a>
                         </div>
                     </c:if>
@@ -128,19 +128,19 @@
                 <c:if test="${communigateDomain.status != 'DELETED'}">
                     <c:if test="${communigateDomain.status == 'NORMAL'}">
                         <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/communigate/block/${communigateDomain.id}"/>"
+                            <a href="<c:url value="/communigate/block/${communigateDomain.id}"/>"
                                class="btn btn-warning btn-block">Block</a>
                         </div>
                     </c:if>
                     <c:if test="${communigateDomain.status == 'BLOCKED'}">
                         <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/communigate/unblock/${communigateDomain.id}"/>"
+                            <a href="<c:url value="/communigate/unblock/${communigateDomain.id}"/>"
                                class="btn btn-warning btn-block">Unblock</a>
                         </div>
                     </c:if>
                     <security:authorize access="hasRole('ROLE_ROOT')">
                         <div class="span1 ml-10px">
-                            <a href="<c:url value="/ipstore/communigate/delete/${communigateDomain.id}"/>"
+                            <a href="<c:url value="/communigate/delete/${communigateDomain.id}"/>"
                                class="btn btn-danger btn-block" id="delete_btn">Delete</a>
                         </div>
                     </security:authorize>

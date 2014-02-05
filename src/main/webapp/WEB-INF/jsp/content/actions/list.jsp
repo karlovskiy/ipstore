@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/init-datepicker.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/init-datepicker.js"/>"></script>
 <div class="container">
-    <form:form commandName="actionsForm" class="form-inline" action="/ipstore/actions">
+    <form:form commandName="actionsForm" class="form-inline" action="/actions">
         <form:input id="from" path="from" cssClass="input-small" placeholder="From"/>
         <form:input id="to" path="to" cssClass="input-small" placeholder="To"/>
         <form:input id="username" path="username" cssClass="input-small" placeholder="Username"/>
@@ -25,7 +25,7 @@
         <c:forEach items="${actions}" var="action">
             <tr class="info">
                 <td class="nw">
-                    <a href="/ipstore/actions/view/${action.id}">
+                    <a href="/actions/view/${action.id}">
                         <fmt:formatDate value="${action.actionTimestamp}"
                                         type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
                     </a>

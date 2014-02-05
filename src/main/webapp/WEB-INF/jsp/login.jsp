@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Sign in</title>
-    <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/assets/css/bootstrap.css" />" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 20px;
@@ -38,17 +38,17 @@
             padding: 7px 9px;
         }
     </style>
-    <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
-          href="<c:url value="/assets/ico/apple-touch-icon-144-precomposed.png"/>">
+          href="<c:url value="/resources/assets/ico/apple-touch-icon-144-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
-          href="<c:url value="/assets/ico/apple-touch-icon-114-precomposed.png"/>..">
+          href="<c:url value="/resources/assets/ico/apple-touch-icon-114-precomposed.png"/>..">
     <link rel="apple-touch-icon-precomposed" sizes="72x72"
-          href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
-    <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
-    <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
-    <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
+          href="<c:url value="/resources/assets/ico/apple-touch-icon-72-precomposed.png"/>">
+    <link rel="apple-touch-icon-precomposed" href="<c:url value="/resources/assets/ico/apple-touch-icon-57-precomposed.png"/>">
+    <link rel="shortcut icon" href="<c:url value="/resources/assets/ico/favicon.png"/>">
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
 </head>
 <body>
 <div class="container">
@@ -66,7 +66,7 @@
         </form>
     </c:if>
     <c:if test="${not empty sessionScope['CREDENTIALS_EXPIRED_USERNAME']}">
-        <form:form commandName="changePassword" action="/ipstore/mustchangepassword" cssClass="form-horizontal">
+        <form:form commandName="changePassword" action="/mustchangepassword" cssClass="form-horizontal">
             <div class="control-group">
                 <label class="control-label" for="username">Username</label>
 

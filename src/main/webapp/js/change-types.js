@@ -8,7 +8,7 @@ var ChangeTypes = function () {
 
     this.load = function () {
         var _this = this;
-        $.getJSON("/ipstore/change_types", function (data) {
+        $.getJSON("/change_types", function (data) {
             _this.init(data);
         });
     };

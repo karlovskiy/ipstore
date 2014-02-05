@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/edit.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/edit.js"/>"></script>
 <div class="container">
     <form:form commandName="equipment" action="${formAction}" cssClass="form-horizontal" enctype="multipart/form-data">
         <div class="control-group">
@@ -14,7 +14,7 @@
                     <c:if test="${not empty existsEquipment}">
                         <span>
                             Equipment with ip
-                            <a href="/ipstore/equipment/${existsEquipment.id}"
+                            <a href="/equipment/${existsEquipment.id}"
                                     target="_blank">
                                 <c:out value="${existsEquipment.ipAddress}"/>
                             </a>
@@ -134,7 +134,7 @@
                     <label class="control-label" for="cf_download">Config</label>
                     <div class="controls">
                         <input type="hidden" name="cf_reset" value=""/>
-                        <a id="cf_download" href="<c:url value="/ipstore/equipment/load_config/${equipment.id}"/>">
+                        <a id="cf_download" href="<c:url value="/equipment/load_config/${equipment.id}"/>">
                             <c:out value="${equipment.configName}"/></a>
                         <a class="btn btn-danger"
                            onclick="$('#exist_cf').hide();$('#new_cf').show();$('input[name=cf_reset]').val('reset');">Delete</a>
@@ -144,10 +144,10 @@
         </c:choose>
         <div class="form-actions">
             <c:if test="${empty equipment.id}">
-                <a href="<c:url value="/ipstore/equipment"/>" class="btn btn-primary">List</a>
+                <a href="<c:url value="/equipment"/>" class="btn btn-primary">List</a>
             </c:if>
             <c:if test="${not empty equipment.id}">
-                <a href="<c:url value="/ipstore/equipment/view/${equipment.id}"/>" class="btn btn-primary">View</a>
+                <a href="<c:url value="/equipment/view/${equipment.id}"/>" class="btn btn-primary">View</a>
             </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
             <a id="generate_password" class="btn btn-success">Generate password</a>

@@ -3,10 +3,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/list.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.tablesorter.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
 <div class="container">
-    <form:form commandName="capacityForm" class="form-inline" action="/ipstore/capacity" method="get">
+    <form:form commandName="capacityForm" class="form-inline" action="/capacity" method="get">
         <form:select id="capacityType" path="capacityType" items="${capacityTypes}" cssClass="input-xlarge"/>
         <form:input id="keyword" path="keyword" cssClass="input-xlarge" placeholder="keyword"/>
         <button type="submit" class="btn btn-primary">Load</button>
@@ -17,8 +17,8 @@
             <h4>
                 <c:out value="${capacity.name}"/>
                 <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
-                    <a class="btn" href="<c:url value="/ipstore/capacity/edit/${capacity.id}"/>"><i class="icon-pencil"></i></a>
-                    <a class="btn" href="<c:url value="/ipstore/capacity/${capacity.id}/add"/>"><i class="icon-plus"></i></a>
+                    <a class="btn" href="<c:url value="/capacity/edit/${capacity.id}"/>"><i class="icon-pencil"></i></a>
+                    <a class="btn" href="<c:url value="/capacity/${capacity.id}/add"/>"><i class="icon-plus"></i></a>
                 </security:authorize>
 
             </h4>
@@ -36,7 +36,7 @@
                 <c:forEach items="${capacity.numbers}" var="number">
                     <tr class="${number.status}">
                         <td class="left-col">
-                            <a href="/ipstore/capacity/number/view/${number.id}">
+                            <a href="/capacity/number/view/${number.id}">
                                 <c:out value="${number.number}"/>
                             </a>
                         </td>

@@ -9,9 +9,9 @@
     <c:if test="${error}">
         <span class="errorblock">Importing error!</span>
     </c:if>
-    <form method="post" action="/ipstore/communigate/import" enctype="multipart/form-data">
+    <form method="post" action="/communigate/import" enctype="multipart/form-data">
         <input type="file" name="file"/>
-        <a href="<c:url value="/ipstore/communigate"/>" class="btn btn-primary">List</a>
+        <a href="<c:url value="/communigate"/>" class="btn btn-primary">List</a>
         <input class="btn btn-primary" type="submit" value="Import"/>
     </form>
     <c:if test="${not error and not empty result}">
@@ -31,7 +31,7 @@
                                 <td>
                                     <span class="text-success">
                                         Communigate domain with domain name
-                                        <a href="/ipstore/communigate/view/${added.id}" target="_blank">
+                                        <a href="/communigate/view/${added.id}" target="_blank">
                                             <c:out value="${added.domainName}"/>
                                         </a>
                                         successfully added!

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/init-datepicker.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/init-datepicker.js"/>"></script>
 <div class="container">
     <form:form commandName="capacityNumber" action="${action}" cssClass="form-horizontal">
 
@@ -15,7 +15,7 @@
                         <c:if test="${not empty existsId}">
                             <span>
                                 Capacity number
-                                <a href="<c:url value="/ipstore/capacity/number/view/${existsId}"/>" target="_blank">
+                                <a href="<c:url value="/capacity/number/view/${existsId}"/>" target="_blank">
                                     <c:out value="${capacityNumber.number}"/>
                                 </a>
                                 already exists!
@@ -94,10 +94,10 @@
 
         <div class="form-actions">
             <c:if test="${empty capacityNumber.id}">
-                <a href="<c:url value="/ipstore/capacity/${capacityType.id}"/>" class="btn btn-primary">List</a>
+                <a href="<c:url value="/capacity/${capacityType.id}"/>" class="btn btn-primary">List</a>
             </c:if>
             <c:if test="${not empty capacityNumber.id}">
-                <a href="<c:url value="/ipstore/capacity/number/view/${capacityNumber.id}"/>" class="btn btn-primary">View</a>
+                <a href="<c:url value="/capacity/number/view/${capacityNumber.id}"/>" class="btn btn-primary">View</a>
             </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>

@@ -72,50 +72,50 @@ public class CapacityController {
     public String addCapacityPage(Model model) {
         CapacityType capacityType = new CapacityType();
         model.addAttribute("capacityType", capacityType);
-        model.addAttribute("action", "/ipstore/capacity/add");
+        model.addAttribute("action", "/capacity/add");
         return "edit-capacity";
     }
 
     @RequestMapping(value = "/capacity/add", method = RequestMethod.POST)
     public String addCapacity(@Valid CapacityType capacityType, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/ipstore/capacity/add");
+            model.addAttribute("action", "/capacity/add");
             return "edit-capacity";
         }
         String name = capacityType.getName();
         Long existsId = capacityService.loadExistsCapacity(name);
         if (existsId != null) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/ipstore/capacity/add");
+            model.addAttribute("action", "/capacity/add");
             return "edit-capacity";
         }
         capacityService.createCapacityType(capacityType);
-        return "redirect:/ipstore/capacity";
+        return "redirect:/capacity";
     }
 
     @RequestMapping(value = "/capacity/edit/{capacityId}", method = RequestMethod.GET)
     public String editCapacityType(@PathVariable Long capacityId, Model model) {
         CapacityType capacityType = capacityService.loadCapacityType(capacityId);
         model.addAttribute("capacityType", capacityType);
-        model.addAttribute("action", "/ipstore/capacity/edit/" + capacityId);
+        model.addAttribute("action", "/capacity/edit/" + capacityId);
         return "edit-capacity";
     }
 
     @RequestMapping(value = "/capacity/edit/{capacityId}", method = RequestMethod.POST)
     public String updateCapacityType(@Valid CapacityType capacityType, BindingResult result, @PathVariable Long capacityId, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/ipstore/capacity/edit/" + capacityId);
+            model.addAttribute("action", "/capacity/edit/" + capacityId);
             return "edit-capacity";
         }
         String name = capacityType.getName();
         Long existsId = capacityService.loadExistsCapacity(name);
         if (existsId != null && !existsId.equals(capacityId)) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/ipstore/capacity/edit/" + capacityId);
+            model.addAttribute("action", "/capacity/edit/" + capacityId);
             return "edit-capacity";
         }
         capacityService.updateCapacityType(capacityId, capacityType);
-        return "redirect:/ipstore/capacity";
+        return "redirect:/capacity";
     }
 
     @RequestMapping(value = "/capacity/{capacityId}/add", method = RequestMethod.GET)
@@ -124,7 +124,7 @@ public class CapacityController {
         model.addAttribute("capacityType", capacityType);
         CapacityNumber capacityNumber = new CapacityNumber();
         model.addAttribute("capacityNumber", capacityNumber);
-        model.addAttribute("action", "/ipstore/capacity/" + capacityId + "/add");
+        model.addAttribute("action", "/capacity/" + capacityId + "/add");
         return "edit-capactity-number";
     }
 
@@ -132,18 +132,18 @@ public class CapacityController {
     public String addCapacityNumber(@Valid CapacityNumber capacityNumber, BindingResult result, @PathVariable Long capacityId,
                                     Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/ipstore/capacity/" + capacityId + "/add");
+            model.addAttribute("action", "/capacity/" + capacityId + "/add");
             return "edit-capactity-number";
         }
         String number = capacityNumber.getNumber();
         Long existsId = capacityService.loadExistsCapacityNumber(number);
         if (existsId != null) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/ipstore/capacity/" + capacityId + "/add");
+            model.addAttribute("action", "/capacity/" + capacityId + "/add");
             return "edit-capactity-number";
         }
         Long capacityNumberId = capacityService.createCapacityNumber(capacityNumber, capacityId);
-        return "redirect:/ipstore/capacity/number/view/" + capacityNumberId;
+        return "redirect:/capacity/number/view/" + capacityNumberId;
     }
 
     @RequestMapping(value = "/capacity/number/view/{id}", method = RequestMethod.GET)
@@ -157,60 +157,60 @@ public class CapacityController {
     public String editCapacityNumber(@PathVariable Long id, Model model) {
         CapacityNumber capacityNumber = capacityService.loadCapacityNumber(id);
         model.addAttribute("capacityNumber", capacityNumber);
-        model.addAttribute("action", "/ipstore/capacity/number/edit/" + id);
+        model.addAttribute("action", "/capacity/number/edit/" + id);
         return "edit-capactity-number";
     }
 
     @RequestMapping(value = "/capacity/number/edit/{id}", method = RequestMethod.POST)
     public String updateCapacityNumber(@Valid CapacityNumber capacityNumber, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/ipstore/capacity/number/edit/" + id);
+            model.addAttribute("action", "/capacity/number/edit/" + id);
             return "edit-capactity-number";
         }
         String number = capacityNumber.getNumber();
         Long existsId = capacityService.loadExistsCapacityNumber(number);
         if (existsId != null && !existsId.equals(id)) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/ipstore/capacity/number/edit/" + id);
+            model.addAttribute("action", "/capacity/number/edit/" + id);
             return "edit-capactity-number";
         }
         capacityService.updateCapacityNumber(id, capacityNumber);
-        return "redirect:/ipstore/capacity/number/view/" + id;
+        return "redirect:/capacity/number/view/" + id;
     }
 
     @RequestMapping(value = "/capacity/number/free/{id}", method = RequestMethod.GET)
     public String freeCapacityNumber(@PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.FREE);
-        return "redirect:/ipstore/capacity/number/view/" + id;
+        return "redirect:/capacity/number/view/" + id;
     }
 
     @RequestMapping(value = "/capacity/number/sell/{id}", method = RequestMethod.GET)
     public String sellCapacityNumber(@PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.SELL);
-        return "redirect:/ipstore/capacity/number/view/" + id;
+        return "redirect:/capacity/number/view/" + id;
     }
 
     @RequestMapping(value = "/capacity/number/reserve/{id}", method = RequestMethod.GET)
     public String reserveCapacityNumber(@PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.RESERVED);
-        return "redirect:/ipstore/capacity/number/view/" + id;
+        return "redirect:/capacity/number/view/" + id;
     }
 
     @RequestMapping(value = "/capacity/number/unreserve/{id}", method = RequestMethod.GET)
     public String unreserveCapacityNumber(@PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.FREE);
-        return "redirect:/ipstore/capacity/number/view/" + id;
+        return "redirect:/capacity/number/view/" + id;
     }
 
     @RequestMapping(value = "/capacity/number/test/{id}", method = RequestMethod.GET)
     public String testCapacityNumber(@PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.TEST);
-        return "redirect:/ipstore/capacity/number/view/" + id;
+        return "redirect:/capacity/number/view/" + id;
     }
 
     @RequestMapping(value = "/capacity/number/transfer/{id}", method = RequestMethod.GET)
     public String transferCapacityNumber(@PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.TRANSFERED);
-        return "redirect:/ipstore/capacity/number/view/" + id;
+        return "redirect:/capacity/number/view/" + id;
     }
 }

@@ -33,6 +33,8 @@
         </bean>
     </mvc:interceptors>
 
+    <mvc:resources mapping="/resources/**" location="/assets, /flash, /images, /js"/>
+
     <aop:aspectj-autoproxy/>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

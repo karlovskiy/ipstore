@@ -5,9 +5,9 @@
     <c:if test="${error}">
         <span class="errorblock">Importing error!</span>
     </c:if>
-    <form method="post" action="/ipstore/accounts/import" enctype="multipart/form-data">
+    <form method="post" action="/accounts/import" enctype="multipart/form-data">
         <input type="file" name="file"/>
-        <a href="<c:url value="/ipstore/accounts"/>" class="btn btn-primary">List</a>
+        <a href="<c:url value="/accounts"/>" class="btn btn-primary">List</a>
         <input class="btn btn-primary" type="submit" value="Import"/>
     </form>
     <c:if test="${not error and not empty result}">
@@ -27,7 +27,7 @@
                                 <td>
                                     <span class="text-success">
                                         Account with login
-                                        <a href="/ipstore/accounts/view/${added.id}" target="_blank">
+                                        <a href="/accounts/view/${added.id}" target="_blank">
                                             <c:out value="${added.login}"/>
                                         </a>
                                         successfully added!
@@ -52,7 +52,7 @@
                                     <td>
                                         <span class="text-error">
                                             Account with login
-                                            <a href="/ipstore/accounts/view/${exists.id}" target="_blank">
+                                            <a href="/accounts/view/${exists.id}" target="_blank">
                                                 <c:out value="${exists.login}"/>
                                             </a>
                                             already exists!

@@ -5,7 +5,7 @@
     <groupId>utilits</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>3.2.1-SNAPSHOT</version>
+    <version>3.3.2-SNAPSHOT</version>
 
     <name>ipstore web application</name>
 
@@ -34,6 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.spring>3.2.0.RELEASE</version.spring>
         <version.spring.security>3.1.3.RELEASE</version.spring.security>
+        <version.spring.integration>2.2.1.RELEASE</version.spring.integration>
         <version.hibernate>3.6.0.Final</version.hibernate>
         <version.hibernate.search>3.3.0.Final</version.hibernate.search>
         <version.hibernate.validator>4.3.1.Final</version.hibernate.validator>
@@ -246,12 +247,12 @@
         <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-core</artifactId>
-            <version>2.2.1.RELEASE</version>
+            <version>${version.spring.integration}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-ftp</artifactId>
-            <version>2.2.1.RELEASE</version>
+            <version>${version.spring.integration}</version>
         </dependency>
         <!-- hibernate -->
         <dependency>

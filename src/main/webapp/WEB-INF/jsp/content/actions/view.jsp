@@ -90,7 +90,7 @@
     <div id="view-buttons">
         <div class="row">
             <div class="span1">
-                <a href="<c:url value="/ipstore/actions"/>" class="btn btn-primary btn-block">List</a>
+                <a href="<c:url value="/actions"/>" class="btn btn-primary btn-block">List</a>
             </div>
         </div>
     </div>

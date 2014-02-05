@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/jquery.tablesorter.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/list.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.tablesorter.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
 <div class="container">
     <table id="list_table" class="table table-condensed tablesorter">
         <thead>
@@ -18,7 +18,7 @@
         <c:forEach items="${equipment}" var="equipment">
             <tr>
                 <td class="left-col">
-                    <a href="/ipstore/equipment/view/${equipment.id}">
+                    <a href="/equipment/view/${equipment.id}">
                         <c:out value="${equipment.ipAddress}"/>
                     </a>
                 </td>

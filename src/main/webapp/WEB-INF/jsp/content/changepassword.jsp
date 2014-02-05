@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="container">
-    <form:form commandName="changePassword" action="/ipstore/changepassword" cssClass="form-horizontal">
+    <form:form commandName="changePassword" action="/changepassword" cssClass="form-horizontal">
         <div class="control-group">
             <label class="control-label" for="username">Username</label>
 

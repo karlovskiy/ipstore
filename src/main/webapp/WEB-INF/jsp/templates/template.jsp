@@ -7,23 +7,23 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><tiles:getAsString name="title"/></title>
-    <link href="<c:url value="/assets/css/bootstrap.css" />" rel="stylesheet">
-    <link href="<c:url value="/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/assets/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/assets/css/bootstrap-responsive.css"/>" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
-          href="<c:url value="/assets/ico/apple-touch-icon-144-precomposed.png"/>">
+          href="<c:url value="/resources/assets/ico/apple-touch-icon-144-precomposed.png"/>">
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
-          href="<c:url value="/assets/ico/apple-touch-icon-114-precomposed.png"/>..">
+          href="<c:url value="/resources/assets/ico/apple-touch-icon-114-precomposed.png"/>..">
     <link rel="apple-touch-icon-precomposed" sizes="72x72"
-          href="<c:url value="/assets/ico/apple-touch-icon-72-precomposed.png"/>">
-    <link rel="apple-touch-icon-precomposed" href="<c:url value="/assets/ico/apple-touch-icon-57-precomposed.png"/>">
-    <link rel="shortcut icon" href="<c:url value="/assets/ico/favicon.png"/>">
-    <script type="text/javascript" src="<c:url value="/js/jquery-1.8.3.min.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/js/bootbox.min.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/js/menu.js"/>"></script>
-    <link href="<c:url value="/css/datepicker.css"/>" rel="stylesheet">
-    <link href="<c:url value="/css/style.css"/>" rel="stylesheet">
+          href="<c:url value="/resources/assets/ico/apple-touch-icon-72-precomposed.png"/>">
+    <link rel="apple-touch-icon-precomposed" href="<c:url value="/resources/assets/ico/apple-touch-icon-57-precomposed.png"/>">
+    <link rel="shortcut icon" href="<c:url value="/resources/assets/ico/favicon.png"/>">
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.8.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/bootbox.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/menu.js"/>"></script>
+    <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
 </head>
 <body>
 <div class="navbar-wrapper">
@@ -35,7 +35,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="<c:url value="/ipstore/" />">VoIPStore</a>
+                <a class="brand" href="<c:url value="/" />">VoIPStore</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li class="dropdown">
@@ -43,46 +43,46 @@
                             <ul class="dropdown-menu">
                                 <security:authorize access="hasRole('ROLE_EQUIPMENT_VIEW')">
                                     <li class="nav-header">Equipment</li>
-                                    <li><a href="<c:url value="/ipstore/equipment"/>">Equipment list</a></li>
+                                    <li><a href="<c:url value="/equipment"/>">Equipment list</a></li>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
-                                    <li><a href="<c:url value="/ipstore/equipment/add"/>">Add equipment</a></li>
+                                    <li><a href="<c:url value="/equipment/add"/>">Add equipment</a></li>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
-                                    <li><a href="<c:url value="/ipstore/equipment/import"/>">Import equipment</a></li>
-                                    <li><a href="<c:url value="/ipstore/equipment/export"/>">Export equipment</a></li>
+                                    <li><a href="<c:url value="/equipment/import"/>">Import equipment</a></li>
+                                    <li><a href="<c:url value="/equipment/export"/>">Export equipment</a></li>
                                 </security:authorize>
 
                                 <security:authorize access="hasRole('ROLE_ACCOUNT_VIEW')">
                                     <li class="nav-header">Accounts</li>
-                                    <li><a href="<c:url value="/ipstore/accounts"/>">Accounts list</a></li>
+                                    <li><a href="<c:url value="/accounts"/>">Accounts list</a></li>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
-                                    <li><a href="<c:url value="/ipstore/accounts/add"/>">Add account</a></li>
+                                    <li><a href="<c:url value="/accounts/add"/>">Add account</a></li>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
-                                    <li><a href="<c:url value="/ipstore/accounts/import"/>">Import accounts</a></li>
-                                    <li><a href="<c:url value="/ipstore/accounts/export"/>">Export accounts</a></li>
+                                    <li><a href="<c:url value="/accounts/import"/>">Import accounts</a></li>
+                                    <li><a href="<c:url value="/accounts/export"/>">Export accounts</a></li>
                                 </security:authorize>
 
                                 <security:authorize access="hasRole('ROLE_COMMUNIGATE_VIEW')">
                                     <li class="nav-header">Communigate Domains</li>
-                                    <li><a href="<c:url value="/ipstore/communigate"/>">Communigate domains list</a></li>
+                                    <li><a href="<c:url value="/communigate"/>">Communigate domains list</a></li>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_COMMUNIGATE_EDIT')">
-                                    <li><a href="<c:url value="/ipstore/communigate/add"/>">Add communigate domain</a></li>
+                                    <li><a href="<c:url value="/communigate/add"/>">Add communigate domain</a></li>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_ROOT')">
-                                    <li><a href="<c:url value="/ipstore/communigate/import"/>">Import communigate domain</a></li>
-                                    <li><a href="<c:url value="/ipstore/communigate/export"/>">Export communigate domain</a></li>
+                                    <li><a href="<c:url value="/communigate/import"/>">Import communigate domain</a></li>
+                                    <li><a href="<c:url value="/communigate/export"/>">Export communigate domain</a></li>
                                 </security:authorize>
 
                                 <security:authorize access="hasRole('ROLE_CAPACITY_VIEW')">
                                     <li class="nav-header">Phone Capacity</li>
-                                    <li><a href="<c:url value="/ipstore/capacity"/>">Phone capacity list</a></li>
+                                    <li><a href="<c:url value="/capacity"/>">Phone capacity list</a></li>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
-                                    <li><a href="<c:url value="/ipstore/capacity/add"/>">Add phone capacity</a></li>
+                                    <li><a href="<c:url value="/capacity/add"/>">Add phone capacity</a></li>
                                 </security:authorize>
                             </ul>
                         </li>
@@ -91,14 +91,14 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-header">Actions</li>
-                                    <li><a href="<c:url value="/ipstore/actions"/>">Actions</a></li>
-                                    <li><a href="<c:url value="/ipstore/changes"/>">Changes</a></li>
+                                    <li><a href="<c:url value="/actions"/>">Actions</a></li>
+                                    <li><a href="<c:url value="/changes"/>">Changes</a></li>
                                     <li class="nav-header">Users</li>
-                                    <li><a href="<c:url value="/ipstore/users"/>">Users list</a></li>
-                                    <li><a href="<c:url value="/ipstore/users/add"/>">Add user</a></li>
+                                    <li><a href="<c:url value="/users"/>">Users list</a></li>
+                                    <li><a href="<c:url value="/users/add"/>">Add user</a></li>
                                     <li class="nav-header">Miscellaneous</li>
                                     <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
-                                    <li><a id="rebuild_index" href="<c:url value="/ipstore/rebuild"/>">Rebuild lucene index</a></li>
+                                    <li><a id="rebuild_index" href="<c:url value="/rebuild"/>">Rebuild lucene index</a></li>
 
                                 </ul>
                             </li>
@@ -107,8 +107,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="<c:url value="/ipstore/changepassword"/>">Change password</a></li>
-                                    <li><a href="<c:url value="/ipstore/changeuserinfo"/>">Change userInfo</a></li>
+                                    <li><a href="<c:url value="/changepassword"/>">Change password</a></li>
+                                    <li><a href="<c:url value="/changeuserinfo"/>">Change userInfo</a></li>
                                 </ul>
                             </li>
                         </security:authorize>
@@ -122,7 +122,7 @@
                                 <li><a href="https://easy.step7.ru" target="_blank">Easy</a></li>
                             </ul>
                         </li>
-                        <li><a href="<c:url value="/ipstore/contact"/>">Contact</a></li>
+                        <li><a href="<c:url value="/contact"/>">Contact</a></li>
                         <li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
                     </ul>
                     <tiles:insertAttribute ignore="true" name="menu-form"/>

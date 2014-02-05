@@ -24,7 +24,7 @@
                     <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">, edit</security:authorize></span>
                 </p>
                 <p>
-                    <a href="<c:url value="/ipstore/equipment"/>" class="btn btn-large">Equipment list »</a>
+                    <a href="<c:url value="/equipment"/>" class="btn btn-large">Equipment list »</a>
                 </p>
             </span>
             </security:authorize>
@@ -38,7 +38,7 @@
                     <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">, edit</security:authorize></span>
                 </p>
                 <p>
-                    <a href="<c:url value="/ipstore/accounts"/>" class="btn btn-large">Accounts list »</a>
+                    <a href="<c:url value="/accounts"/>" class="btn btn-large">Accounts list »</a>
                 </p>
             </span>
             </security:authorize>
@@ -52,7 +52,7 @@
                     <security:authorize access="hasRole('ROLE_COMMUNIGATE_EDIT')">, edit</security:authorize></span>
                 </p>
                 <p>
-                    <a href="<c:url value="/ipstore/communigate"/>" class="btn btn-large">Communigate
+                    <a href="<c:url value="/communigate"/>" class="btn btn-large">Communigate
                         domains list »</a>
                 </p>
             </span>
@@ -69,7 +69,7 @@
                     <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">, edit</security:authorize></span>
                 </p>
                 <p>
-                    <a href="<c:url value="/ipstore/capacity"/>" class="btn btn-large">Phone capacity
+                    <a href="<c:url value="/capacity"/>" class="btn btn-large">Phone capacity
                         list »</a>
                 </p>
             </span>

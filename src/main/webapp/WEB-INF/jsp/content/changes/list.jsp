@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<script type="text/javascript" src="<c:url value="/js/init-datepicker.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/change-types.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/init-datepicker.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/change-types.js"/>"></script>
 <div class="container">
-    <form:form commandName="changesForm" class="form-inline" action="/ipstore/changes">
+    <form:form commandName="changesForm" class="form-inline" action="/changes">
         <form:input id="from" path="from" cssClass="input-small" placeholder="From"/>
         <form:input id="to" path="to" cssClass="input-small" placeholder="To"/>
         <form:input id="username" path="username" cssClass="input-small" placeholder="Username"/>
