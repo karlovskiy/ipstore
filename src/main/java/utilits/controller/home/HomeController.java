@@ -44,7 +44,7 @@ public class HomeController {
             ActionsWidget actionsWidget = homeService.loadActionsWidget();
             model.addAttribute("actionsWidget", actionsWidget);
         }
-        return "home";
+        return "c-home-main";
     }
 
 }

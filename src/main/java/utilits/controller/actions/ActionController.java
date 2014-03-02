@@ -38,7 +38,7 @@ public class ActionController {
         model.addAttribute("actionsForm", DEFAULT_ACTIONS_FORM);
         model.addAttribute("actions", actionService.loadActions(DEFAULT_ACTIONS_FORM));
         model.addAttribute("actionTypes", ACTIONS_TYPES);
-        return "actions";
+        return "c-list-actions";
     }
 
     @RequestMapping(value = "/actions", method = RequestMethod.POST)
@@ -48,13 +48,13 @@ public class ActionController {
             model.addAttribute("actions", actionService.loadActions(actionsForm));
             model.addAttribute("actionTypes", ACTIONS_TYPES);
         }
-        return "actions";
+        return "c-list-actions";
     }
 
     @RequestMapping(value = "/actions/view/{id}", method = RequestMethod.GET)
     public String viewAction(@PathVariable Long id, Model model) {
         model.addAttribute("action", actionService.loadAction(id));
-        return "view-action";
+        return "c-view-actions";
     }
 
     @RequestMapping(value = "/changes", method = RequestMethod.GET)
@@ -63,7 +63,7 @@ public class ActionController {
         model.addAttribute("changesForm", DEFAULT_CHANGES_FORM);
         model.addAttribute("changes", actionService.loadChanges(DEFAULT_CHANGES_FORM));
         model.addAttribute("changesTypes", CHANGES_TYPES);
-        return "changes";
+        return "c-list-changes";
     }
 
     @RequestMapping(value = "/changes", method = RequestMethod.POST)
@@ -73,7 +73,7 @@ public class ActionController {
             model.addAttribute("changes", actionService.loadChanges(changesForm));
             model.addAttribute("changesTypes", CHANGES_TYPES);
         }
-        return "changes";
+        return "c-list-changes";
     }
 
     @RequestMapping(value = "/change_types", method = RequestMethod.GET)

@@ -91,19 +91,19 @@ public class LoginController {
     @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
     public String changePassword(Model model) {
         model.addAttribute("changePassword", new ChangePassword());
-        return "changepassword";
+        return "c-changepassword-main";
     }
 
     @RequestMapping(value = "/changepassword", method = RequestMethod.POST)
     public String changePassword(@Valid ChangePassword changePassword, BindingResult result,
                                  HttpServletRequest request) {
         if (result.hasErrors()) {
-            return "changepassword";
+            return "c-changepassword-main";
         }
         String newPassword = changePassword.getNewPassword();
         if (!newPassword.equals(changePassword.getRepeatNewPassword())) {
             result.rejectValue("repeatNewPassword", "none", "Repeat new password!");
-            return "changepassword";
+            return "c-changepassword-main";
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.loadUser(username);
@@ -111,7 +111,7 @@ public class LoginController {
         String enteredPasswordHash = passwordEncoder.encodePassword(changePassword.getOldPassword(), username);
         if (!storedPasswordHash.equals(enteredPasswordHash)) {
             result.rejectValue("oldPassword", "none", "Incorrect password!");
-            return "changepassword";
+            return "c-changepassword-main";
         }
         user.setPassword(passwordEncoder.encodePassword(newPassword, username));
         userService.updateUser(user.getId(), user);
@@ -128,13 +128,13 @@ public class LoginController {
         userInfo.setFirstName(user.getFirstName());
         userInfo.setLastName(user.getLastName());
         model.addAttribute("changeUserInfo", userInfo);
-        return "changeuserinfo";
+        return "c-changeuserinfo-main";
     }
 
     @RequestMapping(value = "/changeuserinfo", method = RequestMethod.POST)
     public String changeUserInfo(@Valid ChangeUserInfo changeUserInfo, BindingResult result) {
         if (result.hasErrors()) {
-            return "changeuserinfo";
+            return "c-changeuserinfo-main";
         }
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.loadUser(username);
@@ -142,7 +142,7 @@ public class LoginController {
         String enteredPasswordHash = passwordEncoder.encodePassword(changeUserInfo.getPassword(), username);
         if (!storedPasswordHash.equals(enteredPasswordHash)) {
             result.rejectValue("password", "none", "Incorrect password!");
-            return "changeuserinfo";
+            return "c-changeuserinfo-main";
         }
         user.setEmail(changeUserInfo.getEmail());
         user.setFirstName(changeUserInfo.getFirstName());
@@ -160,7 +160,7 @@ public class LoginController {
     @Action(value = CONTACT_PAGE)
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact() {
-        return "contact";
+        return "c-contact-main";
     }
 
 }

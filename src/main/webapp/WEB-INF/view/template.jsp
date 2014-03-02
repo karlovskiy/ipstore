@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/datepicker3.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/css/tablesorter.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/css/ipstore.css"/>">
-    <title><tiles:getAsString name="title"/></title>
+    <title>IPStore</title>
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">

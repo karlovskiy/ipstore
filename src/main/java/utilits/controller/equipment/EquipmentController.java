@@ -55,14 +55,14 @@ public class EquipmentController {
         } else {
             model.addAttribute("equipment", equipmentService.loadEquipments());
         }
-        return "equipment";
+        return "c-list-equipment";
     }
 
     @Action(value = EQUIPMENT_IMPORT_PAGE)
     @RequestMapping(value = "/equipment/import", method = RequestMethod.GET)
     public String importEquipment() {
         logger.debug("Received request to import equipment...");
-        return "import-equipment";
+        return "c-import-equipment";
     }
 
     @Action(value = EQUIPMENT_IMPORT, changeType = EQUIPMENT, changeMode = IMPORT)
@@ -81,7 +81,7 @@ public class EquipmentController {
                 logger.error("Importing error...", e);
             }
         }
-        return "import-equipment";
+        return "c-import-equipment";
     }
 
     @Action(value = EQUIPMENT_VIEW_PAGE)
@@ -89,7 +89,7 @@ public class EquipmentController {
     public String viewEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
-        return "view-equipment";
+        return "c-view-equipment";
     }
 
     @Action(value = EQUIPMENT_ADD_PAGE)
@@ -99,7 +99,7 @@ public class EquipmentController {
         model.addAttribute("equipment", equipment);
         model.addAttribute("formAction", "/equipment/save");
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-        return "edit-equipment";
+        return "c-edit-equipment";
     }
 
     @Action(value = EQUIPMENT_EDIT_PAGE)
@@ -109,7 +109,7 @@ public class EquipmentController {
         model.addAttribute("equipment", equipment);
         model.addAttribute("formAction", "/equipment/save/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-        return "edit-equipment";
+        return "c-edit-equipment";
     }
 
     @Action(value = EQUIPMENT_DELETE, changeType = EQUIPMENT, changeMode = UPDATE)
@@ -139,7 +139,7 @@ public class EquipmentController {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/equipment/save");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-            return "edit-equipment";
+            return "c-edit-equipment";
         }
         String ipAddress = equipment.getIpAddress();
         Equipment existsEquipment = equipmentService.loadEquipment(ipAddress);
@@ -147,7 +147,7 @@ public class EquipmentController {
             model.addAttribute("formAction", "/equipment/save");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             model.addAttribute("existsEquipment", existsEquipment);
-            return "edit-equipment";
+            return "c-edit-equipment";
         }
         Long id = equipmentService.createEquipment(equipment, config);
         return "redirect:/equipment/view/" + id;
@@ -161,7 +161,7 @@ public class EquipmentController {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/equipment/save/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-            return "edit-equipment";
+            return "c-edit-equipment";
         }
         equipmentService.updateEquipment(id, equipment, config, "reset".equals(cfReset));
         return "redirect:/equipment/view/" + id;

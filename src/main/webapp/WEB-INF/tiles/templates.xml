@@ -3,163 +3,22 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <!-- actions page -->
-    <definition name="actions" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Actions list"/>
-        <put-attribute name="content" value="/WEB-INF/view/actions/list.jsp"/>
+
+    <!-- only content -->
+    <definition name="c-*-*" template="/WEB-INF/view/template.jsp">
+        <put-attribute name="content" value="/WEB-INF/view/{2}/{1}.jsp"/>
     </definition>
 
-    <!-- actions view page -->
-    <definition name="view-action" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="View action"/>
-        <put-attribute name="content" value="/WEB-INF/view/actions/view.jsp"/>
+    <!-- content + menu-from -->
+    <definition name="mfc-*-*" template="/WEB-INF/view/template.jsp">
+        <put-attribute name="menu-form" value="/WEB-INF/view/{2}/{1}_form.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/{2}/{1}.jsp"/>
     </definition>
 
-    <!-- changes page -->
-    <definition name="changes" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Changes list"/>
-        <put-attribute name="content" value="/WEB-INF/view/changes/list.jsp"/>
+    <!-- content + additional-scripts -->
+    <definition name="asc-*-*" template="/WEB-INF/view/template.jsp">
+        <put-attribute name="content" value="/WEB-INF/view/{2}/{1}.jsp"/>
+        <put-attribute name="additional-scripts" value="/WEB-INF/view/{2}/{1}_scripts.jsp"/>
     </definition>
 
-    <!-- equipment list page -->
-    <definition name="equipment" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Equipment list"/>
-        <put-attribute name="menu-form" value="/WEB-INF/view/equipment/list_form.jsp"/>
-        <put-attribute name="content" value="/WEB-INF/view/equipment/list.jsp"/>
-    </definition>
-
-    <!-- equipment edit page -->
-    <definition name="edit-equipment" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Edit equipment"/>
-        <put-attribute name="content" value="/WEB-INF/view/equipment/edit.jsp"/>
-    </definition>
-
-    <!-- equipment view page -->
-    <definition name="view-equipment" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="View equipment"/>
-        <put-attribute name="content" value="/WEB-INF/view/equipment/view.jsp"/>
-        <put-attribute name="additional-scripts" value="/WEB-INF/view/equipment/view_scripts.jsp"/>
-    </definition>
-
-    <!-- equipment import page -->
-    <definition name="import-equipment" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Import equipment"/>
-        <put-attribute name="content" value="/WEB-INF/view/equipment/import.jsp"/>
-    </definition>
-
-    <!-- home page -->
-    <definition name="home" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Home"/>
-        <put-attribute name="content" value="/WEB-INF/view/home.jsp"/>
-    </definition>
-
-    <!-- import accounts page -->
-    <definition name="import-accounts" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Import accounts"/>
-        <put-attribute name="content" value="/WEB-INF/view/accounts/import.jsp"/>
-    </definition>
-
-    <!-- accounts list page -->
-    <definition name="accounts" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Accounts list"/>
-        <put-attribute name="menu-form" value="/WEB-INF/view/accounts/list_form.jsp"/>
-        <put-attribute name="content" value="/WEB-INF/view/accounts/list.jsp"/>
-    </definition>
-
-    <!-- accounts view page -->
-    <definition name="view-account" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="View account"/>
-        <put-attribute name="content" value="/WEB-INF/view/accounts/view.jsp"/>
-    </definition>
-
-    <!-- accounts edit page -->
-    <definition name="edit-account" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Edit account"/>
-        <put-attribute name="content" value="/WEB-INF/view/accounts/edit.jsp"/>
-    </definition>
-
-    <!-- users list page -->
-    <definition name="users" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Users list"/>
-        <put-attribute name="content" value="/WEB-INF/view/users/list.jsp"/>
-    </definition>
-
-    <!-- users view page -->
-    <definition name="view-user" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="View user"/>
-        <put-attribute name="content" value="/WEB-INF/view/users/view.jsp"/>
-    </definition>
-
-    <!-- users edit page -->
-    <definition name="edit-user" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Edit user"/>
-        <put-attribute name="content" value="/WEB-INF/view/users/edit.jsp"/>
-    </definition>
-
-    <!--changepassword page -->
-    <definition name="changepassword" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Change password"/>
-        <put-attribute name="content" value="/WEB-INF/view/changepassword.jsp"/>
-    </definition>
-
-    <!--changeuserinfo page -->
-    <definition name="changeuserinfo" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Change password"/>
-        <put-attribute name="content" value="/WEB-INF/view/changeuserinfo.jsp"/>
-    </definition>
-
-    <!-- communigate list page -->
-    <definition name="communigate" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Communigate list"/>
-        <put-attribute name="menu-form" value="/WEB-INF/view/communigate/list_form.jsp"/>
-        <put-attribute name="content" value="/WEB-INF/view/communigate/list.jsp"/>
-    </definition>
-
-    <!-- communigate view page -->
-    <definition name="view-communigate" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="View communigate"/>
-        <put-attribute name="content" value="/WEB-INF/view/communigate/view.jsp"/>
-    </definition>
-
-    <!-- communigate edit page -->
-    <definition name="edit-communigate" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Edit communigate"/>
-        <put-attribute name="content" value="/WEB-INF/view/communigate/edit.jsp"/>
-    </definition>
-
-    <!-- import communigate page -->
-    <definition name="import-communigate" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Import communigate"/>
-        <put-attribute name="content" value="/WEB-INF/view/communigate/import.jsp"/>
-    </definition>
-
-    <!-- contact page -->
-    <definition name="contact" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Contact"/>
-        <put-attribute name="content" value="/WEB-INF/view/contact.jsp"/>
-    </definition>
-
-    <!-- capacity list page -->
-    <definition name="capacity" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Capacity list"/>
-        <put-attribute name="content" value="/WEB-INF/view/capacity/list.jsp"/>
-    </definition>
-
-    <!-- capacity add page -->
-    <definition name="edit-capacity" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Edit Capacity"/>
-        <put-attribute name="content" value="/WEB-INF/view/capacity/edit.jsp"/>
-    </definition>
-
-    <!-- capacity add number page -->
-    <definition name="edit-capactity-number" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="Edit capacity number"/>
-        <put-attribute name="content" value="/WEB-INF/view/capacity_number/edit.jsp"/>
-    </definition>
-
-    <!-- capacity view number page -->
-    <definition name="view-capactity-number" template="/WEB-INF/view/template.jsp">
-        <put-attribute name="title" value="View capacity number"/>
-        <put-attribute name="content" value="/WEB-INF/view/capacity_number/view.jsp"/>
-    </definition>
 </tiles-definitions>

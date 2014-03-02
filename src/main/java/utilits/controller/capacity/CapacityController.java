@@ -37,7 +37,7 @@ public class CapacityController {
         model.addAttribute("capacityTypes", capacityTypes);
         if (capacityForm.isEmptyCapacityType()) {
             capacityForm.setCapacityType("ALL");
-            return "capacity";
+            return "c-list-capacity";
         }
         if (!capacityTypes.containsKey(capacityForm.getCapacityType())) {
             capacityForm.setCapacityType("ALL");
@@ -53,7 +53,7 @@ public class CapacityController {
                 model.addAttribute("result", list);
             }
         }
-        return "capacity";
+        return "c-list-capacity";
     }
 
     @RequestMapping(value = "/capacity/{id}", method = RequestMethod.GET)
@@ -65,7 +65,7 @@ public class CapacityController {
         model.addAttribute("capacityTypes", capacityTypes);
         List<CapacityType> list = capacityService.loadCapacityTypeWithNumbers(id);
         model.addAttribute("result", list);
-        return "capacity";
+        return "c-list-capacity";
     }
 
     @RequestMapping(value = "/capacity/add", method = RequestMethod.GET)
@@ -73,21 +73,21 @@ public class CapacityController {
         CapacityType capacityType = new CapacityType();
         model.addAttribute("capacityType", capacityType);
         model.addAttribute("action", "/capacity/add");
-        return "edit-capacity";
+        return "c-edit-capacity";
     }
 
     @RequestMapping(value = "/capacity/add", method = RequestMethod.POST)
     public String addCapacity(@Valid CapacityType capacityType, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("action", "/capacity/add");
-            return "edit-capacity";
+            return "c-edit-capacity";
         }
         String name = capacityType.getName();
         Long existsId = capacityService.loadExistsCapacity(name);
         if (existsId != null) {
             model.addAttribute("existsId", existsId);
             model.addAttribute("action", "/capacity/add");
-            return "edit-capacity";
+            return "c-edit-capacity";
         }
         capacityService.createCapacityType(capacityType);
         return "redirect:/capacity";
@@ -98,21 +98,21 @@ public class CapacityController {
         CapacityType capacityType = capacityService.loadCapacityType(capacityId);
         model.addAttribute("capacityType", capacityType);
         model.addAttribute("action", "/capacity/edit/" + capacityId);
-        return "edit-capacity";
+        return "c-edit-capacity";
     }
 
     @RequestMapping(value = "/capacity/edit/{capacityId}", method = RequestMethod.POST)
     public String updateCapacityType(@Valid CapacityType capacityType, BindingResult result, @PathVariable Long capacityId, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("action", "/capacity/edit/" + capacityId);
-            return "edit-capacity";
+            return "c-edit-capacity";
         }
         String name = capacityType.getName();
         Long existsId = capacityService.loadExistsCapacity(name);
         if (existsId != null && !existsId.equals(capacityId)) {
             model.addAttribute("existsId", existsId);
             model.addAttribute("action", "/capacity/edit/" + capacityId);
-            return "edit-capacity";
+            return "c-edit-capacity";
         }
         capacityService.updateCapacityType(capacityId, capacityType);
         return "redirect:/capacity";
@@ -125,7 +125,7 @@ public class CapacityController {
         CapacityNumber capacityNumber = new CapacityNumber();
         model.addAttribute("capacityNumber", capacityNumber);
         model.addAttribute("action", "/capacity/" + capacityId + "/add");
-        return "edit-capactity-number";
+        return "c-edit-capacity_number";
     }
 
     @RequestMapping(value = "/capacity/{capacityId}/add", method = RequestMethod.POST)
@@ -133,14 +133,14 @@ public class CapacityController {
                                     Model model) {
         if (result.hasErrors()) {
             model.addAttribute("action", "/capacity/" + capacityId + "/add");
-            return "edit-capactity-number";
+            return "c-edit-capacity_number";
         }
         String number = capacityNumber.getNumber();
         Long existsId = capacityService.loadExistsCapacityNumber(number);
         if (existsId != null) {
             model.addAttribute("existsId", existsId);
             model.addAttribute("action", "/capacity/" + capacityId + "/add");
-            return "edit-capactity-number";
+            return "c-edit-capacity_number";
         }
         Long capacityNumberId = capacityService.createCapacityNumber(capacityNumber, capacityId);
         return "redirect:/capacity/number/view/" + capacityNumberId;
@@ -150,7 +150,7 @@ public class CapacityController {
     public String viewCapacityNumber(@PathVariable Long id, Model model) {
         CapacityNumber capacityNumber = capacityService.loadCapacityNumber(id);
         model.addAttribute("capacityNumber", capacityNumber);
-        return "view-capactity-number";
+        return "c-view-capacity_number";
     }
 
     @RequestMapping(value = "/capacity/number/edit/{id}", method = RequestMethod.GET)
@@ -158,21 +158,21 @@ public class CapacityController {
         CapacityNumber capacityNumber = capacityService.loadCapacityNumber(id);
         model.addAttribute("capacityNumber", capacityNumber);
         model.addAttribute("action", "/capacity/number/edit/" + id);
-        return "edit-capactity-number";
+        return "c-edit-capacity_number";
     }
 
     @RequestMapping(value = "/capacity/number/edit/{id}", method = RequestMethod.POST)
     public String updateCapacityNumber(@Valid CapacityNumber capacityNumber, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("action", "/capacity/number/edit/" + id);
-            return "edit-capactity-number";
+            return "c-edit-capacity_number";
         }
         String number = capacityNumber.getNumber();
         Long existsId = capacityService.loadExistsCapacityNumber(number);
         if (existsId != null && !existsId.equals(id)) {
             model.addAttribute("existsId", existsId);
             model.addAttribute("action", "/capacity/number/edit/" + id);
-            return "edit-capactity-number";
+            return "c-edit-capacity_number";
         }
         capacityService.updateCapacityNumber(id, capacityNumber);
         return "redirect:/capacity/number/view/" + id;

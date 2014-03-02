@@ -38,7 +38,7 @@ public class UsersController {
     public String viewUsers(Model model) {
         logger.info("Received request to load users.");
         model.addAttribute("users", userService.loadUsers());
-        return "users";
+        return "c-list-users";
     }
 
     @Action(value = USERS_VIEW_PAGE)
@@ -46,7 +46,7 @@ public class UsersController {
     public String viewUser(@PathVariable Long id, Model model) {
         User user = userService.loadUser(id);
         model.addAttribute("user", user);
-        return "view-user";
+        return "c-view-users";
     }
 
     @Action(value = USERS_EDIT_PAGE)
@@ -55,7 +55,7 @@ public class UsersController {
         User user = userService.loadUser(id);
         model.addAttribute("user", user);
         model.addAttribute("formAction", "/users/edit/" + id);
-        return "edit-user";
+        return "c-edit-users";
     }
 
     @Action(value = USERS_ADD_PAGE)
@@ -64,7 +64,7 @@ public class UsersController {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("formAction", "/users/add");
-        return "edit-user";
+        return "c-edit-users";
     }
 
     @Action(value = USERS_BLOCK, changeType = USERS, changeMode = UPDATE)
@@ -92,14 +92,14 @@ public class UsersController {
     public String createUser(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/users/add");
-            return "edit-user";
+            return "c-edit-users";
         }
         String username = user.getUsername();
         User existsUser = userService.loadUser(username);
         if (existsUser != null) {
             model.addAttribute("formAction", "/users/add");
             model.addAttribute("existsUser", existsUser);
-            return "edit-user";
+            return "c-edit-users";
         }
         Long id = userService.createUser(user);
         return "redirect:/users/view/" + id;
@@ -110,7 +110,7 @@ public class UsersController {
     public String updateUser(@Valid User user, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/users/edit/" + id);
-            return "edit-user";
+            return "c-edit-users";
         }
         User oldUser = userService.loadUser(id);
         String oldUsername = oldUser.getUsername();
@@ -120,7 +120,7 @@ public class UsersController {
             if (existsUser != null) {
                 model.addAttribute("formAction", "/users/edit/" + id);
                 model.addAttribute("existsUser", existsUser);
-                return "edit-user";
+                return "c-edit-users";
             }
         }
         oldUser.setUsername(user.getUsername());

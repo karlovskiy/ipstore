@@ -52,7 +52,7 @@ public class AccountsController {
     @RequestMapping(value = "/accounts/import", method = RequestMethod.GET)
     public String importAccounts() {
         logger.debug("Loading accounts import page...");
-        return "import-accounts";
+        return "c-import-accounts";
     }
 
     @Action(value = ACCOUNTS_IMPORT, changeType = ACCOUNTS, changeMode = IMPORT)
@@ -71,7 +71,7 @@ public class AccountsController {
                 logger.error("Accounts importing error...", e);
             }
         }
-        return "import-accounts";
+        return "c-import-accounts";
     }
 
     @Action(value = ACCOUNTS_LIST)
@@ -84,7 +84,7 @@ public class AccountsController {
         } else {
             model.addAttribute("accounts", accountsService.loadAccounts());
         }
-        return "accounts";
+        return "mfc-list-accounts";
     }
 
     @Action(value = ACCOUNTS_VIEW_PAGE)
@@ -92,7 +92,7 @@ public class AccountsController {
     public String viewAccount(@PathVariable Long id, Model model) {
         Account account = accountsService.loadAccount(id);
         model.addAttribute("account", account);
-        return "view-account";
+        return "c-view-accounts";
     }
 
     @Action(value = ACCOUNTS_DELETE, changeType = ACCOUNTS, changeMode = UPDATE)
@@ -131,7 +131,7 @@ public class AccountsController {
         model.addAttribute("edit", true);
         model.addAttribute("formAction", "/accounts/edit/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-        return "edit-account";
+        return "c-edit-accounts";
     }
 
     @Action(value = ACCOUNTS_ADD_PAGE)
@@ -142,7 +142,7 @@ public class AccountsController {
         model.addAttribute("account", account);
         model.addAttribute("formAction", "/accounts/add");
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-        return "edit-account";
+        return "c-edit-accounts";
     }
 
     @RequestMapping(value = "/accounts/add", method = RequestMethod.POST)
@@ -150,7 +150,7 @@ public class AccountsController {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/accounts/add");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-            return "edit-account";
+            return "c-edit-accounts";
         }
         String login = account.getLogin();
         Account existsAccount = accountsService.loadAccount(login);
@@ -159,7 +159,7 @@ public class AccountsController {
             model.addAttribute("formAction", "/accounts/add");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             model.addAttribute("existsAccount", existsAccount);
-            return "edit-account";
+            return "c-edit-accounts";
         }
         Long id = accountsService.createAccount(account);
         return "redirect:/accounts/view/" + id;
@@ -172,7 +172,7 @@ public class AccountsController {
             model.addAttribute("edit", true);
             model.addAttribute("formAction", "/accounts/edit/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
-            return "edit-account";
+            return "c-edit-accounts";
         }
         accountsService.updateAccount(id, account);
         return "redirect:/accounts/view/" + id;

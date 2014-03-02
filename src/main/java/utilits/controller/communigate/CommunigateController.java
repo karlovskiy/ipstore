@@ -55,7 +55,7 @@ public class CommunigateController {
         } else {
             model.addAttribute("communigateDomains", communigateService.loadCommunigate());
         }
-        return "communigate";
+        return "c-list-communigate";
     }
 
     @Action(value = COMMUNIGATE_VIEW_PAGE)
@@ -63,7 +63,7 @@ public class CommunigateController {
     public String viewCommunigate(@PathVariable Long id, Model model) {
         CommunigateDomain communigateDomain = communigateService.loadCommunigate(id);
         model.addAttribute("communigateDomain", communigateDomain);
-        return "view-communigate";
+        return "c-view-communigate";
     }
 
     @Action(value = COMMUNIGATE_ADD_PAGE)
@@ -73,14 +73,14 @@ public class CommunigateController {
         model.addAttribute("edit", false);
         model.addAttribute("communigateDomain", communigateDomain);
         model.addAttribute("formAction", "/communigate/add");
-        return "edit-communigate";
+        return "c-edit-communigate";
     }
 
     @RequestMapping(value = "/communigate/add", method = RequestMethod.POST)
     public String createCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/communigate/add");
-            return "edit-communigate";
+            return "c-edit-communigate";
         }
         String domainName = communigateDomain.getDomainName();
         String tryPrefix = communigateDomain.getTryPrefix();
@@ -89,7 +89,7 @@ public class CommunigateController {
             model.addAttribute("edit", false);
             model.addAttribute("formAction", "/communigate/add");
             model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);
-            return "edit-communigate";
+            return "c-edit-communigate";
         }
         Long id = communigateService.createCommunigate(communigateDomain);
         return "redirect:/communigate/view/" + id;
@@ -102,7 +102,7 @@ public class CommunigateController {
         model.addAttribute("communigateDomain", communigateDomain);
         model.addAttribute("edit", true);
         model.addAttribute("formAction", "/communigate/edit/" + id);
-        return "edit-communigate";
+        return "c-edit-communigate";
     }
 
     @Action(value = COMMUNIGATE_UPDATE, changeType = COMMUNIGATE, changeMode = UPDATE)
@@ -110,7 +110,7 @@ public class CommunigateController {
     public String updateCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/communigate/edit/" + id);
-            return "edit-communigate";
+            return "c-edit-communigate";
         }
         CommunigateDomain oldCommunigate = communigateService.loadCommunigate(id);
         String oldDomainName = oldCommunigate.getDomainName();
@@ -120,7 +120,7 @@ public class CommunigateController {
             if (existsCommunigateDomain != null) {
                 model.addAttribute("formAction", "/communigate/edit/" + id);
                 model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);
-                return "edit-communigate";
+                return "c-edit-communigate";
             }
         }
         String oldTryPrefix = oldCommunigate.getTryPrefix();
@@ -130,7 +130,7 @@ public class CommunigateController {
             if (existsCommunigateDomain != null) {
                 model.addAttribute("formAction", "/communigate/edit/" + id);
                 model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);
-                return "edit-communigate";
+                return "c-edit-communigate";
             }
         }
         oldCommunigate.setDomainName(communigateDomain.getDomainName());
@@ -181,7 +181,7 @@ public class CommunigateController {
     @RequestMapping(value = "/communigate/import", method = RequestMethod.GET)
     public String importCommunigate() {
         logger.debug("Loading communigate import page...");
-        return "import-communigate";
+        return "c-import-communigate";
     }
 
     @Action(value = COMMUNIGATE_IMPORT, changeType = COMMUNIGATE, changeMode = IMPORT)
@@ -200,7 +200,7 @@ public class CommunigateController {
                 logger.error("Communigate importing error...", e);
             }
         }
-        return "import-communigate";
+        return "c-import-communigate";
     }
 
 
