@@ -1,10 +1,13 @@
 package utilits;
 
 import org.apache.commons.lang3.time.FastDateFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import utilits.aspect.ActionType;
 import utilits.aspect.change.ChangeType;
 import utilits.controller.actions.ActionsForm;
 import utilits.controller.actions.ChangesForm;
+import utilits.controller.users.Authority;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -63,6 +66,11 @@ public class Utils {
                 CHANGES_TYPES.put(changeType.name(), changeType.name());
             }
         }
+    }
+
+    public static boolean hasRole(Authority authority) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().contains(authority);
     }
 
 }

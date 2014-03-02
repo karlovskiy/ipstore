@@ -19,5 +19,5 @@ Technologies and frameworks used:
   * hibernate search
 * Jasperreports(xls export data)
 * Apache poi(xls import data)
-* Twitter bootstrap
+* Bootstrap 3
 * jQuery

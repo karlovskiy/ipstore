@@ -82,7 +82,9 @@ public class LoginController {
         user.setPassword(passwordEncoder.encodePassword(newPassword, username));
         user.setCredentialsNonExpired(true);
         userService.updateUser(user.getId(), user);
-        session.invalidate();
+        session.removeAttribute(CREDENTIALS_EXPIRED_USERNAME_KEY);
+        session.removeAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+        session.setAttribute("LOGIN_INFO_MESSAGE", "Expired password successfully changed.");
         return "redirect:/";
     }
 
@@ -153,12 +155,6 @@ public class LoginController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
         return "login";
-    }
-
-    @Action(value = HOME_PAGE)
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home() {
-        return "home";
     }
 
     @Action(value = CONTACT_PAGE)

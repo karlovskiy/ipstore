@@ -1,0 +1,77 @@
+body {
+    padding-top: 50px;
+}
+
+.sidebar {
+    background-color: #F5F5F5;
+    border-right: 1px solid #EEEEEE;
+    bottom: 0;
+    display: block;
+    left: 0;
+    padding: 70px 20px 20px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.main {
+    padding: 20px 40px;
+}
+
+div.form-horizontal .form-group {
+    margin-bottom: 5px;
+}
+
+.max_length {
+    display: inline-block;
+    vertical-align: middle;
+    width: 60px;
+}
+
+.nav-pills {
+    margin-bottom: 20px;
+}
+
+.nav-pills > li > a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.overflow-column {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+}
+
+.form-inline .form-group input[type='text'] {
+    width: 120px;
+}
+
+.bootstrap-header {
+    color: #fff;
+    background-color: #007fff !important;
+    border-bottom-width: 0 !important;
+}
+
+.icon-white {
+    color: #fff;
+}
+.table > tbody > tr.danger > td a, .table > tbody > tr.warning > td a {
+    color: #ffffff;
+}
+
+.panel-table {
+    margin-bottom: 11px;
+}
+
+.panel-body {
+    padding: 10px;
+}
+
+.status-table > thead > tr > th, .status-table > tbody > tr > th,
+.status-table > tfoot > tr > th, .status-table > thead > tr > td,
+.status-table > tbody > tr > td, .status-table > tfoot > tr > td {
+    padding: 5px 10px 5px 5px;
+}

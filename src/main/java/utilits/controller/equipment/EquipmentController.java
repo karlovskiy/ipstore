@@ -126,7 +126,7 @@ public class EquipmentController {
         return "redirect:/equipment/view/" + id;
     }
 
-    @Action(value = ACTIVATE_NO_EXPIRED_EQUIPMENT, changeType = EQUIPMENT, changeMode = UPDATE)
+    @Action(value = EQUIPMENT_ACTIVATE_NO_EXPIRED, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/activate_no_expired/{id}", method = RequestMethod.GET)
     public String activateNoExpiredEquipment(@PathVariable Long id) {
         equipmentService.activateWithNoExpiredEquipment(id);

@@ -5,7 +5,7 @@
     <groupId>utilits</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>3.3.2-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 
     <name>ipstore web application</name>
 

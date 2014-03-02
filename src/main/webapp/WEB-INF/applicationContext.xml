@@ -33,7 +33,7 @@
         </bean>
     </mvc:interceptors>
 
-    <mvc:resources mapping="/resources/**" location="/assets, /flash, /images, /js"/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <aop:aspectj-autoproxy/>
 

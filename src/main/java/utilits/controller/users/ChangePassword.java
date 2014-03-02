@@ -1,5 +1,7 @@
 package utilits.controller.users;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -9,11 +11,11 @@ import javax.validation.constraints.NotNull;
  * @since 2.4, 3/28/13
  */
 public class ChangePassword {
-    @NotNull
+    @NotEmpty
     private String oldPassword;
-    @NotNull
+    @NotEmpty
     private String newPassword;
-    @NotNull
+    @NotEmpty
     private String repeatNewPassword;
 
     public String getOldPassword() {
