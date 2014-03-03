@@ -69,16 +69,16 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
 
-            <a href="<c:url value="/users/edit/${user.id}"/>" class="btn btn-primary">Edit</a>
+            <a href="<c:url value="/users/${user.id}/edit"/>" class="btn btn-primary">Edit</a>
 
-            <a href="<c:url value="/users/reset/${user.id}"/>" class="btn btn-danger">Reset password</a>
+            <a href="<c:url value="/users/${user.id}/reset"/>" class="btn btn-danger">Reset password</a>
 
             <c:if test="${user.userStatus == 'BLOCKED'}">
-                <a href="<c:url value="/users/unblock/${user.id}"/>" class="btn btn-success">Unblock</a>
+                <a href="<c:url value="/users/${user.id}/unblock"/>" class="btn btn-success">Unblock</a>
             </c:if>
 
             <c:if test="${user.userStatus == 'ACTIVE'}">
-                <a href="<c:url value="/users/block/${user.id}"/>" class="btn btn-warning">Block</a>
+                <a href="<c:url value="/users/${user.id}/block"/>" class="btn btn-warning">Block</a>
             </c:if>
         </div>
     </div>

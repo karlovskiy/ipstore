@@ -85,7 +85,7 @@ public class EquipmentController {
     }
 
     @Action(value = EQUIPMENT_VIEW_PAGE)
-    @RequestMapping(value = "/equipment/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/{id}", method = RequestMethod.GET)
     public String viewEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
@@ -93,78 +93,78 @@ public class EquipmentController {
     }
 
     @Action(value = EQUIPMENT_ADD_PAGE)
-    @RequestMapping(value = "/equipment/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/new", method = RequestMethod.GET)
     public String addEquipment(Model model) {
         Equipment equipment = new Equipment();
         model.addAttribute("equipment", equipment);
-        model.addAttribute("formAction", "/equipment/save");
+        model.addAttribute("formAction", "/equipment");
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "c-edit-equipment";
     }
 
     @Action(value = EQUIPMENT_EDIT_PAGE)
-    @RequestMapping(value = "/equipment/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/{id}/edit", method = RequestMethod.GET)
     public String editEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
-        model.addAttribute("formAction", "/equipment/save/" + id);
+        model.addAttribute("formAction", "/equipment/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "c-edit-equipment";
     }
 
     @Action(value = EQUIPMENT_DELETE, changeType = EQUIPMENT, changeMode = UPDATE)
-    @RequestMapping(value = "/equipment/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/{id}/delete", method = RequestMethod.GET)
     public String deleteEquipment(@PathVariable Long id) {
         equipmentService.deleteEquipment(id);
         return "redirect:/equipment";
     }
 
     @Action(value = EQUIPMENT_ACTIVATE, changeType = EQUIPMENT, changeMode = UPDATE)
-    @RequestMapping(value = "/equipment/activate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/{id}/activate", method = RequestMethod.GET)
     public String activateEquipment(@PathVariable Long id) {
         equipmentService.activateEquipment(id);
-        return "redirect:/equipment/view/" + id;
+        return "redirect:/equipment/" + id;
     }
 
     @Action(value = EQUIPMENT_ACTIVATE_NO_EXPIRED, changeType = EQUIPMENT, changeMode = UPDATE)
-    @RequestMapping(value = "/equipment/activate_no_expired/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/{id}/activate_no_expired", method = RequestMethod.GET)
     public String activateNoExpiredEquipment(@PathVariable Long id) {
         equipmentService.activateWithNoExpiredEquipment(id);
-        return "redirect:/equipment/view/" + id;
+        return "redirect:/equipment/" + id;
     }
 
-    @RequestMapping(value = "/equipment/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/equipment", method = RequestMethod.POST)
     public String createEquipment(@Valid Equipment equipment, BindingResult result,
                                   @RequestParam("cf") MultipartFile config, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/equipment/save");
+            model.addAttribute("formAction", "/equipment");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "c-edit-equipment";
         }
         String ipAddress = equipment.getIpAddress();
         Equipment existsEquipment = equipmentService.loadEquipment(ipAddress);
         if (existsEquipment != null) {
-            model.addAttribute("formAction", "/equipment/save");
+            model.addAttribute("formAction", "/equipment");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             model.addAttribute("existsEquipment", existsEquipment);
             return "c-edit-equipment";
         }
         Long id = equipmentService.createEquipment(equipment, config);
-        return "redirect:/equipment/view/" + id;
+        return "redirect:/equipment/" + id;
     }
 
     @Action(value = EQUIPMENT_UPDATE, changeType = EQUIPMENT, changeMode = UPDATE)
-    @RequestMapping(value = "/equipment/save/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/equipment/{id}", method = RequestMethod.POST)
     public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id,
                                   @RequestParam("cf") MultipartFile config, @RequestParam("cf_reset") String cfReset,
                                   Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/equipment/save/" + id);
+            model.addAttribute("formAction", "/equipment/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "c-edit-equipment";
         }
         equipmentService.updateEquipment(id, equipment, config, "reset".equals(cfReset));
-        return "redirect:/equipment/view/" + id;
+        return "redirect:/equipment/" + id;
     }
 
     @Action(value = GENERATE_PASSWORD)
@@ -178,7 +178,7 @@ public class EquipmentController {
     }
 
     @Action(value = LOAD_CONFIG)
-    @RequestMapping(value = "/equipment/load_config/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/equipment/{id}/load_config", method = RequestMethod.GET)
     public HttpEntity<byte[]> loadConfig(@PathVariable Long id) {
         logger.info("Request for loading equipment config");
         return equipmentService.loadConfig(id);

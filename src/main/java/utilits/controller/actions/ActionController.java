@@ -51,7 +51,7 @@ public class ActionController {
         return "c-list-actions";
     }
 
-    @RequestMapping(value = "/actions/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/actions/{id}", method = RequestMethod.GET)
     public String viewAction(@PathVariable Long id, Model model) {
         model.addAttribute("action", actionService.loadAction(id));
         return "c-view-actions";

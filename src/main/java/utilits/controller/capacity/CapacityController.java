@@ -68,149 +68,150 @@ public class CapacityController {
         return "c-list-capacity";
     }
 
-    @RequestMapping(value = "/capacity/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/capacity/new", method = RequestMethod.GET)
     public String addCapacityPage(Model model) {
         CapacityType capacityType = new CapacityType();
         model.addAttribute("capacityType", capacityType);
-        model.addAttribute("action", "/capacity/add");
+        model.addAttribute("action", "/capacity");
         return "c-edit-capacity";
     }
 
-    @RequestMapping(value = "/capacity/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/capacity", method = RequestMethod.POST)
     public String addCapacity(@Valid CapacityType capacityType, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/capacity/add");
+            model.addAttribute("action", "/capacity");
             return "c-edit-capacity";
         }
         String name = capacityType.getName();
         Long existsId = capacityService.loadExistsCapacity(name);
         if (existsId != null) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/capacity/add");
+            model.addAttribute("action", "/capacity");
             return "c-edit-capacity";
         }
         capacityService.createCapacityType(capacityType);
         return "redirect:/capacity";
     }
 
-    @RequestMapping(value = "/capacity/edit/{capacityId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/capacity/{capacityId}/edit", method = RequestMethod.GET)
     public String editCapacityType(@PathVariable Long capacityId, Model model) {
         CapacityType capacityType = capacityService.loadCapacityType(capacityId);
         model.addAttribute("capacityType", capacityType);
-        model.addAttribute("action", "/capacity/edit/" + capacityId);
+        model.addAttribute("action", "/capacity/" + capacityId);
         return "c-edit-capacity";
     }
 
-    @RequestMapping(value = "/capacity/edit/{capacityId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/capacity/{capacityId}", method = RequestMethod.POST)
     public String updateCapacityType(@Valid CapacityType capacityType, BindingResult result, @PathVariable Long capacityId, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/capacity/edit/" + capacityId);
+            model.addAttribute("action", "/capacity/" + capacityId);
             return "c-edit-capacity";
         }
         String name = capacityType.getName();
         Long existsId = capacityService.loadExistsCapacity(name);
         if (existsId != null && !existsId.equals(capacityId)) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/capacity/edit/" + capacityId);
+            model.addAttribute("action", "/capacity/" + capacityId);
             return "c-edit-capacity";
         }
         capacityService.updateCapacityType(capacityId, capacityType);
         return "redirect:/capacity";
     }
 
-    @RequestMapping(value = "/capacity/{capacityId}/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/new", method = RequestMethod.GET)
     public String addCapacityNumberPage(@PathVariable Long capacityId, Model model) {
         CapacityType capacityType = capacityService.loadCapacityType(capacityId);
         model.addAttribute("capacityType", capacityType);
         CapacityNumber capacityNumber = new CapacityNumber();
         model.addAttribute("capacityNumber", capacityNumber);
-        model.addAttribute("action", "/capacity/" + capacityId + "/add");
+        model.addAttribute("action", "/capacity/" + capacityId + "/numbers");
         return "c-edit-capacity_number";
     }
 
-    @RequestMapping(value = "/capacity/{capacityId}/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/capacity/{capacityId}/numbers", method = RequestMethod.POST)
     public String addCapacityNumber(@Valid CapacityNumber capacityNumber, BindingResult result, @PathVariable Long capacityId,
                                     Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/capacity/" + capacityId + "/add");
+            model.addAttribute("action", "/capacity/" + capacityId + "/numbers");
             return "c-edit-capacity_number";
         }
         String number = capacityNumber.getNumber();
         Long existsId = capacityService.loadExistsCapacityNumber(number);
         if (existsId != null) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/capacity/" + capacityId + "/add");
+            model.addAttribute("action", "/capacity/" + capacityId + "/numbers");
             return "c-edit-capacity_number";
         }
         Long capacityNumberId = capacityService.createCapacityNumber(capacityNumber, capacityId);
-        return "redirect:/capacity/number/view/" + capacityNumberId;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + capacityNumberId;
     }
 
-    @RequestMapping(value = "/capacity/number/view/{id}", method = RequestMethod.GET)
-    public String viewCapacityNumber(@PathVariable Long id, Model model) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}", method = RequestMethod.GET)
+    public String viewCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id, Model model) {
         CapacityNumber capacityNumber = capacityService.loadCapacityNumber(id);
         model.addAttribute("capacityNumber", capacityNumber);
         return "c-view-capacity_number";
     }
 
-    @RequestMapping(value = "/capacity/number/edit/{id}", method = RequestMethod.GET)
-    public String editCapacityNumber(@PathVariable Long id, Model model) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/edit", method = RequestMethod.GET)
+    public String editCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id, Model model) {
         CapacityNumber capacityNumber = capacityService.loadCapacityNumber(id);
         model.addAttribute("capacityNumber", capacityNumber);
-        model.addAttribute("action", "/capacity/number/edit/" + id);
+        model.addAttribute("action", "/capacity/" + capacityId + "/numbers/" + id);
         return "c-edit-capacity_number";
     }
 
-    @RequestMapping(value = "/capacity/number/edit/{id}", method = RequestMethod.POST)
-    public String updateCapacityNumber(@Valid CapacityNumber capacityNumber, BindingResult result, @PathVariable Long id, Model model) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}", method = RequestMethod.POST)
+    public String updateCapacityNumber(@Valid CapacityNumber capacityNumber, BindingResult result,
+                                       @PathVariable Long capacityId, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("action", "/capacity/number/edit/" + id);
+            model.addAttribute("action", "/capacity/" + capacityId + "/numbers/" + id);
             return "c-edit-capacity_number";
         }
         String number = capacityNumber.getNumber();
         Long existsId = capacityService.loadExistsCapacityNumber(number);
         if (existsId != null && !existsId.equals(id)) {
             model.addAttribute("existsId", existsId);
-            model.addAttribute("action", "/capacity/number/edit/" + id);
+            model.addAttribute("action", "/capacity/" + capacityId + "/numbers/" + id);
             return "c-edit-capacity_number";
         }
         capacityService.updateCapacityNumber(id, capacityNumber);
-        return "redirect:/capacity/number/view/" + id;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + id;
     }
 
-    @RequestMapping(value = "/capacity/number/free/{id}", method = RequestMethod.GET)
-    public String freeCapacityNumber(@PathVariable Long id) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/free", method = RequestMethod.GET)
+    public String freeCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.FREE);
-        return "redirect:/capacity/number/view/" + id;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + id;
     }
 
-    @RequestMapping(value = "/capacity/number/sell/{id}", method = RequestMethod.GET)
-    public String sellCapacityNumber(@PathVariable Long id) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/sell", method = RequestMethod.GET)
+    public String sellCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.SELL);
-        return "redirect:/capacity/number/view/" + id;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + id;
     }
 
-    @RequestMapping(value = "/capacity/number/reserve/{id}", method = RequestMethod.GET)
-    public String reserveCapacityNumber(@PathVariable Long id) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/reserve", method = RequestMethod.GET)
+    public String reserveCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.RESERVED);
-        return "redirect:/capacity/number/view/" + id;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + id;
     }
 
-    @RequestMapping(value = "/capacity/number/unreserve/{id}", method = RequestMethod.GET)
-    public String unreserveCapacityNumber(@PathVariable Long id) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/unreserve", method = RequestMethod.GET)
+    public String unreserveCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.FREE);
-        return "redirect:/capacity/number/view/" + id;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + id;
     }
 
-    @RequestMapping(value = "/capacity/number/test/{id}", method = RequestMethod.GET)
-    public String testCapacityNumber(@PathVariable Long id) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/test", method = RequestMethod.GET)
+    public String testCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.TEST);
-        return "redirect:/capacity/number/view/" + id;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + id;
     }
 
-    @RequestMapping(value = "/capacity/number/transfer/{id}", method = RequestMethod.GET)
-    public String transferCapacityNumber(@PathVariable Long id) {
+    @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/transfer", method = RequestMethod.GET)
+    public String transferCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id) {
         capacityService.updateCapacityNumberStatus(id, CapacityNumberStatus.TRANSFERED);
-        return "redirect:/capacity/number/view/" + id;
+        return "redirect:/capacity/" + capacityId + "/numbers/" + id;
     }
 }

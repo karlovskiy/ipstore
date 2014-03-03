@@ -14,7 +14,7 @@
                 <c:if test="${not empty existsId}">
                         <span class="help-block">
                             Capacity with name
-                            <a href="<c:url value="/capacity/view/${existsId}"/>" target="_blank">
+                            <a href="<c:url value="/capacity/${existsId}"/>" target="_blank">
                                 <c:out value="${capacityType.name}"/>
                             </a>
                             already exists!

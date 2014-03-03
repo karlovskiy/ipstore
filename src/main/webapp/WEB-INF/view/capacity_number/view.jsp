@@ -114,7 +114,7 @@
             <security:authorize access="hasRole('ROLE_CAPACITY_MANAGER')">
 
                 <c:if test="${capacityNumber.status ne 'RESERVED'}">
-                    <a href="<c:url value="/capacity/number/reserve/${capacityNumber.id}"/>"
+                    <a href="<c:url value="/capacity/${capacityNumber.type.id}/numbers/${capacityNumber.id}/reserve"/>"
                        class="btn btn-primary">Reserve</a>
                 </c:if>
 
@@ -122,29 +122,34 @@
                 <security:authorize var="edit" access="hasRole('ROLE_CAPACITY_EDIT')"/>
 
                 <c:if test="${capacityNumber.status eq 'RESERVED' and (capacityNumber.lscUsername eq username or edit)}">
-                    <a href="<c:url value="/capacity/number/unreserve/${capacityNumber.id}"/>"
+                    <a href="<c:url value="/capacity/${capacityNumber.type.id}/numbers/${capacityNumber.id}/unreserve"/>"
                        class="btn btn-primary">Unreserve</a>
                 </c:if>
             </security:authorize>
 
             <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
 
-                <a href="<c:url value="/capacity/number/edit/${capacityNumber.id}"/>" class="btn btn-primary">Edit</a>
+                <a href="<c:url value="/capacity/${capacityNumber.type.id}/numbers/${capacityNumber.id}/edit"/>"
+                   class="btn btn-primary">Edit</a>
 
                 <c:if test="${capacityNumber.status ne 'FREE'}">
-                    <a href="<c:url value="/capacity/number/free/${capacityNumber.id}"/>" class="btn btn-primary">Free</a>
+                    <a href="<c:url value="/capacity/${capacityNumber.type.id}/numbers/${capacityNumber.id}/free"/>"
+                       class="btn btn-primary">Free</a>
                 </c:if>
 
                 <c:if test="${capacityNumber.status ne 'SELL'}">
-                    <a href="<c:url value="/capacity/number/sell/${capacityNumber.id}"/>" class="btn btn-primary">Sell</a>
+                    <a href="<c:url value="/capacity/${capacityNumber.type.id}/numbers/${capacityNumber.id}/sell"/>"
+                       class="btn btn-primary">Sell</a>
                 </c:if>
 
                 <c:if test="${capacityNumber.status ne 'TEST'}">
-                    <a href="<c:url value="/capacity/number/test/${capacityNumber.id}"/>" class="btn btn-primary">Test</a>
+                    <a href="<c:url value="/capacity/${capacityNumber.type.id}/numbers/${capacityNumber.id}/test"/>"
+                       class="btn btn-primary">Test</a>
                 </c:if>
 
                 <c:if test="${capacityNumber.status ne 'TRANSFERED'}">
-                    <a href="<c:url value="/capacity/number/transfer/${capacityNumber.id}"/>" class="btn btn-primary">Transfer</a>
+                    <a href="<c:url value="/capacity/${capacityNumber.type.id}/numbers/${capacityNumber.id}/transfer"/>"
+                       class="btn btn-primary">Transfer</a>
                 </c:if>
             </security:authorize>
         </div>

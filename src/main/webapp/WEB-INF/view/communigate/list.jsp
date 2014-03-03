@@ -16,7 +16,7 @@
     <c:forEach items="${communigateDomains}" var="communigateDomain">
         <tr class="${bootstrap.rowClass(communigateDomain.status)}">
             <td>
-                <a href="<c:url value="/communigate/view/${communigateDomain.id}"/>">
+                <a href="<c:url value="/communigate/${communigateDomain.id}"/>">
                     <c:out value="${communigateDomain.domainName}"/>
                 </a>
             </td>

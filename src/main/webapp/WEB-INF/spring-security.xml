@@ -18,10 +18,10 @@
         <intercept-url pattern="/generate_password"                 access="isFullyAuthenticated()"/>
         <!-- actions -->
         <intercept-url pattern="/actions"                           access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/actions/view/*"                    access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/actions/*"                         access="hasRole('ROLE_ROOT')" method="GET"/>
         <!-- changes -->
         <intercept-url pattern="/changes"                           access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/changes_types"                     access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/changes_types"                     access="hasRole('ROLE_ROOT')" method="GET"/>
         <!-- change password and user info -->
         <intercept-url pattern="/mustchangepassword"                access="hasRole('ROLE_ANONYMOUS')"/>
         <intercept-url pattern="/changepassword"                    access="isFullyAuthenticated()"/>
@@ -29,60 +29,69 @@
         <!-- lucene index -->
         <intercept-url pattern="/rebuild"                           access="hasRole('ROLE_ROOT')"/>
         <!-- equipment -->
-        <intercept-url pattern="/equipment"                         access="hasRole('ROLE_EQUIPMENT_VIEW')"/>
-        <intercept-url pattern="/equipment/view/*"                  access="hasRole('ROLE_EQUIPMENT_VIEW')"/>
-        <intercept-url pattern="/equipment/load_config/*"           access="hasRole('ROLE_EQUIPMENT_VIEW')"/>
-        <intercept-url pattern="/equipment/add"                     access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
-        <intercept-url pattern="/equipment/save"                    access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
-        <intercept-url pattern="/equipment/edit/*"                  access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
-        <intercept-url pattern="/equipment/delete/*"                access="hasRole('ROLE_EQUIPMENT_EDIT')"/>
-        <intercept-url pattern="/equipment/activate/*"              access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/equipment/export"                  access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/equipment"                         access="hasRole('ROLE_EQUIPMENT_VIEW')" method="GET"/>
+        <intercept-url pattern="/equipment/*"                       access="hasRole('ROLE_EQUIPMENT_VIEW')" method="GET"/>
+        <intercept-url pattern="/equipment/load_config/*"           access="hasRole('ROLE_EQUIPMENT_VIEW')" method="GET"/>
+        <intercept-url pattern="/equipment"                         access="hasRole('ROLE_EQUIPMENT_EDIT')" method="POST"/>
+        <intercept-url pattern="/equipment/*"                       access="hasRole('ROLE_EQUIPMENT_EDIT')" method="POST"/>
+        <intercept-url pattern="/equipment/new"                     access="hasRole('ROLE_EQUIPMENT_EDIT')" method="GET"/>
+        <intercept-url pattern="/equipment/*/edit"                  access="hasRole('ROLE_EQUIPMENT_EDIT')" method="GET"/>
+        <intercept-url pattern="/equipment/*/delete"                access="hasRole('ROLE_EQUIPMENT_EDIT')" method="GET"/>
+        <intercept-url pattern="/equipment/*/activate"              access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/equipment/*/activate_no_expired"   access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/equipment/export"                  access="hasRole('ROLE_ROOT')" method="GET"/>
         <intercept-url pattern="/equipment/import"                  access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/equipment/activate_no_expired/*"   access="hasRole('ROLE_ROOT')"/>
         <!-- accounts -->
-        <intercept-url pattern="/accounts"                          access="hasRole('ROLE_ACCOUNT_VIEW')"/>
+        <intercept-url pattern="/accounts"                          access="hasRole('ROLE_ACCOUNT_VIEW')" method="GET"/>
+        <intercept-url pattern="/accounts/*"                        access="hasRole('ROLE_ACCOUNT_VIEW')" method="GET"/>
+        <intercept-url pattern="/accounts"                          access="hasRole('ROLE_ACCOUNT_EDIT')" method="POST"/>
+        <intercept-url pattern="/accounts/*"                        access="hasRole('ROLE_ACCOUNT_EDIT')" method="POST"/>
+        <intercept-url pattern="/accounts/new"                      access="hasRole('ROLE_ACCOUNT_EDIT')" method="GET"/>
+        <intercept-url pattern="/accounts/*/edit"                   access="hasRole('ROLE_ACCOUNT_EDIT')" method="GET"/>
+        <intercept-url pattern="/accounts/*/block"                  access="hasRole('ROLE_ACCOUNT_EDIT')" method="GET"/>
+        <intercept-url pattern="/accounts/*/unblock"                access="hasRole('ROLE_ACCOUNT_EDIT')" method="GET"/>
+        <intercept-url pattern="/accounts/*/delete"                 access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/accounts/*/activate"               access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/accounts/export"                   access="hasRole('ROLE_ROOT')" method="GET"/>
         <intercept-url pattern="/accounts/import"                   access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/accounts/view/*"                   access="hasRole('ROLE_ACCOUNT_VIEW')"/>
-        <intercept-url pattern="/accounts/delete/*"                 access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/accounts/block/*"                  access="hasRole('ROLE_ACCOUNT_EDIT')"/>
-        <intercept-url pattern="/accounts/unblock/*"                access="hasRole('ROLE_ACCOUNT_EDIT')"/>
-        <intercept-url pattern="/accounts/activate/*"               access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/accounts/edit/*"                   access="hasRole('ROLE_ACCOUNT_EDIT')"/>
-        <intercept-url pattern="/accounts/add"                      access="hasRole('ROLE_ACCOUNT_EDIT')"/>
-        <intercept-url pattern="/accounts/export"                   access="hasRole('ROLE_ROOT')"/>
         <!-- users -->
         <intercept-url pattern="/users"                             access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/view/*"                      access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/block/*"                     access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/unblock/*"                   access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/edit/*"                      access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/add"                         access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/reset/*"                     access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/users/*"                           access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/users/new"                         access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/users/*/edit"                      access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/users/*/block"                     access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/users/*/unblock"                   access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/users/*/reset"                     access="hasRole('ROLE_ROOT')"/>
         <!-- communigate -->
-        <intercept-url pattern="/communigate"                       access="hasRole('ROLE_COMMUNIGATE_VIEW')"/>
-        <intercept-url pattern="/communigate/view/*"                access="hasRole('ROLE_COMMUNIGATE_VIEW')"/>
-        <intercept-url pattern="/communigate/delete/*"              access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/communigate/block/*"               access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
-        <intercept-url pattern="/communigate/unblock/*"             access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
-        <intercept-url pattern="/communigate/activate/*"            access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/communigate/edit/*"                access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
-        <intercept-url pattern="/communigate/add"                   access="hasRole('ROLE_COMMUNIGATE_EDIT')"/>
+        <intercept-url pattern="/communigate"                       access="hasRole('ROLE_COMMUNIGATE_VIEW')" method="GET"/>
+        <intercept-url pattern="/communigate/*"                     access="hasRole('ROLE_COMMUNIGATE_VIEW')" method="GET"/>
+        <intercept-url pattern="/communigate"                       access="hasRole('ROLE_COMMUNIGATE_EDIT')" method="POST"/>
+        <intercept-url pattern="/communigate/*"                     access="hasRole('ROLE_COMMUNIGATE_EDIT')" method="POST"/>
+        <intercept-url pattern="/communigate/new"                   access="hasRole('ROLE_COMMUNIGATE_EDIT')" method="GET"/>
+        <intercept-url pattern="/communigate/*/edit"                access="hasRole('ROLE_COMMUNIGATE_EDIT')" method="GET"/>
+        <intercept-url pattern="/communigate/*/block"               access="hasRole('ROLE_COMMUNIGATE_EDIT')" method="GET"/>
+        <intercept-url pattern="/communigate/*/unblock"             access="hasRole('ROLE_COMMUNIGATE_EDIT')" method="GET"/>
+        <intercept-url pattern="/communigate/*/delete"              access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/communigate/*/activate"            access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/communigate/export"                access="hasRole('ROLE_ROOT')" method="GET"/>
         <intercept-url pattern="/communigate/import"                access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/communigate/export"                access="hasRole('ROLE_ROOT')"/>
         <!-- phone capacity -->
-        <intercept-url pattern="/capacity"                          access="hasRole('ROLE_CAPACITY_VIEW')"/>
-        <intercept-url pattern="/capacity/edit/*"                   access="hasRole('ROLE_CAPACITY_EDIT')"/>
-        <intercept-url pattern="/capacity/number/view/*"            access="hasRole('ROLE_CAPACITY_VIEW')"/>
-        <intercept-url pattern="/capacity/number/edit/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
-        <intercept-url pattern="/capacity/*/add"                    access="hasRole('ROLE_CAPACITY_EDIT')"/>
-        <intercept-url pattern="/capacity/add"                      access="hasRole('ROLE_CAPACITY_EDIT')"/>
-        <intercept-url pattern="/capacity/number/reserve/*"         access="hasRole('ROLE_CAPACITY_MANAGER')"/>
-        <intercept-url pattern="/capacity/number/unreserve/*"       access="hasRole('ROLE_CAPACITY_MANAGER')"/>
-        <intercept-url pattern="/capacity/number/free/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
-        <intercept-url pattern="/capacity/number/sell/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
-        <intercept-url pattern="/capacity/number/test/*"            access="hasRole('ROLE_CAPACITY_EDIT')"/>
-        <intercept-url pattern="/capacity/number/transfer/*"        access="hasRole('ROLE_CAPACITY_EDIT')"/>
+        <intercept-url pattern="/capacity"                          access="hasRole('ROLE_CAPACITY_VIEW')" method="GET"/>
+        <intercept-url pattern="/capacity/*"                        access="hasRole('ROLE_CAPACITY_VIEW')" method="GET"/>
+        <intercept-url pattern="/capacity"                          access="hasRole('ROLE_CAPACITY_EDIT')" method="POST"/>
+        <intercept-url pattern="/capacity/*"                        access="hasRole('ROLE_CAPACITY_EDIT')" method="POST"/>
+        <intercept-url pattern="/capacity/new"                      access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
+        <intercept-url pattern="/capacity/*/edit"                   access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*"              access="hasRole('ROLE_CAPACITY_VIEW')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*"              access="hasRole('ROLE_CAPACITY_EDIT')" method="POST"/>
+        <intercept-url pattern="/capacity/*/numbers/new"            access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*/edit"         access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*/reserve"      access="hasRole('ROLE_CAPACITY_MANAGER')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*/unreserve"    access="hasRole('ROLE_CAPACITY_MANAGER')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*/free"         access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*/sell"         access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*/test"         access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
+        <intercept-url pattern="/capacity/*/numbers/*/transfer"     access="hasRole('ROLE_CAPACITY_EDIT')" method="GET"/>
 
         <form-login login-page="/login" default-target-url="/"
                     authentication-failure-handler-ref="authenticationFailureHandler"/>

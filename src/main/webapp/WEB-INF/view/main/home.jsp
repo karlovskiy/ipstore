@@ -74,7 +74,7 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${hasRootRole}">
-                                            <a href="<c:out value="/actions/view/${equipment.actionId}"/>">
+                                            <a href="<c:out value="/actions/${equipment.actionId}"/>">
                                                 <fmt:formatDate value="${equipment.actionTimestamp}" type="both"
                                                                 pattern="dd.MM.yyyy HH:mm:ss"/>
                                             </a>
@@ -92,7 +92,7 @@
                                 </td>
                                 <td><c:out value="${equipment.username}"/></td>
                                 <td>
-                                    <a href="<c:url value="/equipment/view/${equipment.entityId}"/>">
+                                    <a href="<c:url value="/equipment/${equipment.entityId}"/>">
                                         <c:out value="${equipment.entityName}"/>
                                     </a>
                                 </td>
@@ -157,7 +157,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${hasRootRole}">
-                                        <a href="<c:out value="/actions/view/${account.actionId}"/>">
+                                        <a href="<c:out value="/actions/${account.actionId}"/>">
                                             <fmt:formatDate value="${account.actionTimestamp}" type="both"
                                                             pattern="dd.MM.yyyy HH:mm:ss"/>
                                         </a>
@@ -175,7 +175,7 @@
                             </td>
                             <td><c:out value="${account.username}"/></td>
                             <td>
-                                <a href="<c:url value="/accounts/view/${account.entityId}"/>">
+                                <a href="<c:url value="/accounts/${account.entityId}"/>">
                                     <c:out value="${account.entityName}"/>
                                 </a>
                             </td>
@@ -209,7 +209,7 @@
                             <tr>
                                 <td>
                                     <span class="text-success">NORMAL</span>
-                                    <a href="<c:url value="/accounts"/>">
+                                    <a href="<c:url value="/communigate"/>">
                                             <span class="badge">
                                                 <c:out value="${communigateWidget.normal}"/>
                                             </span>
@@ -217,7 +217,7 @@
                                 </td>
                                 <td>
                                     <span class="text-danger">BLOCKED</span>
-                                    <a href="<c:url value="/accounts"/>">
+                                    <a href="<c:url value="/communigate"/>">
                                             <span class="badge">
                                                 <c:out value="${communigateWidget.blocked}"/>
                                             </span>
@@ -241,7 +241,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${hasRootRole}">
-                                        <a href="<c:out value="/actions/view/${communigate.actionId}"/>">
+                                        <a href="<c:out value="/actions/${communigate.actionId}"/>">
                                             <fmt:formatDate value="${communigate.actionTimestamp}" type="both"
                                                             pattern="dd.MM.yyyy HH:mm:ss"/>
                                         </a>
@@ -259,7 +259,7 @@
                             </td>
                             <td><c:out value="${communigate.username}"/></td>
                             <td>
-                                <a href="<c:url value="/communigate/view/${communigate.entityId}"/>">
+                                <a href="<c:url value="/communigate/${communigate.entityId}"/>">
                                     <c:out value="${communigate.entityName}"/>
                                 </a>
                             </td>
@@ -339,7 +339,7 @@
                             <c:forEach items="${actionsWidget.lastActions}" var="action">
                             <tr>
                                 <td>
-                                    <a href="<c:out value="/actions/view/${action.id}"/>">
+                                    <a href="<c:out value="/actions/${action.id}"/>">
                                         <fmt:formatDate value="${action.actionTimestamp}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
                                     </a>
                                 </td>

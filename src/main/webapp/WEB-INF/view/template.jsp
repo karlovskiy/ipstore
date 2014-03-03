@@ -40,7 +40,7 @@
                             <li><a href="<c:url value="/changes"/>">Changes</a></li>
                             <li class="dropdown-header">Users</li>
                             <li><a href="<c:url value="/users"/>">Users list</a></li>
-                            <li><a href="<c:url value="/users/add"/>">Add user</a></li>
+                            <li><a href="<c:url value="/users/new"/>">Add user</a></li>
                             <li class="dropdown-header">Miscellaneous</li>
                             <li><a href="<c:url value="/monitoring"/>">Monitoring</a></li>
                             <li><a id="rebuild_index" href="<c:url value="/rebuild"/>">Rebuild lucene index</a></li>
@@ -86,7 +86,7 @@
                         </li>
                     <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
                         <li class="${bootstrap.checkMenuActive('ADD_EQUIPMENT')}">
-                            <a href="<c:url value="/equipment/add"/>">
+                            <a href="<c:url value="/equipment/new"/>">
                                 <span class="glyphicon glyphicon-plus"></span> Add equipment
                             </a>
                         </li>
@@ -114,7 +114,7 @@
                     </li>
                 <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
                     <li class="${bootstrap.checkMenuActive('ADD_ACCOUNT')}">
-                        <a href="<c:url value="/accounts/add"/>">
+                        <a href="<c:url value="/accounts/new"/>">
                             <span class="glyphicon glyphicon-plus"></span> Add account
                         </a>
                     </li>
@@ -142,7 +142,7 @@
                         </li>
                     <security:authorize access="hasRole('ROLE_COMMUNIGATE_EDIT')">
                         <li class="${bootstrap.checkMenuActive('ADD_DOMAIN')}">
-                            <a href="<c:url value="/communigate/add"/>">
+                            <a href="<c:url value="/communigate/new"/>">
                                 <span class="glyphicon glyphicon-plus"></span> Add domain
                             </a>
                         </li>
@@ -172,7 +172,7 @@
 
                     <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
                         <li class="${bootstrap.checkMenuActive('ADD_CAPACITY')}">
-                            <a href="<c:url value="/capacity/add"/>">
+                            <a href="<c:url value="/capacity/new"/>">
                                 <span class="glyphicon glyphicon-plus"></span> Add capacity
                             </a>
                         </li>

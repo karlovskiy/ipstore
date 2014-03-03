@@ -13,7 +13,7 @@
     <c:forEach items="${users}" var="user">
         <tr class="${bootstrap.rowClass(user.userStatus)}">
             <td>
-                <a href="<c:url value="/users/view/${user.id}"/>">
+                <a href="<c:url value="/users/${user.id}"/>">
                     <c:out value="${user.username}"/>
                 </a>
             </td>

@@ -16,7 +16,7 @@
     <c:forEach items="${equipment}" var="equipment">
         <tr class="${bootstrap.rowClass(equipment.passwordStatus)}">
             <td>
-                <a href="<c:url value="/equipment/view/${equipment.id}"/>">
+                <a href="<c:url value="/equipment/${equipment.id}"/>">
                     <c:out value="${equipment.ipAddress}"/>
                 </a>
             </td>

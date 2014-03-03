@@ -12,7 +12,7 @@
                 <c:if test="${not empty existsCommunigateDomain}">
                       <span class="help-block">
                             Communigate domain with
-                            <a href="<c:url value="/communigate/view/${existsCommunigateDomain.id}"/>" target="_blank">
+                            <a href="<c:url value="/communigate/${existsCommunigateDomain.id}"/>" target="_blank">
                                 domainName <c:out value="${existsCommunigateDomain.domainName}"/> and tryPrefix
                                 <c:out value="${existsCommunigateDomain.tryPrefix}"/>
                             </a>
@@ -126,7 +126,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <c:if test="${not empty communigateDomain.id}">
-                <a href="<c:url value="/communigate/view/${communigateDomain.id}"/>" class="btn btn-primary">View</a>
+                <a href="<c:url value="/communigate/${communigateDomain.id}"/>" class="btn btn-primary">View</a>
             </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>

@@ -43,7 +43,7 @@
     <c:forEach items="${actions}" var="action">
         <tr>
             <td>
-                <a href="<c:out value="/actions/view/${action.id}"/>">
+                <a href="<c:out value="/actions/${action.id}"/>">
                     <fmt:formatDate value="${action.actionTimestamp}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
                 </a>
             </td>

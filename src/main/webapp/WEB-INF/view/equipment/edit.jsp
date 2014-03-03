@@ -12,7 +12,7 @@
                 <c:if test="${not empty existsEquipment}">
                     <span class="help-block">
                         Equipment with ip
-                        <a href="<c:url value="/equipment/view/${existsEquipment.id}"/>" target="_blank">
+                        <a href="<c:url value="/equipment/${existsEquipment.id}"/>" target="_blank">
                             <c:out value="${existsEquipment.ipAddress}"/>
                         </a>
                         already exists!
@@ -125,7 +125,7 @@
                 <div class="col-md-5">
                     <div class="form-control-static">
                         <input type="hidden" name="cf_reset" value=""/>
-                        <a id="cf_download" href="<c:url value="/equipment/load_config/${equipment.id}"/>">
+                        <a id="cf_download" href="<c:url value="/equipment/${equipment.id}/load_config"/>">
                             <c:out value="${equipment.configName}"/></a>
                         <a class="btn btn-danger btn-xs"
                            onclick="$('#exist_cf').hide();$('#new_cf').show();$('input[name=cf_reset]').val('reset');">Delete</a>
@@ -137,7 +137,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <c:if test="${not empty equipment.id}">
-                <a href="<c:url value="/equipment/view/${equipment.id}"/>" class="btn btn-primary">View</a>
+                <a href="<c:url value="/equipment/${equipment.id}"/>" class="btn btn-primary">View</a>
             </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
             <a id="generate_password" class="btn btn-success">Generate password</a>

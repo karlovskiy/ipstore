@@ -71,11 +71,11 @@
         <div class="col-md-offset-2 col-md-5">
             <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
 
-                <a href="<c:url value="/accounts/edit/${account.id}"/>" class="btn btn-primary">Edit</a>
+                <a href="<c:url value="/accounts/${account.id}/edit"/>" class="btn btn-primary">Edit</a>
 
                 <security:authorize access="hasRole('ROLE_ROOT')">
                     <c:if test="${account.status == 'DELETED'}">
-                        <a href="<c:url value="/accounts/activate/${account.id}"/>"
+                        <a href="<c:url value="/accounts/${account.id}/activate"/>"
                            class="btn btn-success">Activate</a>
                     </c:if>
                 </security:authorize>
@@ -83,17 +83,17 @@
                 <c:if test="${account.status != 'DELETED'}">
 
                     <c:if test="${account.status == 'NORMAL'}">
-                        <a href="<c:url value="/accounts/block/${account.id}"/>"
+                        <a href="<c:url value="/accounts/${account.id}/block"/>"
                            class="btn btn-warning">Block</a>
                     </c:if>
 
                     <c:if test="${account.status == 'WARNING'}">
-                        <a href="<c:url value="/accounts/unblock/${account.id}"/>"
+                        <a href="<c:url value="/accounts/${account.id}/unblock"/>"
                            class="btn btn-warning">Unblock</a>
                     </c:if>
 
                     <security:authorize access="hasRole('ROLE_ROOT')">
-                        <a href="<c:url value="/accounts/delete/${account.id}"/>"
+                        <a href="<c:url value="/accounts/${account.id}/delete"/>"
                                class="btn btn-danger" id="delete_btn">Delete</a>
                     </security:authorize>
                 </c:if>

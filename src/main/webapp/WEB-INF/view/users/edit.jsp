@@ -15,7 +15,7 @@
                 <c:if test="${not empty existsUser}">
                     <span class="help-block">
                         User with username
-                        <a href="<c:url value="/users/view/${existsUser.id}"/>" target="_blank">
+                        <a href="<c:url value="/users/${existsUser.id}"/>" target="_blank">
                             <c:out value="${existsUser.username}"/>
                         </a>
                         already exists!
@@ -78,7 +78,7 @@
         <div class="col-md-offset-2 col-md-10">
 
             <c:if test="${not empty user.id}">
-                <a href="<c:url value="/users/view/${user.id}"/>" class="btn btn-primary">View</a>
+                <a href="<c:url value="/users/${user.id}"/>" class="btn btn-primary">View</a>
             </c:if>
 
             <button type="submit" class="btn btn-primary">Save</button>

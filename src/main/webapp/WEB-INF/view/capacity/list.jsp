@@ -20,10 +20,10 @@
         <h4>
             <c:out value="${capacity.name}"/>
             <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
-                <a class="btn btn-primary btn-xs" href="<c:url value="/capacity/edit/${capacity.id}"/>">
+                <a class="btn btn-primary btn-xs" href="<c:url value="/capacity/${capacity.id}/edit"/>">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
-                <a class="btn btn-primary btn-xs" href="<c:url value="/capacity/${capacity.id}/add"/>">
+                <a class="btn btn-primary btn-xs" href="<c:url value="/capacity/${capacity.id}/numbers/new"/>">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </security:authorize>
@@ -43,7 +43,7 @@
             <c:forEach items="${capacity.numbers}" var="number">
                 <tr>
                     <td>
-                        <a href="<c:url value="/capacity/number/view/${number.id}"/>">
+                        <a href="<c:url value="/capacity/${capacity.id}/numbers/${number.id}"/>">
                             <c:out value="${number.number}"/>
                         </a>
                     </td>

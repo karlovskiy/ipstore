@@ -16,7 +16,7 @@
                 <c:if test="${not empty existsAccount}">
                         <span class="help-block">
                             Account with login
-                            <a href="<c:url value="/accounts/view/${existsAccount.id}"/>" target="_blank">
+                            <a href="<c:url value="/accounts/${existsAccount.id}"/>" target="_blank">
                                 <c:out value="${existsAccount.login}"/>
                             </a>
                             already exists!
@@ -73,7 +73,7 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
             <c:if test="${not empty account.id}">
-                <a href="<c:url value="/accounts/view/${account.id}"/>" class="btn btn-primary">View</a>
+                <a href="<c:url value="/accounts/${account.id}"/>" class="btn btn-primary">View</a>
             </c:if>
             <button type="submit" class="btn btn-primary">Save</button>
             <a id="generate_password" class="btn btn-success">Generate password</a>

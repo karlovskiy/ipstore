@@ -153,7 +153,7 @@
                 <label class="control-label col-md-2">Config</label>
                 <div class="col-md-5">
                     <div class="form-control-static">
-                        <a id="cf_download" href="<c:url value="/equipment/load_config/${equipment.id}"/>">
+                        <a id="cf_download" href="<c:url value="/equipment/${equipment.id}/load_config"/>">
                             <c:out value="${equipment.configName}"/></a>
                     </div>
                 </div>
@@ -163,20 +163,20 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
             <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
-                <a class="btn btn-primary" href="<c:url value="/equipment/edit/${equipment.id}" />">Edit</a>
+                <a class="btn btn-primary" href="<c:url value="/equipment/${equipment.id}/edit" />">Edit</a>
                 <c:if test="${equipment.status != 'DELETED'}">
                     <a class="btn btn-danger" id="delete_btn"
-                       href="<c:url value="/equipment/delete/${equipment.id}"/>">Delete</a>
+                       href="<c:url value="/equipment/${equipment.id}/delete"/>">Delete</a>
                 </c:if>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ROOT')">
                 <c:if test="${equipment.status == 'DELETED' or equipment.status == 'ACTIVE_NO_EXPIRED'}">
                     <a class="btn btn-warning"
-                       href="<c:url value="/equipment/activate/${equipment.id}"/>">Activate</a>
+                       href="<c:url value="/equipment/${equipment.id}/activate"/>">Activate</a>
                 </c:if>
                 <c:if test="${equipment.status == 'ACTIVE'}">
                     <a class="btn btn-warning"
-                       href="<c:url value="/equipment/activate_no_expired/${equipment.id}"/>">ActivateWithNoExpired</a>
+                       href="<c:url value="/equipment/${equipment.id}/activate_no_expired"/>">ActivateWithNoExpired</a>
                 </c:if>
             </security:authorize>
         </div>

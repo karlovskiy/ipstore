@@ -88,7 +88,7 @@ public class AccountsController {
     }
 
     @Action(value = ACCOUNTS_VIEW_PAGE)
-    @RequestMapping(value = "/accounts/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
     public String viewAccount(@PathVariable Long id, Model model) {
         Account account = accountsService.loadAccount(id);
         model.addAttribute("account", account);
@@ -96,59 +96,59 @@ public class AccountsController {
     }
 
     @Action(value = ACCOUNTS_DELETE, changeType = ACCOUNTS, changeMode = UPDATE)
-    @RequestMapping(value = "/accounts/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{id}/delete", method = RequestMethod.GET)
     public String deleteAccount(@PathVariable Long id) {
         accountsService.deleteAccount(id);
         return "redirect:/accounts";
     }
 
     @Action(value = ACCOUNTS_BLOCK, changeType = ACCOUNTS, changeMode = UPDATE)
-    @RequestMapping(value = "/accounts/block/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{id}/block", method = RequestMethod.GET)
     public String blockAccount(@PathVariable Long id) {
         accountsService.blockAccount(id);
-        return "redirect:/accounts/view/" + id;
+        return "redirect:/accounts/" + id;
     }
 
     @Action(value = ACCOUNTS_ACTIVATE, changeType = ACCOUNTS, changeMode = UPDATE)
-    @RequestMapping(value = "/accounts/activate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{id}/activate", method = RequestMethod.GET)
     public String activateAccount(@PathVariable Long id) {
         accountsService.activateAccount(id);
-        return "redirect:/accounts/view/" + id;
+        return "redirect:/accounts/" + id;
     }
 
     @Action(value = ACCOUNTS_UNBLOCK, changeType = ACCOUNTS, changeMode = UPDATE)
-    @RequestMapping(value = "/accounts/unblock/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{id}/unblock", method = RequestMethod.GET)
     public String unBlockAccount(@PathVariable Long id) {
         accountsService.activateAccount(id);
-        return "redirect:/accounts/view/" + id;
+        return "redirect:/accounts/" + id;
     }
 
     @Action(value = ACCOUNTS_EDIT_PAGE)
-    @RequestMapping(value = "/accounts/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/{id}/edit", method = RequestMethod.GET)
     public String editAccount(@PathVariable Long id, Model model) {
         Account account = accountsService.loadAccount(id);
         model.addAttribute("account", account);
         model.addAttribute("edit", true);
-        model.addAttribute("formAction", "/accounts/edit/" + id);
+        model.addAttribute("formAction", "/accounts/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "c-edit-accounts";
     }
 
     @Action(value = ACCOUNTS_ADD_PAGE)
-    @RequestMapping(value = "/accounts/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/accounts/new", method = RequestMethod.GET)
     public String addAccount(Model model) {
         Account account = new Account();
         model.addAttribute("edit", false);
         model.addAttribute("account", account);
-        model.addAttribute("formAction", "/accounts/add");
+        model.addAttribute("formAction", "/accounts");
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
         return "c-edit-accounts";
     }
 
-    @RequestMapping(value = "/accounts/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/accounts", method = RequestMethod.POST)
     public String createAccount(@Valid Account account, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/accounts/add");
+            model.addAttribute("formAction", "/accounts");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "c-edit-accounts";
         }
@@ -156,25 +156,25 @@ public class AccountsController {
         Account existsAccount = accountsService.loadAccount(login);
         if (existsAccount != null) {
             model.addAttribute("edit", false);
-            model.addAttribute("formAction", "/accounts/add");
+            model.addAttribute("formAction", "/accounts");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             model.addAttribute("existsAccount", existsAccount);
             return "c-edit-accounts";
         }
         Long id = accountsService.createAccount(account);
-        return "redirect:/accounts/view/" + id;
+        return "redirect:/accounts/" + id;
     }
 
     @Action(value = ACCOUNTS_UPDATE, changeType = ACCOUNTS, changeMode = UPDATE)
-    @RequestMapping(value = "/accounts/edit/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/accounts/{id}", method = RequestMethod.POST)
     public String updateAccount(@Valid Account account, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("edit", true);
-            model.addAttribute("formAction", "/accounts/edit/" + id);
+            model.addAttribute("formAction", "/accounts/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "c-edit-accounts";
         }
         accountsService.updateAccount(id, account);
-        return "redirect:/accounts/view/" + id;
+        return "redirect:/accounts/" + id;
     }
 }

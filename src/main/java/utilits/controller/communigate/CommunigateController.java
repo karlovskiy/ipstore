@@ -59,7 +59,7 @@ public class CommunigateController {
     }
 
     @Action(value = COMMUNIGATE_VIEW_PAGE)
-    @RequestMapping(value = "/communigate/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/communigate/{id}", method = RequestMethod.GET)
     public String viewCommunigate(@PathVariable Long id, Model model) {
         CommunigateDomain communigateDomain = communigateService.loadCommunigate(id);
         model.addAttribute("communigateDomain", communigateDomain);
@@ -67,19 +67,19 @@ public class CommunigateController {
     }
 
     @Action(value = COMMUNIGATE_ADD_PAGE)
-    @RequestMapping(value = "/communigate/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/communigate/new", method = RequestMethod.GET)
     public String addCommunigate(Model model) {
         CommunigateDomain communigateDomain = new CommunigateDomain();
         model.addAttribute("edit", false);
         model.addAttribute("communigateDomain", communigateDomain);
-        model.addAttribute("formAction", "/communigate/add");
+        model.addAttribute("formAction", "/communigate");
         return "c-edit-communigate";
     }
 
-    @RequestMapping(value = "/communigate/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/communigate", method = RequestMethod.POST)
     public String createCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/communigate/add");
+            model.addAttribute("formAction", "/communigate");
             return "c-edit-communigate";
         }
         String domainName = communigateDomain.getDomainName();
@@ -87,29 +87,29 @@ public class CommunigateController {
         CommunigateDomain existsCommunigateDomain = communigateService.loadCommunigate(domainName, tryPrefix);
         if (existsCommunigateDomain != null) {
             model.addAttribute("edit", false);
-            model.addAttribute("formAction", "/communigate/add");
+            model.addAttribute("formAction", "/communigate");
             model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);
             return "c-edit-communigate";
         }
         Long id = communigateService.createCommunigate(communigateDomain);
-        return "redirect:/communigate/view/" + id;
+        return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_EDIT_PAGE)
-    @RequestMapping(value = "/communigate/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/communigate/{id}/edit", method = RequestMethod.GET)
     public String editCommunigate(@PathVariable Long id, Model model) {
         CommunigateDomain communigateDomain = communigateService.loadCommunigate(id);
         model.addAttribute("communigateDomain", communigateDomain);
         model.addAttribute("edit", true);
-        model.addAttribute("formAction", "/communigate/edit/" + id);
+        model.addAttribute("formAction", "/communigate/" + id);
         return "c-edit-communigate";
     }
 
     @Action(value = COMMUNIGATE_UPDATE, changeType = COMMUNIGATE, changeMode = UPDATE)
-    @RequestMapping(value = "/communigate/edit/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/communigate/{id}", method = RequestMethod.POST)
     public String updateCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result, @PathVariable Long id, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("formAction", "/communigate/edit/" + id);
+            model.addAttribute("formAction", "/communigate/" + id);
             return "c-edit-communigate";
         }
         CommunigateDomain oldCommunigate = communigateService.loadCommunigate(id);
@@ -118,7 +118,7 @@ public class CommunigateController {
         if (!oldDomainName.equals(newDomainName)) {
             CommunigateDomain existsCommunigateDomain = communigateService.loadCommunigate(newDomainName);
             if (existsCommunigateDomain != null) {
-                model.addAttribute("formAction", "/communigate/edit/" + id);
+                model.addAttribute("formAction", "/communigate/" + id);
                 model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);
                 return "c-edit-communigate";
             }
@@ -128,7 +128,7 @@ public class CommunigateController {
         if (!oldTryPrefix.equals(newTryPrefix)) {
             CommunigateDomain existsCommunigateDomain = communigateService.loadCommunigateByTryPrefix(newTryPrefix);
             if (existsCommunigateDomain != null) {
-                model.addAttribute("formAction", "/communigate/edit/" + id);
+                model.addAttribute("formAction", "/communigate/" + id);
                 model.addAttribute("existsCommunigateDomain", existsCommunigateDomain);
                 return "c-edit-communigate";
             }
@@ -146,35 +146,35 @@ public class CommunigateController {
         oldCommunigate.setDescription(communigateDomain.getDescription());
 
         communigateService.updateCommunigate(id, communigateDomain);
-        return "redirect:/communigate/view/" + id;
+        return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_DELETE, changeType = COMMUNIGATE, changeMode = UPDATE)
-    @RequestMapping(value = "/communigate/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/communigate/{id}/delete", method = RequestMethod.GET)
     public String deleteCommunigate(@PathVariable Long id) {
         communigateService.deleteCommunigate(id);
         return "redirect:/communigate";
     }
 
     @Action(value = COMMUNIGATE_BLOCK, changeType = COMMUNIGATE, changeMode = UPDATE)
-    @RequestMapping(value = "/communigate/block/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/communigate/{id}/block", method = RequestMethod.GET)
     public String blockCommunigate(@PathVariable Long id) {
         communigateService.blockCommunigate(id);
-        return "redirect:/communigate/view/" + id;
+        return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_ACTIVATE, changeType = COMMUNIGATE, changeMode = UPDATE)
-    @RequestMapping(value = "/communigate/activate/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/communigate/{id}/activate", method = RequestMethod.GET)
     public String activateCommunigate(@PathVariable Long id) {
         communigateService.activateCommunigate(id);
-        return "redirect:/communigate/view/" + id;
+        return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_UNBLOCK, changeType = COMMUNIGATE, changeMode = UPDATE)
-    @RequestMapping(value = "/communigate/unblock/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/communigate/{id}/unblock", method = RequestMethod.GET)
     public String unBlockCommunigate(@PathVariable Long id) {
         communigateService.activateCommunigate(id);
-        return "redirect:/communigate/view/" + id;
+        return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_IMPORT_PAGE)
