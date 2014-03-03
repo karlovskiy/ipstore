@@ -4,6 +4,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <div class="row">
+    <security:authorize access="hasRole('ROLE_ROOT')" var="hasRootRole"/>
     <security:authorize access="hasRole('ROLE_EQUIPMENT_VIEW')">
         <div class="col-md-6">
             <div class="panel panel-primary">
@@ -71,10 +72,18 @@
                         <c:forEach items="${equipmentWidget.lastChanges}" var="equipment">
                             <tr>
                                 <td>
-                                    <a href="<c:out value="/actions/view/${equipment.actionId}"/>">
-                                        <fmt:formatDate value="${equipment.actionTimestamp}" type="both"
-                                                        pattern="dd.MM.yyyy HH:mm:ss"/>
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${hasRootRole}">
+                                            <a href="<c:out value="/actions/view/${equipment.actionId}"/>">
+                                                <fmt:formatDate value="${equipment.actionTimestamp}" type="both"
+                                                                pattern="dd.MM.yyyy HH:mm:ss"/>
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <fmt:formatDate value="${equipment.actionTimestamp}" type="both"
+                                                            pattern="dd.MM.yyyy HH:mm:ss"/>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                                 <td>
                                     <span class="text-muted">
@@ -146,10 +155,18 @@
                         <c:forEach items="${accountsWidget.lastChanges}" var="account">
                         <tr>
                             <td>
-                                <a href="<c:out value="/actions/view/${account.actionId}"/>">
-                                    <fmt:formatDate value="${account.actionTimestamp}" type="both"
-                                                    pattern="dd.MM.yyyy HH:mm:ss"/>
-                                </a>
+                                <c:choose>
+                                    <c:when test="${hasRootRole}">
+                                        <a href="<c:out value="/actions/view/${account.actionId}"/>">
+                                            <fmt:formatDate value="${account.actionTimestamp}" type="both"
+                                                            pattern="dd.MM.yyyy HH:mm:ss"/>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <fmt:formatDate value="${account.actionTimestamp}" type="both"
+                                                        pattern="dd.MM.yyyy HH:mm:ss"/>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                             <td>
                                 <span class="text-muted">
@@ -222,10 +239,18 @@
                         <c:forEach items="${communigateWidget.lastChanges}" var="communigate">
                         <tr>
                             <td>
-                                <a href="<c:out value="/actions/view/${communigate.actionId}"/>">
-                                    <fmt:formatDate value="${communigate.actionTimestamp}" type="both"
-                                                    pattern="dd.MM.yyyy HH:mm:ss"/>
-                                 </a>
+                                <c:choose>
+                                    <c:when test="${hasRootRole}">
+                                        <a href="<c:out value="/actions/view/${communigate.actionId}"/>">
+                                            <fmt:formatDate value="${communigate.actionTimestamp}" type="both"
+                                                            pattern="dd.MM.yyyy HH:mm:ss"/>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <fmt:formatDate value="${communigate.actionTimestamp}" type="both"
+                                                        pattern="dd.MM.yyyy HH:mm:ss"/>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                             <td>
                                 <span class="text-muted">
