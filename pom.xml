@@ -5,7 +5,7 @@
     <groupId>utilits</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>4.0.4-SNAPSHOT</version>
+    <version>4.0.5</version>
 
     <name>ipstore web application</name>
 
@@ -49,6 +49,25 @@
 
     <build>
         <finalName>ipstore</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <targetPath>WEB-INF</targetPath>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>spring.properties</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencies>

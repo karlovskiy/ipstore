@@ -30,7 +30,7 @@
 
         <div class="col-md-5">
             <p class="form-control-static">
-                <span class="${bootstrap.labelClass(account.status)}">
+                <span class="${application.labelClass(account.status)}">
                     <c:out value="${account.status}"/>
                 </span>
             </p>

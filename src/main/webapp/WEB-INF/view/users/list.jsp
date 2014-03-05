@@ -11,14 +11,14 @@
     </thead>
     <tbody>
     <c:forEach items="${users}" var="user">
-        <tr class="${bootstrap.rowClass(user.userStatus)}">
+        <tr class="${application.rowClass(user.userStatus)}">
             <td>
                 <a href="<c:url value="/users/${user.id}"/>">
                     <c:out value="${user.username}"/>
                 </a>
             </td>
             <td>
-                <span class="${bootstrap.labelClass(user.userStatus)}">
+                <span class="${application.labelClass(user.userStatus)}">
                     <c:out value="${user.userStatus}"/>
                 </span>
             </td>

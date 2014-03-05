@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <c:forEach items="${communigateDomains}" var="communigateDomain">
-        <tr class="${bootstrap.rowClass(communigateDomain.status)}">
+        <tr class="${application.rowClass(communigateDomain.status)}">
             <td>
                 <a href="<c:url value="/communigate/${communigateDomain.id}"/>">
                     <c:out value="${communigateDomain.domainName}"/>
@@ -24,7 +24,7 @@
             <td><c:out value="${communigateDomain.clientName}"/></td>
             <td><fmt:formatDate value="${communigateDomain.date}" type="date" pattern="dd.MM.yyyy"/></td>
             <td>
-                <span class="${bootstrap.labelClass(communigateDomain.status)}">
+                <span class="${bootapplicationstrap.labelClass(communigateDomain.status)}">
                     <c:out value="${communigateDomain.status}"/>
                 </span>
             </td>

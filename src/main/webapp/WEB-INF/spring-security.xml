@@ -59,9 +59,9 @@
         <intercept-url pattern="/users/*"                           access="hasRole('ROLE_ROOT')"/>
         <intercept-url pattern="/users/new"                         access="hasRole('ROLE_ROOT')" method="GET"/>
         <intercept-url pattern="/users/*/edit"                      access="hasRole('ROLE_ROOT')" method="GET"/>
-        <intercept-url pattern="/users/*/block"                     access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/*/unblock"                   access="hasRole('ROLE_ROOT')"/>
-        <intercept-url pattern="/users/*/reset"                     access="hasRole('ROLE_ROOT')"/>
+        <intercept-url pattern="/users/*/block"                     access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/users/*/unblock"                   access="hasRole('ROLE_ROOT')" method="GET"/>
+        <intercept-url pattern="/users/*/reset"                     access="hasRole('ROLE_ROOT')" method="GET"/>
         <!-- communigate -->
         <intercept-url pattern="/communigate"                       access="hasRole('ROLE_COMMUNIGATE_VIEW')" method="GET"/>
         <intercept-url pattern="/communigate/*"                     access="hasRole('ROLE_COMMUNIGATE_VIEW')" method="GET"/>

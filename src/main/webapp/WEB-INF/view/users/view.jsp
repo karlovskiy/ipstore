@@ -19,7 +19,7 @@
 
         <div class="col-md-5">
             <p class="form-control-static">
-                <span class="${bootstrap.labelClass(user.userStatus)}">
+                <span class="${application.labelClass(user.userStatus)}">
                     <c:out value="${user.userStatus}"/>
                 </span>
             </p>

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -8,8 +9,8 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Sign in</title>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.cosmo.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/login.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap.cosmo.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/login.css"/>">
 </head>
 <body>
     <div class="container">

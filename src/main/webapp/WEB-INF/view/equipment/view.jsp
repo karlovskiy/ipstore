@@ -70,7 +70,7 @@
         <label class="control-label col-md-2">Password status</label>
         <div class="col-md-5">
             <p class="form-control-static">
-                <span class="${bootstrap.labelClass(equipment.passwordStatus)}">
+                <span class="${application.labelClass(equipment.passwordStatus)}">
                     <c:out value="${equipment.passwordStatus}"/>
                 </span>
             </p>
@@ -81,7 +81,7 @@
             <label class="control-label col-md-2">Status</label>
             <div class="col-md-5">
                 <p class="form-control-static">
-                    <span class="${bootstrap.labelClass(equipment.status)}">
+                    <span class="${application.labelClass(equipment.status)}">
                         <c:out value="${equipment.status}"/>
                     </span>
                 </p>
@@ -101,7 +101,7 @@
         <label class="control-label col-md-2">Telnet status</label>
         <div class="col-md-5">
             <p class="form-control-static">
-                <span class="${bootstrap.labelClass(equipment.telnetStatus)}">
+                <span class="${application.labelClass(equipment.telnetStatus)}">
                     <c:out value="${equipment.telnetStatus}"/>
                 </span>
             </p>

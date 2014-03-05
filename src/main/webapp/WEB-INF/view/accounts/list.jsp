@@ -12,7 +12,7 @@
     </thead>
     <tbody>
     <c:forEach items="${accounts}" var="account">
-        <tr class="${bootstrap.rowClass(account.status)}">
+        <tr class="${application.rowClass(account.status)}">
             <td>
                 <a href="<c:url value="/accounts/${account.id}"/>">
                     <c:out value="${account.login}"/>
@@ -21,7 +21,7 @@
             <td><c:out value="${account.clientName}"/></td>
             <td><c:out value="${account.number}"/></td>
             <td>
-                <span class="${bootstrap.labelClass(account.status)}">
+                <span class="${application.labelClass(account.status)}">
                     <c:out value="${account.status}"/>
                 </span>
             </td>

@@ -8,11 +8,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.cosmo.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/datepicker.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/datepicker3.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/tablesorter.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/ipstore.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap.cosmo.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/datepicker.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/datepicker3.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/tablesorter.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/ipstore.css"/>">
     <title>IPStore</title>
 </head>
 <body>
@@ -32,7 +32,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
                 <security:authorize access="hasRole('ROLE_ROOT')">
-                    <li class="dropdown ${bootstrap.checkMenuActive('MANAGEMENT')}">
+                    <li class="dropdown ${application.checkMenuActive('MANAGEMENT')}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Actions</li>
@@ -57,8 +57,8 @@
                         <li><a href="https://easy.step7.ru" target="_blank">Easy</a></li>
                     </ul>
                 </li>
-                <li class="${bootstrap.checkMenuActive('CONTACT')}"><a href="<c:url value="/contact"/>">Contact</a></li>
-                <li class="dropdown ${bootstrap.checkMenuActive('USER_SETTINGS')}">
+                <li class="${application.checkMenuActive('CONTACT')}"><a href="<c:url value="/contact"/>">Contact</a></li>
+                <li class="dropdown ${application.checkMenuActive('USER_SETTINGS')}">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="glyphicon glyphicon-log-out"></span>
                     </a>
@@ -79,20 +79,20 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <security:authorize access="hasRole('ROLE_EQUIPMENT_VIEW')">
                 <ul class="nav nav-pills nav-stacked">
-                        <li class="${bootstrap.checkMenuActive('EQUIPMENTS')}">
+                        <li class="${application.checkMenuActive('EQUIPMENTS')}">
                             <a href="<c:url value="/equipment"/>">
                                 <span class="glyphicon glyphicon-th-list"></span> Equipments
                             </a>
                         </li>
                     <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
-                        <li class="${bootstrap.checkMenuActive('ADD_EQUIPMENT')}">
+                        <li class="${application.checkMenuActive('ADD_EQUIPMENT')}">
                             <a href="<c:url value="/equipment/new"/>">
                                 <span class="glyphicon glyphicon-plus"></span> Add equipment
                             </a>
                         </li>
                     </security:authorize>
                     <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li class="${bootstrap.checkMenuActive('IMPORT_EQUIPMENTS')}">
+                        <li class="${application.checkMenuActive('IMPORT_EQUIPMENTS')}">
                             <a href="<c:url value="/equipment/import"/>">
                                 <span class="glyphicon glyphicon-upload"></span> Import equipment
                             </a>
@@ -107,20 +107,20 @@
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ACCOUNT_VIEW')">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="${bootstrap.checkMenuActive('ACCOUNTS')}">
+                    <li class="${application.checkMenuActive('ACCOUNTS')}">
                         <a href="<c:url value="/accounts"/>">
                             <span class="glyphicon glyphicon-th-list"></span> Accounts
                         </a>
                     </li>
                 <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
-                    <li class="${bootstrap.checkMenuActive('ADD_ACCOUNT')}">
+                    <li class="${application.checkMenuActive('ADD_ACCOUNT')}">
                         <a href="<c:url value="/accounts/new"/>">
                             <span class="glyphicon glyphicon-plus"></span> Add account
                         </a>
                     </li>
                 </security:authorize>
                 <security:authorize access="hasRole('ROLE_ROOT')">
-                    <li class="${bootstrap.checkMenuActive('IMPORT_ACCOUNTS')}">
+                    <li class="${application.checkMenuActive('IMPORT_ACCOUNTS')}">
                         <a href="<c:url value="/accounts/import"/>">
                             <span class="glyphicon glyphicon-upload"></span> Import accounts
                         </a>
@@ -135,20 +135,20 @@
             </security:authorize>
             <security:authorize access="hasRole('ROLE_COMMUNIGATE_VIEW')">
                 <ul class="nav nav-pills nav-stacked">
-                        <li class="${bootstrap.checkMenuActive('DOMAINS')}">
+                        <li class="${application.checkMenuActive('DOMAINS')}">
                             <a href="<c:url value="/communigate"/>">
                                 <span class="glyphicon glyphicon-th-list"></span> Domains
                             </a>
                         </li>
                     <security:authorize access="hasRole('ROLE_COMMUNIGATE_EDIT')">
-                        <li class="${bootstrap.checkMenuActive('ADD_DOMAIN')}">
+                        <li class="${application.checkMenuActive('ADD_DOMAIN')}">
                             <a href="<c:url value="/communigate/new"/>">
                                 <span class="glyphicon glyphicon-plus"></span> Add domain
                             </a>
                         </li>
                     </security:authorize>
                     <security:authorize access="hasRole('ROLE_ROOT')">
-                        <li class="${bootstrap.checkMenuActive('IMPORT_DOMAIN')}">
+                        <li class="${application.checkMenuActive('IMPORT_DOMAIN')}">
                             <a href="<c:url value="/communigate/import"/>">
                                 <span class="glyphicon glyphicon-upload"></span> Import domains
                             </a>
@@ -164,14 +164,14 @@
             <security:authorize access="hasRole('ROLE_CAPACITY_VIEW')">
                 <ul class="nav nav-pills nav-stacked">
 
-                    <li class="${bootstrap.checkMenuActive('CAPACITY')}">
+                    <li class="${application.checkMenuActive('CAPACITY')}">
                         <a href="<c:url value="/capacity"/>">
                             <span class="glyphicon glyphicon-th-list"></span> Phone capacity
                         </a>
                     </li>
 
                     <security:authorize access="hasRole('ROLE_CAPACITY_EDIT')">
-                        <li class="${bootstrap.checkMenuActive('ADD_CAPACITY')}">
+                        <li class="${application.checkMenuActive('ADD_CAPACITY')}">
                             <a href="<c:url value="/capacity/new"/>">
                                 <span class="glyphicon glyphicon-plus"></span> Add capacity
                             </a>
@@ -185,13 +185,13 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/bootbox.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/tablesorter.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/tablesorter.widgets.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/${application.version}/js/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/${application.version}/js/bootstrap.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/${application.version}/js/bootstrap-datepicker.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/${application.version}/js/bootbox.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/${application.version}/js/tablesorter.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/${application.version}/js/tablesorter.widgets.min.js"/>"></script>
 <tiles:insertAttribute ignore="true" name="additional-scripts"/>
-<script type="text/javascript" src="<c:url value="/resources/js/ipstore.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/${application.version}/js/ipstore.js"/>"></script>
 </body>
 </html>

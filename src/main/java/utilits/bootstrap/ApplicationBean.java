@@ -1,6 +1,7 @@
 package utilits.bootstrap;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,9 +26,9 @@ import java.util.Map;
  * @author ravenstar
  * @since 4.0, 2/19/14
  */
-@Component("bootstrap")
-@Scope("request")
-public class BootstrapBean {
+@Component("application")
+@Scope("singleton")
+public class ApplicationBean {
 
     private static final Map<Object, BootstrapClass> bootstrapStyleClasses = Collections.unmodifiableMap(
             new HashMap<Object, BootstrapClass>() {
@@ -51,6 +52,10 @@ public class BootstrapBean {
                     put(UserStatus.BLOCKED, BootstrapClass.DEFAULT);
                 }
             });
+
+    private
+    @Value("${application.version}")
+    String version;
 
     public String checkMenuActive(String menu) {
         Menu checkMenu = Menu.valueOf(menu);
@@ -79,5 +84,9 @@ public class BootstrapBean {
     public String rowClass(Object status) {
         BootstrapClass styleClass = bootstrapStyleClasses.get(status);
         return StringUtils.defaultString(styleClass.getRowClass());
+    }
+
+    public String getVersion() {
+        return version;
     }
 }

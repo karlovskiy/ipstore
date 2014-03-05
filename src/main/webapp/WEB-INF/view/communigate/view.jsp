@@ -28,7 +28,7 @@
 
         <div class="col-md-5">
             <p class="form-control-static">
-                <span class="${bootstrap.labelClass(communigateDomain.status)}">
+                <span class="${application.labelClass(communigateDomain.status)}">
                     <c:out value="${communigateDomain.status}"/>
                 </span>
             </p>

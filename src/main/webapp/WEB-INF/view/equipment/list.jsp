@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     <c:forEach items="${equipment}" var="equipment">
-        <tr class="${bootstrap.rowClass(equipment.passwordStatus)}">
+        <tr class="${application.rowClass(equipment.passwordStatus)}">
             <td>
                 <a href="<c:url value="/equipment/${equipment.id}"/>">
                     <c:out value="${equipment.ipAddress}"/>
@@ -24,12 +24,12 @@
             <td><c:out value="${equipment.clientName}"/></td>
             <td><c:out value="${equipment.placementAddress}"/></td>
             <td>
-                <span class="${bootstrap.labelClass(equipment.passwordStatus)}">
+                <span class="${application.labelClass(equipment.passwordStatus)}">
                     <c:out value="${equipment.passwordStatus}"/>
                 </span>
             </td>
             <td>
-                <span class="${bootstrap.labelClass(equipment.telnetStatus)}">
+                <span class="${application.labelClass(equipment.telnetStatus)}">
                     <c:out value="${equipment.telnetStatus}"/>
                 </span>
             </td>

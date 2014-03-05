@@ -33,5 +33,5 @@
     </bean>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/view/" p:suffix=".jsp" p:order="2"/>
+          p:prefix="/WEB-INF/view/" p:suffix=".jsp" p:order="2" p:exposeContextBeansAsAttributes="true"/>
 </beans>

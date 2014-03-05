@@ -24,16 +24,8 @@
     Note that, with Spring 3.0, this tag works in Servlet MVC only!  -->
     <mvc:annotation-driven/>
 
-    <mvc:interceptors>
-        <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-            <property name="cacheSeconds" value="0"/>
-            <property name="useExpiresHeader" value="true"/>
-            <property name="useCacheControlHeader" value="true"/>
-            <property name="useCacheControlNoStore" value="true"/>
-        </bean>
-    </mvc:interceptors>
-
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/resources/${application.version}/**" location="/resources/" cache-period="31536000"/>
+    <mvc:resources mapping="/resources/unversioned/*" location="/resources/unversioned/" cache-period="31536000"/>
 
     <aop:aspectj-autoproxy/>
 
