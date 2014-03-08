@@ -1,78 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
 <div class="form-horizontal">
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Date</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <fmt:formatDate value="${action.actionTimestamp}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Type</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${action.type}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Ip</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${action.ip}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Host</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${action.host}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Username</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${action.username}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">User agent</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${action.userAgent}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Request URL</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${action.requestURL}"/>
-            </p>
-        </div>
-    </div>
+    <ipstore:field label="Date" value="${action.actionTimestamp}" type="datetime"/>
+    <ipstore:field label="Type" value="${action.type}"/>
+    <ipstore:field label="Ip" value="${action.ip}"/>
+    <ipstore:field label="Host" value="${action.host}"/>
+    <ipstore:field label="Username" value="${action.username}"/>
+    <ipstore:field label="User agent" value="${action.userAgent}"/>
+    <ipstore:field label="Request URL" value="${action.requestURL}"/>
 </div>
 <c:if test="${not empty action.changes}">
     <table class="tablesorter">

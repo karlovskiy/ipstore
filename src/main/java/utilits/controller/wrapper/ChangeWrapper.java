@@ -20,6 +20,10 @@ public class ChangeWrapper {
         this.change = change;
     }
 
+    public Long getActionId() {
+        return change.getAction().getId();
+    }
+
     public Date getActionTimestamp() {
         return change.getAction().getActionTimestamp();
     }

@@ -55,7 +55,9 @@
     <c:forEach items="${changes}" var="change">
         <tr>
             <td>
-                <fmt:formatDate value="${change.actionTimestamp}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
+                <a href="<c:url value="/actions/${change.actionId}"/>">
+                    <fmt:formatDate value="${change.actionTimestamp}" type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
+                </a>
             </td>
             <td><c:out value="${change.ip}"/></td>
             <td><c:out value="${change.username}"/></td>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
 <form:form commandName="account" action="${formAction}" cssClass="form-horizontal" role="form">
 
@@ -26,49 +27,10 @@
         </div>
     </spring:bind>
 
-    <spring:bind path="password">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="pwd">Password</label>
-
-            <div class="col-md-5">
-                <form:input id="pwd" path="password" cssClass="form-control"/>
-                <form:errors path="password" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="clientName">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="clientName">ClientName</label>
-
-            <div class="col-md-5">
-                <form:input id="clientName" path="clientName" cssClass="form-control"/>
-                <form:errors path="clientName" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="number">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="number">Number</label>
-
-            <div class="col-md-5">
-                <form:input id="number" path="number" cssClass="form-control"/>
-                <form:errors path="number" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="description">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="description">Description</label>
-
-            <div class="col-md-5">
-                <form:input id="description" path="description" cssClass="form-control"/>
-                <form:errors path="description" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
+    <ipstore:input id="pwd" path="password" label="Password"/>
+    <ipstore:input path="clientName" label="ClientName"/>
+    <ipstore:input path="number" label="Number"/>
+    <ipstore:input path="description" label="Description"/>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">

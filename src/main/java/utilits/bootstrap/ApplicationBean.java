@@ -67,23 +67,43 @@ public class ApplicationBean {
     }
 
     public String labelClass(Object status) {
-        BootstrapClass styleClass = bootstrapStyleClasses.get(status);
-        return StringUtils.defaultString(styleClass.getLabelClass());
+        if (status != null) {
+            BootstrapClass styleClass = bootstrapStyleClasses.get(status);
+            if (styleClass != null) {
+                return styleClass.getLabelClass();
+            }
+        }
+        return StringUtils.EMPTY;
     }
 
     public String alertClass(Object status) {
-        BootstrapClass styleClass = bootstrapStyleClasses.get(status);
-        return StringUtils.defaultString(styleClass.getAlertClass());
+        if (status != null) {
+            BootstrapClass styleClass = bootstrapStyleClasses.get(status);
+            if (styleClass != null) {
+                return styleClass.getAlertClass();
+            }
+        }
+        return StringUtils.EMPTY;
     }
 
     public String textClass(Object status) {
-        BootstrapClass styleClass = bootstrapStyleClasses.get(status);
-        return StringUtils.defaultString(styleClass.getTextClass());
+        if (status != null) {
+            BootstrapClass styleClass = bootstrapStyleClasses.get(status);
+            if (styleClass != null) {
+                return styleClass.getTextClass();
+            }
+        }
+        return StringUtils.EMPTY;
     }
 
     public String rowClass(Object status) {
-        BootstrapClass styleClass = bootstrapStyleClasses.get(status);
-        return StringUtils.defaultString(styleClass.getRowClass());
+        if (status != null) {
+            BootstrapClass styleClass = bootstrapStyleClasses.get(status);
+            if (styleClass != null) {
+                return styleClass.getRowClass();
+            }
+        }
+        return StringUtils.EMPTY;
     }
 
     public String getVersion() {

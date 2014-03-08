@@ -1,7 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
+
 <form:form commandName="equipment" action="${formAction}" cssClass="form-horizontal" enctype="multipart/form-data">
     <spring:bind path="ipAddress">
         <div class="form-group ${status.error ? "has-error" : ""}">
@@ -21,89 +23,17 @@
             </div>
         </div>
     </spring:bind>
-    <spring:bind path="type">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="type">Type</label>
-            <div class="col-md-5">
-                <form:input id="type" path="type" cssClass="form-control"/>
-                <form:errors path="type" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="username">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="username">Username</label>
-            <div class="col-md-5">
-                <form:input id="username" path="username" cssClass="form-control"/>
-                <form:errors path="username" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="login">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="login">Login</label>
-            <div class="col-md-5">
-                <form:input id="login" path="login" cssClass="form-control"/>
-                <form:errors path="login" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="password">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="pwd">Password</label>
-            <div class="col-md-5">
-                <form:input id="pwd" path="password" cssClass="form-control"/>
-                <form:errors path="password" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="clientName">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="clientName">ClientName</label>
-            <div class="col-md-5">
-                <form:input id="clientName" path="clientName" cssClass="form-control"/>
-                <form:errors path="clientName" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="placementAddress">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="placementAddress">PlacementAddress</label>
-            <div class="col-md-5">
-                <form:input id="placementAddress" path="placementAddress" cssClass="form-control"/>
-                <form:errors path="placementAddress" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="applicationNumber">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="applicationNumber">ApplicationNumber</label>
-            <div class="col-md-5">
-                <form:input id="applicationNumber" path="applicationNumber" cssClass="form-control"/>
-                <form:errors path="applicationNumber" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="description">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="description">Description</label>
-            <div class="col-md-5">
-                <form:input id="description" path="description" cssClass="form-control"/>
-                <form:errors path="description" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-    <spring:bind path="telnetCheck">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="tch">Is checked by telnet</label>
-            <div class="col-md-5">
-                <div class="checkbox">
-                    <form:checkbox id="tch" path="telnetCheck"/>
-                </div>
-                <form:errors path="telnetCheck" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
+
+    <ipstore:input path="type" label="Type" />
+    <ipstore:input path="username" label="Username"/>
+    <ipstore:input path="login" label="Login"/>
+    <ipstore:input id="pwd" path="password" label="Password"/>
+    <ipstore:input path="clientName" label="ClientName"/>
+    <ipstore:input path="placementAddress" label="PlacementAddress"/>
+    <ipstore:input path="applicationNumber" label="ApplicationNumber"/>
+    <ipstore:input path="description" label="Description"/>
+    <ipstore:input id="tch" path="telnetCheck" label="Is checked by telnet" type="checkbox"/>
+
     <c:choose>
         <c:when test="${empty equipment.id}">
             <div class="form-group">
@@ -134,6 +64,7 @@
             </div>
         </c:otherwise>
     </c:choose>
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <c:if test="${not empty equipment.id}">

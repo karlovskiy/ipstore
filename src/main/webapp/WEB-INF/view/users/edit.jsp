@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
 <form:form id="form" commandName="user" action="${formAction}" cssClass="form-horizontal" role="form">
 
@@ -41,38 +42,9 @@
         <form:hidden id="authorities" path="authorities"/>
     </div>
 
-    <spring:bind path="email">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="email">Email</label>
-
-            <div class="col-md-5">
-                <form:input id="email" path="email" cssClass="form-control"/>
-                <form:errors path="email" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="firstName">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="firstName">FirstName</label>
-
-            <div class="col-md-5">
-                <form:input id="firstName" path="firstName" cssClass="form-control"/>
-                <form:errors path="firstName" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
-
-    <spring:bind path="lastName">
-        <div class="form-group ${status.error ? "has-error" : ""}">
-            <label class="control-label col-md-2" for="lastName">LastName</label>
-
-            <div class="col-md-5">
-                <form:input id="lastName" path="lastName" cssClass="form-control"/>
-                <form:errors path="lastName" cssClass="help-block"/>
-            </div>
-        </div>
-    </spring:bind>
+    <ipstore:input path="email" label="Email"/>
+    <ipstore:input path="firstName" label="FirstName"/>
+    <ipstore:input path="lastName" label="LastName"/>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

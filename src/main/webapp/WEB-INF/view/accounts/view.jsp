@@ -1,71 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
 <div class="form-horizontal">
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Login</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${account.login}"/>
-            </p>
-        </div>
-    </div>
+    <ipstore:field label="Login" value="${account.login}"/>
 
     <security:authorize access="hasRole('ROLE_ACCOUNT_EDIT')">
-        <div class="form-group">
-            <label class="control-label col-md-2">Password</label>
-
-            <div class="col-md-5">
-                <p class="form-control-static">
-                    <c:out value="${account.password}"/>
-                </p>
-            </div>
-        </div>
+        <ipstore:field label="Password" value="${account.password}"/>
     </security:authorize>
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Status</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <span class="${application.labelClass(account.status)}">
-                    <c:out value="${account.status}"/>
-                </span>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">ClientName</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${account.clientName}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Number</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${account.number}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Description</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${account.description}"/>
-            </p>
-        </div>
-    </div>
+    <ipstore:field label="Status" value="${account.status}" cssClass="${application.labelClass(account.status)}"/>
+    <ipstore:field label="ClientName" value="${account.clientName}"/>
+    <ipstore:field label="Number" value="${account.number}"/>
+    <ipstore:field label="Description" value="${account.description}"/>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">

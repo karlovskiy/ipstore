@@ -1,7 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
+
 <div class="form-horizontal">
     <div class="form-group">
         <label class="control-label col-md-2">IpAddress</label>
@@ -20,30 +22,10 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Type</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${equipment.type}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Username</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${equipment.username}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Login</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${equipment.login}"/>
-            </p>
-        </div>
-    </div>
+    <ipstore:field label="Type" value="${equipment.type}"/>
+    <ipstore:field label="Username" value="${equipment.username}"/>
+    <ipstore:field label="Login" value="${equipment.login}"/>
+
     <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
         <div class="form-group">
             <label class="control-label col-md-2">Password</label>
@@ -57,96 +39,25 @@
             </div>
         </div>
     </security:authorize>
-    <div class="form-group">
-        <label class="control-label col-md-2">Password date</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <fmt:formatDate value="${equipment.passwordDate}" type="both"
-                                pattern="dd.MM.yyyy HH:mm:ss"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Password status</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <span class="${application.labelClass(equipment.passwordStatus)}">
-                    <c:out value="${equipment.passwordStatus}"/>
-                </span>
-            </p>
-        </div>
-    </div>
+
+    <ipstore:field label="Password date" value="${equipment.passwordDate}" type="datetime"/>
+    <ipstore:field label="Password status" value="${equipment.passwordStatus}"
+                   cssClass="${application.labelClass(equipment.passwordStatus)}"/>
+
     <c:if test="${equipment.status == 'DELETED' or equipment.status == 'ACTIVE_NO_EXPIRED'}">
-        <div class="form-group">
-            <label class="control-label col-md-2">Status</label>
-            <div class="col-md-5">
-                <p class="form-control-static">
-                    <span class="${application.labelClass(equipment.status)}">
-                        <c:out value="${equipment.status}"/>
-                    </span>
-                </p>
-            </div>
-        </div>
+        <ipstore:field label="Status" value="${equipment.status}"
+                       cssClass="${application.labelClass(equipment.status)}"/>
     </c:if>
-    <div class="form-group">
-        <label class="control-label col-md-2">Telnet status date</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <fmt:formatDate value="${equipment.telnetStatusDate}" type="both"
-                                pattern="dd.MM.yyyy HH:mm:ss"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Telnet status</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <span class="${application.labelClass(equipment.telnetStatus)}">
-                    <c:out value="${equipment.telnetStatus}"/>
-                </span>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Is checked by telnet</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${empty equipment.telnetCheck or not equipment.telnetCheck ? 'false' : 'true'}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">ClientName</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${equipment.clientName}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">PlacementAddress</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${equipment.placementAddress}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">ApplicationNumber</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${equipment.applicationNumber}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Description</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${equipment.description}"/>
-            </p>
-        </div>
-    </div>
+
+    <ipstore:field label="Telnet status date" value="${equipment.telnetStatusDate}" type="datetime"/>
+    <ipstore:field label="Telnet status" value="${equipment.telnetStatus}"
+                   cssClass="${application.labelClass(equipment.telnetStatus)}"/>
+    <ipstore:field label="Is checked by telnet" value="${empty equipment.telnetCheck or not equipment.telnetCheck ? 'No' : 'Yes'}"/>
+    <ipstore:field label="ClientName" value="${equipment.clientName}"/>
+    <ipstore:field label="PlacementAddress" value="${equipment.placementAddress}"/>
+    <ipstore:field label="ApplicationNumber" value="${equipment.applicationNumber}"/>
+    <ipstore:field label="Description" value="${equipment.description}"/>
+
     <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">
         <c:if test="${not empty equipment.configName}">
             <div class="form-group">
@@ -160,6 +71,7 @@
             </div>
         </c:if>
     </security:authorize>
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
             <security:authorize access="hasRole('ROLE_EQUIPMENT_EDIT')">

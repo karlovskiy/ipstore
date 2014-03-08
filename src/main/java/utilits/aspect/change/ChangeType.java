@@ -10,11 +10,11 @@ import utilits.entity.*;
  */
 public enum ChangeType {
 
-    NONE,                                                                                       // 0
-    ACCOUNTS(Account.class, AccountChangeField.class, "/accounts/view/"),                       // 1
-    EQUIPMENT(Equipment.class, EquipmentChangeField.class, "/equipment/view"),                  // 2
-    COMMUNIGATE(CommunigateDomain.class, CommunigateChangeField.class, "/communigate/view"),    // 3
-    USERS(User.class, UsersChangeField.class, "/users/view");                                   // 4
+    NONE,                                                                                   // 0
+    ACCOUNTS(Account.class, AccountChangeField.class, "/accounts/"),                        // 1
+    EQUIPMENT(Equipment.class, EquipmentChangeField.class, "/equipment/"),                  // 2
+    COMMUNIGATE(CommunigateDomain.class, CommunigateChangeField.class, "/communigate/"),    // 3
+    USERS(User.class, UsersChangeField.class, "/users/");                                   // 4
 
     private Class<? extends IHasId> entityClazz;
     private Class<? extends IChangeField> fieldsClazz;

@@ -1,7 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
+
 <div class="form-horizontal">
     <div class="form-group">
         <label class="control-label col-md-2">Domain name</label>
@@ -14,107 +16,18 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">TRY prefix</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.tryPrefix}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Status</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <span class="${application.labelClass(communigateDomain.status)}">
-                    <c:out value="${communigateDomain.status}"/>
-                </span>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Client Name</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.clientName}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Ticket</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.ticket}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Number Line</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.numberLine}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Disk Capacity</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.diskCapacity}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Service</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.service}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Contract</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.contract}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Login</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.login}"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Date</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <fmt:formatDate value="${communigateDomain.date}" type="date" pattern="dd.MM.yyyy"/>
-            </p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Description</label>
-
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${communigateDomain.description}"/>
-            </p>
-        </div>
-    </div>
+    <ipstore:field label="TRY prefix" value="${communigateDomain.tryPrefix}"/>
+    <ipstore:field label="Status" value="${communigateDomain.status}"
+                   cssClass="${application.labelClass(communigateDomain.status)}"/>
+    <ipstore:field label="Client Name" value="${communigateDomain.clientName}"/>
+    <ipstore:field label="Ticket" value="${communigateDomain.ticket}"/>
+    <ipstore:field label="Number Line" value="${communigateDomain.numberLine}"/>
+    <ipstore:field label="Disk Capacity" value="${communigateDomain.diskCapacity}"/>
+    <ipstore:field label="Service" value="${communigateDomain.service}"/>
+    <ipstore:field label="Contract" value="${communigateDomain.contract}"/>
+    <ipstore:field label="Login" value="${communigateDomain.login}"/>
+    <ipstore:field label="Date" value="${communigateDomain.date}" type="date"/>
+    <ipstore:field label="Description" value="${communigateDomain.description}"/>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">

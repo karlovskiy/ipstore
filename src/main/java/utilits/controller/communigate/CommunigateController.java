@@ -55,7 +55,7 @@ public class CommunigateController {
         } else {
             model.addAttribute("communigateDomains", communigateService.loadCommunigate());
         }
-        return "c-list-communigate";
+        return "mfc-list-communigate";
     }
 
     @Action(value = COMMUNIGATE_VIEW_PAGE)

@@ -55,7 +55,7 @@ public class EquipmentController {
         } else {
             model.addAttribute("equipment", equipmentService.loadEquipments());
         }
-        return "c-list-equipment";
+        return "mfc-list-equipment";
     }
 
     @Action(value = EQUIPMENT_IMPORT_PAGE)
@@ -89,7 +89,7 @@ public class EquipmentController {
     public String viewEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
-        return "c-view-equipment";
+        return "asc-view-equipment";
     }
 
     @Action(value = EQUIPMENT_ADD_PAGE)

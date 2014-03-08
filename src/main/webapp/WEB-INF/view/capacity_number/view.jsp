@@ -2,109 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
 <div class="form-horizontal">
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Number</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.number}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Type</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.type.name}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Status</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.status}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">LSC username</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.lscUsername}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">LSC timestamp</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <fmt:formatDate value="${capacityNumber.lscTimestamp}"
-                                type="both" pattern="dd.MM.yyyy HH:mm:ss"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">ClientName</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.clientName}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Address</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.address}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Address</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.application}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Admittance date</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <fmt:formatDate value="${capacityNumber.admittanceDate}"
-                                type="date" pattern="dd.MM.yyyy"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Lines count</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.linesCount}"/>
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Comments</label>
-        <div class="col-md-5">
-            <p class="form-control-static">
-                <c:out value="${capacityNumber.comments}"/>
-            </p>
-        </div>
-    </div>
+    <ipstore:field label="Number" value="${capacityNumber.number}"/>
+    <ipstore:field label="Type" value="${capacityNumber.type.name}"/>
+    <ipstore:field label="Status" value="${capacityNumber.status}"/>
+    <ipstore:field label="LSC username" value="${capacityNumber.lscUsername}"/>
+    <ipstore:field label="LSC timestamp" value="${capacityNumber.lscTimestamp}" type="datetime"/>
+    <ipstore:field label="ClientName" value="${capacityNumber.clientName}"/>
+    <ipstore:field label="Address" value="${capacityNumber.address}"/>
+    <ipstore:field label="Address" value="${capacityNumber.application}"/>
+    <ipstore:field label="Admittance date" value="${capacityNumber.admittanceDate}" type="date"/>
+    <ipstore:field label="Lines count" value="${capacityNumber.linesCount}"/>
+    <ipstore:field label="Comments" value="${capacityNumber.comments}"/>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
