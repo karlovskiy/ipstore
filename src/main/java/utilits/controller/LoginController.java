@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utilits.aspect.Action;
+import utilits.breadcrumb.Breadcrumb;
 import utilits.controller.users.ChangePassword;
 import utilits.controller.users.ChangeUserInfo;
 import utilits.entity.User;
@@ -88,6 +89,7 @@ public class LoginController {
         return "redirect:/";
     }
 
+    @Breadcrumb(label = "Change password")
     @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
     public String changePassword(Model model) {
         model.addAttribute("changePassword", new ChangePassword());
@@ -119,6 +121,7 @@ public class LoginController {
         return "redirect:/";
     }
 
+    @Breadcrumb(label = "Change information")
     @RequestMapping(value = "/changeuserinfo", method = RequestMethod.GET)
     public String changeUserInfo(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -157,6 +160,7 @@ public class LoginController {
         return "login";
     }
 
+    @Breadcrumb(label = "Contact")
     @Action(value = CONTACT_PAGE)
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact() {

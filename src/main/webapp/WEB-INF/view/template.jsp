@@ -181,6 +181,22 @@
             </security:authorize>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <c:if test="${not empty sessionScope['BREADCRUMB']}">
+                <ol class="breadcrumb">
+                    <c:forEach items="${sessionScope['BREADCRUMB']}" var="item" varStatus="index">
+                        <c:choose>
+                            <c:when test="${index.first}">
+                                <li class="active"><c:out value="${item.label}"/></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li>
+                                    <a href="<c:url value="${item.requestURI}"/>"><c:out value="${item.label}"/></a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </ol>
+            </c:if>
             <tiles:insertAttribute name="content"/>
         </div>
     </div>

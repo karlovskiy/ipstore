@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utilits.aspect.Action;
+import utilits.breadcrumb.Breadcrumb;
 import utilits.entity.User;
 import utilits.service.UsersService;
+import utilits.spring.BreadcrumbInterceptor;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -33,6 +35,7 @@ public class UsersController {
     @Resource(name = "userService")
     private UsersService userService;
 
+    @Breadcrumb(label = "Users")
     @Action(value = USERS_LIST)
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String viewUsers(Model model) {
@@ -41,23 +44,28 @@ public class UsersController {
         return "c-list-users";
     }
 
+    @Breadcrumb
     @Action(value = USERS_VIEW_PAGE)
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public String viewUser(@PathVariable Long id, Model model) {
         User user = userService.loadUser(id);
         model.addAttribute("user", user);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "View user ( " + user.getUsername() + " )");
         return "c-view-users";
     }
 
+    @Breadcrumb
     @Action(value = USERS_EDIT_PAGE)
     @RequestMapping(value = "/users/{id}/edit", method = RequestMethod.GET)
     public String editUser(@PathVariable Long id, Model model) {
         User user = userService.loadUser(id);
         model.addAttribute("user", user);
         model.addAttribute("formAction", "/users/" + id);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "Edit user ( " + user.getUsername() + " )");
         return "c-edit-users";
     }
 
+    @Breadcrumb(label = "Add user")
     @Action(value = USERS_ADD_PAGE)
     @RequestMapping(value = "/users/new", method = RequestMethod.GET)
     public String addUser(Model model) {

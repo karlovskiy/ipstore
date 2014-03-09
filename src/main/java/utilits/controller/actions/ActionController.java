@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import utilits.aspect.change.ChangeType;
 import utilits.aspect.change.IChangeField;
+import utilits.breadcrumb.Breadcrumb;
+import utilits.entity.Action;
 import utilits.service.ActionService;
+import utilits.spring.BreadcrumbInterceptor;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static utilits.Utils.*;
@@ -32,6 +36,7 @@ public class ActionController {
     @Resource(name = "actionService")
     private ActionService actionService;
 
+    @Breadcrumb(label = "Actions")
     @RequestMapping(value = "/actions", method = RequestMethod.GET)
     public String actionList(Model model) {
         logger.info("Received request to load actions");
@@ -51,12 +56,17 @@ public class ActionController {
         return "c-list-actions";
     }
 
+    @Breadcrumb
     @RequestMapping(value = "/actions/{id}", method = RequestMethod.GET)
     public String viewAction(@PathVariable Long id, Model model) {
-        model.addAttribute("action", actionService.loadAction(id));
+        Action action = actionService.loadAction(id);
+        model.addAttribute("action", action);
+        String actionTimestamp = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(action.getActionTimestamp());
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "View action ( " + actionTimestamp + " )");
         return "c-view-actions";
     }
 
+    @Breadcrumb(label = "Changes")
     @RequestMapping(value = "/changes", method = RequestMethod.GET)
     public String changesList(Model model) {
         logger.info("Received request to load changes");

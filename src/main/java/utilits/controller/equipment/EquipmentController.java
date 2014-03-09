@@ -12,10 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import utilits.aspect.Action;
+import utilits.breadcrumb.Breadcrumb;
 import utilits.controller.ImportResultType;
 import utilits.entity.Equipment;
 import utilits.service.EquipmentService;
 import utilits.service.SearchService;
+import utilits.spring.BreadcrumbInterceptor;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -45,6 +47,7 @@ public class EquipmentController {
     @Resource(name = "searchService")
     private SearchService searchService;
 
+    @Breadcrumb(label = "Equipment")
     @Action(value = EQUIPMENT_LIST)
     @RequestMapping(value = "/equipment", method = RequestMethod.GET)
     public String viewEquipment(@RequestParam(value = "search", required = false) String search, Model model) {
@@ -58,6 +61,7 @@ public class EquipmentController {
         return "mfc-list-equipment";
     }
 
+    @Breadcrumb(label = "Import equipment")
     @Action(value = EQUIPMENT_IMPORT_PAGE)
     @RequestMapping(value = "/equipment/import", method = RequestMethod.GET)
     public String importEquipment() {
@@ -84,14 +88,17 @@ public class EquipmentController {
         return "c-import-equipment";
     }
 
+    @Breadcrumb
     @Action(value = EQUIPMENT_VIEW_PAGE)
     @RequestMapping(value = "/equipment/{id}", method = RequestMethod.GET)
     public String viewEquipment(@PathVariable Long id, Model model) {
         Equipment equipment = equipmentService.loadEquipment(id);
         model.addAttribute("equipment", equipment);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "View equipment ( " + equipment.getIpAddress() + " )");
         return "asc-view-equipment";
     }
 
+    @Breadcrumb(label = "Add equipment")
     @Action(value = EQUIPMENT_ADD_PAGE)
     @RequestMapping(value = "/equipment/new", method = RequestMethod.GET)
     public String addEquipment(Model model) {
@@ -102,6 +109,7 @@ public class EquipmentController {
         return "c-edit-equipment";
     }
 
+    @Breadcrumb
     @Action(value = EQUIPMENT_EDIT_PAGE)
     @RequestMapping(value = "/equipment/{id}/edit", method = RequestMethod.GET)
     public String editEquipment(@PathVariable Long id, Model model) {
@@ -109,6 +117,7 @@ public class EquipmentController {
         model.addAttribute("equipment", equipment);
         model.addAttribute("formAction", "/equipment/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "Edit equipment ( " + equipment.getIpAddress() + " )");
         return "c-edit-equipment";
     }
 

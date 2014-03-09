@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import utilits.aspect.Action;
+import utilits.breadcrumb.Breadcrumb;
 import utilits.controller.ImportResultType;
 import utilits.entity.Account;
 import utilits.service.AccountsService;
 import utilits.service.SearchService;
+import utilits.spring.BreadcrumbInterceptor;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -48,6 +50,7 @@ public class AccountsController {
     @Resource(name = "searchService")
     private SearchService searchService;
 
+    @Breadcrumb(label = "Import accounts")
     @Action(value = ACCOUNTS_IMPORT_PAGE)
     @RequestMapping(value = "/accounts/import", method = RequestMethod.GET)
     public String importAccounts() {
@@ -74,6 +77,7 @@ public class AccountsController {
         return "c-import-accounts";
     }
 
+    @Breadcrumb(label = "Accounts")
     @Action(value = ACCOUNTS_LIST)
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
     public String viewAccounts(@RequestParam(value = "search", required = false) String search, Model model) {
@@ -87,11 +91,13 @@ public class AccountsController {
         return "mfc-list-accounts";
     }
 
+    @Breadcrumb
     @Action(value = ACCOUNTS_VIEW_PAGE)
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
     public String viewAccount(@PathVariable Long id, Model model) {
         Account account = accountsService.loadAccount(id);
         model.addAttribute("account", account);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "View account ( " + account.getLogin() + " )");
         return "c-view-accounts";
     }
 
@@ -123,6 +129,7 @@ public class AccountsController {
         return "redirect:/accounts/" + id;
     }
 
+    @Breadcrumb
     @Action(value = ACCOUNTS_EDIT_PAGE)
     @RequestMapping(value = "/accounts/{id}/edit", method = RequestMethod.GET)
     public String editAccount(@PathVariable Long id, Model model) {
@@ -131,9 +138,11 @@ public class AccountsController {
         model.addAttribute("edit", true);
         model.addAttribute("formAction", "/accounts/" + id);
         model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "Edit account ( " + account.getLogin() + " )");
         return "c-edit-accounts";
     }
 
+    @Breadcrumb(label = "Add account")
     @Action(value = ACCOUNTS_ADD_PAGE)
     @RequestMapping(value = "/accounts/new", method = RequestMethod.GET)
     public String addAccount(Model model) {

@@ -73,4 +73,8 @@ public class Utils {
         return authentication.getAuthorities().contains(authority);
     }
 
+    public static boolean isAuthenticated() {
+        return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+    }
+
 }

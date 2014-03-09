@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utilits.Utils;
 import utilits.aspect.Action;
+import utilits.breadcrumb.Breadcrumb;
 import utilits.controller.users.Authority;
 import utilits.service.HomeService;
 
@@ -25,6 +26,7 @@ public class HomeController {
     @Resource(name = "homeService")
     private HomeService homeService;
 
+    @Breadcrumb(label = "Home")
     @Action(value = HOME_PAGE)
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {

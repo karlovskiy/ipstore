@@ -5,7 +5,7 @@
     <groupId>utilits</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>4.0.6</version>
+    <version>4.1.0</version>
 
     <name>ipstore web application</name>
 
@@ -335,6 +335,11 @@
             <version>3.2.1</version>
             <type>jar</type>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

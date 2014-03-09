@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import utilits.aspect.Action;
 import utilits.aspect.ActionType;
+import utilits.breadcrumb.Breadcrumb;
 import utilits.entity.CommunigateDomain;
 import utilits.service.CommunigateService;
 import utilits.controller.ImportResultType;
 import utilits.service.SearchService;
+import utilits.spring.BreadcrumbInterceptor;
 
 
 import javax.annotation.Resource;
@@ -45,6 +47,7 @@ public class CommunigateController {
     @Resource(name = "searchService")
     private SearchService searchService;
 
+    @Breadcrumb(label = "Domains")
     @Action(value = COMMUNIGATE_LIST)
     @RequestMapping(value = "/communigate", method = RequestMethod.GET)
     public String viewCommunigate(String search, Model model) {
@@ -58,14 +61,17 @@ public class CommunigateController {
         return "mfc-list-communigate";
     }
 
+    @Breadcrumb
     @Action(value = COMMUNIGATE_VIEW_PAGE)
     @RequestMapping(value = "/communigate/{id}", method = RequestMethod.GET)
     public String viewCommunigate(@PathVariable Long id, Model model) {
         CommunigateDomain communigateDomain = communigateService.loadCommunigate(id);
         model.addAttribute("communigateDomain", communigateDomain);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "View domain ( " + communigateDomain.getDomainName() + "  )");
         return "c-view-communigate";
     }
 
+    @Breadcrumb(label = "Add domain")
     @Action(value = COMMUNIGATE_ADD_PAGE)
     @RequestMapping(value = "/communigate/new", method = RequestMethod.GET)
     public String addCommunigate(Model model) {
@@ -95,6 +101,7 @@ public class CommunigateController {
         return "redirect:/communigate/" + id;
     }
 
+    @Breadcrumb
     @Action(value = COMMUNIGATE_EDIT_PAGE)
     @RequestMapping(value = "/communigate/{id}/edit", method = RequestMethod.GET)
     public String editCommunigate(@PathVariable Long id, Model model) {
@@ -102,6 +109,7 @@ public class CommunigateController {
         model.addAttribute("communigateDomain", communigateDomain);
         model.addAttribute("edit", true);
         model.addAttribute("formAction", "/communigate/" + id);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "Edit domain ( " + communigateDomain.getDomainName() + "  )");
         return "c-edit-communigate";
     }
 
@@ -177,6 +185,7 @@ public class CommunigateController {
         return "redirect:/communigate/" + id;
     }
 
+    @Breadcrumb(label = "Import equipment")
     @Action(value = COMMUNIGATE_IMPORT_PAGE)
     @RequestMapping(value = "/communigate/import", method = RequestMethod.GET)
     public String importCommunigate() {

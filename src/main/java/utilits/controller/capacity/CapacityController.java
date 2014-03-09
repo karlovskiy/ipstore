@@ -8,9 +8,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import utilits.breadcrumb.Breadcrumb;
 import utilits.entity.capacity.CapacityNumber;
 import utilits.entity.capacity.CapacityType;
 import utilits.service.CapacityService;
+import utilits.spring.BreadcrumbInterceptor;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -30,6 +32,7 @@ public class CapacityController {
     @Resource(name = "capacityService")
     private CapacityService capacityService;
 
+    @Breadcrumb(label = "Capacity")
     @RequestMapping(value = "/capacity", method = RequestMethod.GET)
     public String listCapacity(@Valid CapacityForm capacityForm, @SuppressWarnings("unused") BindingResult result, Model model) {
         logger.info("Received request to load number capacity list");
@@ -68,6 +71,7 @@ public class CapacityController {
         return "c-list-capacity";
     }
 
+    @Breadcrumb(label = "Add capacity")
     @RequestMapping(value = "/capacity/new", method = RequestMethod.GET)
     public String addCapacityPage(Model model) {
         CapacityType capacityType = new CapacityType();
@@ -93,11 +97,13 @@ public class CapacityController {
         return "redirect:/capacity";
     }
 
+    @Breadcrumb
     @RequestMapping(value = "/capacity/{capacityId}/edit", method = RequestMethod.GET)
     public String editCapacityType(@PathVariable Long capacityId, Model model) {
         CapacityType capacityType = capacityService.loadCapacityType(capacityId);
         model.addAttribute("capacityType", capacityType);
         model.addAttribute("action", "/capacity/" + capacityId);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "Edit capacity ( " + capacityType.getName() + " )");
         return "c-edit-capacity";
     }
 
@@ -118,6 +124,7 @@ public class CapacityController {
         return "redirect:/capacity";
     }
 
+    @Breadcrumb(label = "Add capacity number")
     @RequestMapping(value = "/capacity/{capacityId}/numbers/new", method = RequestMethod.GET)
     public String addCapacityNumberPage(@PathVariable Long capacityId, Model model) {
         CapacityType capacityType = capacityService.loadCapacityType(capacityId);
@@ -146,18 +153,22 @@ public class CapacityController {
         return "redirect:/capacity/" + capacityId + "/numbers/" + capacityNumberId;
     }
 
+    @Breadcrumb
     @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}", method = RequestMethod.GET)
     public String viewCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id, Model model) {
         CapacityNumber capacityNumber = capacityService.loadCapacityNumber(id);
         model.addAttribute("capacityNumber", capacityNumber);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "View capacity number ( " + capacityNumber.getNumber() + " )");
         return "c-view-capacity_number";
     }
 
+    @Breadcrumb
     @RequestMapping(value = "/capacity/{capacityId}/numbers/{id}/edit", method = RequestMethod.GET)
     public String editCapacityNumber(@PathVariable Long capacityId, @PathVariable Long id, Model model) {
         CapacityNumber capacityNumber = capacityService.loadCapacityNumber(id);
         model.addAttribute("capacityNumber", capacityNumber);
         model.addAttribute("action", "/capacity/" + capacityId + "/numbers/" + id);
+        model.addAttribute(BreadcrumbInterceptor.TITLE_ATTRIBUTE, "Edit capacity number ( " + capacityNumber.getNumber() + " )");
         return "c-edit-capacity_number";
     }
 
