@@ -23,8 +23,10 @@
     <!-- Configures the annotation-driven Spring MVC Controller programming model.
     Note that, with Spring 3.0, this tag works in Servlet MVC only!  -->
     <mvc:annotation-driven/>
+
     <mvc:resources mapping="/resources/${application.version}/**" location="/resources/" cache-period="31536000"/>
     <mvc:resources mapping="/resources/unversioned/*" location="/resources/unversioned/" cache-period="31536000"/>
+
     <mvc:interceptors>
         <bean class="utilits.spring.BreadcrumbInterceptor"/>
     </mvc:interceptors>
@@ -36,6 +38,16 @@
             <list>
                 <value>custom_messages</value>
             </list>
+        </property>
+    </bean>
+
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="utilits.message.MessageToStringConverter"/>
+                <bean class="utilits.message.StringToMessageConverter"/>
+            </set>
         </property>
     </bean>
 

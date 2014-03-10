@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import utilits.aspect.Action;
 import utilits.breadcrumb.Breadcrumb;
 import utilits.controller.ImportResultType;
 import utilits.entity.Account;
+import utilits.message.Message;
+import utilits.message.MessageStatus;
+import utilits.message.MessageType;
 import utilits.service.AccountsService;
 import utilits.service.SearchService;
 import utilits.spring.BreadcrumbInterceptor;
@@ -103,29 +107,41 @@ public class AccountsController {
 
     @Action(value = ACCOUNTS_DELETE, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/{id}/delete", method = RequestMethod.GET)
-    public String deleteAccount(@PathVariable Long id) {
-        accountsService.deleteAccount(id);
+    public String deleteAccount(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Account account = accountsService.deleteAccount(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message(account.getLogin(), MessageType.TEXT_WITH_URL, MessageStatus.DANGER,
+                        "/accounts/" + account.getId(), "Account ", " successfully deleted!"));
         return "redirect:/accounts";
     }
 
     @Action(value = ACCOUNTS_BLOCK, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/{id}/block", method = RequestMethod.GET)
-    public String blockAccount(@PathVariable Long id) {
-        accountsService.blockAccount(id);
+    public String blockAccount(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Account account = accountsService.blockAccount(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+               new Message("Account " + account.getLogin() + " successfully blocked!",
+                       MessageType.TEXT, MessageStatus.WARNING));
         return "redirect:/accounts/" + id;
     }
 
     @Action(value = ACCOUNTS_ACTIVATE, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/{id}/activate", method = RequestMethod.GET)
-    public String activateAccount(@PathVariable Long id) {
-        accountsService.activateAccount(id);
+    public String activateAccount(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Account account = accountsService.activateAccount(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Account " + account.getLogin() + " successfully activated!",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/accounts/" + id;
     }
 
     @Action(value = ACCOUNTS_UNBLOCK, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/{id}/unblock", method = RequestMethod.GET)
-    public String unBlockAccount(@PathVariable Long id) {
-        accountsService.activateAccount(id);
+    public String unBlockAccount(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Account account = accountsService.activateAccount(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Account " + account.getLogin() + " successfully unblocked!", MessageType.TEXT,
+                        MessageStatus.WARNING));
         return "redirect:/accounts/" + id;
     }
 
@@ -155,7 +171,8 @@ public class AccountsController {
     }
 
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
-    public String createAccount(@Valid Account account, BindingResult result, Model model) {
+    public String createAccount(@Valid Account account, BindingResult result, Model model,
+                                RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/accounts");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
@@ -171,12 +188,16 @@ public class AccountsController {
             return "c-edit-accounts";
         }
         Long id = accountsService.createAccount(account);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+               new Message("Account " + account.getLogin() + " successfully created!",
+                       MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/accounts/" + id;
     }
 
     @Action(value = ACCOUNTS_UPDATE, changeType = ACCOUNTS, changeMode = UPDATE)
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.POST)
-    public String updateAccount(@Valid Account account, BindingResult result, @PathVariable Long id, Model model) {
+    public String updateAccount(@Valid Account account, BindingResult result, @PathVariable Long id, Model model,
+                                RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("edit", true);
             model.addAttribute("formAction", "/accounts/" + id);
@@ -184,6 +205,9 @@ public class AccountsController {
             return "c-edit-accounts";
         }
         accountsService.updateAccount(id, account);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Account " + account.getLogin() + " successfully updated!",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/accounts/" + id;
     }
 }

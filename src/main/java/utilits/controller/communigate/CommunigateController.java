@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import utilits.aspect.Action;
-import utilits.aspect.ActionType;
 import utilits.breadcrumb.Breadcrumb;
 import utilits.entity.CommunigateDomain;
+import utilits.message.Message;
+import utilits.message.MessageStatus;
+import utilits.message.MessageType;
 import utilits.service.CommunigateService;
 import utilits.controller.ImportResultType;
 import utilits.service.SearchService;
@@ -83,7 +86,8 @@ public class CommunigateController {
     }
 
     @RequestMapping(value = "/communigate", method = RequestMethod.POST)
-    public String createCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result, Model model) {
+    public String createCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result, Model model,
+                                    RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/communigate");
             return "c-edit-communigate";
@@ -98,6 +102,9 @@ public class CommunigateController {
             return "c-edit-communigate";
         }
         Long id = communigateService.createCommunigate(communigateDomain);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Domain " + communigateDomain.getDomainName() + " successfully created!",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/communigate/" + id;
     }
 
@@ -115,7 +122,8 @@ public class CommunigateController {
 
     @Action(value = COMMUNIGATE_UPDATE, changeType = COMMUNIGATE, changeMode = UPDATE)
     @RequestMapping(value = "/communigate/{id}", method = RequestMethod.POST)
-    public String updateCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result, @PathVariable Long id, Model model) {
+    public String updateCommunigate(@Valid CommunigateDomain communigateDomain, BindingResult result,
+                                    @PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/communigate/" + id);
             return "c-edit-communigate";
@@ -154,34 +162,49 @@ public class CommunigateController {
         oldCommunigate.setDescription(communigateDomain.getDescription());
 
         communigateService.updateCommunigate(id, communigateDomain);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Domain " + communigateDomain.getDomainName() + " successfully updated!",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_DELETE, changeType = COMMUNIGATE, changeMode = UPDATE)
     @RequestMapping(value = "/communigate/{id}/delete", method = RequestMethod.GET)
-    public String deleteCommunigate(@PathVariable Long id) {
-        communigateService.deleteCommunigate(id);
+    public String deleteCommunigate(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        CommunigateDomain domain = communigateService.deleteCommunigate(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message(domain.getDomainName(), MessageType.TEXT_WITH_URL, MessageStatus.DANGER,
+                        "/communigate/" + domain.getId(), "Domain ", "  successfully deleted!"));
         return "redirect:/communigate";
     }
 
     @Action(value = COMMUNIGATE_BLOCK, changeType = COMMUNIGATE, changeMode = UPDATE)
     @RequestMapping(value = "/communigate/{id}/block", method = RequestMethod.GET)
-    public String blockCommunigate(@PathVariable Long id) {
-        communigateService.blockCommunigate(id);
+    public String blockCommunigate(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        CommunigateDomain domain = communigateService.blockCommunigate(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Domain " + domain.getDomainName() + " succesfully blocked",
+                        MessageType.TEXT, MessageStatus.WARNING));
         return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_ACTIVATE, changeType = COMMUNIGATE, changeMode = UPDATE)
     @RequestMapping(value = "/communigate/{id}/activate", method = RequestMethod.GET)
-    public String activateCommunigate(@PathVariable Long id) {
-        communigateService.activateCommunigate(id);
+    public String activateCommunigate(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        CommunigateDomain domain = communigateService.activateCommunigate(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Domain " + domain.getDomainName() + " successfully activated",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/communigate/" + id;
     }
 
     @Action(value = COMMUNIGATE_UNBLOCK, changeType = COMMUNIGATE, changeMode = UPDATE)
     @RequestMapping(value = "/communigate/{id}/unblock", method = RequestMethod.GET)
-    public String unBlockCommunigate(@PathVariable Long id) {
-        communigateService.activateCommunigate(id);
+    public String unBlockCommunigate(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        CommunigateDomain domain = communigateService.activateCommunigate(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Domain " + domain.getDomainName() + " successfully unblocked",
+                        MessageType.TEXT, MessageStatus.WARNING));
         return "redirect:/communigate/" + id;
     }
 

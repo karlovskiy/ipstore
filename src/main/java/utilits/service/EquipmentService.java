@@ -125,26 +125,29 @@ public class EquipmentService {
         }
     }
 
-    public void deleteEquipment(Long id) {
+    public Equipment deleteEquipment(Long id) {
         logger.info("delete equipment with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Equipment equipment = (Equipment) session.get(Equipment.class, id);
         equipment.setStatus(Status.DELETED);
+        return equipment;
     }
 
-    public void activateEquipment(Long id) {
+    public Equipment activateEquipment(Long id) {
         logger.info("activate deleted equipment with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Equipment equipment = (Equipment) session.get(Equipment.class, id);
         equipment.setStatus(Status.ACTIVE);
+        return equipment;
     }
 
-    public void activateWithNoExpiredEquipment(Long id) {
+    public Equipment activateWithNoExpiredEquipment(Long id) {
         logger.info("activate with no expired password equipment with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Equipment equipment = (Equipment) session.get(Equipment.class, id);
         equipment.setStatus(Status.ACTIVE_NO_EXPIRED);
         equipment.setPasswordStatus(PasswordStatus.NEW);
+        return equipment;
     }
 
     public void updatePasswordStatus(Long id, PasswordStatus passwordStatus) {

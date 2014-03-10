@@ -108,25 +108,28 @@ public class CommunigateService {
         return (CommunigateDomain) criteria.uniqueResult();
     }
 
-    public void activateCommunigate(Long id) {
+    public CommunigateDomain activateCommunigate(Long id) {
         logger.info("activate account with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         CommunigateDomain communigateDomain = (CommunigateDomain) session.get(CommunigateDomain.class, id);
         communigateDomain.setStatus(CommunigateStatus.NORMAL);
+        return communigateDomain;
     }
 
-    public void blockCommunigate(Long id) {
+    public CommunigateDomain blockCommunigate(Long id) {
         logger.info("block account with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         CommunigateDomain communigateDomain = (CommunigateDomain) session.get(CommunigateDomain.class, id);
         communigateDomain.setStatus(CommunigateStatus.BLOCKED);
+        return communigateDomain;
     }
 
-    public void deleteCommunigate(Long id) {
+    public CommunigateDomain deleteCommunigate(Long id) {
         logger.info("delete account with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         CommunigateDomain communigateDomain = (CommunigateDomain) session.get(CommunigateDomain.class, id);
         communigateDomain.setStatus(CommunigateStatus.DELETED);
+        return communigateDomain;
     }
 
     public ImportResultType<CommunigateDomain> importFile(InputStream is) throws IOException, InvalidFormatException {

@@ -83,7 +83,7 @@
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ROOT')">
                 <c:if test="${equipment.status == 'DELETED' or equipment.status == 'ACTIVE_NO_EXPIRED'}">
-                    <a class="btn btn-warning"
+                    <a class="btn btn-success"
                        href="<c:url value="/equipment/${equipment.id}/activate"/>">Activate</a>
                 </c:if>
                 <c:if test="${equipment.status == 'ACTIVE'}">

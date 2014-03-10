@@ -11,10 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import utilits.aspect.Action;
 import utilits.breadcrumb.Breadcrumb;
 import utilits.controller.ImportResultType;
 import utilits.entity.Equipment;
+import utilits.message.Message;
+import utilits.message.MessageStatus;
+import utilits.message.MessageType;
 import utilits.service.EquipmentService;
 import utilits.service.SearchService;
 import utilits.spring.BreadcrumbInterceptor;
@@ -123,28 +127,37 @@ public class EquipmentController {
 
     @Action(value = EQUIPMENT_DELETE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/{id}/delete", method = RequestMethod.GET)
-    public String deleteEquipment(@PathVariable Long id) {
-        equipmentService.deleteEquipment(id);
+    public String deleteEquipment(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Equipment equipment = equipmentService.deleteEquipment(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message(equipment.getIpAddress(), MessageType.TEXT_WITH_URL, MessageStatus.DANGER,
+                        "/equipment/" + equipment.getId(), "Equipment ", " successfully deleted!"));
         return "redirect:/equipment";
     }
 
     @Action(value = EQUIPMENT_ACTIVATE, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/{id}/activate", method = RequestMethod.GET)
-    public String activateEquipment(@PathVariable Long id) {
-        equipmentService.activateEquipment(id);
+    public String activateEquipment(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Equipment equipment = equipmentService.activateEquipment(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Equipment " + equipment.getIpAddress() + " successfully activated",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/equipment/" + id;
     }
 
     @Action(value = EQUIPMENT_ACTIVATE_NO_EXPIRED, changeType = EQUIPMENT, changeMode = UPDATE)
     @RequestMapping(value = "/equipment/{id}/activate_no_expired", method = RequestMethod.GET)
-    public String activateNoExpiredEquipment(@PathVariable Long id) {
-        equipmentService.activateWithNoExpiredEquipment(id);
+    public String activateNoExpiredEquipment(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Equipment equipment = equipmentService.activateWithNoExpiredEquipment(id);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Equipment " + equipment.getIpAddress() + " successfully activated with no expiration for password!",
+                        MessageType.TEXT, MessageStatus.WARNING));
         return "redirect:/equipment/" + id;
     }
 
     @RequestMapping(value = "/equipment", method = RequestMethod.POST)
     public String createEquipment(@Valid Equipment equipment, BindingResult result,
-                                  @RequestParam("cf") MultipartFile config, Model model) {
+                                  @RequestParam("cf") MultipartFile config, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/equipment");
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
@@ -159,6 +172,9 @@ public class EquipmentController {
             return "c-edit-equipment";
         }
         Long id = equipmentService.createEquipment(equipment, config);
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Equipment " + equipment.getIpAddress() + " successfully created!",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/equipment/" + id;
     }
 
@@ -166,13 +182,16 @@ public class EquipmentController {
     @RequestMapping(value = "/equipment/{id}", method = RequestMethod.POST)
     public String updateEquipment(@Valid Equipment equipment, BindingResult result, @PathVariable Long id,
                                   @RequestParam("cf") MultipartFile config, @RequestParam("cf_reset") String cfReset,
-                                  Model model) {
+                                  Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("formAction", "/equipment/" + id);
             model.addAttribute("defaultPasswordLength", generatedPasswordDefaultLength);
             return "c-edit-equipment";
         }
         equipmentService.updateEquipment(id, equipment, config, "reset".equals(cfReset));
+        redirectAttributes.addFlashAttribute(Message.MESSAGE_ATTRIBUTE,
+                new Message("Equipment " + equipment.getIpAddress() + " successfully updated!",
+                        MessageType.TEXT, MessageStatus.SUCCESS));
         return "redirect:/equipment/" + id;
     }
 

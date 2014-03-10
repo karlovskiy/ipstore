@@ -197,6 +197,22 @@
                     </c:forEach>
                 </ol>
             </c:if>
+            <c:if test="${not empty requestScope['UI_MESSAGE']}">
+                <div class="${requestScope['UI_MESSAGE'].messageStatus.cssClass}">
+                    <c:choose>
+                        <c:when test="${requestScope['UI_MESSAGE'].messageType eq 'TEXT_WITH_URL'}">
+                            <c:out value="${requestScope['UI_MESSAGE'].leftText}"/>
+                            <a href="<c:url value="${requestScope['UI_MESSAGE'].url}"/>" class="alert-link">
+                                <c:out value="${requestScope['UI_MESSAGE'].text}"/>
+                            </a>
+                            <c:out value="${requestScope['UI_MESSAGE'].rightText}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:out value="${requestScope['UI_MESSAGE'].text}"/>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+            </c:if>
             <tiles:insertAttribute name="content"/>
         </div>
     </div>

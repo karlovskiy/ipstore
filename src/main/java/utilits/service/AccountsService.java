@@ -59,25 +59,28 @@ public class AccountsService {
         return (Long) session.save(account);
     }
 
-    public void activateAccount(Long id) {
+    public Account activateAccount(Long id) {
         logger.info("activate account with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Account account = (Account) session.get(Account.class, id);
         account.setStatus(AccountStatus.NORMAL);
+        return account;
     }
 
-    public void blockAccount(Long id) {
+    public Account blockAccount(Long id) {
         logger.info("block account with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Account account = (Account) session.get(Account.class, id);
         account.setStatus(AccountStatus.WARNING);
+        return account;
     }
 
-    public void deleteAccount(Long id) {
+    public Account deleteAccount(Long id) {
         logger.info("delete account with id=" + id);
         Session session = sessionFactory.getCurrentSession();
         Account account = (Account) session.get(Account.class, id);
         account.setStatus(AccountStatus.DELETED);
+        return account;
     }
 
     @SuppressWarnings("unchecked")
