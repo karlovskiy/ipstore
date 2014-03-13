@@ -27,7 +27,7 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
     </bean>
 
-    <bean id="contextExposingTilesViewResolver" class="utilits.spring.ContextExposingViewResolver" p:order="1">
+    <bean id="contextExposingTilesViewResolver" class="ipstore.spring.ContextExposingViewResolver" p:order="1">
         <constructor-arg ref="tilesViewResolver"/>
         <property name="exposeContextBeansAsAttributes" value="true"/>
     </bean>

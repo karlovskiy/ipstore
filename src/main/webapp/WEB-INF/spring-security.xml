@@ -112,7 +112,7 @@
     </beans:bean>
 
     <beans:bean id="authenticationFailureHandler"
-                class="utilits.controller.users.CustomAuthenticationFailureHandler">
+                class="ipstore.controller.users.CustomAuthenticationFailureHandler">
         <beans:property name="defaultFailureUrl" value="/loginfailed"/>
     </beans:bean>
 

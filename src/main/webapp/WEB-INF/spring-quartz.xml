@@ -4,7 +4,7 @@
 	        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean name="backupDatabaseJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="utilits.quartz.BackupDatabaseJob"/>
+        <property name="jobClass" value="ipstore.quartz.BackupDatabaseJob"/>
         <property name="jobDataAsMap">
             <map>
                 <entry key="ftpChannel" value-ref="ftpChannel"/>
@@ -19,7 +19,7 @@
     </bean>
 
     <bean name="passwordStatusJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="utilits.quartz.PasswordStatusJob"/>
+        <property name="jobClass" value="ipstore.quartz.PasswordStatusJob"/>
         <property name="jobDataAsMap">
             <map>
                 <entry key="equipmentService" value-ref="equipmentService"/>
@@ -35,7 +35,7 @@
     </bean>
 
     <bean name="telnetStatusJobDetails" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="utilits.quartz.TelnetStatusJob"/>
+        <property name="jobClass" value="ipstore.quartz.TelnetStatusJob"/>
         <property name="jobDataAsMap">
             <map>
                 <entry key="equipmentService" value-ref="equipmentService"/>

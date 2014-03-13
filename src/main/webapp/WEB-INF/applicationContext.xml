@@ -18,7 +18,7 @@
 
     <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
      For example @Controller and @Service. Make sure to set the correct base-package-->
-    <context:component-scan base-package="utilits"/>
+    <context:component-scan base-package="ipstore"/>
 
     <!-- Configures the annotation-driven Spring MVC Controller programming model.
     Note that, with Spring 3.0, this tag works in Servlet MVC only!  -->
@@ -28,7 +28,7 @@
     <mvc:resources mapping="/resources/unversioned/*" location="/resources/unversioned/" cache-period="31536000"/>
 
     <mvc:interceptors>
-        <bean class="utilits.spring.BreadcrumbInterceptor"/>
+        <bean class="ipstore.spring.BreadcrumbInterceptor"/>
     </mvc:interceptors>
 
     <aop:aspectj-autoproxy/>
@@ -45,8 +45,8 @@
           class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean class="utilits.message.MessageToStringConverter"/>
-                <bean class="utilits.message.StringToMessageConverter"/>
+                <bean class="ipstore.message.MessageToStringConverter"/>
+                <bean class="ipstore.message.StringToMessageConverter"/>
             </set>
         </property>
     </bean>

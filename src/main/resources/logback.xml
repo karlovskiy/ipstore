@@ -41,7 +41,7 @@
         <!--</rollingPolicy>-->
     <!--</appender>-->
 
-    <logger name="utilits" additivity="false">
+    <logger name="ipstore" additivity="false">
         <appender-ref ref="application"/>
     </logger>
 
