@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap.cosmo.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap/${application.theme}/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/datepicker.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/datepicker3.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/tablesorter.css"/>">
@@ -65,7 +65,7 @@
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">You signed as <security:authentication property="principal.username"/></li>
                         <li><a href="<c:url value="/changepassword"/>">Change password</a></li>
-                        <li><a href="<c:url value="/changeuserinfo"/>">Change userInfo</a></li>
+                        <li><a href="<c:url value="/changeuserinfo"/>">Settings</a></li>
                         <li><a href="<c:url value="/j_spring_security_logout"/>">Logout</a></li>
                     </ul>
                 </li>

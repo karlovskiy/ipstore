@@ -13,6 +13,7 @@
     <ipstore:field label="FirstName" value="${user.firstName}"/>
     <ipstore:field lable="LastName" value="${user.lastName}"/>
     <ipstore:field label="Email" value="${user.email}"/>
+    <ipstore:field label="Theme" value="${empty user.theme ? 'Default' : user.theme}"/>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">

@@ -29,10 +29,10 @@
             <props>
                 <prop key="hibernate.search.default.indexBase">${hibernate.lucene.index}</prop>
                 <prop key="hibernate.search.default.directory_provider">${hibernate.lucene.provider}</prop>
-                <prop key="hbm2ddl.auto">update</prop>
-                <prop key="use_sql_comments">false</prop>
-                <prop key="format_sql">false</prop>
-                <prop key="show_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.use_sql_comments">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
             </props>
         </property>

@@ -15,6 +15,7 @@ public class ChangeUserInfo {
     private String firstName;
     private String lastName;
     private String password;
+    private String theme;
 
     public String getEmail() {
         return email;
@@ -46,5 +47,13 @@ public class ChangeUserInfo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 }

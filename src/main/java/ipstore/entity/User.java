@@ -54,6 +54,9 @@ public class User implements IHasId, Serializable {
     @Column(name = "CREDENTIALS_NON_EXPIRED", nullable = false)
     private boolean credentialsNonExpired;
 
+    @Column(name = "THEME", length = 64)
+    private String theme;
+
     @Transient
     public Collection<? extends GrantedAuthority> getAllAuthorities() {
         return Arrays.asList(Authority.values());
@@ -72,6 +75,11 @@ public class User implements IHasId, Serializable {
     @Transient
     public void setAuthorities(String authorities) {
         authorityMask = Authority.getAuthorityMask(authorities);
+    }
+
+    @Transient
+    public String theme() {
+        return theme != null && theme.length() != 0 ? theme : "default";
     }
 
     public Long getId() {
@@ -144,5 +152,13 @@ public class User implements IHasId, Serializable {
 
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
         this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 }

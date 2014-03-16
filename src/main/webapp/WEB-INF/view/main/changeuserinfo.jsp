@@ -18,6 +18,32 @@
     <ipstore:input path="firstName" label="FirstName"/>
     <ipstore:input path="lastName" label="LastName"/>
 
+    <spring:bind path="theme">
+        <div class="form-group ${status.error ? "has-error" : ""}">
+            <label class="control-label col-md-2" for="theme">Theme</label>
+            <div class="col-md-5">
+                <form:select id="theme" path="theme" cssClass="form-control">
+                    <form:option value="default" label="Default"/>
+                    <form:option value="amelia" label="Amelia"/>
+                    <form:option value="cerulean" label="Cerulean"/>
+                    <form:option value="cosmo" label="Cosmo"/>
+                    <form:option value="cyborg" label="Cyborg"/>
+                    <form:option value="flatly" label="Flatly"/>
+                    <form:option value="journal" label="Journal"/>
+                    <form:option value="lumen" label="Lumen"/>
+                    <form:option value="readable" label="Readable"/>
+                    <form:option value="simplex" label="Simplex"/>
+                    <form:option value="slate" label="Slate"/>
+                    <form:option value="spacelab" label="Spacelab"/>
+                    <form:option value="superhero" label="Superhero"/>
+                    <form:option value="united" label="United"/>
+                    <form:option value="yeti" label="Yeti"/>
+                </form:select>
+                <form:errors path="theme" cssClass="help-block"/>
+            </div>
+        </div>
+    </spring:bind>
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
             <button type="submit" class="btn btn-primary">Save</button>

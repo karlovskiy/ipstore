@@ -1,5 +1,6 @@
 package ipstore.controller;
 
+import ipstore.service.Principal;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -130,6 +131,7 @@ public class LoginController {
         userInfo.setEmail(user.getEmail());
         userInfo.setFirstName(user.getFirstName());
         userInfo.setLastName(user.getLastName());
+        userInfo.setTheme(user.getTheme());
         model.addAttribute("changeUserInfo", userInfo);
         return "c-changeuserinfo-main";
     }
@@ -150,7 +152,10 @@ public class LoginController {
         user.setEmail(changeUserInfo.getEmail());
         user.setFirstName(changeUserInfo.getFirstName());
         user.setLastName(changeUserInfo.getLastName());
+        user.setTheme(changeUserInfo.getTheme());
         userService.updateUser(user.getId(), user);
+        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        principal.setTheme(user.theme());
         return "redirect:/";
     }
 

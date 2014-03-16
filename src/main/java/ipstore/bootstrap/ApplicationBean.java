@@ -1,8 +1,10 @@
 package ipstore.bootstrap;
 
+import ipstore.service.Principal;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -108,5 +110,10 @@ public class ApplicationBean {
 
     public String getVersion() {
         return version;
+    }
+
+    public String getTheme() {
+        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal.getTheme();
     }
 }

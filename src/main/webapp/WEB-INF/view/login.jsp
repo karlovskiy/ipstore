@@ -9,7 +9,7 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Sign in</title>
-    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap.cosmo.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap/cosmo/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/login.css"/>">
 </head>
 <body>

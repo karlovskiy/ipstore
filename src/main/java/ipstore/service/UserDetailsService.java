@@ -42,11 +42,13 @@ public class UserDetailsService implements org.springframework.security.core.use
             }
             logger.info("Loading user details by username " + username);
             User user = loadUser(username);
-            return new org.springframework.security.core.userdetails.User(
+            Principal principal = new Principal(
                     user.getUsername(),
                     user.getPassword(),
                     UserStatus.ACTIVE == user.getUserStatus(), true, user.isCredentialsNonExpired(), true,
                     user.getAuthoritiesCollection());
+            principal.setTheme(user.theme());
+            return principal;
         } catch (Exception e) {
             throw new UsernameNotFoundException("User " + username + " not found!", e);
         }

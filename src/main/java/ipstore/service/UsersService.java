@@ -107,5 +107,6 @@ public class UsersService {
         oldUser.setEmail(user.getEmail());
         oldUser.setAuthorityMask(user.getAuthorityMask());
         oldUser.setCredentialsNonExpired(user.isCredentialsNonExpired());
+        oldUser.setTheme(user.getTheme());
     }
 }
