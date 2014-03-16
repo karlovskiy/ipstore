@@ -28,7 +28,7 @@ ipstore.addModule(function () {
         header: 'bootstrap-header', // give the header a gradient background
         footerRow: '',
         footerCells: '',
-        icons: 'icon-white', // add "icon-white" to make them white; this icon class is added to the <i> in the header
+        icons: 'icon-table', // add "icon-white" to make them white; this icon class is added to the <i> in the header
         sortNone: 'glyphicon glyphicon-sort', //bootstrap-icon-unsorted
         sortAsc: 'glyphicon glyphicon-sort-by-attributes',     // includes classes for Bootstrap v2 & v3  icon-chevron-up glyphicon glyphicon-chevron-up
         sortDesc: 'glyphicon glyphicon-sort-by-attributes-alt', // includes classes for Bootstrap v2 & v3  icon-chevron-down glyphicon glyphicon-chevron-down

@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap/${application.theme}/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/bootstrap/${application.theme}/${application.theme}.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/datepicker.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/datepicker3.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/${application.version}/css/tablesorter.css"/>">

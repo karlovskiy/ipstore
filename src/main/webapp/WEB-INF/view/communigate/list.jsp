@@ -24,7 +24,7 @@
             <td><c:out value="${communigateDomain.clientName}"/></td>
             <td><fmt:formatDate value="${communigateDomain.date}" type="date" pattern="dd.MM.yyyy"/></td>
             <td>
-                <span class="${bootapplicationstrap.labelClass(communigateDomain.status)}">
+                <span class="${application.labelClass(communigateDomain.status)}">
                     <c:out value="${communigateDomain.status}"/>
                 </span>
             </td>

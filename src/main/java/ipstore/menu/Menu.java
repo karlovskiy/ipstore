@@ -11,22 +11,22 @@ import java.util.Set;
  * @since 4.0, 2/14/14
  */
 public enum Menu {
-    EQUIPMENTS(         "/equipment", "/equipment/view/{id}", "/equipment/edit/{id}"),
-    ADD_EQUIPMENT(      "/equipment/add"),
+    EQUIPMENTS(         "/equipment", "/equipment/{id}", "/equipment/{id}/edit"),
+    ADD_EQUIPMENT(      "/equipment/new"),
     IMPORT_EQUIPMENTS(  "/equipment/import"),
     USER_SETTINGS(      "/changeuserinfo", "/changepassword"),
     CONTACT(            "/contact"),
-    ACCOUNTS(           "/accounts", "/accounts/view/{id}", "/accounts/edit/{id}"),
-    ADD_ACCOUNT         ("/accounts/add"),
+    ACCOUNTS(           "/accounts", "/accounts/{id}", "/accounts/{id}/edit"),
+    ADD_ACCOUNT(        "/accounts/new"),
     IMPORT_ACCOUNTS(    "/accounts/import"),
-    DOMAINS(            "/communigate", "/communigate/view/{id}", "/communigate/edit/{id}"),
-    ADD_DOMAIN(         "/communigate/add"),
+    DOMAINS(            "/communigate", "/communigate/{id}", "/communigate/{id}/edit"),
+    ADD_DOMAIN(         "/communigate/new"),
     IMPORT_DOMAIN(      "/communigate/import"),
-    CAPACITY(           "/capacity", "/capacity/{id}", "/capacity/edit/{capacityId}", "/capacity/number/view/{id}",
-                        "/capacity/number/edit/{id}", "/capacity/{capacityId}/add"),
-    ADD_CAPACITY(       "/capacity/add"),
-    MANAGEMENT(         "/actions", "/actions/view/{id}", "/changes", "/users", "/users/view/{id}", "/users/edit/{id}",
-                        "/users/add");
+    CAPACITY(           "/capacity", "/capacity/{id}", "/capacity/{capacityId}/edit", "/capacity/{capacityId}/numbers/{id}",
+                        "/capacity/{capacityId}/numbers/{id}/edit", "/capacity/{capacityId}/numbers/new"),
+    ADD_CAPACITY(       "/capacity/new"),
+    MANAGEMENT(         "/actions", "/actions/{id}", "/changes", "/users", "/users/{id}", "/users/{id}/edit",
+                        "/users/new");
 
     Set<String> mappings = new HashSet<String>();
 

@@ -3,8 +3,6 @@ body {
 }
 
 .sidebar {
-    background-color: #F5F5F5;
-    border-right: 1px solid #EEEEEE;
     bottom: 0;
     display: block;
     left: 0;
@@ -47,19 +45,6 @@ div.form-horizontal .form-group {
 
 .form-inline .form-group input[type='text'] {
     width: 120px;
-}
-
-.bootstrap-header {
-    color: #fff;
-    background-color: #007fff !important;
-    border-bottom-width: 0 !important;
-}
-
-.icon-white {
-    color: #fff;
-}
-.table > tbody > tr.danger > td a, .table > tbody > tr.warning > td a {
-    color: #ffffff;
 }
 
 .panel-table {

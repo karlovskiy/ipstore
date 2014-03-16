@@ -1,0 +1,17 @@
+.sidebar {
+    background-color: #4E5D6C;
+}
+
+.bootstrap-header {
+    color: #ffffff;
+    background-color: #DF691A !important;
+    border-bottom-width: 0 !important;
+}
+
+.icon-table {
+    color: #ffffff;
+}
+
+.table > tbody > tr.danger > td a, .table > tbody > tr.warning > td a {
+    color: #FFFFFF;
+}
