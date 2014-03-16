@@ -26,7 +26,7 @@
                         <tr>
                             <td>
                                 <span class="text-danger">NEED_UPDATE</span>
-                                <a href="<c:url value="/equipment"/>">
+                                <a href="<c:url value="/equipment?passwordStatus=NEED_UPDATE"/>">
                                     <span class="badge">
                                         <c:out value="${equipmentWidget.needUpdate}"/>
                                     </span>
@@ -34,7 +34,7 @@
                             </td>
                             <td>
                                 <span class="text-warning">OLD</span>
-                                <a href="<c:url value="/equipment"/>">
+                                <a href="<c:url value="/equipment?passwordStatus=OLD"/>">
                                     <span class="badge">
                                         <c:out value="${equipmentWidget.old}"/>
                                     </span>
@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 <span class="text-danger">WARNING</span>
-                                <a href="<c:url value="/equipment"/>">
+                                <a href="<c:url value="/equipment?telnetStatus=WARNING"/>">
                                     <span class="badge">
                                         <c:out value="${equipmentWidget.warning}"/>
                                     </span>
@@ -50,7 +50,7 @@
                             </td>
                             <td>
                                 <span class="text-warning">TIMEOUT</span>
-                                <a href="<c:url value="/equipment"/>">
+                                <a href="<c:url value="/equipment?telnetStatus=TIMEOUT"/>">
                                     <span class="badge">
                                         <c:out value="${equipmentWidget.timeout}"/>
                                     </span>
@@ -125,7 +125,7 @@
                         <tr>
                             <td>
                                 <span class="text-success">NORMAL</span>
-                                <a href="<c:url value="/accounts"/>">
+                                <a href="<c:url value="/accounts?status=NORMAL"/>">
                                     <span class="badge">
                                         <c:out value="${accountsWidget.normal}"/>
                                     </span>
@@ -133,7 +133,7 @@
                             </td>
                             <td>
                                 <span class="text-danger">WARNING</span>
-                                <a href="<c:url value="/accounts"/>">
+                                <a href="<c:url value="/accounts?status=WARNING"/>">
                                     <span class="badge">
                                         <c:out value="${accountsWidget.warning}"/>
                                     </span>
@@ -209,7 +209,7 @@
                             <tr>
                                 <td>
                                     <span class="text-success">NORMAL</span>
-                                    <a href="<c:url value="/communigate"/>">
+                                    <a href="<c:url value="/communigate?status=NORMAL"/>">
                                             <span class="badge">
                                                 <c:out value="${communigateWidget.normal}"/>
                                             </span>
@@ -217,7 +217,7 @@
                                 </td>
                                 <td>
                                     <span class="text-danger">BLOCKED</span>
-                                    <a href="<c:url value="/communigate"/>">
+                                    <a href="<c:url value="/communigate?status=BLOCKED"/>">
                                             <span class="badge">
                                                 <c:out value="${communigateWidget.blocked}"/>
                                             </span>
@@ -293,7 +293,7 @@
                             <tr>
                                 <td>
                                     <span class="text-muted">EQUIPMENT</span>
-                                    <a href="<c:url value="/changes"/>">
+                                    <a href="<c:url value="/changes?changeType=EQUIPMENT"/>">
                                         <span class="badge">
                                             <c:out value="${actionsWidget.equipmentChanges}"/>
                                         </span>
@@ -301,7 +301,7 @@
                                 </td>
                                 <td>
                                     <span class="text-muted">ACCOUNTS</span>
-                                    <a href="<c:url value="/changes"/>">
+                                    <a href="<c:url value="/changes?changeType=ACCOUNTS"/>">
                                         <span class="badge">
                                             <c:out value="${actionsWidget.accountsChanges}"/>
                                         </span>
@@ -309,7 +309,7 @@
                                 </td>
                                 <td>
                                     <span class="text-muted">COMMUNIGATE</span>
-                                    <a href="<c:url value="/changes"/>">
+                                    <a href="<c:url value="/changes?changeType=COMMUNIGATE"/>">
                                         <span class="badge">
                                             <c:out value="${actionsWidget.communigateChanges}"/>
                                         </span>
@@ -317,7 +317,7 @@
                                 </td>
                                 <td>
                                     <span class="text-muted">USERS</span>
-                                    <a href="<c:url value="/changes"/>">
+                                    <a href="<c:url value="/changes?changeType=USERS"/>">
                                         <span class="badge">
                                             <c:out value="${actionsWidget.usersChanges}"/>
                                         </span>

@@ -1,14 +1,12 @@
 package ipstore.controller.actions;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ipstore.aspect.change.ChangeType;
 import ipstore.aspect.change.IChangeField;
 import ipstore.breadcrumb.Breadcrumb;
@@ -68,10 +66,18 @@ public class ActionController {
 
     @Breadcrumb(label = "Changes")
     @RequestMapping(value = "/changes", method = RequestMethod.GET)
-    public String changesList(Model model) {
+    public String changesList(@RequestParam(value = "changeType", required = false) String changeType, Model model) {
         logger.info("Received request to load changes");
-        model.addAttribute("changesForm", DEFAULT_CHANGES_FORM);
-        model.addAttribute("changes", actionService.loadChanges(DEFAULT_CHANGES_FORM));
+        ChangesForm changesForm = DEFAULT_CHANGES_FORM;
+        if (StringUtils.isNotEmpty(changeType)) {
+            changesForm = new ChangesForm();
+            changesForm.setFrom(DEFAULT_ACTIONS_FORM.getFrom());
+            changesForm.setTo(DEFAULT_ACTIONS_FORM.getTo());
+            changesForm.setChangeType(changeType);
+            changesForm.setFieldType(ALL);
+        }
+        model.addAttribute("changesForm", changesForm);
+        model.addAttribute("changes", actionService.loadChanges(changesForm));
         model.addAttribute("changesTypes", CHANGES_TYPES);
         return "c-list-changes";
     }

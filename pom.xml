@@ -5,7 +5,7 @@
     <groupId>ipstore</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>4.2.1</version>
+    <version>4.2.2</version>
 
     <name>ipstore web application</name>
 

@@ -84,13 +84,14 @@ public class AccountsController {
     @Breadcrumb(label = "Accounts")
     @Action(value = ACCOUNTS_LIST)
     @RequestMapping(value = "/accounts", method = RequestMethod.GET)
-    public String viewAccounts(@RequestParam(value = "search", required = false) String search, Model model) {
+    public String viewAccounts(@RequestParam(value = "search", required = false) String search,
+                               @RequestParam(value = "status", required = false) String status, Model model) {
         logger.info("Received request to load accounts.");
         if (StringUtils.isNotEmpty(search)) {
             model.addAttribute("accounts", searchService.searchAccounts(search));
             model.addAttribute("search", search);
         } else {
-            model.addAttribute("accounts", accountsService.loadAccounts());
+            model.addAttribute("accounts", accountsService.loadAccounts(status));
         }
         return "mfc-list-accounts";
     }

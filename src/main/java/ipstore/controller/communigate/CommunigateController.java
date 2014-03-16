@@ -53,13 +53,14 @@ public class CommunigateController {
     @Breadcrumb(label = "Domains")
     @Action(value = COMMUNIGATE_LIST)
     @RequestMapping(value = "/communigate", method = RequestMethod.GET)
-    public String viewCommunigate(String search, Model model) {
+    public String viewCommunigate(@RequestParam(value = "search", required = false) String search,
+                                  @RequestParam(value = "status", required = false) String status, Model model) {
         logger.info("Received request to load communigate domains.");
         if (StringUtils.isNotEmpty(search)) {
             model.addAttribute("communigateDomains", searchService.searchCommunigateDomains(search));
             model.addAttribute("search", search);
         } else {
-            model.addAttribute("communigateDomains", communigateService.loadCommunigate());
+            model.addAttribute("communigateDomains", communigateService.loadCommunigateDomains(status));
         }
         return "mfc-list-communigate";
     }

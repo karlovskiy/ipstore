@@ -54,13 +54,15 @@ public class EquipmentController {
     @Breadcrumb(label = "Equipment")
     @Action(value = EQUIPMENT_LIST)
     @RequestMapping(value = "/equipment", method = RequestMethod.GET)
-    public String viewEquipment(@RequestParam(value = "search", required = false) String search, Model model) {
+    public String viewEquipment(@RequestParam(value = "search", required = false) String search,
+                                @RequestParam(value = "passwordStatus", required = false) String passwordStatus,
+                                @RequestParam(value = "telnetStatus", required = false) String telnetStatus, Model model) {
         logger.info("Received request to load equipment.");
         if (StringUtils.isNotEmpty(search)) {
             model.addAttribute("equipment", searchService.searchEquipment(search));
             model.addAttribute("search", search);
         } else {
-            model.addAttribute("equipment", equipmentService.loadEquipments());
+            model.addAttribute("equipment", equipmentService.loadEquipments(passwordStatus, telnetStatus));
         }
         return "mfc-list-equipment";
     }

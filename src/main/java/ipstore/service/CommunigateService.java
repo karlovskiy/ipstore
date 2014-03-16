@@ -1,5 +1,6 @@
 package ipstore.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.hibernate.Criteria;
@@ -69,10 +70,19 @@ public class CommunigateService {
 
     @SuppressWarnings("unchecked")
     public List<CommunigateDomain> loadCommunigate() {
+        return loadCommunigateDomains(null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<CommunigateDomain> loadCommunigateDomains(String status) {
         logger.debug("Start loading communigate domains.");
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(CommunigateDomain.class);
-        criteria.add(Restrictions.ne("status", CommunigateStatus.DELETED));
+        if (StringUtils.isEmpty(status)) {
+            criteria.add(Restrictions.ne("status", CommunigateStatus.DELETED));
+        } else {
+            criteria.add(Restrictions.eq("status", CommunigateStatus.valueOf(status)));
+        }
         return criteria.addOrder(Order.asc("domainName")).list();
     }
 

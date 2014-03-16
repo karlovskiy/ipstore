@@ -1,5 +1,6 @@
 package ipstore.service;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.hibernate.Criteria;
@@ -85,10 +86,19 @@ public class AccountsService {
 
     @SuppressWarnings("unchecked")
     public List<Account> loadAccounts() {
+        return loadAccounts(null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Account> loadAccounts(String status) {
         logger.debug("Start loading accounts.");
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Account.class);
-        criteria.add(Restrictions.ne("status", AccountStatus.DELETED));
+        if (StringUtils.isEmpty(status)) {
+            criteria.add(Restrictions.ne("status", AccountStatus.DELETED));
+        } else {
+            criteria.add(Restrictions.eq("status", AccountStatus.valueOf(status)));
+        }
         return criteria.addOrder(Order.asc("login")).list();
     }
 

@@ -1,5 +1,6 @@
 package ipstore.service;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -52,10 +53,21 @@ public class EquipmentService {
 
     @SuppressWarnings("unchecked")
     public List<Equipment> loadEquipments() {
+        return loadEquipments(null, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Equipment> loadEquipments(String passwordStatus, String telnetStatus) {
         logger.debug("Start loading equipment.");
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Equipment.class);
-        criteria.add(Restrictions.ne("status", Status.DELETED));
+        if (StringUtils.isNotEmpty(passwordStatus)) {
+            criteria.add(Restrictions.eq("passwordStatus", PasswordStatus.valueOf(passwordStatus)));
+        } else if (StringUtils.isNotEmpty(telnetStatus)) {
+            criteria.add(Restrictions.eq("telnetStatus", TelnetStatus.valueOf(telnetStatus)));
+        } else {
+            criteria.add(Restrictions.ne("status", Status.DELETED));
+        }
         return criteria.addOrder(Order.asc("ipAddress")).list();
     }
 
