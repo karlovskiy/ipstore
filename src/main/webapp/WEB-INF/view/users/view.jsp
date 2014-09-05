@@ -11,7 +11,7 @@
     <ipstore:field label="Default password" value="${user.credentialsNonExpired ? 'No' : 'Yes'}"/>
     <ipstore:field label="Authority" value="${user.authorities}"/>
     <ipstore:field label="FirstName" value="${user.firstName}"/>
-    <ipstore:field lable="LastName" value="${user.lastName}"/>
+    <ipstore:field label="LastName" value="${user.lastName}"/>
     <ipstore:field label="Email" value="${user.email}"/>
     <ipstore:field label="Theme" value="${empty user.theme ? 'Default' : user.theme}"/>
 

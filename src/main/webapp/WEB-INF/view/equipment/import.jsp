@@ -36,7 +36,7 @@
                         <tr>
                             <td>
                                     <span class="text-success">
-                                        Equipment with ip <a href="/equipment/view/${added.id}"
+                                        Equipment with ip <a href="/equipment/${added.id}"
                                                              target="_blank">
                                         <c:out value="${added.ipAddress}"/>
                                     </a> successfully added!
@@ -60,7 +60,7 @@
                             <tr>
                                 <td>
                                         <span class="text-error">
-                                            Equipment with ip <a href="/equipment/view/${exists.id}"
+                                            Equipment with ip <a href="/equipment/${exists.id}"
                                                                  target="_blank">
                                             <c:out value="${exists.ipAddress}"/>
                                         </a> already exists!

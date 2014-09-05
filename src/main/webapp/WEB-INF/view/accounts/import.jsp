@@ -37,7 +37,7 @@
                             <td>
                                     <span class="text-success">
                                         Account with login
-                                        <a href="/accounts/view/${added.id}" target="_blank">
+                                        <a href="/accounts/${added.id}" target="_blank">
                                             <c:out value="${added.login}"/>
                                         </a>
                                         successfully added!
@@ -62,7 +62,7 @@
                                 <td>
                                         <span class="text-error">
                                             Account with login
-                                            <a href="/accounts/view/${exists.id}" target="_blank">
+                                            <a href="/accounts/${exists.id}" target="_blank">
                                                 <c:out value="${exists.login}"/>
                                             </a>
                                             already exists!

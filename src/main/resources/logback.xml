@@ -31,6 +31,16 @@
         </rollingPolicy>
     </appender>
 
+    <appender name="activemq" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>[%5level] %date [%thread] %logger{10} [%file : %line] %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${ipstore.logs.dir:-../logs}/%d{yyyyMMdd}_activemq.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
     <!--<appender name="db_migration" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
         <!--<encoder>-->
             <!--<pattern>[%5level] %date [%thread] %logger{10} [%file : %line] %msg%n</pattern>-->
@@ -47,6 +57,10 @@
 
     <logger name="org.hibernate" additivity="false">
         <appender-ref ref="hibernate"/>
+    </logger>
+
+    <logger name="org.apache.activemq" additivity="false">
+        <appender-ref ref="activemq"/>
     </logger>
 
     <!--<logger name="com.googlecode.flyway" additivity="false">-->

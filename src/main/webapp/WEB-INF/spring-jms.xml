@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://activemq.apache.org/schema/core
+                           http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <!--<amq:broker brokerName="LOCAL_IPSTORE" useJmx="false" persistent="false" useShutdownHook="false">-->
+
+        <!--<amq:transportConnectors>-->
+            <!--<amq:transportConnector uri="vm://localhost:7001" />-->
+        <!--</amq:transportConnectors>-->
+
+        <!--<amq:jmsBridgeConnectors>-->
+            <!--<amq:jmsQueueConnector>-->
+                <!--<amq:outboundQueueConnectionFactory>-->
+                    <!--<amq:connectionFactory brokerURL="tcp://localhost:61616"/>-->
+                <!--</amq:outboundQueueConnectionFactory>-->
+                <!--<amq:outboundQueueBridges>-->
+                    <!--<amq:outboundQueueBridge outboundQueueName="http.audit.queue"/>-->
+                <!--</amq:outboundQueueBridges>-->
+            <!--</amq:jmsQueueConnector>-->
+        <!--</amq:jmsBridgeConnectors>-->
+
+    <!--</amq:broker>-->
+
+    <!--<amq:queue id="httpAuditQueue"  physicalName="http.audit.queue"/>-->
+
+    <!--<amq:connectionFactory id="jmsConnectionFactory" brokerURL="vm://localhost:7001"/>-->
+
+    <!--<bean id="bridgedBroker" class="org.apache.activemq.broker.BrokerService"-->
+          <!--init-method="start" destroy-method="stop">-->
+        <!--<property name="brokerName" value="bridgedBroker"/>-->
+        <!--<property name="persistent" value="false"/>-->
+        <!--<property name="useShutdownHook" value="false"/>-->
+        <!--<property name="transportConnectorURIs" value="vm://localhost:7001"/>-->
+        <!--<property name="jmsBridgeConnectors">-->
+            <!--<bean class="org.apache.activemq.network.jms.JmsQueueConnector">-->
+                <!--<property name="outboundQueueConnectionFactory">-->
+                    <!--<bean class="org.apache.activemq.ActiveMQConnectionFactory">-->
+                        <!--&lt;!&ndash;value="failover:(tcp://localhost:61616)?maxReconnectDelay=60" />&ndash;&gt;-->
+                        <!--<property name="brokerURL" value="tcp://localhost:61616" />-->
+                    <!--</bean>-->
+                <!--</property>-->
+                <!--<property name="outboundQueueBridges">-->
+                    <!--<list>-->
+                        <!--<bean class="org.apache.activemq.network.jms.OutboundQueueBridge">-->
+                            <!--<constructor-arg value="http.audit.queue"/>-->
+                        <!--</bean>-->
+                    <!--</list>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="brokerConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
+        <!--<property name="brokerURL"  value="vm://localhost:7001"/>-->
+    <!--</bean>-->
+
+    <bean id="jmsConnectionFactory" class="org.hornetq.jms.client.HornetQJMSConnectionFactory">
+        <constructor-arg value="false" />
+        <constructor-arg>
+            <bean class="org.hornetq.api.core.TransportConfiguration">
+                <constructor-arg
+                        value="org.hornetq.core.remoting.impl.netty.NettyConnectorFactory" />
+                <constructor-arg>
+                    <map key-type="java.lang.String" value-type="java.lang.Object">
+                        <entry key="host" value="localhost"/>
+                        <entry key="port" value="5445"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="cachingJmsConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory" ref="jmsConnectionFactory"/>
+        <property name="sessionCacheSize" value="10"/>
+    </bean>
+
+    <bean id="httpAuditQueue" class="org.hornetq.jms.client.HornetQQueue">
+        <constructor-arg value="http.audit.queue"/>
+    </bean>
+
+    <!--<bean id="helloWorldQueue" class="org.apache.activemq.command.ActiveMQQueue">-->
+        <!--<constructor-arg value="http.audit.queue" />-->
+    <!--</bean>-->
+
+    <bean id="httpAudit" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="cachingJmsConnectionFactory"/>
+        <property name="defaultDestination" ref="httpAuditQueue"/>
+    </bean>
+
+</beans>

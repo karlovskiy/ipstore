@@ -37,7 +37,7 @@
                             <td>
                                     <span class="text-success">
                                         Communigate domain with domain name
-                                        <a href="/communigate/view/${added.id}" target="_blank">
+                                        <a href="/communigate/${added.id}" target="_blank">
                                             <c:out value="${added.domainName}"/>
                                         </a>
                                         successfully added!
@@ -62,7 +62,7 @@
                                 <td>
                                         <span class="text-error">
                                             Communigate Domain with
-                                            <a href="/domain/communigate/view/${exists.id}" target="_blank">
+                                            <a href="/domain/communigate/${exists.id}" target="_blank">
                                                 domainName <c:out value="${exists.domainName}"/> and tryPrefix <c:out
                                                     value="${exists.tryPrefix}"/>
                                             </a>
