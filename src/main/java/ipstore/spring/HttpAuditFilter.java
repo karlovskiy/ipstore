@@ -110,12 +110,6 @@ public class HttpAuditFilter implements Filter {
 
         chain.doFilter(request, response);
 
-        dump.setResAuthType(httpRequest.getAuthType());
-        dump.setResContentType(response.getContentType());
-        dump.setResRemoteUser(httpRequest.getRemoteUser());
-        dump.setStatus(httpResponse.getStatus());
-        dump.setEndTime(new Date());
-
         List<Header> resHeaders = dump.getResHeaders();
         Iterable<String> rhnames = httpResponse.getHeaderNames();
         for (String rhname : rhnames) {
@@ -127,6 +121,12 @@ public class HttpAuditFilter implements Filter {
                 resHeaders.add(header);
             }
         }
+
+        dump.setResAuthType(httpRequest.getAuthType());
+        dump.setResContentType(response.getContentType());
+        dump.setResRemoteUser(httpRequest.getRemoteUser());
+        dump.setStatus(httpResponse.getStatus());
+        dump.setEndTime(new Date());
 
         RequestDumpSerializer serializer = new RequestDumpSerializer();
         httpAudit.convertAndSend(serializer.serialize(dump));
