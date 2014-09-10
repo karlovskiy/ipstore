@@ -60,6 +60,7 @@ public class HttpAuditFilter implements Filter {
         dump.setScheme(request.getScheme());
         dump.setServerName(request.getServerName());
         dump.setServerPort(request.getServerPort());
+        dump.setServletPath(httpRequest.getServletPath());
         dump.setSecure(request.isSecure());
 
         List<ak.audr.protocol.Cookie> cookieList = dump.getCookies();
