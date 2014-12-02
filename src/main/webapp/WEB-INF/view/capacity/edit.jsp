@@ -3,7 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"  %>
 
-<form:form commandName="capacityType" action="${action}" cssClass="form-horizontal" role="form">
+<c:url var="formActionUrl" value="${action}"/>
+<form:form commandName="capacityType" action="${formActionUrl}" cssClass="form-horizontal" role="form">
 
     <spring:bind path="name">
         <div class="form-group ${status.error ? "has-error" : ""}">

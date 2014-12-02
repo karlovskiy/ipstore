@@ -80,7 +80,7 @@ ipstore.addModule(function () {
 ipstore.addModule(function(){
     $("#rebuild_index").click(function (e) {
         e.preventDefault();
-        $.get("/rebuild", function (data) {
+        $.get(window['contextPath'] + "/rebuild", function (data) {
             bootbox.alert({
                 closeButton: false,
                 message: data
@@ -92,7 +92,7 @@ ipstore.addModule(function(){
 ipstore.addModule(function(){
     $("#generate_password").click(function (e) {
         e.preventDefault();
-        $.get("/generate_password", { length: $('#max_length').val() }, function (data) {
+        $.get(window['contextPath'] + "/generate_password", { length: $('#max_length').val() }, function (data) {
             $("#pwd").val(data);
         });
     });
@@ -112,7 +112,7 @@ ipstore.addModule(function () {
     function init() {
         var changeTypes = $("#changeType");
         if (changeTypes.length != 0) {
-            $.getJSON("/change_types", function (data) {
+            $.getJSON(window['contextPath'] + "/change_types", function (data) {
                 changeTypes.change(function () {
                     change($(this), data);
                 });

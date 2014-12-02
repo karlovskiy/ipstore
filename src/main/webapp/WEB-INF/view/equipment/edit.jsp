@@ -4,7 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
-<form:form commandName="equipment" action="${formAction}" cssClass="form-horizontal" enctype="multipart/form-data">
+<c:url var="formActionUrl" value="${formAction}"/>
+<form:form commandName="equipment" action="${formActionUrl}" cssClass="form-horizontal" enctype="multipart/form-data">
     <spring:bind path="ipAddress">
         <div class="form-group ${status.error ? "has-error" : ""}">
             <label class="control-label col-md-2" for="ipAddress">IpAddress</label>

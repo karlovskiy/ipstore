@@ -5,7 +5,7 @@
     <groupId>ipstore</groupId>
     <artifactId>ipstore</artifactId>
     <packaging>war</packaging>
-    <version>4.3.2</version>
+    <version>4.4.0</version>
 
     <name>ipstore web application</name>
 
@@ -433,12 +433,6 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.7.1</version>
-        </dependency>
-        <!-- activemq -->
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-spring</artifactId>
-            <version>${version.activemq}</version>
         </dependency>
         <dependency>
             <groupId>org.hornetq</groupId>

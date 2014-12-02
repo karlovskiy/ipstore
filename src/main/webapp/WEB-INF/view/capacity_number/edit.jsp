@@ -4,7 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
-<form:form commandName="capacityNumber" action="${action}" cssClass="form-horizontal">
+<c:url var="formActionUrl" value="${action}"/>
+<form:form commandName="capacityNumber" action="${formActionUrl}" cssClass="form-horizontal">
 
     <spring:bind path="number">
         <div class="form-group ${status.error ? "has-error" : ""}">

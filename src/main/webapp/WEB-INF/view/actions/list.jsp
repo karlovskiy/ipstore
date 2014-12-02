@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<form:form commandName="actionsForm" class="form-inline" action="/actions" role="form">
+<c:url var="formActionUrl" value="/actions"/>
+<form:form commandName="actionsForm" class="form-inline" action="${formActionUrl}" role="form">
 
     <div class="form-group">
         <label class="sr-only" for="from">From</label>

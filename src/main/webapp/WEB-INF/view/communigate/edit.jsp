@@ -4,7 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
-<form:form commandName="communigateDomain" action="${formAction}" cssClass="form-horizontal">
+<c:url var="formActionUrl" value="${formAction}"/>
+<form:form commandName="communigateDomain" action="${formActionUrl}" cssClass="form-horizontal">
     <spring:bind path="domainName">
         <div class="form-group ${status.error ? "has-error" : ""}">
             <label class="control-label col-md-2" for="domainName">DomainName</label>

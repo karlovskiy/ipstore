@@ -191,7 +191,7 @@
                             </c:when>
                             <c:otherwise>
                                 <li>
-                                    <a href="<c:url value="${item.requestURI}"/>"><c:out value="${item.label}"/></a>
+                                    <a href="${item.requestURI}"><c:out value="${item.label}"/></a>
                                 </li>
                             </c:otherwise>
                         </c:choose>
@@ -224,6 +224,13 @@
 <script type="text/javascript" src="<c:url value="/resources/${application.version}/js/bootbox.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/${application.version}/js/tablesorter.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/${application.version}/js/tablesorter.widgets.min.js"/>"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(function () {
+        window['contextPath'] = '${pageContext.request.contextPath}';
+    });
+    //]]>
+</script>
 <tiles:insertAttribute ignore="true" name="additional-scripts"/>
 <script type="text/javascript" src="<c:url value="/resources/${application.version}/js/ipstore.js"/>"></script>
 </body>

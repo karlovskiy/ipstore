@@ -5,7 +5,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="ipstore" tagdir="/WEB-INF/tags/ipstore" %>
 
-<form:form commandName="changePassword" action="/changepassword" cssClass="form-horizontal">
+<c:url var="formActionUrl" value="/changepassword"/>
+<form:form commandName="changePassword" action="${formActionUrl}" cssClass="form-horizontal">
     <div class="form-group">
         <label class="control-label col-md-2">Username</label>
         <div class="col-md-5">

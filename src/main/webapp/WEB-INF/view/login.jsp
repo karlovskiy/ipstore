@@ -29,7 +29,8 @@
             </form>
         </c:if>
         <c:if test="${not empty sessionScope['CREDENTIALS_EXPIRED_USERNAME']}">
-            <form:form commandName="changePassword" action="/mustchangepassword" cssClass="form-signin" role="form">
+            <c:url var="formActionUrl" value="/mustchangepassword"/>
+            <form:form commandName="changePassword" action="${formActionUrl}" cssClass="form-signin" role="form">
                 <h2>Change password</h2>
                 <c:if test="${not empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION']}">
                     <div class="alert alert-danger">${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</div>

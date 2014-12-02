@@ -4,7 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<form:form commandName="capacityForm" class="form-inline" action="/capacity" method="get" role="form">
+<c:url var="formActionUrl" value="/capacity"/>
+<form:form commandName="capacityForm" class="form-inline" action="${formActionUrl}" method="get" role="form">
     <div class="form-group">
         <form:select id="capacityType" path="capacityType" items="${capacityTypes}" cssClass="form-control"/>
     </div>

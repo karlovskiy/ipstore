@@ -20,7 +20,7 @@
 
             <a href="<c:url value="/users/${user.id}/edit"/>" class="btn btn-primary">Edit</a>
 
-            <a href="<c:url value="/users/${user.id}/reset"/>" class="btn btn-danger">Reset password</a>
+            <a href="<c:url value="/users/${user.id}/reset"/>" class="btn btn-danger" disabled="${user.credentialsNonExpired ? 'false' : 'true'}">Reset password</a>
 
             <c:if test="${user.userStatus == 'BLOCKED'}">
                 <a href="<c:url value="/users/${user.id}/unblock"/>" class="btn btn-success">Unblock</a>
