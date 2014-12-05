@@ -12,6 +12,7 @@ public class BreadcrumbItem implements Serializable {
 
     private final String requestURI;
     private final String label;
+    private boolean current;
 
     public BreadcrumbItem(String requestURI, String label) {
         this.requestURI = requestURI;
@@ -24,6 +25,14 @@ public class BreadcrumbItem implements Serializable {
 
     public String getLabel() {
         return label;
+    }
+
+    public boolean isCurrent() {
+        return current;
+    }
+
+    public void setCurrent(boolean current) {
+        this.current = current;
     }
 
     @Override

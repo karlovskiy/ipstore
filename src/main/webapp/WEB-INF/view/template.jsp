@@ -186,7 +186,7 @@
                 <ol class="breadcrumb">
                     <c:forEach items="${sessionScope['BREADCRUMB']}" var="item" varStatus="index">
                         <c:choose>
-                            <c:when test="${index.first}">
+                            <c:when test="${item.current}">
                                 <li class="active"><c:out value="${item.label}"/></li>
                             </c:when>
                             <c:otherwise>

@@ -25,7 +25,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     public static final String BREADCRUMB = BreadcrumbInterceptor.class.getName() + ".BREADCRUMB";
     public static final String BREADCRUMB_ATTRIBUTE = "BREADCRUMB";
     public static final String TITLE_ATTRIBUTE = "PAGE_TITLE";
-    public static final int BREADCRUMB_SIZE = 5;
+    public static final int BREADCRUMB_SIZE = 7;
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
@@ -44,22 +44,16 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
                 CircularFifoQueue<BreadcrumbItem> breadcrumbQueue = (CircularFifoQueue<BreadcrumbItem>) session.getAttribute(BREADCRUMB);
                 if (breadcrumbQueue == null) {
                     breadcrumbQueue = new CircularFifoQueue<BreadcrumbItem>(BREADCRUMB_SIZE);
-                    breadcrumbQueue.add(breadcrumbItem);
                     session.setAttribute(BREADCRUMB, breadcrumbQueue);
-                } else {
-                    CircularFifoQueue<BreadcrumbItem> newBreadcrumbQueue = new CircularFifoQueue<BreadcrumbItem>(BREADCRUMB_SIZE);
-                    for (BreadcrumbItem item : breadcrumbQueue) {
-                        if (!item.equals(breadcrumbItem)) {
-                            newBreadcrumbQueue.add(item);
-                        }
-                    }
-                    newBreadcrumbQueue.add(breadcrumbItem);
-                    session.setAttribute(BREADCRUMB, newBreadcrumbQueue);
-                    breadcrumbQueue = newBreadcrumbQueue;
+                }
+                if(!breadcrumbQueue.contains(breadcrumbItem)){
+                    breadcrumbQueue.add(breadcrumbItem);
                 }
                 List<BreadcrumbItem> items = new ArrayList<BreadcrumbItem>(BREADCRUMB_SIZE);
                 for (int i = breadcrumbQueue.size() - 1; i >= 0; i--) {
-                    items.add(breadcrumbQueue.get(i));
+                    BreadcrumbItem item = breadcrumbQueue.get(i);
+                    items.add(item);
+                    item.setCurrent(item.equals(breadcrumbItem));
                 }
                 session.setAttribute(BREADCRUMB_ATTRIBUTE, items);
             }
